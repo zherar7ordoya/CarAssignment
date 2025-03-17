@@ -1,3 +1,11 @@
+# ACTIVIDAD INTEGRADORA NRO I
+
+PROGRAMACIÓN ORIENTADA A OBJETOS
+
+**Profesor: DARIO CARDACCI**
+
+---
+
 # ENUNCIADO
 
 Nos solicitan crear un programa que maneje una lista de personas y los autos que estas poseen. Nos indican que una persona puede ser dueño de más de un auto. Pero que los autos poseen como máximo un titular.
@@ -62,7 +70,7 @@ Nos solicitan que la GUI (interfaz gráfica del usuario) permita visualizar en g
 
 \* Los autos de la persona seleccionado en la grilla 1. (Grilla 3)
 
-\* Una grilla (Grilla 4) con los siguientes datos y en el siguiente orden de columnas, para cada auto de la grilla 2: Marca, Año, Modelo, Patente, DNI del dueño, “Apellido, Nombre” del dueño en una misma columna. (Grilla 4) \[***CORREGIDO: Esto era redundante, se hizo esto mismo para cada auto asignado, de forma de equilibrar el Form: Grilla 2 para autos disponibles y Grilla 4 para autos asignados***\].
+\* Una grilla (Grilla 4) con los siguientes datos y en el siguiente orden de columnas, para cada auto de la grilla 2: Marca, Año, Modelo, Patente, DNI del dueño, “Apellido, Nombre” del dueño en una misma columna. (Grilla 4) \[***CORREGIDO: Esto era redundante, así que se hizo para todos los autos asignados de forma de equilibrar el Form: Grilla 2 para autos disponibles y Grilla 4 para autos asignados***\].
 
 La GUI debe tener botones para:
 
