@@ -24,10 +24,8 @@ public class Auto : Entity
     public int Año { get; set; } = DateTime.Now.Year;
     public decimal Precio { get; set; } = 0.0m;
 
-    // Propiedad para almacenar el ID del dueño (serializable)
     public int DueñoId { get; set; }
 
-    // Propiedad Dueño (no serializable)
     [XmlIgnore]
     public Persona? Dueño
     {
@@ -35,7 +33,7 @@ public class Auto : Entity
         set
         {
             _dueño = value;
-            DueñoId = value?.Id ?? 0; // Actualizar DueñoId cuando se asigne un dueño
+            DueñoId = value?.Id ?? 0;
         }
     }
 

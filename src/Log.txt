@@ -5,3 +5,4 @@
 [16/3/2025 02:11:32] Error desconocido al leer Persona.xml - Excepción: InvalidOperationException, Mensaje: There was an error generating the XML document.
 [16/3/2025 02:15:26] Error desconocido al leer Persona.xml - Excepción: InvalidOperationException, Mensaje: There was an error generating the XML document.
 [16/3/2025 02:19:14] Error desconocido al leer Persona.xml - Excepción: InvalidOperationException, Mensaje: There was an error generating the XML document.
+[16/3/2025 22:06:01] Excepción no controlada - Excepción: ArgumentException, Mensaje: Cannot bind to the property or column Text on the DataSource. (Parameter 'dataMember')

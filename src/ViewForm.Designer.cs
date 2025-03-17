@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewForm));
             panel1 = new Panel();
             CantidadAutosTextBox = new TextBox();
             label2 = new Label();
@@ -70,14 +68,12 @@
             QuitarAutoButton = new Button();
             AutosAsignadosDataGridView = new DataGridView();
             label13 = new Label();
-            ErrorProvider = new ErrorProvider(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AutosDePersonaDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PersonasDataGridView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AutosDisponiblesDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AutosAsignadosDataGridView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -104,12 +100,12 @@
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(549, 490);
+            panel1.Size = new Size(535, 490);
             panel1.TabIndex = 0;
             // 
             // CantidadAutosTextBox
             // 
-            CantidadAutosTextBox.Location = new Point(433, 372);
+            CantidadAutosTextBox.Location = new Point(419, 377);
             CantidadAutosTextBox.Name = "CantidadAutosTextBox";
             CantidadAutosTextBox.ReadOnly = true;
             CantidadAutosTextBox.Size = new Size(100, 25);
@@ -118,7 +114,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(330, 375);
+            label2.Location = new Point(316, 380);
             label2.Name = "label2";
             label2.Size = new Size(99, 18);
             label2.TabIndex = 15;
@@ -126,28 +122,28 @@
             // 
             // ApellidoTextBox
             // 
-            ApellidoTextBox.Location = new Point(434, 341);
+            ApellidoTextBox.Location = new Point(420, 346);
             ApellidoTextBox.Name = "ApellidoTextBox";
             ApellidoTextBox.Size = new Size(100, 25);
             ApellidoTextBox.TabIndex = 14;
             // 
             // NombreTextBox
             // 
-            NombreTextBox.Location = new Point(434, 310);
+            NombreTextBox.Location = new Point(210, 377);
             NombreTextBox.Name = "NombreTextBox";
             NombreTextBox.Size = new Size(100, 25);
             NombreTextBox.TabIndex = 13;
             // 
             // DniTextBox
             // 
-            DniTextBox.Location = new Point(434, 279);
+            DniTextBox.Location = new Point(210, 346);
             DniTextBox.Name = "DniTextBox";
             DniTextBox.Size = new Size(100, 25);
             DniTextBox.TabIndex = 12;
             // 
             // IdPersonaTextBox
             // 
-            IdPersonaTextBox.Location = new Point(434, 248);
+            IdPersonaTextBox.Location = new Point(39, 346);
             IdPersonaTextBox.Name = "IdPersonaTextBox";
             IdPersonaTextBox.ReadOnly = true;
             IdPersonaTextBox.Size = new Size(100, 25);
@@ -156,7 +152,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(330, 348);
+            label6.Location = new Point(316, 353);
             label6.Name = "label6";
             label6.Size = new Size(61, 18);
             label6.TabIndex = 10;
@@ -165,7 +161,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(330, 317);
+            label5.Location = new Point(145, 384);
             label5.Name = "label5";
             label5.Size = new Size(59, 18);
             label5.TabIndex = 9;
@@ -174,7 +170,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(330, 286);
+            label4.Location = new Point(145, 353);
             label4.Name = "label4";
             label4.Size = new Size(31, 18);
             label4.TabIndex = 8;
@@ -183,7 +179,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(330, 255);
+            label3.Location = new Point(13, 349);
             label3.Name = "label3";
             label3.Size = new Size(20, 18);
             label3.TabIndex = 7;
@@ -192,12 +188,12 @@
             // ValorTotalAutosLabel
             // 
             ValorTotalAutosLabel.Font = new Font("Calibri", 22F);
-            ValorTotalAutosLabel.Location = new Point(319, 208);
+            ValorTotalAutosLabel.Location = new Point(13, 436);
             ValorTotalAutosLabel.Name = "ValorTotalAutosLabel";
             ValorTotalAutosLabel.Size = new Size(214, 37);
             ValorTotalAutosLabel.TabIndex = 6;
             ValorTotalAutosLabel.Text = "Total";
-            ValorTotalAutosLabel.TextAlign = ContentAlignment.MiddleRight;
+            ValorTotalAutosLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // AutosDePersonaDataGridView
             // 
@@ -205,18 +201,18 @@
             AutosDePersonaDataGridView.AllowUserToDeleteRows = false;
             AutosDePersonaDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutosDePersonaDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AutosDePersonaDataGridView.Location = new Point(319, 50);
+            AutosDePersonaDataGridView.Location = new Point(13, 182);
             AutosDePersonaDataGridView.Name = "AutosDePersonaDataGridView";
             AutosDePersonaDataGridView.ReadOnly = true;
             AutosDePersonaDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AutosDePersonaDataGridView.Size = new Size(214, 150);
+            AutosDePersonaDataGridView.Size = new Size(506, 127);
             AutosDePersonaDataGridView.TabIndex = 5;
             // 
             // EliminarPersonaButton
             // 
             EliminarPersonaButton.AutoSize = true;
             EliminarPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            EliminarPersonaButton.Location = new Point(464, 445);
+            EliminarPersonaButton.Location = new Point(451, 445);
             EliminarPersonaButton.Name = "EliminarPersonaButton";
             EliminarPersonaButton.Size = new Size(69, 28);
             EliminarPersonaButton.TabIndex = 4;
@@ -228,7 +224,7 @@
             // 
             GuardarPersonaButton.AutoSize = true;
             GuardarPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            GuardarPersonaButton.Location = new Point(391, 445);
+            GuardarPersonaButton.Location = new Point(378, 445);
             GuardarPersonaButton.Name = "GuardarPersonaButton";
             GuardarPersonaButton.Size = new Size(67, 28);
             GuardarPersonaButton.TabIndex = 3;
@@ -240,7 +236,7 @@
             // 
             NuevoPersonaButton.AutoSize = true;
             NuevoPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            NuevoPersonaButton.Location = new Point(319, 445);
+            NuevoPersonaButton.Location = new Point(313, 445);
             NuevoPersonaButton.Name = "NuevoPersonaButton";
             NuevoPersonaButton.Size = new Size(59, 28);
             NuevoPersonaButton.TabIndex = 2;
@@ -258,7 +254,7 @@
             PersonasDataGridView.Name = "PersonasDataGridView";
             PersonasDataGridView.ReadOnly = true;
             PersonasDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            PersonasDataGridView.Size = new Size(300, 423);
+            PersonasDataGridView.Size = new Size(506, 126);
             PersonasDataGridView.TabIndex = 1;
             PersonasDataGridView.SelectionChanged += PersonasDataGridView_SelectionChanged;
             // 
@@ -293,22 +289,22 @@
             panel2.Controls.Add(NuevoAutoButton);
             panel2.Controls.Add(AutosDisponiblesDataGridView);
             panel2.Controls.Add(label12);
-            panel2.Location = new Point(691, 12);
+            panel2.Location = new Point(677, 12);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10);
-            panel2.Size = new Size(549, 490);
+            panel2.Size = new Size(528, 490);
             panel2.TabIndex = 1;
             // 
             // PrecioTextBox
             // 
-            PrecioTextBox.Location = new Point(433, 205);
+            PrecioTextBox.Location = new Point(412, 380);
             PrecioTextBox.Name = "PrecioTextBox";
             PrecioTextBox.Size = new Size(100, 25);
             PrecioTextBox.TabIndex = 19;
             // 
             // AñoTextBox
             // 
-            AñoTextBox.Location = new Point(433, 174);
+            AñoTextBox.Location = new Point(412, 349);
             AñoTextBox.Name = "AñoTextBox";
             AñoTextBox.Size = new Size(100, 25);
             AñoTextBox.TabIndex = 18;
@@ -316,7 +312,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(319, 177);
+            label14.Location = new Point(350, 352);
             label14.Name = "label14";
             label14.Size = new Size(33, 18);
             label14.TabIndex = 17;
@@ -325,7 +321,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(319, 208);
+            label11.Location = new Point(350, 383);
             label11.Name = "label11";
             label11.Size = new Size(47, 18);
             label11.TabIndex = 16;
@@ -333,28 +329,28 @@
             // 
             // ModeloTextBox
             // 
-            ModeloTextBox.Location = new Point(433, 143);
+            ModeloTextBox.Location = new Point(244, 380);
             ModeloTextBox.Name = "ModeloTextBox";
             ModeloTextBox.Size = new Size(100, 25);
             ModeloTextBox.TabIndex = 14;
             // 
             // MarcaTextBox
             // 
-            MarcaTextBox.Location = new Point(433, 112);
+            MarcaTextBox.Location = new Point(244, 349);
             MarcaTextBox.Name = "MarcaTextBox";
             MarcaTextBox.Size = new Size(100, 25);
             MarcaTextBox.TabIndex = 13;
             // 
             // PatenteTextBox
             // 
-            PatenteTextBox.Location = new Point(433, 81);
+            PatenteTextBox.Location = new Point(76, 380);
             PatenteTextBox.Name = "PatenteTextBox";
             PatenteTextBox.Size = new Size(100, 25);
             PatenteTextBox.TabIndex = 12;
             // 
             // IdAutoTextBox
             // 
-            IdAutoTextBox.Location = new Point(433, 50);
+            IdAutoTextBox.Location = new Point(76, 349);
             IdAutoTextBox.Name = "IdAutoTextBox";
             IdAutoTextBox.ReadOnly = true;
             IdAutoTextBox.Size = new Size(100, 25);
@@ -363,7 +359,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(319, 146);
+            label7.Location = new Point(182, 383);
             label7.Name = "label7";
             label7.Size = new Size(56, 18);
             label7.TabIndex = 10;
@@ -372,7 +368,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(319, 115);
+            label8.Location = new Point(181, 352);
             label8.Name = "label8";
             label8.Size = new Size(45, 18);
             label8.TabIndex = 9;
@@ -381,7 +377,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(319, 84);
+            label9.Location = new Point(13, 383);
             label9.Name = "label9";
             label9.Size = new Size(57, 18);
             label9.TabIndex = 8;
@@ -390,7 +386,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(319, 53);
+            label10.Location = new Point(13, 352);
             label10.Name = "label10";
             label10.Size = new Size(20, 18);
             label10.TabIndex = 7;
@@ -400,7 +396,7 @@
             // 
             EliminarAutoButton.AutoSize = true;
             EliminarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            EliminarAutoButton.Location = new Point(464, 445);
+            EliminarAutoButton.Location = new Point(443, 445);
             EliminarAutoButton.Name = "EliminarAutoButton";
             EliminarAutoButton.Size = new Size(69, 28);
             EliminarAutoButton.TabIndex = 4;
@@ -412,7 +408,7 @@
             // 
             GuardarAutoButton.AutoSize = true;
             GuardarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            GuardarAutoButton.Location = new Point(391, 445);
+            GuardarAutoButton.Location = new Point(370, 445);
             GuardarAutoButton.Name = "GuardarAutoButton";
             GuardarAutoButton.Size = new Size(67, 28);
             GuardarAutoButton.TabIndex = 3;
@@ -424,7 +420,7 @@
             // 
             NuevoAutoButton.AutoSize = true;
             NuevoAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            NuevoAutoButton.Location = new Point(319, 445);
+            NuevoAutoButton.Location = new Point(305, 445);
             NuevoAutoButton.Name = "NuevoAutoButton";
             NuevoAutoButton.Size = new Size(59, 28);
             NuevoAutoButton.TabIndex = 2;
@@ -442,9 +438,8 @@
             AutosDisponiblesDataGridView.Name = "AutosDisponiblesDataGridView";
             AutosDisponiblesDataGridView.ReadOnly = true;
             AutosDisponiblesDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AutosDisponiblesDataGridView.Size = new Size(300, 423);
+            AutosDisponiblesDataGridView.Size = new Size(499, 259);
             AutosDisponiblesDataGridView.TabIndex = 1;
-            AutosDisponiblesDataGridView.SelectionChanged += AutosDisponiblesDataGridView_SelectionChanged;
             // 
             // label12
             // 
@@ -459,8 +454,7 @@
             // AsignarAutoButton
             // 
             AsignarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AsignarAutoButton.Image = Properties.Resources.sign_left;
-            AsignarAutoButton.Location = new Point(567, 63);
+            AsignarAutoButton.Location = new Point(553, 195);
             AsignarAutoButton.Name = "AsignarAutoButton";
             AsignarAutoButton.Size = new Size(118, 34);
             AsignarAutoButton.TabIndex = 15;
@@ -472,8 +466,7 @@
             // QuitarAutoButton
             // 
             QuitarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            QuitarAutoButton.Image = (Image)resources.GetObject("QuitarAutoButton.Image");
-            QuitarAutoButton.Location = new Point(567, 179);
+            QuitarAutoButton.Location = new Point(553, 235);
             QuitarAutoButton.Name = "QuitarAutoButton";
             QuitarAutoButton.Size = new Size(118, 34);
             QuitarAutoButton.TabIndex = 16;
@@ -488,11 +481,11 @@
             AutosAsignadosDataGridView.AllowUserToDeleteRows = false;
             AutosAsignadosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AutosAsignadosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AutosAsignadosDataGridView.Location = new Point(332, 508);
+            AutosAsignadosDataGridView.Location = new Point(234, 508);
             AutosAsignadosDataGridView.Name = "AutosAsignadosDataGridView";
             AutosAsignadosDataGridView.ReadOnly = true;
             AutosAsignadosDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AutosAsignadosDataGridView.Size = new Size(908, 150);
+            AutosAsignadosDataGridView.Size = new Size(971, 150);
             AutosAsignadosDataGridView.TabIndex = 17;
             // 
             // label13
@@ -505,16 +498,12 @@
             label13.TabIndex = 18;
             label13.Text = "Autos asignados";
             // 
-            // ErrorProvider
-            // 
-            ErrorProvider.ContainerControl = this;
-            // 
             // ViewForm
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(1250, 668);
+            ClientSize = new Size(1212, 668);
             Controls.Add(label13);
             Controls.Add(AutosAsignadosDataGridView);
             Controls.Add(QuitarAutoButton);
@@ -534,7 +523,6 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)AutosDisponiblesDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)AutosAsignadosDataGridView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -576,7 +564,6 @@
         internal Button QuitarAutoButton;
         internal DataGridView AutosAsignadosDataGridView;
         internal Label label13;
-        internal ErrorProvider ErrorProvider;
         internal TextBox AñoTextBox;
         internal Label label14;
         internal TextBox PrecioTextBox;
