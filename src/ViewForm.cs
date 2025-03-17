@@ -59,7 +59,9 @@ public partial class ViewForm : Form
         finally { boton.Enabled = true; }
     }
 
-    private static void EliminarObjeto<T>(BindingSource source, Func<T, bool> eliminar, Action recargar)
+    private static void EliminarObjeto<T>(BindingSource source,
+                                          Func<T, bool> eliminar,
+                                          Action recargar)
     {
         if (MostrarConfirmacion("¿Está seguro que desea eliminar la entidad seleccionada?", "Confirmación"))
         {
