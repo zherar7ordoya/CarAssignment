@@ -90,15 +90,16 @@ public class ViewController
     public List<object> AutosAsignados()
     {
         var autosAsignados = ObtenerPersonas()
-        .SelectMany(persona => persona.Autos.Select(auto => new
-        {
-            auto.Marca,
-            auto.Año,
-            auto.Modelo,
-            auto.Patente,
-            Documento = persona.DNI,
-            Dueño = $"{persona.Apellido}, {persona.Nombre}"
-        })).ToList();
+            .SelectMany(persona => persona.Autos.Select(auto => new
+            {
+                auto.Marca,
+                auto.Año,
+                auto.Modelo,
+                auto.Patente,
+                Documento = persona.DNI,
+                Dueño = $"{persona.Apellido}, {persona.Nombre}"
+            }))
+            .ToList();
         return [.. autosAsignados.Cast<object>()];
     }
 }

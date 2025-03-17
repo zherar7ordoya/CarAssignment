@@ -199,7 +199,7 @@
             // 
             AutosDePersonaDataGridView.AllowUserToAddRows = false;
             AutosDePersonaDataGridView.AllowUserToDeleteRows = false;
-            AutosDePersonaDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            AutosDePersonaDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AutosDePersonaDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AutosDePersonaDataGridView.Location = new Point(13, 182);
             AutosDePersonaDataGridView.Name = "AutosDePersonaDataGridView";
@@ -248,7 +248,7 @@
             // 
             PersonasDataGridView.AllowUserToAddRows = false;
             PersonasDataGridView.AllowUserToDeleteRows = false;
-            PersonasDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            PersonasDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             PersonasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PersonasDataGridView.Location = new Point(13, 50);
             PersonasDataGridView.Name = "PersonasDataGridView";
@@ -432,7 +432,7 @@
             // 
             AutosDisponiblesDataGridView.AllowUserToAddRows = false;
             AutosDisponiblesDataGridView.AllowUserToDeleteRows = false;
-            AutosDisponiblesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            AutosDisponiblesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AutosDisponiblesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AutosDisponiblesDataGridView.Location = new Point(13, 50);
             AutosDisponiblesDataGridView.Name = "AutosDisponiblesDataGridView";

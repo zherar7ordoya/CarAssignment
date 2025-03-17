@@ -117,7 +117,7 @@ public partial class ViewForm : Form
     private void CargarDatosIniciales()
     {
         CargarDatos(_personaBindingSource, _viewController.ObtenerPersonas);
-        CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(a => a.DueñoId == 0).ToList());
+        CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
         CargarAutosAsignados();
     }
 
@@ -220,7 +220,7 @@ public partial class ViewForm : Form
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private void CargarAutosDisponibles() => CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(a => a.DueñoId == 0).ToList());
+    private void CargarAutosDisponibles() => CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
     private void NuevoAutoButton_Click(object sender, EventArgs e) => NuevoObjeto(_autosDisponiblesBindingSource, new Auto(), NuevoAutoButton);
     private void EliminarAutoButton_Click(object sender, EventArgs e) => EliminarObjeto<Auto>(_autosDisponiblesBindingSource, _viewController.EliminarAuto, CargarAutosDisponibles);
 
