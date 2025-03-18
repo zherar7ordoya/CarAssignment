@@ -456,9 +456,9 @@
             AsignarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AsignarAutoButton.Location = new Point(553, 195);
             AsignarAutoButton.Name = "AsignarAutoButton";
-            AsignarAutoButton.Size = new Size(118, 34);
+            AsignarAutoButton.Size = new Size(118, 60);
             AsignarAutoButton.TabIndex = 15;
-            AsignarAutoButton.Text = "Asignar auto";
+            AsignarAutoButton.Text = "< Asignar auto a persona";
             AsignarAutoButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             AsignarAutoButton.UseVisualStyleBackColor = true;
             AsignarAutoButton.Click += AsignarAutoButton_Click;
@@ -466,11 +466,11 @@
             // QuitarAutoButton
             // 
             QuitarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            QuitarAutoButton.Location = new Point(553, 235);
+            QuitarAutoButton.Location = new Point(553, 262);
             QuitarAutoButton.Name = "QuitarAutoButton";
-            QuitarAutoButton.Size = new Size(118, 34);
+            QuitarAutoButton.Size = new Size(118, 60);
             QuitarAutoButton.TabIndex = 16;
-            QuitarAutoButton.Text = "Quitar auto";
+            QuitarAutoButton.Text = "Quitar auto a persona >";
             QuitarAutoButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             QuitarAutoButton.UseVisualStyleBackColor = true;
             QuitarAutoButton.Click += QuitarAutoButton_Click;
@@ -502,7 +502,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1212, 668);
             Controls.Add(label13);
             Controls.Add(AutosAsignadosDataGridView);

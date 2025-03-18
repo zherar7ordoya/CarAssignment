@@ -1,6 +1,6 @@
-﻿using Integrador.Entities;
+﻿using Integrador1.Entities;
 
-namespace Integrador.Logic;
+namespace Integrador1.Logic;
 
 public static class AsignacionesManager
 {

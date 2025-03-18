@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrador", "src\Integrador.csproj", "{1A3C8992-A41F-497C-9CD6-C347EBC5C7AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrador1", "Integrador1\Integrador1.csproj", "{1A3C8992-A41F-497C-9CD6-C347EBC5C7AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

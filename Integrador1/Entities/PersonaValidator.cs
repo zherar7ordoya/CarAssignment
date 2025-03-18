@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using Integrador1.Entities;
+
+using System.Text.RegularExpressions;
 
 namespace Integrador.Entities;
 

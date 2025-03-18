@@ -1,5 +1,6 @@
-using Integrador.Abstract;
-using Integrador.Entities;
+using Integrador1;
+using Integrador1.Abstract;
+using Integrador1.Entities;
 
 namespace Integrador;
 
@@ -139,7 +140,8 @@ public partial class ViewForm : Form
         {
             if (_personaBindingSource.Current is Persona personaSeleccionada)
             {
-                _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
+                //_autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
+                _autosDePersonaBindingSource.DataSource = personaSeleccionada.ListarAutos();
                 ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }

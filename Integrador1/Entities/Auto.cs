@@ -1,7 +1,8 @@
-﻿using Integrador.Abstract;
+﻿using Integrador1.Abstract;
+
 using System.Xml.Serialization;
 
-namespace Integrador.Entities;
+namespace Integrador1.Entities;
 
 public class Auto : Entity
 {

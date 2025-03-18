@@ -1,4 +1,4 @@
-﻿namespace Integrador.Abstract;
+﻿namespace Integrador1.Abstract;
 
 public interface IEntity
 {

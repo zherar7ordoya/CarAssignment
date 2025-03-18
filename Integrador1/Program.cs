@@ -1,4 +1,6 @@
-namespace Integrador
+using Integrador;
+
+namespace Integrador1
 {
     internal static class Program
     {
