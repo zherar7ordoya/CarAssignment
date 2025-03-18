@@ -35,11 +35,6 @@ public class ViewController
         return _personaManager.Delete(persona);
     }
 
-    public static List<Auto> ObtenerAutosDePersona(Persona persona)
-    {
-        return PersonaManager.GetListaAutos(persona);
-    }
-
     public static int ObtenerCantidadAutosDePersona(Persona persona)
     {
         return PersonaManager.GetCantidadAutos(persona);
@@ -51,9 +46,27 @@ public class ViewController
     }
 
     // Métodos para Autos.------------------------------------------------------
-    public List<Auto> ObtenerAutos()
+    private List<Auto> ObtenerAutos()
     {
         return _autoManager.Read();
+    }
+
+    public List<Auto> AutosDisponibles()
+    {
+        var autosDisponibles = ObtenerAutos()
+            .Where(auto => auto.DueñoId == 0)
+            .Select(auto => new Auto
+            {
+                Id = auto.Id,
+                Patente = auto.Patente,
+                Marca = auto.Marca,
+                Modelo = auto.Modelo,
+                Año = auto.Año,
+                Precio = auto.Precio
+            })
+            .ToList();
+
+        return autosDisponibles;
     }
 
     public bool CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
@@ -71,9 +84,10 @@ public class ViewController
         return _autoManager.Delete(auto);
     }
 
-    public static Persona? ObtenerDueñoAuto(Auto auto)
+    /* Para cumplir con lo pedido en el enunciado. */
+    public static string ObtenerDueñoAuto(Persona persona)
     {
-        return auto.Dueño;
+        return $"{persona.Apellido}, {persona.Nombre}";
     }
 
     // Métodos para Asignaciones.-----------------------------------------------
@@ -97,7 +111,7 @@ public class ViewController
                 auto.Modelo,
                 auto.Patente,
                 Documento = persona.DNI,
-                Dueño = $"{persona.Apellido}, {persona.Nombre}"
+                Dueño = ObtenerDueñoAuto(persona)
             }))
             .ToList();
         return [.. autosAsignados.Cast<object>()];

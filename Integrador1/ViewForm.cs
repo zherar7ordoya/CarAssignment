@@ -117,7 +117,10 @@ public partial class ViewForm : Form
     private void CargarDatosIniciales()
     {
         CargarDatos(_personaBindingSource, _viewController.ObtenerPersonas);
-        CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
+
+        //CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
+        CargarDatos(_autosDisponiblesBindingSource, () => _viewController.AutosDisponibles());
+
         CargarAutosAsignados();
     }
 
@@ -139,8 +142,8 @@ public partial class ViewForm : Form
         {
             if (_personaBindingSource.Current is Persona personaSeleccionada)
             {
-                //_autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
-                _autosDePersonaBindingSource.DataSource = personaSeleccionada.ListarAutos();
+                _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
+                //_autosDePersonaBindingSource.DataSource = personaSeleccionada.ListarAutos();
                 ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }
@@ -221,7 +224,9 @@ public partial class ViewForm : Form
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private void CargarAutosDisponibles() => CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
+    //private void CargarAutosDisponibles() => CargarDatos(_autosDisponiblesBindingSource, () => _viewController.ObtenerAutos().Where(auto => auto.DueñoId == 0).ToList());
+    private void CargarAutosDisponibles() => CargarDatos(_autosDisponiblesBindingSource, () => _viewController.AutosDisponibles());
+
     private void NuevoAutoButton_Click(object sender, EventArgs e) => NuevoObjeto(_autosDisponiblesBindingSource, new Auto(), NuevoAutoButton);
     private void EliminarAutoButton_Click(object sender, EventArgs e) => EliminarObjeto<Auto>(_autosDisponiblesBindingSource, _viewController.EliminarAuto, CargarAutosDisponibles);
 
