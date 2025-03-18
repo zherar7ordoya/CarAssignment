@@ -1,4 +1,4 @@
-﻿namespace Integrador1;
+﻿namespace Integrador;
 
 public static class Service
 {

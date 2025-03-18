@@ -1,7 +1,7 @@
-﻿using Integrador1.Entities;
-using Integrador1.Logic;
+﻿using Integrador.Entities;
+using Integrador.Logic;
 
-namespace Integrador1;
+namespace Integrador;
 
 public class ViewController
 {

@@ -1,6 +1,6 @@
-﻿using Integrador1.Abstract;
+﻿using Integrador.Abstract;
 
-namespace Integrador1.Persistence;
+namespace Integrador.Persistence;
 
 public class CRUD<T> : ICRUD<T> where T : IEntity
 {

@@ -1,6 +1,6 @@
 using Integrador;
 
-namespace Integrador1
+namespace Integrador
 {
     internal static class Program
     {

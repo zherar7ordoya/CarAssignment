@@ -1,6 +1,6 @@
-﻿using Integrador1.Abstract;
+﻿using Integrador.Abstract;
 
-namespace Integrador1.Entities;
+namespace Integrador.Entities;
 
 public class Persona : Entity
 {

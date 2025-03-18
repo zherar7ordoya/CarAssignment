@@ -1,6 +1,5 @@
-using Integrador1;
-using Integrador1.Abstract;
-using Integrador1.Entities;
+using Integrador.Abstract;
+using Integrador.Entities;
 
 namespace Integrador;
 

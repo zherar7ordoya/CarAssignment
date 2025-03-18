@@ -1,9 +1,7 @@
 ﻿using Integrador.Entities;
+using Integrador.Persistence;
 
-using Integrador1.Entities;
-using Integrador1.Persistence;
-
-namespace Integrador1.Logic;
+namespace Integrador.Logic;
 
 public class PersonaManager : CRUD<Persona>
 {

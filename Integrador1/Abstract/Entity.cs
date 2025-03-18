@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Integrador1.Abstract;
+namespace Integrador.Abstract;
 
 public abstract class Entity : IEntity
 {
