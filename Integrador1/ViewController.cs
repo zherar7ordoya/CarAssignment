@@ -46,31 +46,9 @@ public class ViewController
     }
 
     // Métodos para Autos.------------------------------------------------------
-    private List<Auto> ObtenerAutos()
-    {
-        return _autoManager.Read();
-    }
-
     public List<Auto> AutosDisponibles()
     {
-        //return [.. ObtenerAutos().Where(auto => auto.DueñoId == 0)];
         return [.. _autoManager.Read().Where(auto => auto.DueñoId == 0)];
-
-
-        //var autosDisponibles = ObtenerAutos()
-        //    .Where(auto => auto.DueñoId == 0)
-        //    .Select(auto => new Auto
-        //    {
-        //        Id = auto.Id,
-        //        Patente = auto.Patente,
-        //        Marca = auto.Marca,
-        //        Modelo = auto.Modelo,
-        //        Año = auto.Año,
-        //        Precio = auto.Precio
-        //    })
-        //    .ToList();
-
-        //return autosDisponibles;
     }
 
     public bool CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
@@ -94,6 +72,14 @@ public class ViewController
         return $"{persona.Apellido}, {persona.Nombre}";
     }
 
+    public static string ObtenerDueñoAuto(Auto auto)
+    {
+        return auto.DueñoId == 0 ? "Sin asignar" : $"{auto.Dueño?.Apellido}, {auto.Dueño?.Nombre}";
+    }
+
+
+
+
     // Métodos para Asignaciones.-----------------------------------------------
     public static void AsignarAutoAPersona(Persona persona, Auto auto)
     {
@@ -105,19 +91,18 @@ public class ViewController
         AsignacionesManager.DesasignarAuto(persona, auto);
     }
 
-    public List<object> AutosAsignados()
+    public record AutoAsignado(string Marca, int Año, string Modelo, string Patente, string Documento, string Dueño);
+
+    public List<AutoAsignado> AutosAsignados()
     {
-        var autosAsignados = ObtenerPersonas()
-            .SelectMany(persona => persona.Autos.Select(auto => new
-            {
-                auto.Marca,
-                auto.Año,
-                auto.Modelo,
-                auto.Patente,
-                Documento = persona.DNI,
-                Dueño = ObtenerDueñoAuto(persona)
-            }))
-            .ToList();
-        return [.. autosAsignados.Cast<object>()];
+        return [.. ObtenerPersonas()
+                .SelectMany(persona => persona.Autos.Select(auto =>
+                new AutoAsignado(auto.Marca ?? "",
+                                 auto.Año,
+                                 auto.Modelo ?? "",
+                                 auto.Patente ?? "",
+                                 persona.DNI ?? "",
+                                 ObtenerDueñoAuto(persona))))];
     }
+
 }
