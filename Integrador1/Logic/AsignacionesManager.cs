@@ -1,4 +1,4 @@
-﻿using Integrador.Entities;
+﻿using Integrador.Model;
 
 namespace Integrador.Logic;
 

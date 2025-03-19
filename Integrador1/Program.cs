@@ -1,4 +1,4 @@
-using Integrador;
+using Integrador.Service;
 
 namespace Integrador
 {
@@ -19,7 +19,7 @@ namespace Integrador
             }
             catch (Exception ex)
             {
-                Service.LogError("Error al iniciar la aplicación", ex);
+                Logger.LogError("Error al iniciar la aplicación", ex);
                 MessageBox.Show("Error al iniciar la aplicación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             

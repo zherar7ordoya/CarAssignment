@@ -1,6 +1,6 @@
 ﻿using Integrador.Abstract;
 
-namespace Integrador.Entities;
+namespace Integrador.Model;
 
 public class Persona : Entity
 {

@@ -1,4 +1,6 @@
 ﻿using Integrador.Abstract;
+using Integrador.Service;
+
 using System.Windows.Forms;
 
 namespace Integrador.Persistence;
@@ -17,7 +19,7 @@ public class CRUD<T> : ICRUD<T> where T : IEntity
         }
         catch (ArgumentException ex)
         {
-            Service.LogError($"Error al validar y crear el objeto {typeof(T).Name}", ex);
+            Logger.LogError($"Error al validar y crear el objeto {typeof(T).Name}", ex);
             return false;  // No se pudo crear debido a un error de validación
         }
     }

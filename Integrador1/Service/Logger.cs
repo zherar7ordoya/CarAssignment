@@ -1,6 +1,6 @@
-﻿namespace Integrador;
+﻿namespace Integrador.Service;
 
-public static class Service
+public static class Logger
 {
     public static void LogError(string message, Exception ex)
     {

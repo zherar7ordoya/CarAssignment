@@ -2,7 +2,7 @@
 
 using System.Xml.Serialization;
 
-namespace Integrador.Entities;
+namespace Integrador.Model;
 
 public class Auto : Entity
 {
