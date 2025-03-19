@@ -106,12 +106,70 @@ public partial class ViewForm : Form
                 control.DataBindings.Add("Text", source, property);
             }
 
-            PersonasDataGridView.DataSource = _personaBindingSource;
-            AutosDePersonaDataGridView.DataSource = _autosDePersonaBindingSource;
-            AutosDisponiblesDataGridView.DataSource = _autosDisponiblesBindingSource;
-            AutosAsignadosDataGridView.DataSource = _autosAsignadosBindingSource;
+            // Configurar manualmente las columnas de los DataGridView
+            ConfigurarDataGridView(PersonasDataGridView, _personaBindingSource,
+            [
+            ("Id", "ID"),
+            ("DNI", "DNI"),
+            ("Nombre", "Nombre"),
+            ("Apellido", "Apellido")
+            ]);
+
+            ConfigurarDataGridView(AutosDePersonaDataGridView, _autosDePersonaBindingSource,
+            [
+            ("Id", "ID"),
+            ("Patente", "Patente"),
+            ("Marca", "Marca"),
+            ("Modelo", "Modelo"),
+            ("Año", "Año"),
+            ("Precio", "Precio")
+            ]);
+
+            ConfigurarDataGridView(AutosDisponiblesDataGridView, _autosDisponiblesBindingSource,
+            [
+            ("Id", "ID"),
+            ("Patente", "Patente"),
+            ("Marca", "Marca"),
+            ("Modelo", "Modelo"),
+            ("Año", "Año"),
+            ("Precio", "Precio")
+            ]);
+
+
+            // Configurar Autos Asignados con la proyección de datos
+            var autosAsignados = _viewController.AutosAsignados(); // Obtiene la lista de autos asignados
+            _autosAsignadosBindingSource.DataSource = autosAsignados;
+            ConfigurarDataGridView(AutosAsignadosDataGridView, _autosAsignadosBindingSource,
+            [
+                ("Marca", "Marca"),
+            ("Año", "Año"),
+            ("Modelo", "Modelo"),
+            ("Patente", "Patente"),
+            ("Documento", "DNI Dueño"),
+            ("Dueño", "Nombre Dueño")
+            ]);
+
+
         }
         catch (Exception ex) { ManejarExcepcion("Error al configurar enlaces.", ex); }
+    }
+
+    private static void ConfigurarDataGridView(DataGridView dataGridView, BindingSource bindingSource, (string Property, string Header)[] columnas)
+    {
+        dataGridView.AutoGenerateColumns = false;
+        dataGridView.DataSource = bindingSource;
+        dataGridView.Columns.Clear(); // Limpiar columnas previas para evitar duplicaciones
+
+        foreach (var (property, header) in columnas)
+        {
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = property,
+                HeaderText = header,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                ReadOnly = true
+            });
+        }
     }
 
     private void CargarDatosIniciales()
@@ -143,7 +201,6 @@ public partial class ViewForm : Form
             if (_personaBindingSource.Current is Persona personaSeleccionada)
             {
                 _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
-                //_autosDePersonaBindingSource.DataSource = personaSeleccionada.ListarAutos();
                 ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }
@@ -178,17 +235,13 @@ public partial class ViewForm : Form
             try
             {
                 ViewController.AsignarAutoAPersona(personaSeleccionada, autoSeleccionado);
-
                 _viewController.ActualizarPersona(personaSeleccionada);
                 _viewController.ActualizarAuto(autoSeleccionado);
-
                 _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
                 _autosDePersonaBindingSource.ResetBindings(false);
                 _autosDisponiblesBindingSource.Remove(autoSeleccionado);
                 _autosDisponiblesBindingSource.ResetBindings(false);
-
                 CargarAutosAsignados();
-
                 ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }
@@ -204,17 +257,13 @@ public partial class ViewForm : Form
             try
             {
                 ViewController.DesasignarAutoDePersona(personaSeleccionada, autoSeleccionado);
-
                 _viewController.ActualizarPersona(personaSeleccionada);
                 _viewController.ActualizarAuto(autoSeleccionado);
-
                 _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
                 _autosDePersonaBindingSource.ResetBindings(false); // Notificar a los controles enlazados
                 _autosDisponiblesBindingSource.Add(autoSeleccionado); // Agregar el auto a la lista de disponibles
                 _autosDisponiblesBindingSource.ResetBindings(false); // Notificar a los controles enlazados
-
                 CargarAutosAsignados();
-
                 ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }

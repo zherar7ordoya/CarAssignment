@@ -53,20 +53,24 @@ public class ViewController
 
     public List<Auto> AutosDisponibles()
     {
-        var autosDisponibles = ObtenerAutos()
-            .Where(auto => auto.DueñoId == 0)
-            .Select(auto => new Auto
-            {
-                Id = auto.Id,
-                Patente = auto.Patente,
-                Marca = auto.Marca,
-                Modelo = auto.Modelo,
-                Año = auto.Año,
-                Precio = auto.Precio
-            })
-            .ToList();
+        //return [.. ObtenerAutos().Where(auto => auto.DueñoId == 0)];
+        return [.. _autoManager.Read().Where(auto => auto.DueñoId == 0)];
 
-        return autosDisponibles;
+
+        //var autosDisponibles = ObtenerAutos()
+        //    .Where(auto => auto.DueñoId == 0)
+        //    .Select(auto => new Auto
+        //    {
+        //        Id = auto.Id,
+        //        Patente = auto.Patente,
+        //        Marca = auto.Marca,
+        //        Modelo = auto.Modelo,
+        //        Año = auto.Año,
+        //        Precio = auto.Precio
+        //    })
+        //    .ToList();
+
+        //return autosDisponibles;
     }
 
     public bool CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
