@@ -15,7 +15,7 @@ namespace Integrador
                 ApplicationConfiguration.Initialize();
                 Application.Run(new ViewForm());
             }
-            catch (Exception ex) { Exceptor.HandleException("Error al iniciar la aplicación", ex); }
+            catch (Exception ex) { ExceptionHandler.HandleException("Error al iniciar la aplicación", ex); }
         }
     }
 }

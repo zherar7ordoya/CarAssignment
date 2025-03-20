@@ -11,7 +11,7 @@ public class Validator
         }
         catch (ArgumentException ex)
         {
-            Exceptor.HandleException($"Error al validar el objeto {typeof(T).Name}", ex);
+            ExceptionHandler.HandleException($"Error al validar el objeto {typeof(T).Name}", ex);
             return false;
         }
     }

@@ -8,8 +8,8 @@ public partial class ViewForm : Form
 {
     public ViewForm()
     {
-        Application.ThreadException += (sender, e) => Exceptor.HandleException("Excepción no controlada", e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += static (sender, e) => Exceptor.HandleException("Error grave", e.ExceptionObject as Exception ?? new Exception("Unknown exception"));
+        Application.ThreadException += (sender, e) => ExceptionHandler.HandleException("Excepción no controlada", e.Exception);
+        AppDomain.CurrentDomain.UnhandledException += static (sender, e) => ExceptionHandler.HandleException("Error grave", e.ExceptionObject as Exception ?? new Exception("Unknown exception"));
 
         InitializeComponent();
         ConfigurarDelegados();
@@ -37,7 +37,7 @@ public partial class ViewForm : Form
             ConfigurarDataGridViews();
             CargarDatosIniciales();
         }
-        catch (Exception ex) { Exceptor.HandleException("Error al configurar enlaces.", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException("Error al configurar enlaces.", ex); }
     }
 
     private void ConfigurarBindingsDeControles()
@@ -141,7 +141,7 @@ public partial class ViewForm : Form
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }
         }
-        catch (Exception ex) { Exceptor.HandleException("Error al seleccionar una persona.", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException("Error al seleccionar una persona.", ex); }
     }
 
     private void NuevoPersonaButton_Click(object sender, EventArgs e)
@@ -149,7 +149,7 @@ public partial class ViewForm : Form
         NuevoPersonaCommand nuevo = new(_personasBS, NuevoPersonaButton);
 
         try { nuevo.Execute(); }
-        catch (Exception ex) { Exceptor.HandleException("Error al crear una nueva persona.", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException("Error al crear una nueva persona.", ex); }
     }
 
     private void GuardarPersonaButton_Click(object sender, EventArgs e)
@@ -168,7 +168,7 @@ public partial class ViewForm : Form
                 command.Execute();
                 ViewController.CargarDatos(_personasBS, _controller.ObtenerPersonas);
             }
-            catch (Exception ex) { Exceptor.HandleException("Error al guardar.", ex); }
+            catch (Exception ex) { ExceptionHandler.HandleException("Error al guardar.", ex); }
             finally { NuevoPersonaButton.Enabled = true; }
         }
     }
@@ -185,7 +185,7 @@ public partial class ViewForm : Form
                 ViewController.CargarDatos(_personasBS, _controller.ObtenerPersonas);
                 Messenger.MostrarMensaje("Persona eliminada correctamente.", "Éxito");
             }
-            catch (Exception ex) { Exceptor.HandleException("Error al eliminar la persona.", ex); }
+            catch (Exception ex) { ExceptionHandler.HandleException("Error al eliminar la persona.", ex); }
         }
         else { Messenger.MostrarMensaje("No se ha seleccionado ninguna persona.", "Advertencia"); }
     }
@@ -209,7 +209,7 @@ public partial class ViewForm : Form
             }
             else
             {
-                Exceptor.HandleException("Error al asignar un auto a una persona.", new Exception(ErrorMessage));
+                ExceptionHandler.HandleException("Error al asignar un auto a una persona.", new Exception(ErrorMessage));
             }
         }
     }
@@ -233,7 +233,7 @@ public partial class ViewForm : Form
             }
             else
             {
-                Exceptor.HandleException("Error al quitar un auto de una persona.", new Exception(ErrorMessage));
+                ExceptionHandler.HandleException("Error al quitar un auto de una persona.", new Exception(ErrorMessage));
             }
         }
     }
@@ -243,7 +243,7 @@ public partial class ViewForm : Form
         NuevoAutoCommand nuevo = new(_autosDisponiblesBS, NuevoAutoButton);
 
         try { nuevo.Execute(); }
-        catch (Exception ex) { Exceptor.HandleException("Error al crear un nuevo auto.", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException("Error al crear un nuevo auto.", ex); }
     }
 
     private void GuardarAutoButton_Click(object sender, EventArgs e)
@@ -264,7 +264,7 @@ public partial class ViewForm : Form
                 command.Execute();
                 ViewController.CargarDatos(_autosDisponiblesBS, _controller.AutosDisponibles);
             }
-            catch (Exception ex) { Exceptor.HandleException("Error al guardar.", ex); }
+            catch (Exception ex) { ExceptionHandler.HandleException("Error al guardar.", ex); }
             finally { NuevoAutoButton.Enabled = true; }
         }
     }
@@ -281,7 +281,7 @@ public partial class ViewForm : Form
                 ViewController.CargarDatos(_autosDisponiblesBS, _controller.AutosDisponibles);
                 Messenger.MostrarMensaje("Auto eliminado correctamente.", "Éxito");
             }
-            catch (Exception ex) { Exceptor.HandleException("Error al eliminar el auto.", ex); }
+            catch (Exception ex) { ExceptionHandler.HandleException("Error al eliminar el auto.", ex); }
         }
         else { Messenger.MostrarMensaje("No se ha seleccionado ningún auto.", "Advertencia"); }
     }

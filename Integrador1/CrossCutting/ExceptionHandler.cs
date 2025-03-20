@@ -1,6 +1,6 @@
 ﻿namespace Integrador.CrossCutting;
 
-public static class Exceptor
+public static class ExceptionHandler
 {
     public static void HandleException(string mensaje, Exception ex)
     {

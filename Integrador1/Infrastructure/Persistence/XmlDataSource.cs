@@ -27,9 +27,9 @@ public class XmlDataSource<T> : IDataSource<T> where T : IEntity
             var result = serializer.Deserialize(reader) as List<T>;
             return result ?? [];
         }
-        catch (FileNotFoundException ex) { Exceptor.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { Exceptor.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { Exceptor.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
+        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
         finally
         {
             if (reader != null)
@@ -53,9 +53,9 @@ public class XmlDataSource<T> : IDataSource<T> where T : IEntity
             serializer.Serialize(writer, data);
             return true;
         }
-        catch (FileNotFoundException ex) { Exceptor.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { Exceptor.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { Exceptor.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
+        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
 
         return false; // Ensure all code paths return a value
     }
@@ -68,8 +68,8 @@ public class XmlDataSource<T> : IDataSource<T> where T : IEntity
             using StreamWriter writer = new(file, false, Encoding.Unicode);
             serializer.Serialize(writer, new List<T>());
         }
-        catch (FileNotFoundException ex) { Exceptor.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { Exceptor.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { Exceptor.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
+        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
+        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
     }
 }
