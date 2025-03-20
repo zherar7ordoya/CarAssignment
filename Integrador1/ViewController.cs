@@ -17,7 +17,6 @@ public class ViewController
     private readonly PersonaRepository _personaManager;
     private readonly AutoRepository _autoManager;
 
-    // Métodos para Personas.---------------------------------------------------
     public List<Persona> ObtenerPersonas()
     {
         return _personaManager.Read();
@@ -48,7 +47,6 @@ public class ViewController
         return PersonaRepository.GetValorAutos(persona);
     }
 
-    // Métodos para Autos.------------------------------------------------------
     public List<Auto> AutosDisponibles()
     {
         return [.. _autoManager.Read().Where(auto => auto.DueñoId == 0)];
@@ -69,30 +67,18 @@ public class ViewController
         return _autoManager.Delete(auto);
     }
 
-    /* Para cumplir con lo pedido en el enunciado. */
     public static string ObtenerDueñoAuto(Persona persona)
     {
         return $"{persona.Apellido}, {persona.Nombre}";
     }
 
+
+    /* SIN REFERENCIAS... */
     public static string ObtenerDueñoAuto(Auto auto)
     {
         return auto.DueñoId == 0 ? "Sin asignar" : $"{auto.Dueño?.Apellido}, {auto.Dueño?.Nombre}";
     }
 
-
-
-
-    // Métodos para Asignaciones.-----------------------------------------------
-    //public static void AsignarAutoAPersona(Persona persona, Auto auto)
-    //{
-    //    AsignacionesManager.AsignarAuto(persona, auto);
-    //}
-
-    //public static void DesasignarAutoDePersona(Persona persona, Auto auto)
-    //{
-    //    AsignacionesManager.DesasignarAuto(persona, auto);
-    //}
 
     public record AutoAsignado(string Marca, int Año, string Modelo, string Patente, string Documento, string Dueño);
 
@@ -108,15 +94,6 @@ public class ViewController
                                  ObtenerDueñoAuto(persona))))];
     }
 
-
-
-
-
-
-
-
-
-
     public static void NuevoObjeto<T>(BindingSource source, T nuevoObjeto, Button boton)
     {
         source.Add(nuevoObjeto);
@@ -124,6 +101,8 @@ public class ViewController
         boton.Enabled = false;
     }
 
+
+    /* SIN REFERENCIAS... */
     public static void GuardarEntidad<T>(BindingSource source,
                                           Action<T> actualizar,
                                           Action<T> crear,
@@ -142,6 +121,8 @@ public class ViewController
         finally { boton.Enabled = true; }
     }
 
+
+    /* SIN REFERENCIAS... */
     public static void EliminarObjeto<T>(BindingSource source,
                                           Func<T, bool> eliminar,
                                           Action recargar)
@@ -156,17 +137,13 @@ public class ViewController
         }
     }
 
+
     public static void CargarDatos<T>(BindingSource source, Func<List<T>> obtenerDatos)
     {
         try { source.DataSource = obtenerDatos(); }
         catch (Exception ex) { Exceptor.HandleException("Error al cargar datos.", ex); }
     }
 
-
-
-
-
-    // Método para asignar un auto a una persona
     public (bool Success, string ErrorMessage) AsignarAutoAPersona(Persona persona, Auto auto)
     {
         try
@@ -182,7 +159,6 @@ public class ViewController
         }
     }
 
-    // Método para quitar un auto de una persona
     public (bool Success, string ErrorMessage) QuitarAutoDePersona(Persona persona, Auto auto)
     {
         try
@@ -197,8 +173,4 @@ public class ViewController
             return (false, ex.Message); // Error
         }
     }
-
-
-
-
 }

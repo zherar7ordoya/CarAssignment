@@ -12,17 +12,10 @@ namespace Integrador
         {
             try
             {
-                // To customize application configuration such as set high DPI settings or default font,
-                // see https://aka.ms/applicationconfiguration.
                 ApplicationConfiguration.Initialize();
                 Application.Run(new ViewForm());
             }
-            catch (Exception ex)
-            {
-                Logger.LogError("Error al iniciar la aplicación", ex);
-                MessageBox.Show("Error al iniciar la aplicación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            catch (Exception ex) { Exceptor.HandleException("Error al iniciar la aplicación", ex); }
         }
     }
 }
