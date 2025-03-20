@@ -1,7 +1,8 @@
 ﻿using Integrador.Abstract;
-using Integrador.Logic;
-using Integrador.Model;
-using Integrador.Service;
+using Integrador.BusinessLogic;
+using Integrador.Core;
+using Integrador.CrossCutting;
+using Integrador.Infrastructure.Repositories;
 
 namespace Integrador;
 
@@ -9,12 +10,12 @@ public class ViewController
 {
     public ViewController()
     {
-        _personaManager = new PersonaManager();
-        _autoManager = new AutoManager();
+        _personaManager = new PersonaRepository();
+        _autoManager = new AutoRepository();
     }
 
-    private readonly PersonaManager _personaManager;
-    private readonly AutoManager _autoManager;
+    private readonly PersonaRepository _personaManager;
+    private readonly AutoRepository _autoManager;
 
     // Métodos para Personas.---------------------------------------------------
     public List<Persona> ObtenerPersonas()
@@ -39,12 +40,12 @@ public class ViewController
 
     public static int ObtenerCantidadAutosDePersona(Persona persona)
     {
-        return PersonaManager.GetCantidadAutos(persona);
+        return PersonaRepository.GetCantidadAutos(persona);
     }
 
     public static decimal ObtenerValorTotalAutosDePersona(Persona persona)
     {
-        return PersonaManager.GetValorAutos(persona);
+        return PersonaRepository.GetValorAutos(persona);
     }
 
     // Métodos para Autos.------------------------------------------------------
@@ -137,7 +138,7 @@ public class ViewController
                 recargar();
             }
         }
-        catch (Exception ex) { ExceptionHandler.ManejarExcepcion("Error al guardar.", ex); }
+        catch (Exception ex) { Exceptor.HandleException("Error al guardar.", ex); }
         finally { boton.Enabled = true; }
     }
 
@@ -158,7 +159,7 @@ public class ViewController
     public static void CargarDatos<T>(BindingSource source, Func<List<T>> obtenerDatos)
     {
         try { source.DataSource = obtenerDatos(); }
-        catch (Exception ex) { ExceptionHandler.ManejarExcepcion("Error al cargar datos.", ex); }
+        catch (Exception ex) { Exceptor.HandleException("Error al cargar datos.", ex); }
     }
 
 
@@ -173,7 +174,7 @@ public class ViewController
             AsignacionesManager.AsignarAuto(persona, auto);
             ActualizarPersona(persona);
             ActualizarAuto(auto);
-            return (true, null); // Éxito
+            return (true, string.Empty); // Éxito
         }
         catch (Exception ex)
         {
@@ -189,7 +190,7 @@ public class ViewController
             AsignacionesManager.DesasignarAuto(persona, auto);
             ActualizarPersona(persona);
             ActualizarAuto(auto);
-            return (true, null); // Éxito
+            return (true, string.Empty); // Éxito
         }
         catch (Exception ex)
         {

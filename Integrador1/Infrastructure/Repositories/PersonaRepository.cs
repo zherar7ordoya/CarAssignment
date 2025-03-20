@@ -1,15 +1,23 @@
-﻿using Integrador.Entities;
-using Integrador.Model;
-using Integrador.Persistence;
+﻿using Integrador.Core;
+using Integrador.CrossCutting;
+using Integrador.Entities;
+using Integrador.Infrastructure.Persistence;
 
-namespace Integrador.Logic;
+namespace Integrador.Infrastructure.Repositories;
 
-public class PersonaManager : CRUD<Persona>
+public class PersonaRepository : Repository<Persona>
 {
     public bool CrearPersona(string dni, string nombre, string apellido)
     {
         var persona = new Persona(dni, nombre, apellido);
-        return ValidateAndCreate(persona, PersonaValidator.Validar);
+
+        if (Validator.Validate(persona, PersonaValidator.Validar))
+        {
+            Create(persona);
+            return true;
+        }
+
+        return false;
     }
 
     public static List<Auto> GetListaAutos(Persona persona) => persona.Autos;

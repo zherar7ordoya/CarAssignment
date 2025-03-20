@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Abstract;
 
-public interface ICRUD<T> where T : IEntity
+public interface IRepository<T> where T : IEntity
 {
     T Create(T entity);
     List<T> Read();

@@ -1,4 +1,4 @@
-using Integrador.Service;
+using Integrador.CrossCutting;
 
 namespace Integrador
 {

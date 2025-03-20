@@ -1,6 +1,5 @@
-using Integrador.Abstract;
-using Integrador.Model;
-using Integrador.Service;
+using Integrador.Core;
+using Integrador.CrossCutting;
 
 namespace Integrador;
 
@@ -8,8 +7,8 @@ public partial class ViewForm : Form
 {
     public ViewForm()
     {
-        Application.ThreadException += (sender, e) => ExceptionHandler.ManejarExcepcion("Excepción no controlada", e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += static (sender, e) => ExceptionHandler.ManejarExcepcion("Error grave", e.ExceptionObject as Exception ?? new Exception("Unknown exception"));
+        Application.ThreadException += (sender, e) => Exceptor.HandleException("Excepción no controlada", e.Exception);
+        AppDomain.CurrentDomain.UnhandledException += static (sender, e) => Exceptor.HandleException("Error grave", e.ExceptionObject as Exception ?? new Exception("Unknown exception"));
         InitializeComponent();
         //ConfigurarDelegados(); /* ES MOLESTO, SE DEJA PORQUE LO PIDE LA CONSIGNA. */
         ConfigurarEnlaces();
@@ -105,7 +104,7 @@ public partial class ViewForm : Form
                                        ("Dueño", "Nombre Dueño")
                                    ]);
         }
-        catch (Exception ex) { ExceptionHandler.ManejarExcepcion("Error al configurar enlaces.", ex); }
+        catch (Exception ex) { Exceptor.HandleException("Error al configurar enlaces.", ex); }
     }
 
     private static void ConfigurarDataGridView(DataGridView dataGridView,
@@ -150,7 +149,7 @@ public partial class ViewForm : Form
                 CantidadAutosTextBox.Text = ViewController.ObtenerCantidadAutosDePersona(personaSeleccionada).ToString();
             }
         }
-        catch (Exception ex) { ExceptionHandler.ManejarExcepcion("Error al seleccionar una persona.", ex); }
+        catch (Exception ex) { Exceptor.HandleException("Error al seleccionar una persona.", ex); }
     }
 
     private void GuardarPersonaButton_Click(object sender, EventArgs e)
@@ -233,7 +232,7 @@ public partial class ViewForm : Form
             }
             else
             {
-                ExceptionHandler.ManejarExcepcion("Error al asignar un auto a una persona.", new Exception(resultado.ErrorMessage));
+                Exceptor.HandleException("Error al asignar un auto a una persona.", new Exception(resultado.ErrorMessage));
             }
         }
     }
@@ -257,7 +256,7 @@ public partial class ViewForm : Form
             }
             else
             {
-                ExceptionHandler.ManejarExcepcion("Error al quitar un auto de una persona.", new Exception(resultado.ErrorMessage));
+                Exceptor.HandleException("Error al quitar un auto de una persona.", new Exception(resultado.ErrorMessage));
             }
         }
     }

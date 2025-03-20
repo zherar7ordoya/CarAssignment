@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Abstract;
 
-public interface IPersister<T> where T : IEntity
+public interface IDataSource<T> where T : IEntity
 {
     List<T> Read();
     bool Write(List<T> datos);

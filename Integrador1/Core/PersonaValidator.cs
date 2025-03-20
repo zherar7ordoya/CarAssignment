@@ -1,4 +1,4 @@
-﻿using Integrador.Model;
+﻿using Integrador.Core;
 
 using System.Text.RegularExpressions;
 

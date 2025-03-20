@@ -1,4 +1,4 @@
-﻿namespace Integrador.Service;
+﻿namespace Integrador.CrossCutting;
 
 public static class Logger
 {

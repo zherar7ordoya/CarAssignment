@@ -1,6 +1,6 @@
-﻿using Integrador.Model;
+﻿using Integrador.Core;
 
-namespace Integrador.Logic;
+namespace Integrador.BusinessLogic;
 
 public static class AsignacionesManager
 {
