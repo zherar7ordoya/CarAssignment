@@ -10,7 +10,7 @@ public class EliminarPersonaCommand(ViewController viewController, Persona perso
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.EliminarPersona(_persona));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.DeletePersona(_persona));
         return (Success, ErrorMessage);
     }
 

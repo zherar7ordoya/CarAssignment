@@ -14,7 +14,7 @@ public class CrearPersonaCommand(ViewController viewController,
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.CrearPersona(_dni, _nombre, _apellido));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.CreatePersona(_dni, _nombre, _apellido));
         return (Success, ErrorMessage);
     }
 

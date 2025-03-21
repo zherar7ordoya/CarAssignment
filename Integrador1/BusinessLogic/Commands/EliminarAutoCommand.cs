@@ -10,7 +10,7 @@ public class EliminarAutoCommand(ViewController viewController, Auto auto) : ICo
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.EliminarAuto(_auto));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.DeleteAuto(_auto));
         return (Success, ErrorMessage);
     }
 

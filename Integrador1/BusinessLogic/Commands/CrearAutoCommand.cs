@@ -18,7 +18,7 @@ public class CrearAutoCommand(ViewController viewController,
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.CrearAuto(_patente, _marca, _modelo, _año, _precio));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.CreateAuto(_patente, _marca, _modelo, _año, _precio));
         return (Success, ErrorMessage);
     }
 

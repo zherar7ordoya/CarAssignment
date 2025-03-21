@@ -8,71 +8,10 @@ namespace Integrador;
 
 public class ViewController
 {
-    public ViewController()
-    {
-        _persona = new PersonaRepository();
-        _auto = new AutoRepository();
-    }
+    //private readonly PersonaRepository _personaRepository = new();
+    //private readonly AutoRepository _autoRepository = new();
 
-    private readonly PersonaRepository _persona;
-    private readonly AutoRepository _auto;
-
-    public List<Persona> ObtenerPersonas()
-    {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(_persona.Read);
-        return Success && Result != null ? Result : [];
-    }
-
-    public bool CrearPersona(string dni, string nombre, string apellido)
-    {
-        return SafeExecutor.Execute(() => _persona.CrearPersona(dni, nombre, apellido)).Success;
-    }
-
-    public bool ActualizarPersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => _persona.Update(persona)).Success;
-    }
-
-    public bool EliminarPersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => _persona.Delete(persona)).Success;
-    }
-
-    public static int ObtenerCantidadAutosDePersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => PersonaRepository.GetCantidadAutos(persona)).Result;
-    }
-
-    public static decimal ObtenerValorTotalAutosDePersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => PersonaRepository.GetValorAutos(persona)).Result;
-    }
-
-    public List<Auto> AutosDisponibles()
-    {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(_auto.Read);
-        return Success && Result != null ? [.. Result.Where(auto => auto.DueñoId == 0)] : [];
-    }
-
-    public bool CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
-    {
-        return SafeExecutor.Execute(() => _auto.CrearAuto(patente, marca, modelo, año, precio)).Success;
-    }
-
-    public bool ActualizarAuto(Auto auto)
-    {
-        return SafeExecutor.Execute(() => _auto.Update(auto)).Success;
-    }
-
-    public bool EliminarAuto(Auto auto)
-    {
-        return SafeExecutor.Execute(() => _auto.Delete(auto)).Success;
-    }
-
-    public static string ObtenerDueñoAuto(Persona persona)
-    {
-        return $"{persona.Apellido}, {persona.Nombre}";
-    }
+    #region OPERACIONES CRUD ***************************************************
 
     public record AutoAsignado(string Marca,
                                int Año,
@@ -81,46 +20,100 @@ public class ViewController
                                string Documento,
                                string Dueño);
 
-    public List<AutoAsignado> AutosAsignados()
+    public static string GetApellidoNombre(Persona persona)
     {
-        var personas = ObtenerPersonas();
-
-        return [.. personas
-            .Where(persona => persona.Autos != null) // Filtrar personas con autos no nulos
-            .SelectMany(persona => persona.Autos
-                .Select(auto => new AutoAsignado
-                (
-                    auto.Marca ?? "Desconocido",
-                    auto.Año,
-                    auto.Modelo ?? "Desconocido",
-                    auto.Patente ?? "Sin patente",
-                    persona.DNI ?? "Sin DNI",
-                    ObtenerDueñoAuto(persona)
-                )))]; // Convertir el resultado en una lista
+        return $"{persona.Apellido}, {persona.Nombre}";
     }
+
+    //..........................................................................
+
+    public bool CreatePersona(string dni, string nombre, string apellido)
+    {
+        return SafeExecutor.Execute(() => _personaRepository.CreatePersona(dni, nombre, apellido)).Success;
+    }
+
+    public List<Persona> ReadPersonas()
+    {
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(_personaRepository.Read);
+        return Success && Result != null ? Result : [];
+    }
+
+    public bool UpdatePersona(Persona persona)
+    {
+        return SafeExecutor.Execute(() => _personaRepository.Update(persona)).Success;
+    }
+
+    public bool DeletePersona(Persona persona)
+    {
+        return SafeExecutor.Execute(() => _personaRepository.Delete(persona)).Success;
+    }
+
+    //..........................................................................
+
+    public bool CreateAuto(string patente, string marca, string modelo, int año, decimal precio)
+    {
+        return SafeExecutor.Execute(() => _autoRepository.CreateAuto(patente, marca, modelo, año, precio)).Success;
+    }
+
+    public List<Auto> ReadAutosDisponibles()
+    {
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _autoRepository.ReadDisponibles());
+        return Success && Result != null ? Result : [];
+    }
+
+    public static List<AutoAsignado> ReadAutosAsignados(List<Persona> personas)
+    {
+        return [.. personas
+        .Where(persona => persona.Autos != null)
+        .SelectMany(persona => persona.Autos
+            .Select(auto => new AutoAsignado
+            (
+                auto.Marca ?? "Desconocido",
+                auto.Año,
+                auto.Modelo ?? "Desconocido",
+                auto.Patente ?? "Sin patente",
+                persona.DNI ?? "Sin DNI",
+                GetApellidoNombre(persona)
+            )))];
+    }
+
+    public bool UpdateAuto(Auto auto)
+    {
+        return SafeExecutor.Execute(() => _autoRepository.Update(auto)).Success;
+    }
+
+    public bool DeleteAuto(Auto auto)
+    {
+        return SafeExecutor.Execute(() => _autoRepository.Delete(auto)).Success;
+    }
+
+    #endregion *****************************************************************
+
+    public static int GetCantidadAutos(Persona persona) => SafeExecutor.Execute(() => PersonaRepository.GetCantidadAutos(persona)).Result;
+    public static decimal GetValorAutos(Persona persona) => SafeExecutor.Execute(() => PersonaRepository.GetValorAutos(persona)).Result;
 
     public static bool CargarDatos<T>(BindingSource source, Func<List<T>> obtenerDatos)
     {
-        return SafeExecutor.Execute(() => source.DataSource = obtenerDatos()).Success;
+        return SafeExecutor.Execute(() => source.DataSource = obtenerDatos(), "Error al cargar datos.").Success;
     }
 
-    public (bool Success, string ErrorMessage) AsignarAutoAPersona(Persona persona, Auto auto)
+    public (bool Success, string ErrorMessage) AsignarAuto(Persona persona, Auto auto)
     {
         return SafeExecutor.Execute(() =>
         {
             AsignacionesManager.AsignarAuto(persona, auto);
-            ActualizarPersona(persona);
-            ActualizarAuto(auto);
+            UpdatePersona(persona);
+            UpdateAuto(auto);
         });
     }
 
-    public (bool Success, string ErrorMessage) QuitarAutoDePersona(Persona persona, Auto auto)
+    public (bool Success, string ErrorMessage) DesasignarAuto(Persona persona, Auto auto)
     {
         return SafeExecutor.Execute(() =>
         {
             AsignacionesManager.DesasignarAuto(persona, auto);
-            ActualizarPersona(persona);
-            ActualizarAuto(auto);
+            UpdatePersona(persona);
+            UpdateAuto(auto);
         });
     }
 }

@@ -10,7 +10,7 @@ public class ActualizarAutoCommand(ViewController viewController, Auto auto) : I
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.ActualizarAuto(_auto));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.UpdateAuto(_auto));
         return (Success, ErrorMessage);
     }
 

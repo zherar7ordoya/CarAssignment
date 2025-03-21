@@ -7,7 +7,11 @@ namespace Integrador.Infrastructure.Repositories;
 
 public class AutoRepository : Repository<Auto>
 {
-    public bool CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
+    public bool CreateAuto(string patente,
+                           string marca,
+                           string modelo,
+                           int año,
+                           decimal precio)
     {
         var auto = new Auto(patente, marca, modelo, año, precio);
 
@@ -18,5 +22,10 @@ public class AutoRepository : Repository<Auto>
         }
 
         return false;
+    }
+
+    public List<Auto> ReadDisponibles()
+    {
+        return [.. Read().Where(auto => auto.DueñoId == 0)];
     }
 }

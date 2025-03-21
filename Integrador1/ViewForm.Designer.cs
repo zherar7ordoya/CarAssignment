@@ -40,7 +40,7 @@
             label4 = new Label();
             label3 = new Label();
             ValorTotalAutosLabel = new Label();
-            AutosDePersonaDGV = new DataGridView();
+            AutosPersonaDGV = new DataGridView();
             EliminarPersonaButton = new Button();
             GuardarPersonaButton = new Button();
             NuevoPersonaButton = new Button();
@@ -69,7 +69,7 @@
             AutosAsignadosDGV = new DataGridView();
             label13 = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)AutosDePersonaDGV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AutosPersonaDGV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PersonasDGV).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AutosDisponiblesDGV).BeginInit();
@@ -91,7 +91,7 @@
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(ValorTotalAutosLabel);
-            panel1.Controls.Add(AutosDePersonaDGV);
+            panel1.Controls.Add(AutosPersonaDGV);
             panel1.Controls.Add(EliminarPersonaButton);
             panel1.Controls.Add(GuardarPersonaButton);
             panel1.Controls.Add(NuevoPersonaButton);
@@ -197,16 +197,16 @@
             // 
             // AutosDePersonaDataGridView
             // 
-            AutosDePersonaDGV.AllowUserToAddRows = false;
-            AutosDePersonaDGV.AllowUserToDeleteRows = false;
-            AutosDePersonaDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AutosDePersonaDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AutosDePersonaDGV.Location = new Point(13, 182);
-            AutosDePersonaDGV.Name = "AutosDePersonaDataGridView";
-            AutosDePersonaDGV.ReadOnly = true;
-            AutosDePersonaDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AutosDePersonaDGV.Size = new Size(506, 127);
-            AutosDePersonaDGV.TabIndex = 5;
+            AutosPersonaDGV.AllowUserToAddRows = false;
+            AutosPersonaDGV.AllowUserToDeleteRows = false;
+            AutosPersonaDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AutosPersonaDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            AutosPersonaDGV.Location = new Point(13, 182);
+            AutosPersonaDGV.Name = "AutosDePersonaDataGridView";
+            AutosPersonaDGV.ReadOnly = true;
+            AutosPersonaDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            AutosPersonaDGV.Size = new Size(506, 127);
+            AutosPersonaDGV.TabIndex = 5;
             // 
             // EliminarPersonaButton
             // 
@@ -517,7 +517,7 @@
             Text = "Integrador";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)AutosDePersonaDGV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AutosPersonaDGV).EndInit();
             ((System.ComponentModel.ISupportInitialize)PersonasDGV).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -535,7 +535,7 @@
         internal Button EliminarPersonaButton;
         internal Button GuardarPersonaButton;
         internal Button NuevoPersonaButton;
-        internal DataGridView AutosDePersonaDGV;
+        internal DataGridView AutosPersonaDGV;
         internal Label ValorTotalAutosLabel;
         internal Label label6;
         internal Label label5;

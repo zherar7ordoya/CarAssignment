@@ -7,7 +7,9 @@ namespace Integrador.Infrastructure.Repositories;
 
 public class PersonaRepository : Repository<Persona>
 {
-    public bool CrearPersona(string dni, string nombre, string apellido)
+    public bool CreatePersona(string dni,
+                              string nombre,
+                              string apellido)
     {
         var persona = new Persona(dni, nombre, apellido);
 
