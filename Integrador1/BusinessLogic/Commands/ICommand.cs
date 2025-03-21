@@ -2,6 +2,6 @@
 
 public interface ICommand
 {
-    void Execute();
-    void Undo(); // Opcional, para deshacer la acción
+    (bool Success, string ErrorMessage) Execute();
+    void Undo();
 }

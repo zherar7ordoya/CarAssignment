@@ -12,12 +12,13 @@ public class NuevoAutoCommand(BindingSource bindingSource, Button nuevoAutoButto
     private readonly BindingSource _bindingSource = bindingSource;
     private readonly Button _nuevoAutoButton = nuevoAutoButton;
 
-    public void Execute()
+    public (bool Success, string ErrorMessage) Execute()
     {
         var nuevoAuto = new Auto();
         _bindingSource.Add(nuevoAuto);
         _bindingSource.MoveLast();
         _nuevoAutoButton.Enabled = false;
+        return (true, string.Empty);
     }
 
     public void Undo() { /* Opcional: Lógica para deshacer la creación del borrador. */ }

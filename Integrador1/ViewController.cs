@@ -83,20 +83,20 @@ public class ViewController
 
     public List<AutoAsignado> AutosAsignados()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(ObtenerPersonas);
+        var personas = ObtenerPersonas();
 
-        if (!Success || Result == null)
-        {
-            return [];
-        }
-
-        return [.. Result.SelectMany(persona => persona.Autos?.Select(auto =>
-            new AutoAsignado(auto.Marca ?? "",
-                             auto.Año,
-                             auto.Modelo ?? "",
-                             auto.Patente ?? "",
-                             persona.DNI ?? "",
-                             ObtenerDueñoAuto(persona))) ?? [])];
+        return [.. personas
+            .Where(persona => persona.Autos != null) // Filtrar personas con autos no nulos
+            .SelectMany(persona => persona.Autos
+                .Select(auto => new AutoAsignado
+                (
+                    auto.Marca ?? "Desconocido",
+                    auto.Año,
+                    auto.Modelo ?? "Desconocido",
+                    auto.Patente ?? "Sin patente",
+                    persona.DNI ?? "Sin DNI",
+                    ObtenerDueñoAuto(persona)
+                )))]; // Convertir el resultado en una lista
     }
 
     public static bool CargarDatos<T>(BindingSource source, Func<List<T>> obtenerDatos)

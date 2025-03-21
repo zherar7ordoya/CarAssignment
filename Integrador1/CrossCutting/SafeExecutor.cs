@@ -2,8 +2,7 @@
 
 public static class SafeExecutor
 {
-    // Método genérico para operaciones que no devuelven valor.
-    public static (bool Success, string ErrorMessage) Execute(Action action)
+    public static (bool Success, string ErrorMessage) Execute(Action action, string errorMessage = "Error en la operación.")
     {
         try
         {
@@ -12,13 +11,26 @@ public static class SafeExecutor
         }
         catch (Exception ex)
         {
-            ExceptionHandler.HandleException("Error en la operación.", ex);
+            ExceptionHandler.HandleException(errorMessage, ex);
             return (false, ex.Message);
         }
     }
 
-    // Sobrecarga para métodos que sí devuelven valor.
-    public static (bool Success, T? Result, string ErrorMessage) Execute<T>(Func<T> function)
+    public static (bool Success, string ErrorMessage) Execute(Func<(bool, string)> function, string errorMessage = "Error en la operación.")
+    {
+        try
+        {
+            var (success, funcErrorMessage) = function();
+            return (success, funcErrorMessage);
+        }
+        catch (Exception ex)
+        {
+            ExceptionHandler.HandleException(errorMessage, ex);
+            return (false, ex.Message);
+        }
+    }
+
+    public static (bool Success, T? Result, string ErrorMessage) Execute<T>(Func<T> function, string errorMessage = "Error en la operación.")
     {
         try
         {
@@ -27,7 +39,7 @@ public static class SafeExecutor
         }
         catch (Exception ex)
         {
-            ExceptionHandler.HandleException("Error en la operación.", ex);
+            ExceptionHandler.HandleException(errorMessage, ex);
             return (false, default, ex.Message);
         }
     }

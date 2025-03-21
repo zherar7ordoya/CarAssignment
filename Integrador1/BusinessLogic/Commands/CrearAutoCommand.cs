@@ -1,4 +1,6 @@
-﻿namespace Integrador.BusinessLogic.Commands;
+﻿using Integrador.CrossCutting;
+
+namespace Integrador.BusinessLogic.Commands;
 
 public class CrearAutoCommand(ViewController viewController,
                               string patente,
@@ -14,6 +16,11 @@ public class CrearAutoCommand(ViewController viewController,
     private readonly int _año = año;
     private readonly decimal _precio = precio;
 
-    public void Execute() => _viewController.CrearAuto(_patente, _marca, _modelo, _año, _precio);
+    public (bool Success, string ErrorMessage) Execute()
+    {
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.CrearAuto(_patente, _marca, _modelo, _año, _precio));
+        return (Success, ErrorMessage);
+    }
+
     public void Undo() { /* Lógica para deshacer */ }
 }
