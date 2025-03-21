@@ -1,4 +1,6 @@
 ﻿using Integrador.Core;
+using Integrador.Infrastructure.Persistence;
+using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic;
 
@@ -12,16 +14,26 @@ public static class AsignacionesManager
         }
 
         persona.Autos.Add(auto);
-        // auto.EstablecerDueño(persona); <== Ver nota en el archivo Auto.cs
         auto.Dueño = persona;
+
+        var autoRepository = new AutoRepository();
+        var personaRepository = new PersonaRepository();
+
+        autoRepository.Update(auto);
+        personaRepository.Update(persona);
     }
 
     public static void DesasignarAuto(Persona persona, Auto auto)
     {
         if (persona.Autos.Remove(auto))
         {
-            //auto.EstablecerDueño(null); <== Ver nota en el archivo Auto.cs
             auto.Dueño = null;
+
+            var autoRepository = new AutoRepository();
+            var personaRepository = new PersonaRepository();
+
+            autoRepository.Update(auto);
+            personaRepository.Update(persona);
         }
         else
         {

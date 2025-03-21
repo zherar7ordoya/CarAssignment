@@ -1,5 +1,6 @@
 ﻿using Integrador.Abstract;
 using Integrador.BusinessLogic;
+using Integrador.BusinessLogic.Commands;
 using Integrador.Core;
 using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
@@ -8,8 +9,8 @@ namespace Integrador;
 
 public class ViewController
 {
-    //private readonly PersonaRepository _personaRepository = new();
-    //private readonly AutoRepository _autoRepository = new();
+    private readonly PersonaRepository _personaRepository = new();
+    private readonly AutoRepository _autoRepository = new();
 
     #region OPERACIONES CRUD ***************************************************
 
@@ -46,6 +47,24 @@ public class ViewController
     public bool DeletePersona(Persona persona)
     {
         return SafeExecutor.Execute(() => _personaRepository.Delete(persona)).Success;
+    }
+
+    public (bool Success, string ErrorMessage) GuardarPersona(Persona persona)
+    {
+        ICommand command = persona.Id == 0
+            ? new CrearPersonaCommand(this,
+                                      persona.DNI ?? string.Empty,
+                                      persona.Nombre ?? string.Empty,
+                                      persona.Apellido ?? string.Empty)
+            : new ActualizarPersonaCommand(this, persona);
+
+        return SafeExecutor.Execute(command.Execute);
+    }
+
+    public (bool Success, string ErrorMessage) EliminarPersona(Persona persona)
+    {
+        var command = new EliminarPersonaCommand(this, persona);
+        return SafeExecutor.Execute(command.Execute);
     }
 
     //..........................................................................
@@ -89,31 +108,31 @@ public class ViewController
 
     #endregion *****************************************************************
 
-    public static int GetCantidadAutos(Persona persona) => SafeExecutor.Execute(() => PersonaRepository.GetCantidadAutos(persona)).Result;
-    public static decimal GetValorAutos(Persona persona) => SafeExecutor.Execute(() => PersonaRepository.GetValorAutos(persona)).Result;
-
-    public static bool CargarDatos<T>(BindingSource source, Func<List<T>> obtenerDatos)
+    public static bool CargarDatos<T>(BindingSource source,
+                                      Func<List<T>> obtenerDatos,
+                                      string errorMessage = "Error al cargar datos.")
     {
-        return SafeExecutor.Execute(() => source.DataSource = obtenerDatos(), "Error al cargar datos.").Success;
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(obtenerDatos);
+
+        if (Success && Result != null)
+        {
+            source.DataSource = Result;
+            return true;
+        }
+        else
+        {
+            ExceptionHandler.HandleException(errorMessage, new Exception(ErrorMessage));
+            return false;
+        }
     }
 
-    public (bool Success, string ErrorMessage) AsignarAuto(Persona persona, Auto auto)
+    public static (bool Success, string ErrorMessage) AsignarAuto(Persona persona, Auto auto)
     {
-        return SafeExecutor.Execute(() =>
-        {
-            AsignacionesManager.AsignarAuto(persona, auto);
-            UpdatePersona(persona);
-            UpdateAuto(auto);
-        });
+        return SafeExecutor.Execute(() => AsignacionesManager.AsignarAuto(persona, auto));
     }
 
-    public (bool Success, string ErrorMessage) DesasignarAuto(Persona persona, Auto auto)
+    public static (bool Success, string ErrorMessage) DesasignarAuto(Persona persona, Auto auto)
     {
-        return SafeExecutor.Execute(() =>
-        {
-            AsignacionesManager.DesasignarAuto(persona, auto);
-            UpdatePersona(persona);
-            UpdateAuto(auto);
-        });
+        return SafeExecutor.Execute(() => AsignacionesManager.DesasignarAuto(persona, auto));
     }
 }

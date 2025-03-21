@@ -1,18 +1,22 @@
 ﻿using Integrador.Core;
 using Integrador.CrossCutting;
+using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic.Commands;
 
-public class EliminarPersonaCommand(ViewController viewController, Persona persona) : ICommand
+public class EliminarPersonaCommand(PersonaRepository personaRepository, Persona persona) : ICommand
 {
-    private readonly ViewController _viewController = viewController;
+    private readonly PersonaRepository _personaRepository = personaRepository;
     private readonly Persona _persona = persona;
 
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _viewController.DeletePersona(_persona));
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _personaRepository.Delete(_persona));
         return (Success, ErrorMessage);
     }
 
-    public void Undo() { /* Lógica para deshacer */ }
+    public void Undo()
+    {
+        // Lógica para deshacer la eliminación (si es necesario)
+    }
 }

@@ -95,7 +95,7 @@ public partial class ViewForm : Form
         ]);
 
         var personas = _viewController.ReadPersonas();
-        ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => _viewController.ReadAutosAsignados(personas));
+        ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => ViewController.ReadAutosAsignados(personas));
 
         ConfigurarDataGridView(AutosAsignadosDGV, _autosAsignadosBS,
         [
@@ -131,16 +131,16 @@ public partial class ViewForm : Form
         ViewController.CargarDatos<Persona>(_personasBS, _viewController.ReadPersonas);
         ViewController.CargarDatos<Auto>(_autosDisponiblesBS, _viewController.ReadAutosDisponibles);
         var personas = _viewController.ReadPersonas();
-        ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => _viewController.ReadAutosAsignados(personas));
+        ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => ViewController.ReadAutosAsignados(personas));
     }
 
     private void PersonasDataGridView_SelectionChanged(object sender, EventArgs e)
     {
-        if (_personasBS.Current is Persona personaSeleccionada)
+        if (_personasBS.Current is Persona persona)
         {
-            _autosPersonaBS.DataSource = personaSeleccionada.Autos;
-            ValorTotalAutosLabel.Text = ViewController.GetValorAutos(personaSeleccionada).ToString("C");
-            CantidadAutosTextBox.Text = ViewController.GetCantidadAutos(personaSeleccionada).ToString();
+            _autosPersonaBS.DataSource = persona.Autos;
+            ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
+            CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
         }
     }
 
@@ -159,18 +159,12 @@ public partial class ViewForm : Form
     {
         if (_personasBS.Current is Persona persona)
         {
-            ICommand command = persona.Id == 0
-            ? new CrearPersonaCommand(_viewController,
-                                      persona.DNI ?? string.Empty,
-                                      persona.Nombre ?? string.Empty,
-                                      persona.Apellido ?? string.Empty)
-            : new ActualizarPersonaCommand(_viewController, persona);
-
-            var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+            var (Success, ErrorMessage) = _viewController.GuardarPersona(persona);
 
             if (Success)
             {
                 ViewController.CargarDatos(_personasBS, _viewController.ReadPersonas);
+                Messenger.MostrarMensaje("Persona guardada correctamente.", "Éxito");
             }
             else
             {
@@ -185,8 +179,7 @@ public partial class ViewForm : Form
     {
         if (_personasBS.Current is Persona persona)
         {
-            EliminarPersonaCommand eliminar = new(_viewController, persona);
-            var (Success, ErrorMessage) = SafeExecutor.Execute(eliminar.Execute);
+            var (Success, ErrorMessage) = _viewController.EliminarPersona(persona);
 
             if (Success)
             {
@@ -198,26 +191,31 @@ public partial class ViewForm : Form
                 ExceptionHandler.HandleException("Error al eliminar la persona.", new Exception(ErrorMessage));
             }
         }
-        else { Messenger.MostrarMensaje("No se ha seleccionado ninguna persona.", "Advertencia"); }
+        else
+        {
+            Messenger.MostrarMensaje("No se ha seleccionado ninguna persona.", "Advertencia");
+        }
     }
 
     private void AsignarAutoButton_Click(object sender, EventArgs e)
     {
-        if (_personasBS.Current is Persona personaSeleccionada
-            && _autosDisponiblesBS.Current is Auto autoSeleccionado)
+        if (_personasBS.Current is Persona persona
+            && _autosDisponiblesBS.Current is Auto auto)
         {
-            var (Success, ErrorMessage) = _viewController.AsignarAuto(personaSeleccionada, autoSeleccionado);
+            var (Success, ErrorMessage) = ViewController.AsignarAuto(persona, auto);
 
             if (Success)
             {
-                _autosPersonaBS.DataSource = personaSeleccionada.Autos;
+                _autosPersonaBS.DataSource = persona.Autos;
                 _autosPersonaBS.ResetBindings(false);
-                _autosDisponiblesBS.Remove(autoSeleccionado);
+                _autosDisponiblesBS.Remove(auto);
                 _autosDisponiblesBS.ResetBindings(false);
+
                 var personas = _viewController.ReadPersonas();
-                ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => _viewController.ReadAutosAsignados(personas));
-                ValorTotalAutosLabel.Text = ViewController.GetValorAutos(personaSeleccionada).ToString("C");
-                CantidadAutosTextBox.Text = ViewController.GetCantidadAutos(personaSeleccionada).ToString();
+                ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => ViewController.ReadAutosAsignados(personas));
+
+                ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
+                CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
             }
             else
             {
@@ -228,21 +226,23 @@ public partial class ViewForm : Form
 
     private void QuitarAutoButton_Click(object sender, EventArgs e)
     {
-        if (_personasBS.Current is Persona personaSeleccionada
-            && _autosPersonaBS.Current is Auto autoSeleccionado)
+        if (_personasBS.Current is Persona persona
+            && _autosPersonaBS.Current is Auto auto)
         {
-            var (Success, ErrorMessage) = _viewController.DesasignarAuto(personaSeleccionada, autoSeleccionado);
+            var (Success, ErrorMessage) = ViewController.DesasignarAuto(persona, auto);
 
             if (Success)
             {
-                _autosPersonaBS.DataSource = personaSeleccionada.Autos;
+                _autosPersonaBS.DataSource = persona.Autos;
                 _autosPersonaBS.ResetBindings(false);
-                _autosDisponiblesBS.Add(autoSeleccionado);
+                _autosDisponiblesBS.Add(auto);
                 _autosDisponiblesBS.ResetBindings(false);
+
                 var personas = _viewController.ReadPersonas();
-                ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => _viewController.ReadAutosAsignados(personas));
-                ValorTotalAutosLabel.Text = ViewController.GetValorAutos(personaSeleccionada).ToString("C");
-                CantidadAutosTextBox.Text = ViewController.GetCantidadAutos(personaSeleccionada).ToString();
+                ViewController.CargarDatos<ViewController.AutoAsignado>(_autosAsignadosBS, () => ViewController.ReadAutosAsignados(personas));
+
+                ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
+                CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
             }
             else
             {
