@@ -9,15 +9,12 @@ namespace Integrador.BusinessLogic.Commands.Personas;
 
 public class NewPersonaCommand(BindingSource bindingSource, Button nuevoPersonaButton) : ICommand
 {
-    private readonly BindingSource _bindingSource = bindingSource;
-    private readonly Button _nuevoPersonaButton = nuevoPersonaButton;
-
     public (bool Success, string ErrorMessage) Execute()
     {
         var nuevoPersona = new Persona();
-        _bindingSource.Add(nuevoPersona);
-        _bindingSource.MoveLast();
-        _nuevoPersonaButton.Enabled = false;
+        bindingSource.Add(nuevoPersona);
+        bindingSource.MoveLast();
+        nuevoPersonaButton.Enabled = false;
         return (true, string.Empty);
     }
 

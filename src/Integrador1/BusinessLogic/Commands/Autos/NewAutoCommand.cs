@@ -8,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace Integrador.BusinessLogic.Commands.Autos;
 
-public class NuevoAutoCommand(BindingSource bindingSource, Button nuevoAutoButton) : ICommand
+public class NewAutoCommand(BindingSource bindingSource, Button nuevoAutoButton) : ICommand
 {
-    private readonly BindingSource _bindingSource = bindingSource;
-    private readonly Button _nuevoAutoButton = nuevoAutoButton;
-
     public (bool Success, string ErrorMessage) Execute()
     {
         var nuevoAuto = new Auto();
-        _bindingSource.Add(nuevoAuto);
-        _bindingSource.MoveLast();
-        _nuevoAutoButton.Enabled = false;
+        bindingSource.Add(nuevoAuto);
+        bindingSource.MoveLast();
+        nuevoAutoButton.Enabled = false;
         return (true, string.Empty);
     }
 

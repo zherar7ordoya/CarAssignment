@@ -255,7 +255,7 @@ public partial class ViewForm : Form
 
     private void NuevoAutoButton_Click(object sender, EventArgs e)
     {
-        NuevoAutoCommand nuevo = new(_autosDisponiblesBS, NuevoAutoButton);
+        NewAutoCommand nuevo = new(_autosDisponiblesBS, NuevoAutoButton);
         var (Success, ErrorMessage) = nuevo.Execute();
 
         if (!Success)
@@ -296,7 +296,7 @@ public partial class ViewForm : Form
     {
         if (_autosDisponiblesBS.Current is Auto auto)
         {
-            EliminarAutoCommand eliminar = new(_viewController, auto);
+            DeleteAutoCommand eliminar = new(_viewController, auto);
 
             var (Success, ErrorMessage) = SafeExecutor.Execute(eliminar.Execute);
 

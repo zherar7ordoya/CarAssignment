@@ -29,9 +29,13 @@ public class ViewController
 
     //..........................................................................
 
-    public bool CreatePersona(string dni, string nombre, string apellido)
+    public bool CreatePersona(Persona persona)
     {
-        return SafeExecutor.Execute(() => _personaRepository.CreatePersona(dni, nombre, apellido)).Success;
+        var (Success, ErrorMessage) = SafeExecutor.Execute(() =>
+        (
+            new CreatePersonaCommand(persona).Execute()
+        ));
+        return Success;
     }
 
     public List<Persona> ReadPersonas()

@@ -2,19 +2,19 @@
 using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
 
-namespace Integrador.BusinessLogic.Commands.Personas;
+namespace Integrador.BusinessLogic.Commands.Autos;
 
-public class DeletePersonaCommand(Persona persona) : ICommand
+public class CreateAutoCommand(Auto auto) : ICommand
 {
     public (bool Success, string ErrorMessage) Execute()
     {
         var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() =>
         (
-            new PersonaRepository().DeletePersona(persona)
+            new AutoRepository().CreateAuto(auto)
         ));
 
         return (Success, ErrorMessage);
     }
 
-    public void Undo() { /* Lógica para deshacer la eliminación (si es necesario) */ }
+    public void Undo() { /* Lógica para deshacer */ }
 }
