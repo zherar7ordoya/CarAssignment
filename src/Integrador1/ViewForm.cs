@@ -269,13 +269,8 @@ public partial class ViewForm : Form
         if (_autosDisponiblesBS.Current is Auto auto)
         {
             ICommand command = auto.Id == 0
-            ? new CrearAutoCommand(_viewController,
-                                      auto.Patente ?? string.Empty,
-                                      auto.Marca ?? string.Empty,
-                                      auto.Modelo ?? string.Empty,
-                                      auto.Año,
-                                      auto.Precio)
-            : new ActualizarAutoCommand(_viewController, auto);
+            ? new CreateAutoCommand(auto)
+            : new UpdateAutoCommand(auto);
 
             var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
 
@@ -296,7 +291,7 @@ public partial class ViewForm : Form
     {
         if (_autosDisponiblesBS.Current is Auto auto)
         {
-            DeleteAutoCommand eliminar = new(_viewController, auto);
+            DeleteAutoCommand eliminar = new(auto);
 
             var (Success, ErrorMessage) = SafeExecutor.Execute(eliminar.Execute);
 

@@ -65,15 +65,15 @@ public class ViewController
 
     public (bool Success, string ErrorMessage) EliminarPersona(Persona persona)
     {
-        var command = new EliminarPersonaCommand(this, persona);
+        var command = new DeletePersonaCommand(persona);
         return SafeExecutor.Execute(command.Execute);
     }
 
     //..........................................................................
 
-    public bool CreateAuto(string patente, string marca, string modelo, int año, decimal precio)
+    public bool CreateAuto(Auto auto)
     {
-        return SafeExecutor.Execute(() => _autoRepository.CreateAuto(patente, marca, modelo, año, precio)).Success;
+        return SafeExecutor.Execute(() => _autoRepository.CreateAuto(auto)).Success;
     }
 
     public List<Auto> ReadAutosDisponibles()
