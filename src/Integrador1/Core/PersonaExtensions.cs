@@ -1,12 +1,6 @@
 ﻿using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Integrador.Core;
 
 public static class PersonaExtensions

@@ -1,19 +1,16 @@
 ﻿using Integrador.Core;
-using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic.Commands.Personas;
 
-public class DeletePersonaCommand(Persona persona) : ICommand
+public class DeletePersonaCommand(Persona persona) : IWriteCommand
 {
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() =>
-        (
-            new PersonaRepository().DeletePersona(persona)
-        ));
-
-        return (Success, ErrorMessage);
+        var personaRepository = new PersonaRepository();
+        return personaRepository.DeletePersona(persona)
+            ? (true, string.Empty)
+            : (false, "Error al eliminar persona");
     }
 
     public void Undo() { /* Lógica para deshacer la eliminación (si es necesario) */ }

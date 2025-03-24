@@ -1,19 +1,16 @@
 ﻿using Integrador.Core;
-using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic.Commands.Personas;
 
-public class UpdatePersonaCommand(Persona persona) : ICommand
+public class UpdatePersonaCommand(Persona persona) : IWriteCommand
 {
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() =>
-        (
-            new PersonaRepository().UpdatePersona(persona)
-        ));
-
-        return (Success, ErrorMessage);
+        var personaRepository = new PersonaRepository();
+        return personaRepository.UpdatePersona(persona)
+            ? (true, string.Empty)
+            : (false, "Error al actualizar persona");
     }
 
     public void Undo() { /* Lógica para deshacer */ }

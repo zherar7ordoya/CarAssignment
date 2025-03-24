@@ -1,19 +1,16 @@
 ﻿using Integrador.Core;
-using Integrador.CrossCutting;
 using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic.Commands.Autos;
 
-public class CreateAutoCommand(Auto auto) : ICommand
+public class CreateAutoCommand(Auto auto) : IWriteCommand
 {
     public (bool Success, string ErrorMessage) Execute()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() =>
-        (
-            new AutoRepository().CreateAuto(auto)
-        ));
-
-        return (Success, ErrorMessage);
+        var personaRepository = new AutoRepository();
+        return personaRepository.CreateAuto(auto)
+            ? (true, string.Empty)
+            : (false, "Error al crear auto");
     }
 
     public void Undo() { /* Lógica para deshacer */ }

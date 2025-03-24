@@ -473,7 +473,7 @@
             QuitarAutoButton.Text = "Quitar auto a persona >";
             QuitarAutoButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             QuitarAutoButton.UseVisualStyleBackColor = true;
-            QuitarAutoButton.Click += QuitarAutoButton_Click;
+            QuitarAutoButton.Click += DesasignarAutoButton_Click;
             // 
             // AutosAsignadosDataGridView
             // 

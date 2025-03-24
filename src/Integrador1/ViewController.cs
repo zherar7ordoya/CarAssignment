@@ -1,26 +1,18 @@
-﻿using Integrador.Abstract;
-using Integrador.BusinessLogic;
-using Integrador.BusinessLogic.Commands;
+﻿using Integrador.BusinessLogic.Commands;
+using Integrador.BusinessLogic.Commands.Asignaciones;
+using Integrador.BusinessLogic.Commands.Autos;
 using Integrador.BusinessLogic.Commands.Personas;
 using Integrador.Core;
 using Integrador.CrossCutting;
-using Integrador.Infrastructure.Repositories;
+
+using System.Windows.Forms;
 
 namespace Integrador;
 
-public class ViewController
+public partial class ViewController
 {
-    private readonly PersonaRepository _personaRepository = new();
-    private readonly AutoRepository _autoRepository = new();
 
     #region OPERACIONES CRUD ***************************************************
-
-    public record AutoAsignado(string Marca,
-                               int Año,
-                               string Modelo,
-                               string Patente,
-                               string Documento,
-                               string Dueño);
 
     public static string GetApellidoNombre(Persona persona)
     {
@@ -29,112 +21,181 @@ public class ViewController
 
     //..........................................................................
 
-    public bool CreatePersona(Persona persona)
+    public static List<Persona> ListarPersonas()
     {
+        var command = new ReadPersonasCommand();
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success && Result.Result != null)
+        {
+            return Result.Result;
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al listar personas.", new Exception(ErrorMessage));
+            return [];
+        }
+    }
+
+    public static void NuevoPersona(BindingSource personasBS, Button nuevoPersonaButton)
+    {
+        var nuevoPersona = new Persona();
         var (Success, ErrorMessage) = SafeExecutor.Execute(() =>
-        (
-            new CreatePersonaCommand(persona).Execute()
-        ));
-        return Success;
+        {
+            personasBS.Add(nuevoPersona);
+            personasBS.MoveLast();
+        });
+
+        if (Success)
+        {
+            nuevoPersonaButton.Enabled = false;
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al crear una nueva persona.", new Exception(ErrorMessage));
+        }
     }
 
-    public List<Persona> ReadPersonas()
+    public static void GuardarPersona(Persona persona, BindingSource personasBS)
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(_personaRepository.Read);
-        return Success && Result != null ? Result : [];
-    }
-
-    public bool UpdatePersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => _personaRepository.Update(persona)).Success;
-    }
-
-    public bool DeletePersona(Persona persona)
-    {
-        return SafeExecutor.Execute(() => _personaRepository.Delete(persona)).Success;
-    }
-
-    public (bool Success, string ErrorMessage) GuardarPersona(Persona persona)
-    {
-        ICommand command = persona.Id == 0
+        IWriteCommand command = persona.Id == 0
             ? new CreatePersonaCommand(persona)
             : new UpdatePersonaCommand(persona);
 
-        return SafeExecutor.Execute(command.Execute);
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success)
+        {
+            personasBS.ResetBindings(false); // Actualizar la lista de personas
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al guardar la persona.", new Exception(ErrorMessage));
+        }
     }
 
-    public (bool Success, string ErrorMessage) EliminarPersona(Persona persona)
+    public static void EliminarPersona(Persona persona, BindingSource personasBS)
     {
         var command = new DeletePersonaCommand(persona);
-        return SafeExecutor.Execute(command.Execute);
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success)
+        {
+            personasBS.ResetBindings(false);
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al eliminar la persona.", new Exception(ErrorMessage));
+        }
     }
 
     //..........................................................................
 
-    public bool CreateAuto(Auto auto)
+    public static List<Auto> ListarAutosDisponibles()
     {
-        return SafeExecutor.Execute(() => _autoRepository.CreateAuto(auto)).Success;
+        var command = new ReadAutosDisponiblesCommand();
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success && Result.Result != null)
+        {
+            return Result.Result;
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al listar autos disponibles.", new Exception(ErrorMessage));
+            return [];
+        }
     }
 
-    public List<Auto> ReadAutosDisponibles()
+    public static List<AutoAsignado> ListarAutosAsignados()
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(() => _autoRepository.ReadDisponibles());
-        return Success && Result != null ? Result : [];
+        var command = new ReadAutosAsignadosCommand();
+        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success && Result.Result != null)
+        {
+            return Result.Result;
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al listar autos asignados.", new Exception(ErrorMessage));
+            return [];
+        }
     }
 
-    public static List<AutoAsignado> ReadAutosAsignados(List<Persona> personas)
+    public static void NuevoAuto(BindingSource autosDisponiblesBS, Button nuevoAutoButton)
     {
-        return [.. personas
-        .Where(persona => persona.Autos != null)
-        .SelectMany(persona => persona.Autos
-            .Select(auto => new AutoAsignado
-            (
-                auto.Marca ?? "Desconocido",
-                auto.Año,
-                auto.Modelo ?? "Desconocido",
-                auto.Patente ?? "Sin patente",
-                persona.DNI ?? "Sin DNI",
-                GetApellidoNombre(persona)
-            )))];
+        var nuevoAuto = new Auto();
+        var (Success, ErrorMessage) = SafeExecutor.Execute(() =>
+        {
+            autosDisponiblesBS.Add(nuevoAuto);
+            autosDisponiblesBS.MoveLast();
+        });
+
+        if (Success)
+        {
+            nuevoAutoButton.Enabled = false;
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al crear una nueva persona.", new Exception(ErrorMessage));
+        }
     }
 
-    public bool UpdateAuto(Auto auto)
+    public static void GuardarAuto(Auto auto, BindingSource autosDisponiblesBS)
     {
-        return SafeExecutor.Execute(() => _autoRepository.Update(auto)).Success;
+        IWriteCommand command = auto.Id == 0
+            ? new CreateAutoCommand(auto)
+            : new UpdateAutoCommand(auto);
+
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success)
+        {
+            autosDisponiblesBS.ResetBindings(false);
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al guardar el auto.", new Exception(ErrorMessage));
+        }
     }
 
-    public bool DeleteAuto(Auto auto)
+    public static void EliminarAuto(Auto auto, BindingSource autosDisponiblesBS)
     {
-        return SafeExecutor.Execute(() => _autoRepository.Delete(auto)).Success;
+        var command = new DeleteAutoCommand(auto);
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
+
+        if (Success)
+        {
+            autosDisponiblesBS.ResetBindings(false);
+        }
+        else
+        {
+            ExceptionHandler.HandleException("Error al eliminar el auto.", new Exception(ErrorMessage));
+        }
     }
 
     #endregion *****************************************************************
 
-    public static bool CargarDatos<T>(BindingSource source,
-                                      Func<List<T>> obtenerDatos,
-                                      string errorMessage = "Error al cargar datos.")
+    public static void AsignarAuto(Persona persona,
+                                   Auto auto,
+                                   Action<Persona, Auto> onSuccess)
     {
-        var (Success, Result, ErrorMessage) = SafeExecutor.Execute(obtenerDatos);
+        var command = new AsignarAutoCommand(persona, auto);
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
 
-        if (Success && Result != null)
-        {
-            source.DataSource = Result;
-            return true;
-        }
-        else
-        {
-            ExceptionHandler.HandleException(errorMessage, new Exception(ErrorMessage));
-            return false;
-        }
+        if (Success) { onSuccess?.Invoke(persona, auto); }
+        else { ExceptionHandler.HandleException("Error al asignar un auto a una persona.", new Exception(ErrorMessage)); }
     }
 
-    public static (bool Success, string ErrorMessage) AsignarAuto(Persona persona, Auto auto)
+    public static void DesasignarAuto(Persona persona,
+                                      Auto auto,
+                                      Action<Persona, Auto> onSuccess)
     {
-        return SafeExecutor.Execute(() => AsignacionesManager.AsignarAuto(persona, auto));
-    }
+        var command = new DesasignarAutoCommand(persona, auto);
+        var (Success, ErrorMessage) = SafeExecutor.Execute(command.Execute);
 
-    public static (bool Success, string ErrorMessage) DesasignarAuto(Persona persona, Auto auto)
-    {
-        return SafeExecutor.Execute(() => AsignacionesManager.DesasignarAuto(persona, auto));
+        if (Success) { onSuccess?.Invoke(persona, auto); }
+        else { ExceptionHandler.HandleException("Error al quitar un auto de una persona.", new Exception(ErrorMessage)); }
     }
 }

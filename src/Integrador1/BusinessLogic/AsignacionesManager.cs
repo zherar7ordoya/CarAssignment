@@ -1,5 +1,4 @@
 ﻿using Integrador.Core;
-using Integrador.Infrastructure.Persistence;
 using Integrador.Infrastructure.Repositories;
 
 namespace Integrador.BusinessLogic;
