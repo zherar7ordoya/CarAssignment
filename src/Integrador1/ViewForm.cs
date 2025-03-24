@@ -13,9 +13,9 @@ public partial class ViewForm : Form
         SafeExecutor.Execute(() =>
         {
             InitializeComponent();
-            ViewHelper.ConfigurarDelegados();
+            ConfigurarDelegados();
             ConfigurarEnlaces();
-            CargarDatosIniciales();
+            LoadData();
         }, "Error durante la inicialización del formulario.");
     }
 
@@ -23,83 +23,6 @@ public partial class ViewForm : Form
     private readonly BindingSource _autosPersonaBS = [];
     private readonly BindingSource _autosDisponiblesBS = [];
     private readonly BindingSource _autosAsignadosBS = [];
-
-    private void ConfigurarEnlaces()
-    {
-        SafeExecutor.Execute(() =>
-        {
-            ConfigurarBindingsDeControles();
-            ConfigurarDataGridViews();
-            CargarDatosIniciales();
-        });
-    }
-
-    private void ConfigurarBindingsDeControles()
-    {
-        var bindings = new (Control Control, string Property, BindingSource Source)[]
-        {
-            (IdPersonaTextBox, nameof(Persona.Id), _personasBS),
-            (DniTextBox, nameof(Persona.DNI), _personasBS),
-            (NombreTextBox, nameof(Persona.Nombre), _personasBS),
-            (ApellidoTextBox, nameof(Persona.Apellido), _personasBS),
-            (IdAutoTextBox, nameof(Auto.Id), _autosDisponiblesBS),
-            (PatenteTextBox, nameof(Auto.Patente), _autosDisponiblesBS),
-            (MarcaTextBox, nameof(Auto.Marca), _autosDisponiblesBS),
-            (ModeloTextBox, nameof(Auto.Modelo), _autosDisponiblesBS),
-            (AñoTextBox, nameof(Auto.Año), _autosDisponiblesBS),
-            (PrecioTextBox, nameof(Auto.Precio), _autosDisponiblesBS)
-        };
-
-        ViewHelper.ConfigurarBindingsDeControles(bindings);
-    }
-
-    private void ConfigurarDataGridViews()
-    {
-        ViewHelper.ConfigurarDataGridView(PersonasDGV, _personasBS,
-        [
-            ("Id", "ID"),
-            ("DNI", "DNI"),
-            ("Nombre", "Nombre"),
-            ("Apellido", "Apellido")
-        ]);
-
-        ViewHelper.ConfigurarDataGridView(AutosPersonaDGV, _autosPersonaBS,
-        [
-            ("Id", "ID"),
-            ("Patente", "Patente"),
-            ("Marca", "Marca"),
-            ("Modelo", "Modelo"),
-            ("Año", "Año"),
-            ("Precio", "Precio")
-        ]);
-
-        ViewHelper.ConfigurarDataGridView(AutosDisponiblesDGV, _autosDisponiblesBS,
-        [
-            ("Id", "ID"),
-            ("Patente", "Patente"),
-            ("Marca", "Marca"),
-            ("Modelo", "Modelo"),
-            ("Año", "Año"),
-            ("Precio", "Precio")
-        ]);
-
-        ViewHelper.ConfigurarDataGridView(AutosAsignadosDGV, _autosAsignadosBS,
-        [
-            ("Marca", "Marca"),
-            ("Año", "Año"),
-            ("Modelo", "Modelo"),
-            ("Patente", "Patente"),
-            ("Documento", "Documento"),
-            ("Dueño", "Dueño")
-        ]);
-    }
-
-    private void CargarDatosIniciales()
-    {
-        _personasBS.DataSource = ViewController.ListarPersonas();
-        _autosDisponiblesBS.DataSource = ViewController.ListarAutosDisponibles();
-        _autosAsignadosBS.DataSource = ViewController.ListarAutosAsignados();
-    }
 
     private void PersonasDataGridView_SelectionChanged(object sender, EventArgs e)
     {
@@ -167,32 +90,5 @@ public partial class ViewForm : Form
         {
             ViewController.EliminarAuto(auto, _autosDisponiblesBS);
         }
-    }
-
-    private void ActualizarVistaDespuesDeAsignacion(Persona persona,
-                                                    Auto auto,
-                                                    bool fueAsignado)
-    {
-        _autosPersonaBS.DataSource = persona.Autos;
-        _autosPersonaBS.ResetBindings(false);
-
-        if (fueAsignado) { _autosDisponiblesBS.Remove(auto); }
-        else { _autosDisponiblesBS.Add(auto); }
-
-        _autosDisponiblesBS.ResetBindings(false);
-        _autosAsignadosBS.DataSource = ViewController.ListarAutosAsignados();
-
-        ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
-        CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
-    }
-
-    private void OnAutoAsignado(Persona persona, Auto auto)
-    {
-        ActualizarVistaDespuesDeAsignacion(persona, auto, fueAsignado: true);
-    }
-
-    private void OnAutoDesasignado(Persona persona, Auto auto)
-    {
-        ActualizarVistaDespuesDeAsignacion(persona, auto, fueAsignado: false);
     }
 }

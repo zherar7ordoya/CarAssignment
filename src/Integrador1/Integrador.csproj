@@ -10,6 +10,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectCapability Include="ConfigurableFileNesting" />
+		<ProjectCapability Include="ConfigurableFileNestingFeatureEnabled" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Auto.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
