@@ -18,7 +18,7 @@ public class Persona : Entity
     public string? Nombre { get; set; } = string.Empty;
     public string? Apellido { get; set; } = string.Empty;
     public List<Auto> Autos { get; set; } = [];
-   
+
     //--------------------------------------------------------------------------
 
     public static event Action<string>? PersonaEliminada;

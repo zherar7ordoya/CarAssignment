@@ -5,8 +5,6 @@ using Integrador.BusinessLogic.Commands.Personas;
 using Integrador.Core;
 using Integrador.CrossCutting;
 
-using System.Windows.Forms;
-
 namespace Integrador;
 
 public partial class ViewController

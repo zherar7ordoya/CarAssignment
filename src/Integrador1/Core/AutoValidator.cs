@@ -1,4 +1,5 @@
 ﻿using Integrador.Core;
+
 using System.Text.RegularExpressions;
 
 namespace Integrador.Entities;
