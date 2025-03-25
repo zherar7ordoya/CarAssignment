@@ -1,8 +1,8 @@
 ﻿using System.Xml.Serialization;
 
-namespace Integrador.Interfaces;
+namespace Integrador.Entities;
 
-public abstract class Entity : IEntity
+public abstract class PersistentEntity : IPersistentEntity
 {
     [XmlAttribute]
     public int Id { get; set; } = 0;

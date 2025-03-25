@@ -1,10 +1,8 @@
-﻿using Integrador.Interfaces;
-
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Integrador.Entities;
 
-public class Auto : Entity
+public class Auto : PersistentEntity
 {
     public Auto() { }
 

@@ -2,11 +2,11 @@
 using System.Xml.Serialization;
 
 using Integrador.CrossCutting;
-using Integrador.Interfaces;
+using Integrador.Entities;
 
 namespace Integrador.Adapters.Persistence;
 
-public class XmlDataSource<T> : IDataSource<T> where T : IEntity
+public class DataSource<T> : IDataSource<T> where T : IPersistentEntity
 {
     public List<T> Read()
     {
@@ -14,7 +14,7 @@ public class XmlDataSource<T> : IDataSource<T> where T : IEntity
 
         if (!File.Exists(file))
         {
-            XmlDataSource<T>.CreateEmptyFile(file);
+            DataSource<T>.CreateEmptyFile(file);
             return [];
         }
 

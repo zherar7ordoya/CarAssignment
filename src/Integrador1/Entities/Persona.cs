@@ -1,8 +1,6 @@
-﻿using Integrador.Interfaces;
+﻿namespace Integrador.Entities;
 
-namespace Integrador.Entities;
-
-public class Persona : Entity
+public class Persona : PersistentEntity
 {
     public Persona() { }
     public Persona(string dni, string nombre, string apellido)
