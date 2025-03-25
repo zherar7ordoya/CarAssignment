@@ -6,8 +6,14 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PlatformTarget>x64</PlatformTarget>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Update=".\Adapters\UI\ViewForm.*.cs">
+			<DependentUpon>.\Adapters\UI\ViewForm.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="Auto.xml">
