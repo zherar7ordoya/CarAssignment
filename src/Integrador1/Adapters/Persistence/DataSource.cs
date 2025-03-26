@@ -1,16 +1,19 @@
 ﻿using System.Text;
 using System.Xml.Serialization;
 
-using Integrador.CrossCutting;
-using Integrador.Entities;
+using Integrador.Abstractions;
+using Integrador.Infrastructure;
 
 namespace Integrador.Adapters.Persistence;
 
-public class DataSource<T> : IDataSource<T> where T : IPersistentEntity
+public class DataSource<T> : IDataSource<T> where T : IEntity
 {
     public List<T> Read()
     {
+        string path = Path.Combine(Environment.CurrentDirectory,"Infrastructure", "Data");
         string file = $"{typeof(T).Name}.xml";
+        file = Path.Combine(path, file);
+
 
         if (!File.Exists(file))
         {
@@ -44,7 +47,9 @@ public class DataSource<T> : IDataSource<T> where T : IPersistentEntity
 
     public bool Write(List<T> data)
     {
+        string path = Path.Combine(Environment.CurrentDirectory,"Infrastructure", "Data");
         string file = $"{typeof(T).Name}.xml";
+        file = Path.Combine(path, file);
 
         try
         {

@@ -1,7 +1,6 @@
-﻿using Integrador.Adapters.Persistence;
-using Integrador.CrossCutting;
+﻿using Integrador.Abstractions;
+using Integrador.Adapters.Persistence;
 using Integrador.Entities;
-using Integrador.UseCases.Commands;
 
 namespace Integrador.UseCases.Autos;
 

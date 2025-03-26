@@ -10,21 +10,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Update=".\Adapters\UI\ViewForm.*.cs">
-			<DependentUpon>.\Adapters\UI\ViewForm.cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Auto.xml">
+		<None Update="Infrastructure\Data\Auto.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Log.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Persona.xml">
+		<None Update="Infrastructure\Data\Persona.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update=".\Adapters\UI\ViewForm.*.cs">
+			<DependentUpon>.\Adapters\UI\ViewForm.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>

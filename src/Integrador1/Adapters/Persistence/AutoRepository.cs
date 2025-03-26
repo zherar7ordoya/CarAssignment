@@ -1,5 +1,5 @@
-﻿using Integrador.CrossCutting;
-using Integrador.Entities;
+﻿using Integrador.Entities;
+using Integrador.Infrastructure;
 
 namespace Integrador.Adapters.Persistence;
 

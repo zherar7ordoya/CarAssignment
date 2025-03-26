@@ -1,8 +1,8 @@
-﻿using Integrador.Entities;
+﻿using Integrador.Abstractions;
 
 namespace Integrador.Adapters.Persistence;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : IPersistentEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : IEntity
 {
     private readonly DataSource<T> _dataSource = new();
 

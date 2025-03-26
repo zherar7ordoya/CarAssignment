@@ -1,6 +1,6 @@
-﻿using Integrador.Adapters.Persistence;
+﻿using Integrador.Abstractions;
+using Integrador.Adapters.Persistence;
 using Integrador.Entities;
-using Integrador.UseCases.Commands;
 
 namespace Integrador.UseCases.Asignaciones;
 

@@ -1,14 +1,13 @@
-﻿using static Integrador.Adapters.UI.ViewPresenter;
-using Integrador.UseCases.Commands;
+﻿using Integrador.Abstractions;
 using Integrador.Adapters.Persistence;
-using Integrador.Adapters.UI;
-using Integrador.CrossCutting.Extensions;
+using Integrador.Adapters.Presentation.ViewModels;
+using Integrador.Infrastructure.Extensions;
 
 namespace Integrador.UseCases.Autos
 {
-    public class ReadAutosAsignadosQuery : IReadQuery<List<AutoAsignado>>
+    public class ReadAutosAsignadosQuery : IReadQuery<List<AssignedAutoViewModel>>
     {
-        public (bool Success, List<AutoAsignado>? Result, Exception Error) Execute()
+        public (bool Success, List<AssignedAutoViewModel>? Result, Exception Error) Execute()
         {
             var personaRepository = new PersonaRepository();
             var personas = personaRepository.Read();
@@ -21,7 +20,7 @@ namespace Integrador.UseCases.Autos
             var autosAsignados = personas
                     .Where(persona => persona.Autos != null)
                     .SelectMany(persona => persona.Autos
-                        .Select(auto => new AutoAsignado
+                        .Select(auto => new AssignedAutoViewModel
                         (
                             auto.Marca ?? "Desconocido",
                             auto.Año,
