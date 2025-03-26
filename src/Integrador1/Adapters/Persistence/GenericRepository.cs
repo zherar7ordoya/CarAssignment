@@ -1,34 +1,34 @@
-﻿using Integrador.Interfaces;
+﻿using Integrador.Entities;
 
 namespace Integrador.Adapters.Persistence;
 
-public class GenericRepository<T> : IRepository<T> where T : IEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : IPersistentEntity
 {
-    private readonly XmlDataSource<T> _xmlDataSource = new();
+    private readonly DataSource<T> _dataSource = new();
 
     public bool Create(T entity)
     {
-        var entities = _xmlDataSource.Read();
+        var entities = _dataSource.Read();
         entities.Add(entity);
-        return _xmlDataSource.Write(entities);
+        return _dataSource.Write(entities);
     }
 
     public bool Delete(T entity)
     {
-        var entities = _xmlDataSource.Read();
+        var entities = _dataSource.Read();
         int removedCount = entities.RemoveAll(x => x.Id == entity.Id);
-        return removedCount > 0 && _xmlDataSource.Write(entities);
+        return removedCount > 0 && _dataSource.Write(entities);
     }
 
     public List<T> Read()
     {
-        var entities = _xmlDataSource.Read();
+        var entities = _dataSource.Read();
         return entities;
     }
 
     public bool Update(T entity)
     {
-        var entities = _xmlDataSource.Read();
+        var entities = _dataSource.Read();
         var entityToUpdate = entities.FirstOrDefault(x => x.Id == entity.Id);
 
         if (entityToUpdate == null)
@@ -44,6 +44,6 @@ public class GenericRepository<T> : IRepository<T> where T : IEntity
         }
 
         entities[index] = entity;
-        return _xmlDataSource.Write(entities);
+        return _dataSource.Write(entities);
     }
 }
