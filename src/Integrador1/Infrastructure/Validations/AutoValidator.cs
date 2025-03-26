@@ -11,7 +11,7 @@ public static partial class AutoValidator
     {
         if (string.IsNullOrEmpty(auto.Patente) || !PatenteRegex().IsMatch(auto.Patente))
         {
-            throw new ArgumentException("Formato de patente inválido.");
+            throw new ArgumentException("Patente - formato esperado: AA123AA o AAA123.");
         }
 
         if (string.IsNullOrEmpty(auto.Marca))
