@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PlatformTarget>AnyCPU</PlatformTarget>
+		<PlatformTarget>x86</PlatformTarget>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -20,11 +20,5 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update=".\Adapters\UI\ViewForm.*.cs">
-			<DependentUpon>.\Adapters\UI\ViewForm.cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
+		
 </Project>

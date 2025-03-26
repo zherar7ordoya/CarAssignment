@@ -8,8 +8,10 @@ namespace Integrador.UseCases.Autos
     {
         public (bool Success, List<Auto>? Result, Exception Error) Execute()
         {
-            var autoRepository = new AutoRepository();
-            return autoRepository.ReadDisponibles() is List<Auto> autos
+            var repository = new GenericRepository<Auto>();
+            var autos = repository.Read().Where(auto => auto.DueñoId == 0).ToList();
+
+            return autos.Count != 0
                 ? (true, autos, null!)
                 : (false, null, new Exception("Error al listar autos disponibles."));
         }

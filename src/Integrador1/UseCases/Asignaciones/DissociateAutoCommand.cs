@@ -17,8 +17,8 @@ public class DissociateAutoCommand(Persona persona, Auto auto) : ICommand
 
             auto.Dueño = null;
 
-            var autoRepository = new AutoRepository();
-            var personaRepository = new PersonaRepository();
+            var autoRepository = new GenericRepository<Auto>();
+            var personaRepository = new GenericRepository<Persona>();
 
             autoRepository.Update(auto);
             personaRepository.Update(persona);

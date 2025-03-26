@@ -1,6 +1,7 @@
 ﻿using Integrador.Abstractions;
 using Integrador.Adapters.Persistence;
 using Integrador.Adapters.Presentation.ViewModels;
+using Integrador.Entities;
 using Integrador.Infrastructure.Extensions;
 
 namespace Integrador.UseCases.Autos
@@ -9,7 +10,7 @@ namespace Integrador.UseCases.Autos
     {
         public (bool Success, List<AssignedAutoViewModel>? Result, Exception Error) Execute()
         {
-            var personaRepository = new PersonaRepository();
+            var personaRepository = new GenericRepository<Persona>();
             var personas = personaRepository.Read();
 
             if (personas == null)

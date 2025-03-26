@@ -18,8 +18,8 @@ public class AssociateAutoCommand(Persona persona, Auto auto) : ICommand
             persona.Autos.Add(auto);
             auto.Dueño = persona;
 
-            var autoRepository = new AutoRepository();
-            var personaRepository = new PersonaRepository();
+            var autoRepository = new GenericRepository<Auto>();
+            var personaRepository = new GenericRepository<Persona>();
 
             autoRepository.Update(auto);
             personaRepository.Update(persona);
