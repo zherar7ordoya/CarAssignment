@@ -21,11 +21,6 @@ public partial class ViewForm : Form
         }, "Error durante la inicialización del formulario.");
     }
 
-    private readonly BindingSource _personasBS = [];
-    private readonly BindingSource _autosPersonaBS = [];
-    private readonly BindingSource _autosDisponiblesBS = [];
-    private readonly BindingSource _autosAsignadosBS = [];
-
     private void PersonasDataGridView_SelectionChanged(object sender, EventArgs e)
     {
         if (_personasBS.Current is Persona persona)
@@ -51,7 +46,8 @@ public partial class ViewForm : Form
 
     private void EliminarPersonaButton_Click(object sender, EventArgs e)
     {
-        if (_personasBS.Current is Persona persona)
+        var confirmacion = Messenger.Confirmar("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
+        if (_personasBS.Current is Persona persona && confirmacion)
         {
             ViewPresenter.EliminarPersona(persona, _personasBS);
         }
@@ -88,7 +84,8 @@ public partial class ViewForm : Form
 
     private void EliminarAutoButton_Click(object sender, EventArgs e)
     {
-        if (_autosDisponiblesBS.Current is Auto auto)
+        var confirmacion = Messenger.Confirmar("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
+        if (_autosDisponiblesBS.Current is Auto auto && confirmacion)
         {
             ViewPresenter.EliminarAuto(auto, _autosDisponiblesBS);
         }

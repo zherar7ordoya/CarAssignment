@@ -81,8 +81,9 @@ public partial class ViewPresenter
         var command = new DeletePersonaCommand(persona);
         var (Success, Error) = ExceptionHandler.Execute(command.Execute);
 
-        if (Success)
+        if (Success && personasBS.DataSource is List<Persona> lista)
         {
+            lista.Remove(persona);
             personasBS.ResetBindings(false);
         }
         else
@@ -94,7 +95,6 @@ public partial class ViewPresenter
             );
         }
     }
-
 
     //..........................................................................
 
@@ -187,8 +187,9 @@ public partial class ViewPresenter
         var command = new DeleteAutoCommand(auto);
         var (Success, Error) = ExceptionHandler.Execute(command.Execute);
 
-        if (Success)
+        if (Success && autosDisponiblesBS.DataSource is List<Auto> lista)
         {
+            lista.Remove(auto);
             autosDisponiblesBS.ResetBindings(false);
         }
         else

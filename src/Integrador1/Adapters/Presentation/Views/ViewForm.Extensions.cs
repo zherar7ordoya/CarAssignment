@@ -7,6 +7,11 @@ namespace Integrador;
 
 partial class ViewForm
 {
+    private readonly BindingSource _personasBS = [];
+    private readonly BindingSource _autosPersonaBS = [];
+    private readonly BindingSource _autosDisponiblesBS = [];
+    private readonly BindingSource _autosAsignadosBS = [];
+
     private static void ConfigurarDelegados()
     {
         Auto.AutoEliminado += static mensaje => Messenger.MostrarMensaje(mensaje, "Auto eliminado");

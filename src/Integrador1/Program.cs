@@ -1,5 +1,4 @@
 using Integrador.Infrastructure;
-using System.Configuration;
 
 namespace Integrador;
 
