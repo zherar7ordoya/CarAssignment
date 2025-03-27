@@ -5,7 +5,7 @@ using Integrador.Infrastructure.Extensions;
 
 namespace Integrador;
 
-public partial class ViewForm
+partial class ViewForm
 {
     private static void ConfigurarDelegados()
     {

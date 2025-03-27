@@ -289,7 +289,7 @@ partial class ViewForm
         panel2.Controls.Add(NuevoAutoButton);
         panel2.Controls.Add(AutosDisponiblesDGV);
         panel2.Controls.Add(label12);
-        panel2.Location = new Point(677, 12);
+        panel2.Location = new Point(709, 12);
         panel2.Name = "panel2";
         panel2.Padding = new Padding(10);
         panel2.Size = new Size(528, 490);
@@ -454,11 +454,11 @@ partial class ViewForm
         // AsignarAutoButton
         // 
         AsignarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        AsignarAutoButton.Location = new Point(553, 259);
+        AsignarAutoButton.Location = new Point(553, 297);
         AsignarAutoButton.Name = "AsignarAutoButton";
-        AsignarAutoButton.Size = new Size(118, 60);
+        AsignarAutoButton.Size = new Size(150, 30);
         AsignarAutoButton.TabIndex = 15;
-        AsignarAutoButton.Text = "< Asignar auto a persona";
+        AsignarAutoButton.Text = "← Asignar auto";
         AsignarAutoButton.TextImageRelation = TextImageRelation.TextBeforeImage;
         AsignarAutoButton.UseVisualStyleBackColor = true;
         AsignarAutoButton.Click += AsignarAutoButton_Click;
@@ -466,11 +466,11 @@ partial class ViewForm
         // QuitarAutoButton
         // 
         QuitarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        QuitarAutoButton.Location = new Point(553, 326);
+        QuitarAutoButton.Location = new Point(553, 333);
         QuitarAutoButton.Name = "QuitarAutoButton";
-        QuitarAutoButton.Size = new Size(118, 60);
+        QuitarAutoButton.Size = new Size(150, 30);
         QuitarAutoButton.TabIndex = 16;
-        QuitarAutoButton.Text = "Quitar auto a persona >";
+        QuitarAutoButton.Text = "Desasignar auto →";
         QuitarAutoButton.TextImageRelation = TextImageRelation.ImageBeforeText;
         QuitarAutoButton.UseVisualStyleBackColor = true;
         QuitarAutoButton.Click += DesasignarAutoButton_Click;
@@ -485,7 +485,7 @@ partial class ViewForm
         AutosAsignadosDGV.Name = "AutosAsignadosDGV";
         AutosAsignadosDGV.ReadOnly = true;
         AutosAsignadosDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        AutosAsignadosDGV.Size = new Size(971, 150);
+        AutosAsignadosDGV.Size = new Size(1003, 150);
         AutosAsignadosDGV.TabIndex = 17;
         // 
         // label13
@@ -503,7 +503,7 @@ partial class ViewForm
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.Control;
-        ClientSize = new Size(1212, 668);
+        ClientSize = new Size(1247, 668);
         Controls.Add(label13);
         Controls.Add(AutosAsignadosDGV);
         Controls.Add(QuitarAutoButton);

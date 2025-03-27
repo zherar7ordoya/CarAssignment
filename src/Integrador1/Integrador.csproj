@@ -6,19 +6,22 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PlatformTarget>x86</PlatformTarget>
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<None Update="Infrastructure\Data\Auto.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Log.txt">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Infrastructure\Data\Persona.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-		
+	
+	<ItemGroup>
+		<Compile Update=".\Adapters\Presentation\Views\ViewForm.Extensions.cs">
+			<SubType>Code</SubType>
+			<DependentUpon>.\Adapters\Presentation\Views\ViewForm.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
 </Project>
