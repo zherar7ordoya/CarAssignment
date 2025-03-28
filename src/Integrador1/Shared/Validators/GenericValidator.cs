@@ -2,7 +2,7 @@
 
 namespace Integrador.Shared.Validators;
 
-public class Validator
+public class GenericValidator
 {
     public static bool Validate<T>(T entity, Action<T> validator)
     {

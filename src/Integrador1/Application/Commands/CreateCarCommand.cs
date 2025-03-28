@@ -1,32 +1,33 @@
 ﻿using Integrador.Application.Interfaces;
+using Integrador.Application.Validators;
 using Integrador.Domain.Entities;
-using Integrador.Entities;
+using Integrador.Domain.Exceptions;
+using Integrador.Domain.Interfaces;
 using Integrador.Infrastructure.Persistence;
 using Integrador.Shared.Exceptions;
-using Integrador.Shared.Validators;
 
 namespace Integrador.Application.Commands;
 
-public class CreateCarCommand(Car auto) : ICommand
+public class CreateCarCommand(Car auto, IGenericRepository<Car> repository, IValidator<Car> validator) : ICommand
 {
+    private readonly IValidator<Car> _validator = validator;
+
     public (bool Success, Exception Error) Execute()
     {
-        if (Validator.Validate(auto, CarValidator.Validar))
-        {
-            var repository = new GenericRepository<Car>();
-            var autos = repository.Read();
-            auto.Id = autos.Count > 0 ? autos.Max(x => x.Id) + 1 : 1;
+        var validationResult = _validator.Validate(auto);
 
-            return repository.Create(auto)
-                ? (true, null!)
-                : (false, new Exception("Error al crear auto."));
-        }
-        else
+        if (!validationResult.IsValid)
         {
-            var exception = new Exception("El auto no es válido");
-            ExceptionHandler.HandleException("Error al crear auto", exception);
-            return (false, exception);
+            return (false, new DomainException(string.Join(", ", validationResult.Errors)));
         }
+
+        var autos = repository.GetAll();
+        auto.Id = autos.Count > 0 ? autos.Max(x => x.Id) + 1 : 1;
+
+        return repository.Create(auto)
+            ? (true, null!)
+            : (false, new Exception("Error al crear auto."));
+
     }
 
     public void Undo() { /* Lógica para deshacer */ }

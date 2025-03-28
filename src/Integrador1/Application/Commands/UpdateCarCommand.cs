@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.Interfaces;
+using Integrador.Application.Validators;
 using Integrador.Domain.Entities;
-using Integrador.Entities;
 using Integrador.Infrastructure.Persistence;
 using Integrador.Shared.Exceptions;
 using Integrador.Shared.Validators;
@@ -11,7 +11,7 @@ public class UpdateCarCommand(Car auto) : ICommand
 {
     public (bool Success, Exception Error) Execute()
     {
-        if (Validator.Validate(auto, CarValidator.Validar))
+        if (GenericValidator.Validate(auto, CarValidator.Validar))
         {
             var repository = new GenericRepository<Car>();
 

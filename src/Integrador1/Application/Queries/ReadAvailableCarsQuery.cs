@@ -9,7 +9,7 @@ namespace Integrador.Application.Queries
         public (bool Success, List<Car>? Result, Exception Error) Execute()
         {
             var repository = new GenericRepository<Car>();
-            var autos = repository.Read().Where(auto => auto.DueñoId == 0).ToList();
+            var autos = repository.GetAll().Where(auto => auto.DueñoId == 0).ToList();
 
             return autos.Count != 0
                 ? (true, autos, null!)

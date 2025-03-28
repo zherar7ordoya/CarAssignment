@@ -1,39 +1,43 @@
 ﻿using Integrador.Domain.Entities;
-
+using Integrador.Shared.Validators;
 using System.Text.RegularExpressions;
 
-namespace Integrador.Entities;
+namespace Integrador.Application.Validators;
 
-public static partial class CarValidator
+public partial class CarValidator : IValidator<Car>
 {
-    [System.Text.RegularExpressions.GeneratedRegex(@"^[A-Z]{2}\d{3}[A-Z]{2}$|^[A-Z]{3}\d{3}$")]
+    [GeneratedRegex(@"^[A-Z]{2}\d{3}[A-Z]{2}$|^[A-Z]{3}\d{3}$")]
     private static partial Regex PatenteRegex();
 
-    public static void Validar(Car auto)
+    public ValidationResult Validate(Car car)
     {
-        if (string.IsNullOrEmpty(auto.Patente) || !PatenteRegex().IsMatch(auto.Patente))
+        var errors = new List<string>();
+
+        if (string.IsNullOrEmpty(car.Patente) || !PatenteRegex().IsMatch(car.Patente))
         {
-            throw new ArgumentException("Patente - formato esperado: AA123AA o AAA123.");
+            errors.Add("Patente - formato esperado: AA123AA o AAA123.");
         }
 
-        if (string.IsNullOrEmpty(auto.Marca))
+        if (string.IsNullOrEmpty(car.Marca))
         {
-            throw new ArgumentException("La marca no puede estar vacía.");
+            errors.Add("La marca no puede estar vacía.");
         }
 
-        if (string.IsNullOrEmpty(auto.Modelo))
+        if (string.IsNullOrEmpty(car.Modelo))
         {
-            throw new ArgumentException("El modelo no puede estar vacío.");
+            errors.Add("El modelo no puede estar vacío.");
         }
 
-        if (auto.Año < 1900 || auto.Año > DateTime.Now.Year)
+        if (car.Año < 1900 || car.Año > DateTime.Now.Year)
         {
-            throw new ArgumentException("Año inválido.");
+            errors.Add("Año inválido.");
         }
 
-        if (auto.Precio <= 0)
+        if (car.Precio <= 0)
         {
-            throw new ArgumentException("El precio debe ser mayor a 0.");
+            errors.Add("El precio debe ser mayor a 0.");
         }
+
+        return new ValidationResult(errors);
     }
 }

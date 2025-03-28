@@ -1,47 +1,36 @@
-﻿using System.Xml.Serialization;
+﻿using Integrador.Domain.Exceptions;
 
 namespace Integrador.Domain.Entities;
 
-public class Car : BaseEntity, IDisposable
+public class Car : BaseEntity
 {
-    public Car() { }
     public Car(string patente, string marca, string modelo, int año, decimal precio)
     {
+        // Validación delegada al dominio
+        if (string.IsNullOrEmpty(patente))
+        {
+            throw new DomainException("Patente no puede ser vacía");
+        }
+
         Patente = patente;
         Marca = marca;
         Modelo = modelo;
         Año = año;
         Precio = precio;
     }
-    //--------------------------------------------------------------------------
-    public string? Patente { get; set; } = string.Empty;
-    public string? Marca { get; set; } = string.Empty;
-    public string? Modelo { get; set; } = string.Empty;
-    public int Año { get; set; } = DateTime.Now.Year;
-    public decimal Precio { get; set; } = 0.0m;
 
-    // ¿Por qué esto? Ambas clases se referencian entre sí, por lo que,
-    // al serializar, se produciría un ciclo infinito.
-    public int DueñoId { get; set; }
+    // Propiedades encapsuladas (sin setters públicos)
+    public string Patente { get; private set; }
+    public string Marca { get; private set; }
+    public string Modelo { get; private set; }
+    public int Año { get; private set; }
+    public decimal Precio { get; private set; }
 
-    [XmlIgnore]
-    public Person? Dueño
+    // Método para actualización segura
+    public void Update(string marca, string modelo, decimal precio)
     {
-        get => _dueño;
-        set
-        {
-            _dueño = value;
-            DueñoId = value?.Id ?? 0;
-        }
+        Marca = marca;
+        Modelo = modelo;
+        Precio = precio;
     }
-    private Person? _dueño;
-    //--------------------------------------------------------------------------
-    public static event Action<string>? AutoEliminado;
-    public void Dispose()
-    {
-        AutoEliminado?.Invoke($"El objeto Auto con Patente {Patente} ha sido eliminado.");
-        GC.SuppressFinalize(this);
-    }
-
-    //~Auto() => AutoEliminado?.Invoke($"El objeto Auto con Patente {Patente} ha sido eliminado.");
 }

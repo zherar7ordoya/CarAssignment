@@ -11,7 +11,7 @@ namespace Integrador.Application.Queries
         public (bool Success, List<AssignedCarDTO>? Result, Exception Error) Execute()
         {
             var personaRepository = new GenericRepository<Person>();
-            var personas = personaRepository.Read();
+            var personas = personaRepository.GetAll();
 
             if (personas == null)
             {

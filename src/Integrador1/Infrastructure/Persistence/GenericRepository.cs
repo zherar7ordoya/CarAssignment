@@ -6,11 +6,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : IEntity
 {
     private readonly DataSource<T> _dataSource = new();
 
-    public bool Create(T entity)
+    public T Create(T entity)
     {
-        var entities = _dataSource.Read();
+        var entities = GetAll();
+        entity.Id = entities.Count == 0 ? 1 : entities.Max(e => e.Id) + 1;
         entities.Add(entity);
-        return _dataSource.Write(entities);
+        return _dataSource.Write(entities) ? entity : throw new InvalidOperationException("Failed to create entity.");
     }
 
     public bool Delete(T entity)
@@ -20,7 +21,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : IEntity
         return removedCount > 0 && _dataSource.Write(entities);
     }
 
-    public List<T> Read()
+    public List<T> GetAll()
     {
         var entities = _dataSource.Read();
         return entities;

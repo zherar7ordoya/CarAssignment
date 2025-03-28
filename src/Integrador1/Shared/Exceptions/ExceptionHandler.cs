@@ -3,38 +3,21 @@ using Integrador.Infrastructure.Messaging;
 
 namespace Integrador.Shared.Exceptions;
 
-public static class ExceptionHandler
+public class ExceptionHandler : IExceptionHandler
 {
-    public static void HandleException(string mensaje, Exception ex)
+    private readonly ILogger _logger;
+    private readonly IMessageBus _messageBus;
+
+    // Inyección de dependencias
+    public ExceptionHandler(ILogger logger, IMessageBus messageBus)
     {
-        Logger.LogError(mensaje, ex);
-        Messenger.MostrarError(mensaje, ex);
+        _logger = logger;
+        _messageBus = messageBus;
     }
 
-    public static (bool Success, Exception? Error) Execute(Action action, string errorMessage = "Error en la operación.")
+    public void Handle(Exception ex, string message)
     {
-        try
-        {
-            action();
-            return (true, null);
-        }
-        catch (Exception ex)
-        {
-            HandleException(errorMessage, ex);
-            return (false, ex);
-        }
-    }
-
-    public static (bool Success, Exception? Error) Execute(Func<(bool, Exception?)> function, string errorMessage = "Error en la operación.")
-    {
-        try
-        {
-            return function();
-        }
-        catch (Exception ex)
-        {
-            HandleException(errorMessage, ex);
-            return (false, ex);
-        }
+        _logger.LogError(message, ex);
+        _messageBus.PublishError(message);
     }
 }

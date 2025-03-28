@@ -9,7 +9,7 @@ public class ReadPersonsQuery : IReadQuery<List<Person>>
     public (bool Success, List<Person>? Result, Exception Error) Execute()
     {
         var personaRepository = new GenericRepository<Person>();
-        return personaRepository.Read() is List<Person> personas
+        return personaRepository.GetAll() is List<Person> personas
             ? (true, personas, null!)
             : (false, null, new Exception("Error al listar personas."));
     }

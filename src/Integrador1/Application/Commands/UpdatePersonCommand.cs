@@ -11,7 +11,7 @@ public class UpdatePersonCommand(Person persona) : ICommand
 {
     public (bool Success, Exception Error) Execute()
     {
-        if (Validator.Validate(persona, PersonValidator.Validar))
+        if (GenericValidator.Validate(persona, PersonValidator.Validar))
         {
             var repository = new GenericRepository<Person>();
 

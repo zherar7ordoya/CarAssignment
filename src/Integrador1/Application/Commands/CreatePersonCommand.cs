@@ -11,10 +11,10 @@ public class CreatePersonCommand(Person persona) : ICommand
 {
     public (bool Success, Exception Error) Execute()
     {
-        if (Validator.Validate(persona, PersonValidator.Validar))
+        if (GenericValidator.Validate(persona, PersonValidator.Validar))
         {
             var repository = new GenericRepository<Person>();
-            var personas = repository.Read();
+            var personas = repository.GetAll();
             persona.Id = personas.Count > 0 ? personas.Max(x => x.Id) + 1 : 1;
 
             return repository.Create(persona)
