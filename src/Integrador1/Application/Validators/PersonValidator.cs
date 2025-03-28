@@ -1,29 +1,21 @@
-﻿using Integrador.Domain.Entities;
+﻿using FluentValidation;
+using Integrador.Domain.Entities;
 
-using System.Text.RegularExpressions;
+namespace Integrador.Application.Validators;
 
-namespace Integrador.Entities;
-
-public static partial class PersonValidator
+public class PersonValidator : AbstractValidator<Person>
 {
-    [System.Text.RegularExpressions.GeneratedRegex(@"^\d{7,8}$")]
-    private static partial Regex DniRegex();
-
-    public static void Validar(Person persona)
+    public PersonValidator()
     {
-        if (string.IsNullOrEmpty(persona.DNI) || !DniRegex().IsMatch(persona.DNI))
-        {
-            throw new ArgumentException("Formato de DNI inválido.");
-        }
+        RuleFor(p => p.Nombre)
+            .NotEmpty().WithMessage("El nombre es requerido.")
+            .MaximumLength(100).WithMessage("Máximo 100 caracteres.");
 
-        if (string.IsNullOrEmpty(persona.Nombre))
-        {
-            throw new ArgumentException("El nombre no puede estar vacío.");
-        }
+        RuleFor(p => p.DNI)
+            .NotEmpty().WithMessage("El documento es requerido.")
+            .Matches(@"^\d{8}$").WithMessage("Formato inválido (ej: 12345678).");
 
-        if (string.IsNullOrEmpty(persona.Apellido))
-        {
-            throw new ArgumentException("El apellido no puede estar vacío.");
-        }
+        //RuleFor(p => p.Edad)
+        //    .InclusiveBetween(18, 120).WithMessage("Edad debe ser entre 18 y 120.");
     }
 }

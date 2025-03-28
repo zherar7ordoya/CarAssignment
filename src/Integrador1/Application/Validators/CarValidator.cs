@@ -1,43 +1,21 @@
-﻿using Integrador.Domain.Entities;
-using Integrador.Shared.Validators;
-using System.Text.RegularExpressions;
+﻿using FluentValidation;
+
+using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Validators;
 
-public partial class CarValidator : IValidator<Car>
+public partial class CarValidator : AbstractValidator<Car>
 {
-    [GeneratedRegex(@"^[A-Z]{2}\d{3}[A-Z]{2}$|^[A-Z]{3}\d{3}$")]
-    private static partial Regex PatenteRegex();
-
-    public ValidationResult Validate(Car car)
+    public CarValidator()
     {
-        var errors = new List<string>();
+        RuleFor(c => c.Patente)
+            .NotEmpty()
+            .Matches(@"^[A-Z]{2}\d{3}[A-Z]{2}$|^[A-Z]{3}\d{3}$")
+            .WithMessage("Formato de patente inválido (ej: ABC123 o ABC123DEF).");
 
-        if (string.IsNullOrEmpty(car.Patente) || !PatenteRegex().IsMatch(car.Patente))
-        {
-            errors.Add("Patente - formato esperado: AA123AA o AAA123.");
-        }
-
-        if (string.IsNullOrEmpty(car.Marca))
-        {
-            errors.Add("La marca no puede estar vacía.");
-        }
-
-        if (string.IsNullOrEmpty(car.Modelo))
-        {
-            errors.Add("El modelo no puede estar vacío.");
-        }
-
-        if (car.Año < 1900 || car.Año > DateTime.Now.Year)
-        {
-            errors.Add("Año inválido.");
-        }
-
-        if (car.Precio <= 0)
-        {
-            errors.Add("El precio debe ser mayor a 0.");
-        }
-
-        return new ValidationResult(errors);
+        RuleFor(c => c.Marca).NotEmpty().WithMessage("La marca es requerida.");
+        RuleFor(c => c.Modelo).NotEmpty().WithMessage("El modelo es requerido.");
+        RuleFor(c => c.Año).InclusiveBetween(1900, DateTime.Now.Year).WithMessage("Año inválido.");
+        RuleFor(c => c.Precio).GreaterThan(0).WithMessage("El precio debe ser mayor a 0.");
     }
 }

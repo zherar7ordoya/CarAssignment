@@ -1,19 +1,13 @@
-﻿using Integrador.Infrastructure.Logging;
+﻿using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
 
 namespace Integrador.Shared.Exceptions;
 
-public class ExceptionHandler : IExceptionHandler
+public class ExceptionHandler(ILogger logger, IMessageBus messageBus) : IExceptionHandler
 {
-    private readonly ILogger _logger;
-    private readonly IMessageBus _messageBus;
-
-    // Inyección de dependencias
-    public ExceptionHandler(ILogger logger, IMessageBus messageBus)
-    {
-        _logger = logger;
-        _messageBus = messageBus;
-    }
+    private readonly ILogger _logger = logger;
+    private readonly IMessageBus _messageBus = messageBus;
 
     public void Handle(Exception ex, string message)
     {

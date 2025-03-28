@@ -1,19 +1,40 @@
-using Integrador.Shared.Exceptions;
+ï»¿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using MediatR;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Integrador.Application.Behaviors;
+using Integrador.Application.Validators;
+using Integrador.Infrastructure.Persistence;
+using Integrador.Domain.Interfaces;
+using System.Windows.Forms;
+using Integrador.Domain.Entities;
+using Integrador;
 
-namespace Integrador;
-
-internal static class Program
+static class Program
 {
     [STAThread]
     static void Main()
     {
-        try
-        {
-            ApplicationConfiguration.Initialize();
+        var host = Host.CreateDefaultBuilder()
+            .ConfigureServices((context, services) =>
+            {
+                services.AddMediatR(cfg =>
+                {
+                    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+                    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+                });
 
-            // Para evitar conflictos con el nombre del namespace "Application".
-            System.Windows.Forms.Application.Run(new ViewForm());
-        }
-        catch (Exception ex) { ExceptionHandler.HandleException("Error al iniciar la aplicación", ex); }
+                // Registrar validadores de FluentValidation
+                services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+                services.AddSingleton<IGenericRepository<Car>, GenericRepository<Car>>();
+                services.AddSingleton<IGenericRepository<Person>, GenericRepository<Person>>();
+
+                services.AddTransient<ViewForm>();
+            })
+            .Build();
+
+        System.Windows.Forms.Application.Run(host.Services.GetRequiredService<ViewForm>());
     }
 }
