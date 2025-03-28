@@ -1,4 +1,4 @@
-using Integrador.Infrastructure;
+using Integrador.Shared.Exceptions;
 
 namespace Integrador;
 
@@ -10,7 +10,9 @@ internal static class Program
         try
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new ViewForm());
+
+            // Para evitar conflictos con el nombre del namespace "Application".
+            System.Windows.Forms.Application.Run(new ViewForm());
         }
         catch (Exception ex) { ExceptionHandler.HandleException("Error al iniciar la aplicación", ex); }
     }

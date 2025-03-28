@@ -1,0 +1,40 @@
+﻿using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Messaging;
+
+namespace Integrador.Shared.Exceptions;
+
+public static class ExceptionHandler
+{
+    public static void HandleException(string mensaje, Exception ex)
+    {
+        Logger.LogError(mensaje, ex);
+        Messenger.MostrarError(mensaje, ex);
+    }
+
+    public static (bool Success, Exception? Error) Execute(Action action, string errorMessage = "Error en la operación.")
+    {
+        try
+        {
+            action();
+            return (true, null);
+        }
+        catch (Exception ex)
+        {
+            HandleException(errorMessage, ex);
+            return (false, ex);
+        }
+    }
+
+    public static (bool Success, Exception? Error) Execute(Func<(bool, Exception?)> function, string errorMessage = "Error en la operación.")
+    {
+        try
+        {
+            return function();
+        }
+        catch (Exception ex)
+        {
+            HandleException(errorMessage, ex);
+            return (false, ex);
+        }
+    }
+}

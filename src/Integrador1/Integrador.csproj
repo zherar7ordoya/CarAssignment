@@ -10,19 +10,12 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<None Update="Infrastructure\Data\Auto.xml">
+		<None Update="Data\Car.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Infrastructure\Data\Persona.xml">
+		<None Update="Data\Person.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 	
-	<ItemGroup>
-		<Compile Update=".\Adapters\Presentation\Views\ViewForm.Extensions.cs">
-			<SubType>Code</SubType>
-			<DependentUpon>.\Adapters\Presentation\Views\ViewForm.cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
 </Project>
