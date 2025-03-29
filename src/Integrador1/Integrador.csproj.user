@@ -6,7 +6,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Presentation\Views\ViewForm.Extensions.cs">
-      <SubType>Form</SubType>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 </Project>

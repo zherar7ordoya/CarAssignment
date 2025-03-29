@@ -2,22 +2,26 @@
 using System.Xml.Serialization;
 
 using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Messaging;
 using Integrador.Shared.Exceptions;
 
 namespace Integrador.Infrastructure.Persistence;
 
 public class DataSource<T> : IDataSource<T> where T : IEntity
 {
+    readonly ILogger _logger = new Logger();
+    readonly IMessenger _messenger = new Messenger();
+
     public List<T> Read()
     {
         string path = Path.Combine(Environment.CurrentDirectory, "Data");
         string file = $"{typeof(T).Name}.xml";
         file = Path.Combine(path, file);
 
-
         if (!File.Exists(file))
         {
-            DataSource<T>.CreateEmptyFile(file);
+            CreateEmptyFile(file);
             return [];
         }
 
@@ -30,9 +34,10 @@ public class DataSource<T> : IDataSource<T> where T : IEntity
             var result = serializer.Deserialize(reader) as List<T>;
             return result ?? [];
         }
-        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (Exception ex)
+        {
+            new ExceptionHandler(_logger, _messenger).Handle(ex, $"Error en la lectura de {file}");
+        }
         finally
         {
             if (reader != null)
@@ -58,14 +63,15 @@ public class DataSource<T> : IDataSource<T> where T : IEntity
             serializer.Serialize(writer, data);
             return true;
         }
-        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (Exception ex)
+        {
+            new ExceptionHandler(_logger, _messenger).Handle(ex, $"Error en la escritura de {file}");
+        }
 
         return false; // Ensure all code paths return a value
     }
 
-    private static void CreateEmptyFile(string file)
+    private void CreateEmptyFile(string file)
     {
         try
         {
@@ -73,8 +79,9 @@ public class DataSource<T> : IDataSource<T> where T : IEntity
             using StreamWriter writer = new(file, false, Encoding.Unicode);
             serializer.Serialize(writer, new List<T>());
         }
-        catch (FileNotFoundException ex) { ExceptionHandler.HandleException($"Archivo no encontrado: {file}", ex); }
-        catch (UnauthorizedAccessException ex) { ExceptionHandler.HandleException($"Acceso no autorizado al archivo: {file}", ex); }
-        catch (Exception ex) { ExceptionHandler.HandleException($"Error desconocido al leer {file}", ex); }
+        catch (Exception ex)
+        {
+            new ExceptionHandler(_logger, _messenger).Handle(ex, $"Error desconocido para {file}");
+        }
     }
 }

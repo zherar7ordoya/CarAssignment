@@ -2,19 +2,29 @@
 
 namespace Integrador.Domain.Entities;
 
-public class Car(string patente,
-                 string marca,
-                 string modelo,
-                 int año,
-                 decimal precio) : BaseEntity
+public class Car : BaseEntity
 {
+    // Empty constructor required by serialization
+    public Car() { }
+    public Car(string patente,
+                     string marca,
+                     string modelo,
+                     int año,
+                     decimal precio)
+    {
+        Patente = patente;
+        Marca = marca;
+        Modelo = modelo;
+        Año = año;
+        Precio = precio;
+    }
 
     // Propiedades encapsuladas
-    public string Patente { get; private set; } = patente;
-    public string Marca { get; private set; } = marca;
-    public string Modelo { get; private set; } = modelo;
-    public int Año { get; private set; } = año;
-    public decimal Precio { get; private set; } = precio;
+    public string Patente { get; private set; }
+    public string Marca { get; private set; }
+    public string Modelo { get; private set; }
+    public int Año { get; private set; }
+    public decimal Precio { get; private set; }
 
     // Relación con Person (sin exposición de ID)
     private Person? _dueño;

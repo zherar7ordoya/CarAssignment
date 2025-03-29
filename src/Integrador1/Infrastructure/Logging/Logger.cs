@@ -1,14 +1,16 @@
-﻿namespace Integrador.Infrastructure.Logging;
+﻿using Integrador.Domain.Interfaces;
 
-public static class Logger
+namespace Integrador.Infrastructure.Logging;
+
+public class Logger : ILogger
 {
-    public static void LogError(string message, Exception ex)
+    public void LogError(Exception ex, string message)
     {
         var logMessage = $"[{DateTime.Now}] ERROR: {message} - Excepción: {ex.GetType().Name}, Mensaje: {ex.Message}";
         File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
     }
 
-    public static void LogInfo(string message)
+    public void LogInformation(string message)
     {
         var logMessage = $"[{DateTime.Now}] INFO: {message}";
         File.AppendAllText("Log.txt", logMessage + Environment.NewLine);

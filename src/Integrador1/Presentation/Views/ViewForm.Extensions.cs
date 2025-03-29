@@ -1,31 +1,45 @@
 ﻿using Integrador.Domain.Entities;
+using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
 using Integrador.Presentation.Presenters;
 using Integrador.Shared.Exceptions;
 using Integrador.Shared.Extensions;
 
+using MediatR;
+
 namespace Integrador;
 
 partial class ViewForm
 {
+    private readonly IMediator _mediator;
+    private readonly ViewPresenter _presenter;
+
     private readonly BindingSource _personasBS = [];
     private readonly BindingSource _autosPersonaBS = [];
     private readonly BindingSource _autosDisponiblesBS = [];
     private readonly BindingSource _autosAsignadosBS = [];
 
-    private static void ConfigurarDelegados()
-    {
-        Car.AutoEliminado += static mensaje => Messenger.MostrarMensaje(mensaje, "Auto eliminado");
-        Person.PersonaEliminada += static mensaje => Messenger.MostrarMensaje(mensaje, "Persona eliminada");
-    }
+    readonly ILogger _logger = new Logger();
+    readonly IMessenger _messenger = new Messenger();
+
+    //private static void ConfigurarDelegados()
+    //{
+    //    Car.AutoEliminado += static mensaje => Messenger.MostrarMensaje(mensaje, "Auto eliminado");
+    //    Person.PersonaEliminada += static mensaje => Messenger.MostrarMensaje(mensaje, "Persona eliminada");
+    //}
 
     private void ConfigurarEnlaces()
     {
-        ExceptionHandler.Execute(() =>
+        try
         {
             ConfigurarBindingSources();
             ConfigurarDataGridView();
-        }, "Error al configurar los enlaces.");
+        }
+        catch (Exception ex)
+        {
+            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al configurar los enlaces.");
+        }
     }
 
     private void ConfigurarBindingSources()
@@ -114,9 +128,9 @@ partial class ViewForm
 
     private void LoadData()
     {
-        _personasBS.DataSource = ViewPresenter.ListarPersonas();
-        _autosDisponiblesBS.DataSource = ViewPresenter.ListarAutosDisponibles();
-        _autosAsignadosBS.DataSource = ViewPresenter.ListarAutosAsignados();
+        _personasBS.DataSource = _presenter.ListarPersonas();
+        _autosDisponiblesBS.DataSource = _presenter.ListarAutosDisponibles();
+        _autosAsignadosBS.DataSource = _presenter.ListarAutosAsignados();
     }
 
     private void OnAutoAsignado(Person persona, Car auto)
@@ -140,7 +154,7 @@ partial class ViewForm
         else { _autosDisponiblesBS.Add(auto); }
 
         _autosDisponiblesBS.ResetBindings(false);
-        _autosAsignadosBS.DataSource = ViewPresenter.ListarAutosAsignados();
+        _autosAsignadosBS.DataSource = _presenter.ListarAutosAsignados();
 
         ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
         CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
