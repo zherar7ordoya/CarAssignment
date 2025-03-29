@@ -27,6 +27,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : IEntity
         return entities;
     }
 
+    public T? GetById(int id)
+    {
+        return GetAll().FirstOrDefault(e => e.Id == id);
+    }
+
     public bool Update(T entity)
     {
         var entities = _dataSource.Read();

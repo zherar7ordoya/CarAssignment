@@ -1,7 +1,6 @@
 ﻿using Integrador.Application.Assignments;
 using Integrador.Application.Commands;
 using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
 using Integrador.Application.Queries;
 using Integrador.Domain.Entities;
 using Integrador.Shared.Exceptions;

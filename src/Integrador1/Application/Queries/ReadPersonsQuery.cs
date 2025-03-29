@@ -1,18 +1,7 @@
-﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Persistence;
+﻿using Integrador.Domain.Entities;
+
+using MediatR;
 
 namespace Integrador.Application.Queries;
 
-public class ReadPersonsQuery : IReadQuery<List<Person>>
-{
-    public (bool Success, List<Person>? Result, Exception Error) Execute()
-    {
-        var personaRepository = new GenericRepository<Person>();
-        return personaRepository.GetAll() is List<Person> personas
-            ? (true, personas, null!)
-            : (false, null, new Exception("Error al listar personas."));
-    }
-
-    public void Undo() { }
-}
+public record ReadPersonsQuery : IRequest<List<Person>>;

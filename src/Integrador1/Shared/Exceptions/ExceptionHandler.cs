@@ -1,6 +1,4 @@
 ﻿using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Logging;
-using Integrador.Infrastructure.Messaging;
 
 namespace Integrador.Shared.Exceptions;
 

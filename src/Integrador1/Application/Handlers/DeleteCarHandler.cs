@@ -1,23 +1,33 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Domain.Interfaces;
-using Integrador.Shared.Exceptions;
-using System.Threading;
-using System.Threading.Tasks;
+using FluentValidation;
 using Integrador.Application.Commands;
+using Integrador.Domain.Exceptions;
 
 namespace Integrador.Application.Handlers;
 
-public class DeleteCarHandler(IGenericRepository<Car> repository) : IRequestHandler<DeleteCarCommand, bool>
+public class DeleteCarHandler(
+    IGenericRepository<Car> repository,
+    IValidator<Car> validator) : IRequestHandler<DeleteCarCommand, bool>
 {
     private readonly IGenericRepository<Car> _repository = repository;
+    private readonly IValidator<Car> _validator = validator;
 
     public async Task<bool> Handle(DeleteCarCommand request, CancellationToken ct)
     {
-        // 1. Validación de dominio (usando lógica encapsulada en Car)
+        // Validación técnica con FluentValidation
+        var validationResult = await _validator.ValidateAsync(request.Car, ct);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            throw new DomainException(errors);
+        }
+
+        // Validación de negocio
         request.Car.EnsureCanBeDeleted();
 
-        // 2. Eliminar auto
-        return await Task.FromResult(_repository.Delete(request.Car));
+        return _repository.Delete(request.Car);
     }
 }
