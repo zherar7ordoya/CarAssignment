@@ -24,20 +24,24 @@ public class RemoveCarHandler(
         var existingPerson = _personRepository.GetById(request.Person.Id);
 
         if (existingCar == null || existingPerson == null)
+        {
             throw new DomainException("Auto o persona no existen.");
+        }
 
         // 2. Validar relación
-        if (!existingPerson.Autos.Contains(existingCar))
-            throw new DomainException("El auto no pertenece a esta persona.");
+        if (!existingPerson.EnsureCarCanBeRemoved(existingCar))
+        {
+            throw new DomainException("El auto no pertenece a la persona.");
+        }
 
-        // 3. Ejecutar lógica de dominio
+        // 3. Remover relación bidireccional
         existingPerson.RemoveCar(existingCar);
-        existingCar.DissociateOwner();
+        existingCar.RemoveOwner();
 
+        // 4. Persistencia
         bool carUpdated = await Task.Run(() => _carRepository.Update(existingCar));
         bool personUpdated = await Task.Run(() => _personRepository.Update(existingPerson));
 
-        // 4. Persistir cambios
         return carUpdated && personUpdated;
     }
 }

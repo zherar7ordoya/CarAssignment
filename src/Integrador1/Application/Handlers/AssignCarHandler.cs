@@ -5,6 +5,7 @@ using Integrador.Shared.Exceptions;
 using System.Threading;
 using System.Threading.Tasks;
 using Integrador.Application.Assignments;
+using Integrador.Domain.Exceptions;
 
 namespace Integrador.Application.Handlers;
 
@@ -18,16 +19,27 @@ public class AssignCarHandler(
 
     public async Task<bool> Handle(AssignCarCommand request, CancellationToken ct)
     {
-        // 1. Validación de negocio
-        request.Car.EnsureCanBeAssigned(); // Verifica si el auto ya tiene dueño
+        // Validar existencia
+        var existingCar = await Task.Run(() => _carRepository.GetById(request.Car.Id));
+        var existingPerson = await Task.Run(() => _personRepository.GetById(request.Person.Id));
 
-        // 2. Asignación bidireccional
-        request.Person.AssignCar(request.Car); // Encapsula lógica en dominio
+        if (existingCar == null || existingPerson == null)
+        {
+            throw new DomainException("Auto o persona no existen.");
+        }
 
-        // 3. Persistencia
-        bool carUpdated = await Task.Run(() => _carRepository.Update(request.Car));
-        bool personUpdated = await Task.Run(() => _personRepository.Update(request.Person));
+        // Validar regla de negocio
+        if (!existingCar.EnsureCanBeAssigned())
+        {
+            throw new DomainException("El auto ya tiene un dueño.");
+        }
 
-        return carUpdated && personUpdated;
+        // Actualizar relaciones mediante IDs
+        existingCar.AssignOwner(existingPerson);
+        existingPerson.AssignCar(existingCar);
+
+        // Persistir cambios
+        return _carRepository.Update(existingCar) &&
+               _personRepository.Update(existingPerson);
     }
 }

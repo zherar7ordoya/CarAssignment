@@ -18,6 +18,7 @@ public class UpdateCarHandler(
     {
         // 1. Validación Técnica (formato de patente, año, etc.)
         var validationResult = await _validator.ValidateAsync(request.Car, ct);
+
         if (!validationResult.IsValid)
         {
             var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();

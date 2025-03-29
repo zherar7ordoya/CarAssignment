@@ -20,37 +20,21 @@ public class Person : BaseEntity
     public string Apellido { get; set; } = string.Empty;
     public List<Car> Autos { get; set; } = [];
 
-    // Regla de negocio: No permitir eliminar si tiene autos asociados
-    public void EnsureCanBeDeleted()
-    {
-        if (Autos.Count > 0)
-        {
-            throw new DomainException("No se puede eliminar una persona con autos asociados.");
-        }
-    }
+    public bool EnsureCanBeDeleted() => Autos.Count == 0;
 
-    // Validación de negocio para actualización
-    public void EnsureCanBeUpdated()
-    {
-        if (Autos.Count > 0)
-            throw new DomainException("No se puede actualizar una persona con autos asociados.");
-    }
+    public bool EnsureCarCanBeRemoved(Car car) => Autos.Contains(car);
 
     public void AssignCar(Car car)
     {
-        car.EnsureCanBeAssigned(); // Valida antes de asignar
+        if (Autos.Contains(car)) return;
         Autos.Add(car);
-        car.AssignTo(this);
+        car.AssignOwner(this);
     }
 
-    // Método para remover auto (encapsula colección)
     public void RemoveCar(Car car)
     {
-        if (!Autos.Contains(car))
-        {
-            throw new DomainException("El auto no pertenece a esta persona.");
-        }
-
+        if (!Autos.Contains(car)) return;
         Autos.Remove(car);
+        car.RemoveOwner();
     }
 }

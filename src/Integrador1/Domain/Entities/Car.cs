@@ -1,5 +1,7 @@
 ﻿using Integrador.Domain.Exceptions;
 
+using System.Xml.Serialization;
+
 namespace Integrador.Domain.Entities;
 
 public class Car : BaseEntity
@@ -25,63 +27,27 @@ public class Car : BaseEntity
     public string Modelo { get; set; } = string.Empty;
     public int Año { get; set; } = 0;
     public decimal Precio { get; set; } = 0;
+    public int DueñoId { get; set; } = 0;
+    [XmlIgnore]
+    public Person? Dueño { get; set; } = null;
 
-    // Relación con Person (sin exposición de ID)
-    private Person? _dueño;
-    public Person? Dueño => _dueño;
 
-    // Método para verificar si se puede eliminar
-    public void EnsureCanBeDeleted()
+    public bool EnsureCanBeAssigned() => DueñoId == 0;
+
+    public bool EnsureCanBeDeleted()
     {
-        if (_dueño != null)
-            throw new DomainException("No se puede eliminar un auto asignado a un dueño.");
+        return Dueño == null;
     }
 
-    // Método para asignar dueño (ejemplo de lógica de dominio)
     public void AssignOwner(Person person)
     {
-        _dueño = person;
+        DueñoId = person.Id;
+        Dueño = person;
     }
 
-    // Método para actualización segura
-    public void Update(string marca, string modelo, decimal precio)
+    public void RemoveOwner()
     {
-        // Validar datos antes de actualizar
-        if (string.IsNullOrEmpty(marca))
-        {
-            throw new DomainException("Marca no puede estar vacía.");
-        }
-
-        Marca = marca;
-        Modelo = modelo;
-        Precio = precio;
-    }
-
-    // Validación de negocio para actualización
-    public void EnsureCanBeUpdated()
-    {
-        // Ejemplo: Verificar si el auto está asignado a alguien
-        if (Dueño != null)
-        {
-            throw new DomainException("No se puede actualizar un auto asignado a un dueño.");
-        }
-    }
-
-    // Método de dominio para asignación
-    public void EnsureCanBeAssigned()
-    {
-        if (Dueño != null)
-            throw new DomainException("El auto ya tiene un dueño.");
-    }
-
-    public void AssignTo(Person person)
-    {
-        _dueño = person;
-    }
-
-    // Método para desasignar dueño
-    public void DissociateOwner()
-    {
-        _dueño = null;
+        DueñoId = 0;
+        Dueño = null;
     }
 }

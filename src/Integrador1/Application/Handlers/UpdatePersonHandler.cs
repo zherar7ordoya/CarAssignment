@@ -27,10 +27,7 @@ public class UpdatePersonHandler(
         // 2. Verificar existencia
         var existingPerson = _repository.GetById(request.Person.Id) ?? throw new DomainException("La persona no existe.");
 
-        // 3. Validación de Negocio (ej: no actualizar personas con autos)
-        existingPerson.EnsureCanBeUpdated();
-
-        // 4. Actualizar entidad
+        // 3. Actualizar entidad
         return _repository.Update(request.Person);
     }
 }
