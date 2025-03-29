@@ -126,11 +126,11 @@ partial class ViewForm
         }
     }
 
-    private void LoadData()
+    private async void LoadData()
     {
-        _personasBS.DataSource = _presenter.ListarPersonas();
-        _autosDisponiblesBS.DataSource = _presenter.ListarAutosDisponibles();
-        _autosAsignadosBS.DataSource = _presenter.ListarAutosAsignados();
+        _personasBS.DataSource = await _presenter.ListarPersonas();
+        _autosDisponiblesBS.DataSource = await _presenter.ListarAutosDisponibles();
+        _autosAsignadosBS.DataSource = await _presenter.ListarAutosAsignados();
     }
 
     private void OnAutoAsignado(Person persona, Car auto)
@@ -143,7 +143,7 @@ partial class ViewForm
         ReloadData(persona, auto, fueAsignado: false);
     }
 
-    private void ReloadData(Person persona,
+    private async void ReloadData(Person persona,
                             Car auto,
                             bool fueAsignado)
     {
@@ -154,7 +154,7 @@ partial class ViewForm
         else { _autosDisponiblesBS.Add(auto); }
 
         _autosDisponiblesBS.ResetBindings(false);
-        _autosAsignadosBS.DataSource = _presenter.ListarAutosAsignados();
+        _autosAsignadosBS.DataSource = await _presenter.ListarAutosAsignados();
 
         ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
         CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();

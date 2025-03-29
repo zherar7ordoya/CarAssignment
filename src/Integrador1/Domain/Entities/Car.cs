@@ -7,10 +7,10 @@ public class Car : BaseEntity
     // Empty constructor required by serialization
     public Car() { }
     public Car(string patente,
-                     string marca,
-                     string modelo,
-                     int año,
-                     decimal precio)
+               string marca,
+               string modelo,
+               int año,
+               decimal precio)
     {
         Patente = patente;
         Marca = marca;
@@ -19,12 +19,12 @@ public class Car : BaseEntity
         Precio = precio;
     }
 
-    // Propiedades encapsuladas
-    public string Patente { get; private set; }
-    public string Marca { get; private set; }
-    public string Modelo { get; private set; }
-    public int Año { get; private set; }
-    public decimal Precio { get; private set; }
+    // Public set for serialization, default values because of empty constructor
+    public string Patente { get; set; } = string.Empty;
+    public string Marca { get; set; } = string.Empty;
+    public string Modelo { get; set; } = string.Empty;
+    public int Año { get; set; } = 0;
+    public decimal Precio { get; set; } = 0;
 
     // Relación con Person (sin exposición de ID)
     private Person? _dueño;
