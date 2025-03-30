@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 using Integrador.Application.Assignments;
-using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Validators;
 

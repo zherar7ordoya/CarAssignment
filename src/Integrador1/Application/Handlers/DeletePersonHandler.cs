@@ -25,7 +25,10 @@ public class DeletePersonHandler(
         }
 
         // 2. Validación de Negocio: No permitir eliminar si hay autos asociados
-        request.Person.EnsureCanBeDeleted();
+        if (request.Person.HasCars())
+        {
+            throw new DomainException("No se puede eliminar una persona que tiene autos asociados");
+        }
 
         // 3. Eliminar la persona
         return _repository.Delete(request.Person);

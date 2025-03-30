@@ -4,9 +4,6 @@ using Integrador.Application.Queries;
 using Integrador.Application.Assignments;
 using Integrador.Domain.Entities;
 using Integrador.Application.DTOs;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Integrador.Shared.Exceptions;
 using Integrador.Domain.Exceptions;
 using Integrador.Domain.Interfaces;
@@ -173,29 +170,31 @@ public class ViewPresenter(IMediator mediator)
     }
 
     // --- ASIGNACIONES ---
-    public async Task AsignarAuto(Person persona, Car auto, Action onSuccess)
+    public async Task<bool> AsignarAuto(Person persona, Car auto)
     {
         try
         {
             await _mediator.Send(new AssignCarCommand(persona, auto));
-            onSuccess?.Invoke();
+            return true;
         }
         catch (DomainException ex)
         {
             new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al asignar auto.");
+            return false;
         }
     }
 
-    public async Task DesasignarAuto(Person persona, Car auto, Action onSuccess)
+    public async Task<bool> DesasignarAuto(Person persona, Car auto)
     {
         try
         {
             await _mediator.Send(new RemoveCarCommand(persona, auto));
-            onSuccess?.Invoke();
+            return true;
         }
         catch (DomainException ex)
         {
             new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al desasignar auto.");
+            return false;
         }
     }
 }

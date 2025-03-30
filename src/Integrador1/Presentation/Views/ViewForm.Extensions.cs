@@ -135,17 +135,19 @@ partial class ViewForm
 
     private void OnAutoAsignado(Person persona, Car auto)
     {
-        ReloadData(persona, auto, fueAsignado: true);
+        //ReloadData(persona, auto, fueAsignado: true);
+        LoadData();
     }
 
     private void OnAutoDesasignado(Person persona, Car auto)
     {
-        ReloadData(persona, auto, fueAsignado: false);
+        //ReloadData(persona, auto, fueAsignado: false);
+        LoadData();
     }
 
     private async void ReloadData(Person persona,
-                            Car auto,
-                            bool fueAsignado)
+                                  Car auto,
+                                  bool fueAsignado)
     {
         _autosPersonaBS.DataSource = persona.Autos;
         _autosPersonaBS.ResetBindings(false);

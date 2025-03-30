@@ -26,7 +26,10 @@ public class DeleteCarHandler(
         }
 
         // Validación de negocio
-        request.Car.EnsureCanBeDeleted();
+        if (request.Car.HasOwner())
+        {
+            throw new DomainException("No se puede eliminar un auto que tiene dueño");
+        }
 
         return _repository.Delete(request.Car);
     }

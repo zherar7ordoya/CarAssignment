@@ -7,14 +7,9 @@ using Integrador.Shared.Extensions;
 
 namespace Integrador.Application.Handlers;
 
-public class ReadAssignedCarsHandler : IRequestHandler<ReadAssignedCarsQuery, List<AssignedCarDTO>>
+public class ReadAssignedCarsHandler(IGenericRepository<Person> repository) : IRequestHandler<ReadAssignedCarsQuery, List<AssignedCarDTO>>
 {
-    private readonly IGenericRepository<Person> _repository;
-
-    public ReadAssignedCarsHandler(IGenericRepository<Person> repository)
-    {
-        _repository = repository;
-    }
+    private readonly IGenericRepository<Person> _repository = repository;
 
     public Task<List<AssignedCarDTO>> Handle(ReadAssignedCarsQuery request, CancellationToken ct)
     {

@@ -1,6 +1,4 @@
-﻿using Integrador.Domain.Exceptions;
-
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Integrador.Domain.Entities;
 
@@ -32,12 +30,7 @@ public class Car : BaseEntity
     public Person? Dueño { get; set; } = null;
 
 
-    public bool EnsureCanBeAssigned() => DueñoId == 0;
-
-    public bool EnsureCanBeDeleted()
-    {
-        return Dueño == null;
-    }
+    public bool HasOwner() => DueñoId > 0;
 
     public void AssignOwner(Person person)
     {

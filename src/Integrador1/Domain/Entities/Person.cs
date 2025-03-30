@@ -20,21 +20,26 @@ public class Person : BaseEntity
     public string Apellido { get; set; } = string.Empty;
     public List<Car> Autos { get; set; } = [];
 
-    public bool EnsureCanBeDeleted() => Autos.Count == 0;
+    public bool HasCars() => Autos.Count > 0;
 
-    public bool EnsureCarCanBeRemoved(Car car) => Autos.Contains(car);
+    public bool OwnsCar(Car car) => Autos.Contains(car);
 
     public void AssignCar(Car car)
     {
-        if (Autos.Contains(car)) return;
         Autos.Add(car);
-        car.AssignOwner(this);
     }
 
     public void RemoveCar(Car car)
     {
-        if (!Autos.Contains(car)) return;
-        Autos.Remove(car);
-        car.RemoveOwner();
+        var carToRemove = Autos.FirstOrDefault(c => c.Id == car.Id);
+
+        if (carToRemove == null)
+        {
+            throw new DomainException("El auto no pertenece a la persona.");
+        }
+        else
+        {
+            Autos.Remove(carToRemove);
+        }
     }
 }

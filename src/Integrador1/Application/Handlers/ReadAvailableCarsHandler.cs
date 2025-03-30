@@ -15,7 +15,7 @@ public class ReadAvailableCarsHandler(
     {
         // Obtiene autos sin dueño (Dueño == null en lugar de DueñoId == 0)
         var availableCars = _repository.GetAll()
-            .Where(c => c.Dueño == null) // Usa la relación de dominio
+            .Where(c => c.DueñoId == 0) // Usa la relación de dominio
             .ToList();
 
         return Task.FromResult(availableCars);

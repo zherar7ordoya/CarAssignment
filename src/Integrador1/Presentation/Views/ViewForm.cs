@@ -1,6 +1,4 @@
 using Integrador.Domain.Entities;
-using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Messaging;
 using Integrador.Presentation.Presenters;
 using Integrador.Shared.Exceptions;
 using Integrador.Shared.Extensions;
@@ -37,6 +35,7 @@ public partial class ViewForm : Form
         if (_personasBS.Current is Person persona)
         {
             _autosPersonaBS.DataSource = persona.Autos;
+            _autosPersonaBS.ResetBindings(false); // Forzar actualización
             ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
             CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
         }
@@ -69,7 +68,8 @@ public partial class ViewForm : Form
     {
         if (_personasBS.Current is Person persona && _autosDisponiblesBS.Current is Car auto)
         {
-            await _presenter.AsignarAuto(persona, auto, () => OnAutoAsignado(persona, auto));
+            bool success = await _presenter.AsignarAuto(persona, auto);
+            if (success) LoadData(); // Recargar todo
         }
     }
 
@@ -77,7 +77,8 @@ public partial class ViewForm : Form
     {
         if (_personasBS.Current is Person persona && _autosPersonaBS.Current is Car auto)
         {
-            await _presenter.DesasignarAuto(persona, auto, () => OnAutoDesasignado(persona, auto));
+            bool success = await _presenter.DesasignarAuto(persona, auto);
+            if (success) LoadData(); // Recargar todo
         }
     }
 

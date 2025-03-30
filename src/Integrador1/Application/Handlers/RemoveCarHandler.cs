@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Domain.Interfaces;
-using Integrador.Shared.Exceptions;
-using System.Threading;
-using System.Threading.Tasks;
 using Integrador.Application.Assignments;
 using Integrador.Domain.Exceptions;
 
@@ -29,7 +26,7 @@ public class RemoveCarHandler(
         }
 
         // 2. Validar relación
-        if (!existingPerson.EnsureCarCanBeRemoved(existingCar))
+        if (existingPerson.OwnsCar(existingCar))
         {
             throw new DomainException("El auto no pertenece a la persona.");
         }

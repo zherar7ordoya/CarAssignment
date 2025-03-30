@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Domain.Interfaces;
-using Integrador.Shared.Exceptions;
-using System.Threading;
-using System.Threading.Tasks;
 using Integrador.Application.Assignments;
 using Integrador.Domain.Exceptions;
 
@@ -29,7 +26,7 @@ public class AssignCarHandler(
         }
 
         // Validar regla de negocio
-        if (!existingCar.EnsureCanBeAssigned())
+        if (existingCar.HasOwner())
         {
             throw new DomainException("El auto ya tiene un dueño.");
         }
