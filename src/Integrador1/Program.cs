@@ -2,10 +2,14 @@
 using Microsoft.Extensions.Hosting;
 using MediatR;
 using FluentValidation;
-using Integrador.Application.Behaviors;
 using Integrador.Infrastructure.Persistence;
-using Integrador.Domain.Interfaces;
 using Integrador;
+using Integrador.Infrastructure.Interfaces;
+using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Messaging;
+using Integrador.Infrastructure.Exceptions;
+using Integrador.Domain.Interfaces;
+using Integrador.Domain.Entities;
 
 static class Program
 {
@@ -19,14 +23,21 @@ static class Program
                 services.AddMediatR(cfg =>
                 {
                     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-                    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+                    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(Integrador.Application.Behaviors.ValidationBehavior<,>));
                 });
 
                 // Validadores de FluentValidation
                 services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
+                // Servicios de infraestructura
+                services.AddSingleton<ILogger, Logger>();
+                services.AddSingleton<IMessenger, Messenger>();
+                services.AddSingleton<IExceptionHandler, ExceptionHandler>();
+                services.AddSingleton<ICarFactory, CarFactory>();
+                services.AddSingleton<IPersonFactory, PersonFactory>();
+
                 // Repositorios genéricos
-                services.AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+                services.AddSingleton(typeof(Integrador.Domain.Interfaces.IGenericRepository<>), typeof(GenericRepository<>));
 
                 // UI
                 services.AddTransient<ViewForm>();

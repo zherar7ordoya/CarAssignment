@@ -2,9 +2,10 @@
 using System.Xml.Serialization;
 
 using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Exceptions;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
-using Integrador.Shared.Exceptions;
 
 namespace Integrador.Infrastructure.Persistence;
 

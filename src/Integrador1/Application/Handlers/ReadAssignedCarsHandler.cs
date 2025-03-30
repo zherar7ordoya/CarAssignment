@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Integrador.Application.DTOs;
 using Integrador.Domain.Entities;
-using Integrador.Domain.Interfaces;
 using Integrador.Application.Queries;
 using Integrador.Shared.Extensions;
+using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 

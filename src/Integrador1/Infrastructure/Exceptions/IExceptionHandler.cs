@@ -1,4 +1,4 @@
-﻿namespace Integrador.Shared.Exceptions;
+﻿namespace Integrador.Infrastructure.Exceptions;
 
 public interface IExceptionHandler
 {

@@ -1,6 +1,6 @@
-﻿using Integrador.Domain.Interfaces;
+﻿using Integrador.Infrastructure.Interfaces;
 
-namespace Integrador.Shared.Exceptions;
+namespace Integrador.Infrastructure.Exceptions;
 
 public class ExceptionHandler(ILogger logger, IMessenger messenger) : IExceptionHandler
 {
@@ -8,6 +8,7 @@ public class ExceptionHandler(ILogger logger, IMessenger messenger) : IException
     private readonly IMessenger _messenger = messenger;
 
     public void Handle(Exception ex) => Handle(ex, string.Empty);
+
     public void Handle(Exception ex, string message)
     {
         _logger.LogError(ex, message);

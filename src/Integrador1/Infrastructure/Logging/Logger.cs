@@ -1,4 +1,4 @@
-﻿using Integrador.Domain.Interfaces;
+﻿using Integrador.Infrastructure.Interfaces;
 
 namespace Integrador.Infrastructure.Logging;
 

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
-using Integrador.Domain.Interfaces;
-using Integrador.Application.Assignments;
 using Integrador.Domain.Exceptions;
+using Integrador.Application.Commands;
+using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 

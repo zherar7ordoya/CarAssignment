@@ -1,4 +1,6 @@
-﻿namespace Integrador.Domain.Interfaces;
+﻿using Integrador.Domain.Interfaces;
+
+namespace Integrador.Infrastructure.Interfaces;
 
 public interface IDataSource<T> where T : IEntity
 {

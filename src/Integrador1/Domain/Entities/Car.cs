@@ -6,6 +6,7 @@ public class Car : BaseEntity
 {
     // Empty constructor required by serialization
     public Car() { }
+
     public Car(string patente,
                string marca,
                string modelo,
@@ -19,13 +20,16 @@ public class Car : BaseEntity
         Precio = precio;
     }
 
-    // Public set for serialization, default values because of empty constructor
+    // Public setters required for serialization.
+    // Default values required by empty constructor.
     public string Patente { get; set; } = string.Empty;
     public string Marca { get; set; } = string.Empty;
     public string Modelo { get; set; } = string.Empty;
     public int Año { get; set; } = 0;
     public decimal Precio { get; set; } = 0;
     public int DueñoId { get; set; } = 0;
+
+    // XmlIgnore to avoid circular reference in serialization
     [XmlIgnore]
     public Person? Dueño { get; set; } = null;
 

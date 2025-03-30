@@ -1,22 +1,18 @@
 ﻿using MediatR;
 using Integrador.Application.Commands;
 using Integrador.Application.Queries;
-using Integrador.Application.Assignments;
 using Integrador.Domain.Entities;
 using Integrador.Application.DTOs;
-using Integrador.Shared.Exceptions;
 using Integrador.Domain.Exceptions;
-using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Messaging;
-using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Exceptions;
 
 namespace Integrador.Presentation.Presenters;
 
-public class ViewPresenter(IMediator mediator)
+public class ViewPresenter(IMediator mediator,
+                           IExceptionHandler exceptionHandler)
 {
     private readonly IMediator _mediator = mediator;
-    readonly ILogger _logger = new Logger();
-    readonly IMessenger _messenger = new Messenger();
+    private readonly IExceptionHandler _exceptionHandler = exceptionHandler;
 
     // --- PERSONAS ---
     public async Task<List<Person>> ListarPersonas()
@@ -27,64 +23,38 @@ public class ViewPresenter(IMediator mediator)
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al listar personas.");
+            _exceptionHandler.Handle(ex, "Error al listar personas.");
             return [];
         }
     }
 
-    public async Task NuevoPersona(BindingSource personasBS, Button button)
+    public async Task<bool> GuardarPersona(Person persona)
     {
         try
         {
-            var nuevaPersona = new Person("12345678", "Nombre", "Apellido"); // Datos por defecto
-            personasBS.Add(nuevaPersona);
-            personasBS.MoveLast();
-            button.Enabled = false;
-        }
-        catch (Exception ex)
-        {
-            await Task.Run(() => new ExceptionHandler(_logger, _messenger).Handle(ex));
-        }
-    }
-
-    public async Task GuardarPersona(Person persona,
-                                    BindingSource personasBS,
-                                    Button nuevoPersonaButton)
-    {
-        try
-        {
-            // Crear o actualizar
             await _mediator.Send(persona.Id == 0
                 ? new CreatePersonCommand(persona)
                 : new UpdatePersonCommand(persona));
-
-            // Actualizar UI
-            personasBS.ResetBindings(false);
+            return true;
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al guardar persona.");
-        }
-        finally
-        {
-            nuevoPersonaButton.Enabled = true;
+            _exceptionHandler.Handle(ex, "Error al guardar persona.");
+            return false;
         }
     }
 
-    public async Task EliminarPersona(Person persona, BindingSource personasBS)
+    public async Task<bool> EliminarPersona(Person persona)
     {
         try
         {
             await _mediator.Send(new DeletePersonCommand(persona));
-            if (personasBS.DataSource is List<Person> lista)
-            {
-                lista.Remove(persona);
-                personasBS.ResetBindings(false);
-            }
+            return true;
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al eliminar persona.");
+            _exceptionHandler.Handle(ex, "Error al eliminar persona.");
+            return false;
         }
     }
 
@@ -97,7 +67,7 @@ public class ViewPresenter(IMediator mediator)
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al listar autos.");
+            _exceptionHandler.Handle(ex, "Error al listar autos.");
             return [];
         }
     }
@@ -110,62 +80,38 @@ public class ViewPresenter(IMediator mediator)
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al listar autos asignados.");
+            _exceptionHandler.Handle(ex, "Error al listar autos asignados.");
             return [];
         }
     }
 
-    public async Task NuevoAuto(BindingSource autosBS, Button button)
-    {
-        try
-        {
-            var nuevoAuto = new Car("AAA123", "Marca", "Modelo", 2023, 50000);
-            autosBS.Add(nuevoAuto);
-            autosBS.MoveLast();
-            button.Enabled = false;
-        }
-        catch (Exception ex)
-        {
-            await Task.Run(() => new ExceptionHandler(_logger, _messenger).Handle(ex));
-        }
-    }
-
-    public async Task GuardarAuto(Car auto,
-                                 BindingSource autosBS,
-                                 Button nuevoAutoButton)
+    public async Task<bool> GuardarAuto(Car auto)
     {
         try
         {
             await _mediator.Send(auto.Id == 0
                 ? new CreateCarCommand(auto)
                 : new UpdateCarCommand(auto));
-
-            autosBS.ResetBindings(false);
+            return true;
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al guardar auto.");
-        }
-        finally
-        {
-            nuevoAutoButton.Enabled = true;
+            _exceptionHandler.Handle(ex, "Error al guardar auto.");
+            return false;
         }
     }
 
-    public async Task EliminarAuto(Car auto, BindingSource autosBS)
+    public async Task<bool> EliminarAuto(Car auto)
     {
         try
         {
             await _mediator.Send(new DeleteCarCommand(auto));
-            if (autosBS.DataSource is List<Car> lista)
-            {
-                lista.Remove(auto);
-                autosBS.ResetBindings(false);
-            }
+            return true;
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al eliminar auto.");
+            _exceptionHandler.Handle(ex, "Error al eliminar auto.");
+            return false;
         }
     }
 
@@ -179,7 +125,7 @@ public class ViewPresenter(IMediator mediator)
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al asignar auto.");
+            _exceptionHandler.Handle(ex, "Error al asignar auto.");
             return false;
         }
     }
@@ -193,7 +139,7 @@ public class ViewPresenter(IMediator mediator)
         }
         catch (DomainException ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al desasignar auto.");
+            _exceptionHandler.Handle(ex, "Error al desasignar auto.");
             return false;
         }
     }

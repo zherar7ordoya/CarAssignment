@@ -1,27 +1,24 @@
 ﻿using Integrador.Domain.Entities;
 using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Logging;
-using Integrador.Infrastructure.Messaging;
+using Integrador.Infrastructure.Exceptions;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Presenters;
-using Integrador.Shared.Exceptions;
-using Integrador.Shared.Extensions;
-
-using MediatR;
 
 namespace Integrador;
 
 partial class ViewForm
 {
-    private readonly IMediator _mediator;
+    private readonly IMessenger _messenger;
+    private readonly ICarFactory _carFactory;
+    private readonly IPersonFactory _personFactory;
+    private readonly IExceptionHandler _exceptionHandler;
+
     private readonly ViewPresenter _presenter;
 
     private readonly BindingSource _personasBS = [];
     private readonly BindingSource _autosPersonaBS = [];
     private readonly BindingSource _autosDisponiblesBS = [];
     private readonly BindingSource _autosAsignadosBS = [];
-
-    readonly ILogger _logger = new Logger();
-    readonly IMessenger _messenger = new Messenger();
 
     //private static void ConfigurarDelegados()
     //{
@@ -38,7 +35,7 @@ partial class ViewForm
         }
         catch (Exception ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error al configurar los enlaces.");
+            _exceptionHandler.Handle(ex, "Error al configurar los enlaces.");
         }
     }
 
@@ -131,34 +128,5 @@ partial class ViewForm
         _personasBS.DataSource = await _presenter.ListarPersonas();
         _autosDisponiblesBS.DataSource = await _presenter.ListarAutosDisponibles();
         _autosAsignadosBS.DataSource = await _presenter.ListarAutosAsignados();
-    }
-
-    private void OnAutoAsignado(Person persona, Car auto)
-    {
-        //ReloadData(persona, auto, fueAsignado: true);
-        LoadData();
-    }
-
-    private void OnAutoDesasignado(Person persona, Car auto)
-    {
-        //ReloadData(persona, auto, fueAsignado: false);
-        LoadData();
-    }
-
-    private async void ReloadData(Person persona,
-                                  Car auto,
-                                  bool fueAsignado)
-    {
-        _autosPersonaBS.DataSource = persona.Autos;
-        _autosPersonaBS.ResetBindings(false);
-
-        if (fueAsignado) { _autosDisponiblesBS.Remove(auto); }
-        else { _autosDisponiblesBS.Add(auto); }
-
-        _autosDisponiblesBS.ResetBindings(false);
-        _autosAsignadosBS.DataSource = await _presenter.ListarAutosAsignados();
-
-        ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
-        CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
     }
 }

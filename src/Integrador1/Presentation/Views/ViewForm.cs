@@ -1,6 +1,7 @@
 using Integrador.Domain.Entities;
+using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Presenters;
-using Integrador.Shared.Exceptions;
 using Integrador.Shared.Extensions;
 
 using MediatR;
@@ -9,14 +10,21 @@ namespace Integrador;
 
 public partial class ViewForm : Form
 {
-    public ViewForm(IMediator mediator)
+    public ViewForm(IMediator mediator,
+                    IMessenger messenger,
+                    ICarFactory carFactory,
+                    IPersonFactory personFactory,
+                    Infrastructure.Exceptions.IExceptionHandler exceptionHandler)
     {
-        System.Windows.Forms.Application.ThreadException += (sender, e) => new ExceptionHandler(_logger, _messenger).Handle(e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += (sender, e) => new ExceptionHandler(_logger, _messenger).Handle(e.ExceptionObject as Exception ?? new Exception("Excepción al cargar el Form."));
+        System.Windows.Forms.Application.ThreadException += (sender, e) => exceptionHandler.Handle(e.Exception);
+        AppDomain.CurrentDomain.UnhandledException += (sender, e) => exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("Excepción al cargar el Form."));
 
         InitializeComponent();
-        _mediator = mediator;
-        _presenter = new ViewPresenter(mediator);
+        _messenger = messenger;
+        _carFactory = carFactory;
+        _personFactory = personFactory;
+        _exceptionHandler = exceptionHandler;
+        _presenter = new ViewPresenter(mediator, exceptionHandler);
 
         try
         {
@@ -26,7 +34,7 @@ public partial class ViewForm : Form
         }
         catch (Exception ex)
         {
-            new ExceptionHandler(_logger, _messenger).Handle(ex, "Error durante la inicialización del formulario.");
+            exceptionHandler.Handle(ex, "Error durante la inicialización del formulario.");
         }
     }
 
@@ -43,14 +51,26 @@ public partial class ViewForm : Form
 
     private async void NuevoPersonaButton_Click(object sender, EventArgs e)
     {
-        await _presenter.NuevoPersona(_personasBS, NuevoPersonaButton);
+        try
+        {
+            var nuevaPersona = _personFactory.CreateDefault(); // Datos por defecto
+            _personasBS.Add(nuevaPersona);
+            _personasBS.MoveLast();
+            NuevoPersonaButton.Enabled = false;
+        }
+        catch (Exception ex)
+        {
+            await Task.Run(() => _exceptionHandler.Handle(ex));
+        }
     }
 
     private async void GuardarPersonaButton_Click(object sender, EventArgs e)
     {
         if (_personasBS.Current is Person persona)
         {
-           await _presenter.GuardarPersona(persona, _personasBS, NuevoPersonaButton);
+            bool success = await _presenter.GuardarPersona(persona);
+            if (success) LoadData();
+            NuevoAutoButton.Enabled = true;
         }
     }
 
@@ -60,7 +80,8 @@ public partial class ViewForm : Form
 
         if (_personasBS.Current is Person persona && confirmacion)
         {
-            await _presenter.EliminarPersona(persona, _personasBS);
+            bool success = await _presenter.EliminarPersona(persona);
+            if (success) LoadData();
         }
     }
 
@@ -84,23 +105,37 @@ public partial class ViewForm : Form
 
     private async void NuevoAutoButton_Click(object sender, EventArgs e)
     {
-        await _presenter.NuevoAuto(_autosDisponiblesBS, NuevoAutoButton);
+        try
+        {
+            var nuevoAuto = _carFactory.CreateDefault(); // Datos por defecto
+            _autosDisponiblesBS.Add(nuevoAuto);
+            _autosDisponiblesBS.MoveLast();
+            NuevoAutoButton.Enabled = false;
+        }
+        catch (Exception ex)
+        {
+            await Task.Run(() => _exceptionHandler.Handle(ex));
+        }
     }
 
     private async void GuardarAutoButton_Click(object sender, EventArgs e)
     {
         if (_autosDisponiblesBS.Current is Car auto)
         {
-            await _presenter.GuardarAuto(auto, _autosDisponiblesBS, NuevoAutoButton);
+            bool success = await _presenter.GuardarAuto(auto);
+            if (success) LoadData();
+            NuevoAutoButton.Enabled = true;
         }
     }
 
     private async void EliminarAutoButton_Click(object sender, EventArgs e)
     {
         var confirmacion = _messenger.AskConfirmation("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
+
         if (_autosDisponiblesBS.Current is Car auto && confirmacion)
         {
-            await _presenter.EliminarAuto(auto, _autosDisponiblesBS);
+            bool success = await _presenter.EliminarAuto(auto);
+            if (success) LoadData();
         }
     }
 }

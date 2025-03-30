@@ -14,7 +14,9 @@ public class Person : BaseEntity
         Nombre = nombre;
         Apellido = apellido;
     }
-    // Public set for serialization, default values because of empty constructor
+
+    // Public setters required for serialization.
+    // Default values required by empty constructor.
     public string DNI { get; set; } = string.Empty;
     public string Nombre { get; set; } = string.Empty;
     public string Apellido { get; set; } = string.Empty;
