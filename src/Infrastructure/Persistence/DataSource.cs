@@ -6,8 +6,11 @@ using Integrador.Infrastructure.Interfaces;
 
 namespace Integrador.Infrastructure.Persistence;
 
-public class DataSource<T>(IExceptionHandler exceptionHandler,
-                           string dataDirectory = "Data") : IDataSource<T> where T : IEntity
+public class DataSource<T>
+(
+    IExceptionHandler exceptionHandler,
+    string dataDirectory = "Data"
+) : IDataSource<T> where T : IEntity
 {
     private readonly IExceptionHandler _exceptionHandler = exceptionHandler;
     private readonly string _filePath = Path.Combine(Environment.CurrentDirectory,
