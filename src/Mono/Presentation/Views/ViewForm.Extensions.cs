@@ -8,12 +8,12 @@ namespace Integrador;
 
 partial class ViewForm
 {
-    private readonly IMessenger _messenger;
-    private readonly ICarFactory _carFactory;
-    private readonly IPersonFactory _personFactory;
-    private readonly IExceptionHandler _exceptionHandler;
+    //private readonly IMessenger _messenger;
+    //private readonly ICarFactory _carFactory;
+    //private readonly IPersonFactory _personFactory;
+    //private readonly IExceptionHandler _exceptionHandler;
 
-    private readonly ViewPresenter _presenter;
+    //private readonly ViewPresenter _presenter;
 
     private readonly BindingSource _personasBS = [];
     private readonly BindingSource _autosPersonaBS = [];
@@ -35,7 +35,7 @@ partial class ViewForm
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, "Error al configurar los enlaces.");
+            exceptionHandler.Handle(ex, "Error al configurar los enlaces.");
         }
     }
 

@@ -1,6 +1,4 @@
-﻿using Integrador.Infrastructure.Interfaces;
-
-using Serilog;
+﻿using Serilog;
 using Serilog.Events;
 
 

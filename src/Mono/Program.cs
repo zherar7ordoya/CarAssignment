@@ -1,13 +1,10 @@
-﻿using Serilog.Sinks.SystemConsole;
-using Serilog.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatR;
 using FluentValidation;
 using Integrador.Infrastructure.Persistence;
 using Integrador;
 using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
 using Integrador.Infrastructure.Exceptions;
 using Integrador.Domain.Interfaces;

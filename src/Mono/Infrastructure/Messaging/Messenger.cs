@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-using Integrador.Infrastructure.Interfaces;
+﻿using Integrador.Infrastructure.Interfaces;
 
 namespace Integrador.Infrastructure.Messaging;
 

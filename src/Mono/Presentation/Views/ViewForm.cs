@@ -20,10 +20,10 @@ public partial class ViewForm : Form
         AppDomain.CurrentDomain.UnhandledException += (sender, e) => exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("Excepción al cargar el Form."));
 
         InitializeComponent();
-        _messenger = messenger;
-        _carFactory = carFactory;
-        _personFactory = personFactory;
-        _exceptionHandler = exceptionHandler;
+        //_messenger = messenger;
+        //_carFactory = carFactory;
+        //_personFactory = personFactory;
+        //_exceptionHandler = exceptionHandler;
         _presenter = new ViewPresenter(mediator);
 
         try
@@ -87,11 +87,25 @@ public partial class ViewForm : Form
 
     private async void AsignarAutoButton_Click(object sender, EventArgs e)
     {
-        if (_personasBS.Current is Person persona && _autosDisponiblesBS.Current is Car auto)
+        try
         {
-            bool success = await _presenter.AsignarAuto(persona, auto);
-            if (success) LoadData(); // Recargar todo
+            if (_personasBS.Current is Person persona && _autosDisponiblesBS.Current is Car auto)
+            {
+                await _presenter.AsignarAuto(persona, auto);
+                LoadData(); // Recargar todo
+                _messenger.ShowInformation("Auto asignado correctamente.", "Asignación de auto");
+            }
         }
+        catch (ApplicationException ex)
+        {
+            exceptionHandler.Handle(ex);
+        }
+        catch (Exception ex)
+        {
+            exceptionHandler.Handle(ex);
+        }
+
+        
     }
 
     private async void DesasignarAutoButton_Click(object sender, EventArgs e)
