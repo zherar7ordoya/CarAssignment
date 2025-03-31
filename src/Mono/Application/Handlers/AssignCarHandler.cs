@@ -10,15 +10,12 @@ public class AssignCarHandler
 (
     IGenericRepository<Car> carRepository,
     IGenericRepository<Person> personRepository
-) : IRequestHandler<AssignCarCommand, bool>
+) : IRequestHandler<AssignCarCommand, Unit>
 {
-    private readonly IGenericRepository<Car> _carRepository = carRepository;
-    private readonly IGenericRepository<Person> _personRepository = personRepository;
-
-    public async Task<bool> Handle(AssignCarCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(AssignCarCommand request, CancellationToken ct)
     {
-        var existingCar = await _carRepository.GetByIdAsync(request.Car.Id, ct);
-        var existingPerson = await _personRepository.GetByIdAsync(request.Person.Id, ct);
+        var existingCar = await carRepository.GetByIdAsync(request.Car.Id, ct);
+        var existingPerson = await personRepository.GetByIdAsync(request.Person.Id, ct);
 
         if (existingCar == null || existingPerson == null)
         {
@@ -33,9 +30,10 @@ public class AssignCarHandler
         existingCar.AssignOwner(existingPerson.Id);
         existingPerson.AssignCar(existingCar);
 
-        var carUpdateResult = await _carRepository.UpdateAsync(existingCar, ct);
-        var personUpdateResult = await _personRepository.UpdateAsync(existingPerson, ct);
+        await carRepository.UpdateAsync(existingCar, ct);
+        await personRepository.UpdateAsync(existingPerson, ct);
 
-        return carUpdateResult && personUpdateResult;
+        //return carUpdateResult && personUpdateResult;
+        return Unit.Value;
     }
 }
