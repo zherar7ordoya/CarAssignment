@@ -3,4 +3,4 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Commands;
 
-public record CreatePersonCommand(Person Person) : IRequest<bool>;
+public record CreatePersonCommand(Person Person) : IRequest<Unit>;

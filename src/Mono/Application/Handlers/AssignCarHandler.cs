@@ -33,7 +33,6 @@ public class AssignCarHandler
         await carRepository.UpdateAsync(existingCar, ct);
         await personRepository.UpdateAsync(existingPerson, ct);
 
-        //return carUpdateResult && personUpdateResult;
         return Unit.Value;
     }
 }

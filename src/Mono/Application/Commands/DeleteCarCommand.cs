@@ -3,4 +3,4 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Commands;
 
-public record DeleteCarCommand(Car Car) : IRequest<bool>;
+public record DeleteCarCommand(Car Car) : IRequest<Unit>;

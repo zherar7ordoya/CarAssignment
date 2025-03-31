@@ -7,16 +7,15 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class CreateCarHandler(
+public class CreateCarHandler
+(
     IGenericRepository<Car> repository,
-    IValidator<Car> validator) : IRequestHandler<CreateCarCommand, bool>
+    IValidator<Car> validator
+) : IRequestHandler<CreateCarCommand, Unit>
 {
-    private readonly IGenericRepository<Car> _repository = repository;
-    private readonly IValidator<Car> _validator = validator;
-
-    public async Task<bool> Handle(CreateCarCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(CreateCarCommand request, CancellationToken ct)
     {
-        var validationResult = await _validator.ValidateAsync(request.Car, ct);
+        var validationResult = await validator.ValidateAsync(request.Car, ct);
 
         if (!validationResult.IsValid)
         {
@@ -24,6 +23,8 @@ public class CreateCarHandler(
             throw new DomainException(errors);
         }
 
-        return await _repository.CreateAsync(request.Car, ct);
+        await repository.CreateAsync(request.Car, ct);
+
+        return Unit.Value;
     }
 }

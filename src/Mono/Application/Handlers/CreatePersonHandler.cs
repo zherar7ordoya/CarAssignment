@@ -7,17 +7,16 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class CreatePersonHandler(
+public class CreatePersonHandler
+(
     IGenericRepository<Person> repository,
-    IValidator<Person> validator) : IRequestHandler<CreatePersonCommand, bool>
+    IValidator<Person> validator
+) : IRequestHandler<CreatePersonCommand, Unit>
 {
-    private readonly IGenericRepository<Person> _repository = repository;
-    private readonly IValidator<Person> _validator = validator;
-
-    public async Task<bool> Handle(CreatePersonCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(CreatePersonCommand request, CancellationToken ct)
     {
         // Validación asíncrona
-        var validationResult = await _validator.ValidateAsync(request.Person, ct);
+        var validationResult = await validator.ValidateAsync(request.Person, ct);
 
         if (!validationResult.IsValid)
         {
@@ -26,6 +25,8 @@ public class CreatePersonHandler(
         }
 
         // Crear persona (retorna booleano)
-        return await _repository.CreateAsync(request.Person, ct);
+        await repository.CreateAsync(request.Person, ct);
+
+        return Unit.Value;
     }
 }

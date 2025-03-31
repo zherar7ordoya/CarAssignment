@@ -6,19 +6,17 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class RemoveCarHandler(
+public class RemoveCarHandler
+(
     IGenericRepository<Car> carRepository,
-    IGenericRepository<Person> personRepository)
-    : IRequestHandler<RemoveCarCommand, bool>
+    IGenericRepository<Person> personRepository
+) : IRequestHandler<RemoveCarCommand, Unit>
 {
-    private readonly IGenericRepository<Car> _carRepository = carRepository;
-    private readonly IGenericRepository<Person> _personRepository = personRepository;
-
-    public async Task<bool> Handle(RemoveCarCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(RemoveCarCommand request, CancellationToken ct)
     {
         // 1. Validar existencia
-        var existingCar = await _carRepository.GetByIdAsync(request.Car.Id, ct);
-        var existingPerson = await _personRepository.GetByIdAsync(request.Person.Id, ct);
+        var existingCar = await carRepository.GetByIdAsync(request.Car.Id, ct);
+        var existingPerson = await personRepository.GetByIdAsync(request.Person.Id, ct);
 
         if (existingCar == null || existingPerson == null)
         {
@@ -36,9 +34,9 @@ public class RemoveCarHandler(
         existingCar.RemoveOwner();
 
         // 4. Persistencia
-        bool carUpdated = await _carRepository.UpdateAsync(existingCar, ct);
-        bool personUpdated = await _personRepository.UpdateAsync(existingPerson, ct);
+        await carRepository.UpdateAsync(existingCar, ct);
+        await personRepository.UpdateAsync(existingPerson, ct);
 
-        return carUpdated && personUpdated;
+        return Unit.Value;
     }
 }

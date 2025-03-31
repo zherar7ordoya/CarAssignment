@@ -7,17 +7,16 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class DeletePersonHandler(
+public class DeletePersonHandler
+(
     IGenericRepository<Person> repository,
-    IValidator<Person> validator) : IRequestHandler<DeletePersonCommand, bool>
+    IValidator<Person> validator
+) : IRequestHandler<DeletePersonCommand, Unit>
 {
-    private readonly IGenericRepository<Person> _repository = repository;
-    private readonly IValidator<Person> _validator = validator; // Inyectamos el validador
-
-    public async Task<bool> Handle(DeletePersonCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(DeletePersonCommand request, CancellationToken ct)
     {
         // 1. Validación Técnica con FluentValidation
-        var validationResult = await _validator.ValidateAsync(request.Person, ct);
+        var validationResult = await validator.ValidateAsync(request.Person, ct);
         if (!validationResult.IsValid)
         {
             var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
@@ -31,6 +30,8 @@ public class DeletePersonHandler(
         }
 
         // 3. Eliminar la persona
-        return await _repository.DeleteAsync(request.Person, ct);
+        await repository.DeleteAsync(request.Person, ct);
+
+        return Unit.Value;
     }
 }

@@ -7,17 +7,16 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class UpdatePersonHandler(
+public class UpdatePersonHandler
+(
     IGenericRepository<Person> repository,
-    IValidator<Person> validator) : IRequestHandler<UpdatePersonCommand, bool>
+    IValidator<Person> validator
+) : IRequestHandler<UpdatePersonCommand, Unit>
 {
-    private readonly IGenericRepository<Person> _repository = repository;
-    private readonly IValidator<Person> _validator = validator;
-
-    public async Task<bool> Handle(UpdatePersonCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(UpdatePersonCommand request, CancellationToken ct)
     {
         // 1. Validación Técnica (FluentValidation)
-        var validationResult = await _validator.ValidateAsync(request.Person, ct);
+        var validationResult = await validator.ValidateAsync(request.Person, ct);
 
         if (!validationResult.IsValid)
         {
@@ -25,9 +24,11 @@ public class UpdatePersonHandler(
         }
 
         // 2. Verificar existencia
-        var existingPerson = _repository.GetByIdAsync(request.Person.Id, ct) ?? throw new DomainException("La persona no existe.");
+        var existingPerson = repository.GetByIdAsync(request.Person.Id, ct) ?? throw new DomainException("La persona no existe.");
 
         // 3. Actualizar entidad
-        return await _repository.UpdateAsync(request.Person, ct);
+        await repository.UpdateAsync(request.Person, ct);
+
+        return Unit.Value;
     }
 }

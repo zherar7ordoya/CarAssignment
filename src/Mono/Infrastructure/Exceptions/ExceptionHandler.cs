@@ -1,4 +1,5 @@
-﻿using Integrador.Infrastructure.Interfaces;
+﻿using Integrador.Domain.Exceptions;
+using Integrador.Infrastructure.Interfaces;
 
 using Serilog;
 
@@ -8,11 +9,23 @@ public class ExceptionHandler(IMessenger messenger) : IExceptionHandler
 {
     private readonly Serilog.ILogger _logger = Log.ForContext<ExceptionHandler>();
 
-    public void Handle(Exception ex) => Handle(ex, string.Empty);
+    public void Handle(Exception ex) => Handle(ex, "Ocurrió un error inesperado.");
 
-    public void Handle(Exception ex, string message)
+    public void Handle(Exception ex, string defaultMessage)
     {
-        _logger.Error(ex, message);
-        messenger.ShowError(ex, message);
+        // Loguea con contexto estructurado
+        _logger.Error(ex, "Error capturado: {Message}", defaultMessage);
+
+        // Muestra mensaje al usuario según tipo de excepción
+        switch (ex)
+        {
+            case DomainException domainEx:
+                var errors = string.Join("\n- ", domainEx.Errors);
+                messenger.ShowError(ex, $"Errores de negocio:\n- {errors}");
+                break;
+            default:
+                messenger.ShowError(ex, $"{defaultMessage}\nConsulte el log para más detalles.");
+                break;
+        }
     }
 }

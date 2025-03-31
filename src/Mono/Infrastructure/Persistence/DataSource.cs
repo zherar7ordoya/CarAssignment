@@ -12,7 +12,6 @@ public class DataSource<T>
     string dataDirectory = "Data"
 ) : IDataSource<T> where T : IEntity
 {
-    private readonly IExceptionHandler _exceptionHandler = exceptionHandler;
     private readonly string _filePath = Path.Combine(Environment.CurrentDirectory,
                                                      dataDirectory,
                                                      $"{typeof(T).Name}.xml");
@@ -40,7 +39,7 @@ public class DataSource<T>
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, $"Error leyendo {_filePath}");
+            exceptionHandler.Handle(ex, $"Error leyendo {_filePath}");
             return [];
         }
     }
@@ -62,7 +61,7 @@ public class DataSource<T>
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, $"Error escribiendo {_filePath}");
+            exceptionHandler.Handle(ex, $"Error escribiendo {_filePath}");
             return false;
         }
     }
@@ -84,7 +83,7 @@ public class DataSource<T>
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, $"Error creando {_filePath}");
+            exceptionHandler.Handle(ex, $"Error creando {_filePath}");
         }
     }
 }

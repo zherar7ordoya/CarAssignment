@@ -76,7 +76,7 @@ public partial class ViewForm : Form
 
     private async void EliminarPersonaButton_Click(object sender, EventArgs e)
     {
-        var confirmacion = _messenger.AskConfirmation("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
+        var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
 
         if (_personasBS.Current is Person persona && confirmacion)
         {
@@ -130,7 +130,7 @@ public partial class ViewForm : Form
 
     private async void EliminarAutoButton_Click(object sender, EventArgs e)
     {
-        var confirmacion = _messenger.AskConfirmation("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
+        var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
 
         if (_autosDisponiblesBS.Current is Car auto && confirmacion)
         {

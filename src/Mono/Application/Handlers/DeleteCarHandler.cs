@@ -7,17 +7,16 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class DeleteCarHandler(
+public class DeleteCarHandler
+(
     IGenericRepository<Car> repository,
-    IValidator<Car> validator) : IRequestHandler<DeleteCarCommand, bool>
+    IValidator<Car> validator
+) : IRequestHandler<DeleteCarCommand, Unit>
 {
-    private readonly IGenericRepository<Car> _repository = repository;
-    private readonly IValidator<Car> _validator = validator;
-
-    public async Task<bool> Handle(DeleteCarCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(DeleteCarCommand request, CancellationToken ct)
     {
         // Validación técnica con FluentValidation
-        var validationResult = await _validator.ValidateAsync(request.Car, ct);
+        var validationResult = await validator.ValidateAsync(request.Car, ct);
 
         if (!validationResult.IsValid)
         {
@@ -31,6 +30,8 @@ public class DeleteCarHandler(
             throw new DomainException("No se puede eliminar un auto que tiene dueño");
         }
 
-        return await _repository.DeleteAsync(request.Car, ct);
+        await repository.DeleteAsync(request.Car, ct);
+
+        return Unit.Value;
     }
 }

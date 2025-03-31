@@ -7,15 +7,13 @@ using Integrador.Domain.Interfaces;
 namespace Integrador.Application.Handlers;
 
 public class ReadPersonsHandler(IGenericRepository<Person> repository)
-    : IRequestHandler<ReadPersonsQuery, List<Person>>
+           : IRequestHandler<ReadPersonsQuery, List<Person>>
 {
-    private readonly IGenericRepository<Person> _repository = repository;
-
     public async Task<List<Person>> Handle(ReadPersonsQuery request, CancellationToken ct)
     {
         try
         {
-            var persons = await _repository.GetAllAsync(ct);
+            var persons = await repository.GetAllAsync(ct);
             return persons;
         }
         catch (Exception ex)

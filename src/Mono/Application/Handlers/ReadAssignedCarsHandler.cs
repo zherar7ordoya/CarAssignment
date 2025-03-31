@@ -8,13 +8,11 @@ using Integrador.Domain.Interfaces;
 namespace Integrador.Application.Handlers;
 
 public class ReadAssignedCarsHandler(IGenericRepository<Person> repository)
-    : IRequestHandler<ReadAssignedCarsQuery, List<AssignedCarDTO>>
+           : IRequestHandler<ReadAssignedCarsQuery, List<AssignedCarDTO>>
 {
-    private readonly IGenericRepository<Person> _repository = repository;
-
     public async Task<List<AssignedCarDTO>> Handle(ReadAssignedCarsQuery request, CancellationToken ct)
     {
-        var personas = await _repository.GetAllAsync(ct);
+        var personas = await repository.GetAllAsync(ct);
         var autosAsignados = personas
             .SelectMany(persona => persona.GetListaAutos()
                 .Select(auto => new AssignedCarDTO(

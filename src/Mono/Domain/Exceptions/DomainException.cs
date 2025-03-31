@@ -2,22 +2,27 @@
 
 public class DomainException : Exception
 {
-    public List<string> Errors { get; }
+    public IReadOnlyList<string> Errors { get; }
 
-    public DomainException(string message) : base(message)
+    // Constructor para un solo error
+    public DomainException(string error) : base(error)
     {
-        Errors = [message];
+        Errors = [error];
     }
 
-    public DomainException(List<string> errors)
+    // Constructor para múltiples errores
+    public DomainException(IEnumerable<string> errors) : base("Errores de dominio")
     {
-        Errors = errors;
+        Errors = errors.ToList().AsReadOnly();
     }
 
+    // Constructor para errores con excepción interna
     public DomainException(string message, Exception innerException) : base(message, innerException)
     {
         Errors = [message];
     }
 
-    public override string Message => $"Errores de dominio: {string.Join(", ", Errors)}";
+    // Sobrescribe Message para incluir todos los errores
+    public override string Message =>
+        Errors.Any() ? $"Errores de dominio: {string.Join(", ", Errors)}" : base.Message;
 }

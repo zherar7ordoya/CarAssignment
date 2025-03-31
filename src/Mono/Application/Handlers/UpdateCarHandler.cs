@@ -7,17 +7,16 @@ using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class UpdateCarHandler(
+public class UpdateCarHandler
+(
     IGenericRepository<Car> repository,
-    IValidator<Car> validator) : IRequestHandler<UpdateCarCommand, bool>
+    IValidator<Car> validator
+) : IRequestHandler<UpdateCarCommand, Unit>
 {
-    private readonly IGenericRepository<Car> _repository = repository;
-    private readonly IValidator<Car> _validator = validator;
-
-    public async Task<bool> Handle(UpdateCarCommand request, CancellationToken ct)
+    public async Task<Unit> Handle(UpdateCarCommand request, CancellationToken ct)
     {
         // 1. Validación Técnica (formato de patente, año, etc.)
-        var validationResult = await _validator.ValidateAsync(request.Car, ct);
+        var validationResult = await validator.ValidateAsync(request.Car, ct);
 
         if (!validationResult.IsValid)
         {
@@ -26,9 +25,11 @@ public class UpdateCarHandler(
         }
 
         // 2. Validación de Negocio (ej: verificar si el auto existe)
-        var existingCar = _repository.GetByIdAsync(request.Car.Id, ct) ?? throw new DomainException("El auto no existe.");
+        var existingCar = repository.GetByIdAsync(request.Car.Id, ct) ?? throw new DomainException("El auto no existe.");
 
         // 3. Actualizar entidad
-        return await _repository.UpdateAsync(request.Car, ct);
+        await repository.UpdateAsync(request.Car, ct);
+
+        return Unit.Value;
     }
 }
