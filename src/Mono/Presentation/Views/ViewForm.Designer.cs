@@ -43,7 +43,7 @@ partial class ViewForm
         AutosPersonaDGV = new DataGridView();
         EliminarPersonaButton = new Button();
         GuardarPersonaButton = new Button();
-        NuevoPersonaButton = new Button();
+        NewPersonButton = new Button();
         PersonasDGV = new DataGridView();
         label1 = new Label();
         panel2 = new Panel();
@@ -61,7 +61,7 @@ partial class ViewForm
         label10 = new Label();
         EliminarAutoButton = new Button();
         GuardarAutoButton = new Button();
-        NuevoAutoButton = new Button();
+        NewCarButton = new Button();
         AutosDisponiblesDGV = new DataGridView();
         label12 = new Label();
         AsignarAutoButton = new Button();
@@ -94,7 +94,7 @@ partial class ViewForm
         panel1.Controls.Add(AutosPersonaDGV);
         panel1.Controls.Add(EliminarPersonaButton);
         panel1.Controls.Add(GuardarPersonaButton);
-        panel1.Controls.Add(NuevoPersonaButton);
+        panel1.Controls.Add(NewPersonButton);
         panel1.Controls.Add(PersonasDGV);
         panel1.Controls.Add(label1);
         panel1.Location = new Point(12, 12);
@@ -234,15 +234,15 @@ partial class ViewForm
         // 
         // NuevoPersonaButton
         // 
-        NuevoPersonaButton.AutoSize = true;
-        NuevoPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        NuevoPersonaButton.Location = new Point(313, 445);
-        NuevoPersonaButton.Name = "NuevoPersonaButton";
-        NuevoPersonaButton.Size = new Size(59, 28);
-        NuevoPersonaButton.TabIndex = 2;
-        NuevoPersonaButton.Text = "Nuevo";
-        NuevoPersonaButton.UseVisualStyleBackColor = true;
-        NuevoPersonaButton.Click += NuevoPersonaButton_Click;
+        NewPersonButton.AutoSize = true;
+        NewPersonButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        NewPersonButton.Location = new Point(313, 445);
+        NewPersonButton.Name = "NuevoPersonaButton";
+        NewPersonButton.Size = new Size(59, 28);
+        NewPersonButton.TabIndex = 2;
+        NewPersonButton.Text = "Nuevo";
+        NewPersonButton.UseVisualStyleBackColor = true;
+        NewPersonButton.Click += NuevoPersonaButton_Click;
         // 
         // PersonasDGV
         // 
@@ -286,7 +286,7 @@ partial class ViewForm
         panel2.Controls.Add(label10);
         panel2.Controls.Add(EliminarAutoButton);
         panel2.Controls.Add(GuardarAutoButton);
-        panel2.Controls.Add(NuevoAutoButton);
+        panel2.Controls.Add(NewCarButton);
         panel2.Controls.Add(AutosDisponiblesDGV);
         panel2.Controls.Add(label12);
         panel2.Location = new Point(709, 12);
@@ -418,15 +418,15 @@ partial class ViewForm
         // 
         // NuevoAutoButton
         // 
-        NuevoAutoButton.AutoSize = true;
-        NuevoAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        NuevoAutoButton.Location = new Point(305, 445);
-        NuevoAutoButton.Name = "NuevoAutoButton";
-        NuevoAutoButton.Size = new Size(59, 28);
-        NuevoAutoButton.TabIndex = 2;
-        NuevoAutoButton.Text = "Nuevo";
-        NuevoAutoButton.UseVisualStyleBackColor = true;
-        NuevoAutoButton.Click += NuevoAutoButton_Click;
+        NewCarButton.AutoSize = true;
+        NewCarButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        NewCarButton.Location = new Point(305, 445);
+        NewCarButton.Name = "NuevoAutoButton";
+        NewCarButton.Size = new Size(59, 28);
+        NewCarButton.TabIndex = 2;
+        NewCarButton.Text = "Nuevo";
+        NewCarButton.UseVisualStyleBackColor = true;
+        NewCarButton.Click += NuevoAutoButton_Click;
         // 
         // AutosDisponiblesDGV
         // 
@@ -534,7 +534,7 @@ partial class ViewForm
     internal DataGridView PersonasDGV;
     internal Button EliminarPersonaButton;
     internal Button GuardarPersonaButton;
-    internal Button NuevoPersonaButton;
+    internal Button NewPersonButton;
     internal DataGridView AutosPersonaDGV;
     internal Label ValorTotalAutosLabel;
     internal Label label6;
@@ -556,7 +556,7 @@ partial class ViewForm
     internal Label label10;
     internal Button EliminarAutoButton;
     internal Button GuardarAutoButton;
-    internal Button NuevoAutoButton;
+    internal Button NewCarButton;
     internal DataGridView AutosDisponiblesDGV;
     internal Label label12;
     internal Label label11;

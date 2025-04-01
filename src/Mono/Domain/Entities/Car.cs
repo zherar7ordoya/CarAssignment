@@ -1,6 +1,8 @@
-﻿namespace Integrador.Domain.Entities;
+﻿using Integrador.Shared.Interfaces;
 
-public class Car : BaseEntity
+namespace Integrador.Domain.Entities;
+
+public class Car : BaseEntity, ICar
 {
     // Empty constructor required by serialization
     public Car() { }

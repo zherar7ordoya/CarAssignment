@@ -1,8 +1,9 @@
 ﻿using Integrador.Domain.Exceptions;
+using Integrador.Shared.Interfaces;
 
 namespace Integrador.Domain.Entities;
 
-public class Person : BaseEntity
+public class Person : BaseEntity, IPerson
 {
     // Empty constructor required by serialization.
     public Person() { }
@@ -48,4 +49,12 @@ public class Person : BaseEntity
             Autos.Remove(carToRemove);
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    public List<Car> GetListaAutos() => Autos;
+    public int GetCantidadAutos() => Autos.Count;
+    public decimal GetValorAutos() => Autos.Sum(auto => auto.Precio);
+    public string GetApellidoNombre() => $"{Apellido}, {Nombre}";
+    public string GetDNI() => DNI;
 }

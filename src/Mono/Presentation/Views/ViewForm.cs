@@ -1,7 +1,5 @@
-//using Integrador.Domain.Entities;
 using Integrador.Presentation.Presenters;
 using Integrador.Shared.Exceptions;
-using Integrador.Shared.Extensions;
 using Integrador.Shared.Interfaces;
 
 using MediatR;
@@ -49,10 +47,10 @@ public partial class ViewForm : Form
 
     private readonly ViewPresenter _presenter;
 
-    //private readonly BindingSource _personasBS = [];
-    //private readonly BindingSource _autosPersonaBS = [];
-    //private readonly BindingSource _autosDisponiblesBS = [];
-    //private readonly BindingSource _autosAsignadosBS = [];
+    private readonly BindingSource _personasBS = [];
+    private readonly BindingSource _autosPersonaBS = [];
+    private readonly BindingSource _autosDisponiblesBS = [];
+    private readonly BindingSource _autosAsignadosBS = [];
 
     ////////////////////////////////////////////////////////////////////////////
 
@@ -60,12 +58,12 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_personasBS.Current is person)
+            if (_personasBS.Current is IPerson person)
             {
-                _autosPersonaBS.DataSource = persona.Autos;
+                _autosPersonaBS.DataSource = person.Autos;
                 _autosPersonaBS.ResetBindings(false); // Forzar actualización
-                ValorTotalAutosLabel.Text = persona.GetValorAutos().ToString("C");
-                CantidadAutosTextBox.Text = persona.GetCantidadAutos().ToString();
+                ValorTotalAutosLabel.Text = person.GetValorAutos().ToString("C");
+                CantidadAutosTextBox.Text = person.GetCantidadAutos().ToString();
             }
         }
         catch (Exception ex)
@@ -78,10 +76,10 @@ public partial class ViewForm : Form
     {
         try
         {
-            var nuevaPersona = _personFactory.CreateDefault(); // Datos por defecto
-            _personasBS.Add(nuevaPersona);
+            var newPerson = _personFactory.CreateDefault();
+            _personasBS.Add(newPerson);
             _personasBS.MoveLast();
-            NuevoPersonaButton.Enabled = false;
+            NewPersonButton.Enabled = false;
         }
         catch (Exception ex)
         {
@@ -93,11 +91,11 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_personasBS.Current is Person persona)
+            if (_personasBS.Current is IPerson person)
             {
-                _presenter.GuardarPersona(persona);
+                _presenter.GuardarPersona(person);
                 LoadData();
-                NuevoAutoButton.Enabled = true;
+                NewCarButton.Enabled = true;
             }
         }
         catch (Exception ex)
@@ -165,7 +163,7 @@ public partial class ViewForm : Form
             var nuevoAuto = _carFactory.CreateDefault(); // Datos por defecto
             _autosDisponiblesBS.Add(nuevoAuto);
             _autosDisponiblesBS.MoveLast();
-            NuevoAutoButton.Enabled = false;
+            NewCarButton.Enabled = false;
         }
         catch (Exception ex)
         {
@@ -181,7 +179,7 @@ public partial class ViewForm : Form
             {
                 _presenter.GuardarAuto(auto);
                 LoadData();
-                NuevoAutoButton.Enabled = true;
+                NewCarButton.Enabled = true;
             }
         }
         catch (Exception ex)

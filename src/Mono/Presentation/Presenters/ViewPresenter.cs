@@ -3,6 +3,7 @@ using Integrador.Application.Commands;
 using Integrador.Application.Queries;
 using Integrador.Domain.Entities;
 using Integrador.Application.DTOs;
+using Integrador.Shared.Interfaces;
 
 namespace Integrador.Presentation.Presenters;
 
@@ -15,7 +16,7 @@ public class ViewPresenter(IMediator mediator)
         return await mediator.Send(new ReadPersonsQuery());
     }
 
-    public void GuardarPersona(Person persona)
+    public void GuardarPersona(IPerson persona)
     {
         if (persona.Id == 0) mediator.Send(new CreatePersonCommand(persona));
         else mediator.Send(new UpdatePersonCommand(persona));

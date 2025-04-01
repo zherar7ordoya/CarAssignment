@@ -2,7 +2,6 @@
 using Integrador.Application.DTOs;
 using Integrador.Domain.Entities;
 using Integrador.Application.Queries;
-using Integrador.Shared.Extensions;
 using Integrador.Domain.Interfaces;
 
 namespace Integrador.Application.Handlers;
