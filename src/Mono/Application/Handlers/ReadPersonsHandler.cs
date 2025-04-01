@@ -2,7 +2,7 @@
 using Integrador.Domain.Entities;
 using Integrador.Application.Queries;
 using Integrador.Domain.Exceptions;
-using Integrador.Domain.Interfaces;
+using Integrador.Application.Interfaces;
 
 namespace Integrador.Application.Handlers;
 

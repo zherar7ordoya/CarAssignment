@@ -1,6 +1,6 @@
+using Integrador.Application.Interfaces;
+using Integrador.Presentation.Exceptions;
 using Integrador.Presentation.Presenters;
-using Integrador.Shared.Exceptions;
-using Integrador.Shared.Interfaces;
 
 using MediatR;
 
@@ -76,8 +76,8 @@ public partial class ViewForm : Form
     {
         try
         {
-            var newPerson = _personFactory.CreateDefault();
-            _personasBS.Add(newPerson);
+            IPerson person = _personFactory.CreateDefault();
+            _personasBS.Add(person);
             _personasBS.MoveLast();
             NewPersonButton.Enabled = false;
         }
@@ -93,7 +93,7 @@ public partial class ViewForm : Form
         {
             if (_personasBS.Current is IPerson person)
             {
-                _presenter.GuardarPersona(person);
+                _presenter.SavePerson(person);
                 LoadData();
                 NewCarButton.Enabled = true;
             }
@@ -110,9 +110,9 @@ public partial class ViewForm : Form
         {
             var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
 
-            if (_personasBS.Current is Person persona && confirmacion)
+            if (_personasBS.Current is IPerson persona && confirmacion)
             {
-                _presenter.EliminarPersona(persona);
+                _presenter.DeletePerson(persona);
                 LoadData();
             }
         }
@@ -301,8 +301,8 @@ public partial class ViewForm : Form
 
     private void LoadData()
     {
-        _personasBS.DataSource = _presenter.ListarPersonas();
-        _autosDisponiblesBS.DataSource = _presenter.ListarAutosDisponibles();
-        _autosAsignadosBS.DataSource = _presenter.ListarAutosAsignados();
+        _personasBS.DataSource = _presenter.ReadPersons();
+        _autosDisponiblesBS.DataSource = _presenter.ReadAvailableCars();
+        _autosAsignadosBS.DataSource = _presenter.ReadAssignedCars();
     }
 }

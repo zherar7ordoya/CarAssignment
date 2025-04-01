@@ -2,7 +2,7 @@
 
 using Integrador.Domain.Interfaces;
 using Integrador.Infrastructure.Interfaces;
-using Integrador.Shared.Exceptions;
+using Integrador.Presentation.Exceptions;
 
 namespace Integrador.Infrastructure.Persistence;
 

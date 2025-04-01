@@ -3,7 +3,7 @@ using Integrador.Domain.Entities;
 using Integrador.Application.Commands;
 using Integrador.Domain.Exceptions;
 using FluentValidation;
-using Integrador.Domain.Interfaces;
+using Integrador.Application.Interfaces;
 
 namespace Integrador.Application.Handlers;
 

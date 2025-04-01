@@ -1,9 +1,9 @@
-﻿using Integrador.Domain.Exceptions;
-using Integrador.Shared.Interfaces;
+﻿using Integrador.Application.Interfaces;
+using Integrador.Domain.Exceptions;
 
 using Serilog;
 
-namespace Integrador.Shared.Exceptions;
+namespace Integrador.Presentation.Exceptions;
 
 public class ExceptionHandler(IMessenger messenger) : IExceptionHandler
 {

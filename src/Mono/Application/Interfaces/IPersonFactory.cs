@@ -1,6 +1,6 @@
 ﻿using Integrador.Domain.Entities;
 
-namespace Integrador.Shared.Interfaces;
+namespace Integrador.Application.Interfaces;
 
 public interface IPersonFactory
 {

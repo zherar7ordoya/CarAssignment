@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Integrador.Application.Commands;
 using Integrador.Application.Queries;
-using Integrador.Domain.Entities;
 using Integrador.Application.DTOs;
-using Integrador.Shared.Interfaces;
+using Integrador.Application.Interfaces;
 
 namespace Integrador.Presentation.Presenters;
 
@@ -11,40 +10,40 @@ public class ViewPresenter(IMediator mediator)
 {
 
     // --- PERSONAS ---
-    public async Task<List<Person>> ListarPersonas()
+    public async Task<List<IPerson>> ReadPersons()
     {
         return await mediator.Send(new ReadPersonsQuery());
     }
 
-    public void GuardarPersona(IPerson persona)
+    public void SavePerson(IPerson person)
     {
-        if (persona.Id == 0) mediator.Send(new CreatePersonCommand(persona));
-        else mediator.Send(new UpdatePersonCommand(persona));
+        if (person.Id == 0) mediator.Send(new CreatePersonCommand(person));
+        else mediator.Send(new UpdatePersonCommand(person));
     }
 
-    public void EliminarPersona(Person persona) => mediator.Send(new DeletePersonCommand(persona));
+    public void DeletePerson(IPerson person) => mediator.Send(new DeletePersonCommand(person));
 
     // --- AUTOS ---
-    public async Task<List<Car>> ListarAutosDisponibles()
+    public async Task<List<ICar>> ReadAvailableCars()
     {
         return await mediator.Send(new ReadAvailableCarsQuery());
     }
 
-    public async Task<List<AssignedCarDTO>> ListarAutosAsignados()
+    public async Task<List<AssignedCarDTO>> ReadAssignedCars()
     {
         return await mediator.Send(new ReadAssignedCarsQuery());
     }
 
-    public void GuardarAuto(Car auto)
+    public void SaveCar(ICar car)
     {
-        if (auto.Id == 0) mediator.Send(new CreateCarCommand(auto));
-        else mediator.Send(new UpdateCarCommand(auto));
+        if (car.Id == 0) mediator.Send(new CreateCarCommand(car));
+        else mediator.Send(new UpdateCarCommand(car));
     }
 
-    public void EliminarAuto(Car auto) => mediator.Send(new DeleteCarCommand(auto));
+    public void DeleteCar(ICar car) => mediator.Send(new DeleteCarCommand(car));
 
     // --- ASIGNACIONES ---
-    public void AsignarAuto(Person persona, Car auto) => mediator.Send(new AssignCarCommand(persona, auto));
+    public void AssignCar(IPerson person, ICar car) => mediator.Send(new AssignCarCommand(person, car));
 
-    public void DesasignarAuto(Person persona, Car auto) => mediator.Send(new RemoveCarCommand(persona, auto));
+    public void RemoveCar(IPerson person, ICar car) => mediator.Send(new RemoveCarCommand(person, car));
 }

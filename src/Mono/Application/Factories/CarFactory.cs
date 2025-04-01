@@ -1,6 +1,7 @@
-﻿using Integrador.Shared.Interfaces;
+﻿using Integrador.Application.Interfaces;
+using Integrador.Domain.Entities;
 
-namespace Integrador.Domain.Entities;
+namespace Integrador.Application.Factories;
 
 public class CarFactory : ICarFactory
 {

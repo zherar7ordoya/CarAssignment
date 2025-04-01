@@ -6,11 +6,10 @@ using Integrador.Infrastructure.Persistence;
 using Integrador;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Messaging;
-using Integrador.Domain.Interfaces;
-using Integrador.Domain.Entities;
 using Serilog;
-using Integrador.Shared.Exceptions;
-using Integrador.Shared.Interfaces;
+using Integrador.Application.Interfaces;
+using Integrador.Presentation.Exceptions;
+using Integrador.Application.Factories;
 
 static class Program
 {

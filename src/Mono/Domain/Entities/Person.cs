@@ -1,5 +1,5 @@
-﻿using Integrador.Domain.Exceptions;
-using Integrador.Shared.Interfaces;
+﻿using Integrador.Application.Interfaces;
+using Integrador.Domain.Exceptions;
 
 namespace Integrador.Domain.Entities;
 
