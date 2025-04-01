@@ -2,6 +2,7 @@
 using Integrador.Domain.Entities;
 using FluentValidation;
 using Integrador.Application.Commands;
+using Integrador.Application.DTOs;
 using Integrador.Domain.Exceptions;
 using Integrador.Application.Interfaces;
 
@@ -15,20 +16,30 @@ public class UpdateCarHandler
 {
     public async Task<Unit> Handle(UpdateCarCommand request, CancellationToken ct)
     {
-        // 1. Validación Técnica (formato de patente, año, etc.)
-        var validationResult = await validator.ValidateAsync(request.Car, ct);
+        // Convertir el DTO en la entidad correspondiente
+        var carEntity = new Car(
+            request.CarDTO.Patente,
+            request.CarDTO.Marca,
+            request.CarDTO.Modelo,
+            request.CarDTO.Año,
+            request.CarDTO.Precio
+        )
+        { Id = request.CarDTO.Id }; // Asignamos el ID
 
-        if (!validationResult.IsValid)
+        // 1. Validación Técnica (formato de patente, año, etc.)
+        var validation = await validator.ValidateAsync(carEntity, ct);
+
+        if (!validation.IsValid)
         {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-            throw new DomainException(errors);
+            var errors = string.Join("", validation.Errors.Select(e => e.ErrorMessage).ToList());
+            throw new ApplicationException(errors);
         }
 
         // 2. Validación de Negocio (ej: verificar si el auto existe)
-        var existingCar = repository.GetByIdAsync(request.Car.Id, ct) ?? throw new DomainException("El auto no existe.");
+        var existingCar = await repository.GetByIdAsync(carEntity.Id, ct) ?? throw new ApplicationException("El auto no existe.");
 
         // 3. Actualizar entidad
-        await repository.UpdateAsync(request.Car, ct);
+        await repository.UpdateAsync(carEntity, ct);
 
         return Unit.Value;
     }

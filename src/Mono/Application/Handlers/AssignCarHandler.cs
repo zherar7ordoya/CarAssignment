@@ -1,8 +1,9 @@
 ﻿using MediatR;
-using Integrador.Domain.Entities;
 using Integrador.Domain.Exceptions;
 using Integrador.Application.Commands;
 using Integrador.Application.Interfaces;
+using Integrador.Application.DTOs;
+using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Handlers;
 
@@ -14,8 +15,8 @@ public class AssignCarHandler
 {
     public async Task<Unit> Handle(AssignCarCommand request, CancellationToken ct)
     {
-        var existingCar = await carRepository.GetByIdAsync(request.Car.Id, ct);
-        var existingPerson = await personRepository.GetByIdAsync(request.Person.Id, ct);
+        var existingCar = await carRepository.GetByIdAsync(request.CarId, ct);
+        var existingPerson = await personRepository.GetByIdAsync(request.PersonId, ct);
 
         if (existingCar == null || existingPerson == null)
         {
@@ -27,8 +28,9 @@ public class AssignCarHandler
             throw new DomainException("El auto ya tiene un dueño.");
         }
 
-        existingCar.AssignOwner(existingPerson.Id);
-        existingPerson.AssignCar(existingCar);
+        // Asignamos el dueño sin modificar directamente la entidad
+        existingCar.DueñoId = existingPerson.Id;
+        existingPerson.Autos.Add(existingCar);
 
         await carRepository.UpdateAsync(existingCar, ct);
         await personRepository.UpdateAsync(existingPerson, ct);

@@ -4,6 +4,7 @@ using FluentValidation;
 using Integrador.Application.Commands;
 using Integrador.Domain.Exceptions;
 using Integrador.Application.Interfaces;
+using Integrador.Application.DTOs;  // Asegúrate de importar el namespace de DTOs
 
 namespace Integrador.Application.Handlers;
 
@@ -15,19 +16,37 @@ public class UpdatePersonHandler
 {
     public async Task<Unit> Handle(UpdatePersonCommand request, CancellationToken ct)
     {
-        // 1. Validación Técnica (FluentValidation)
-        var validationResult = await validator.ValidateAsync(request.Person, ct);
+        // 1. Convertir DTO a Entidad Person
+        var personEntity = new Person
+        (
+            request.PersonDTO.Id,
+            request.PersonDTO.DNI,
+            request.PersonDTO.Nombre,
+            request.PersonDTO.Apellido,
+            [.. request.PersonDTO.Autos.Select(auto => new Car
+            (
+                auto.Patente,
+                auto.Marca,
+                auto.Modelo,
+                auto.Año,
+                auto.Precio
+            ))]
+        );
 
-        if (!validationResult.IsValid)
+        // 2. Validación Técnica (FluentValidation)
+        var validation = await validator.ValidateAsync(personEntity, ct);
+
+        if (!validation.IsValid)
         {
-            throw new DomainException([.. validationResult.Errors.Select(e => e.ErrorMessage)]);
+            var errors = string.Join("", validation.Errors.Select(e => e.ErrorMessage).ToList());
+            throw new ApplicationException(errors);
         }
 
-        // 2. Verificar existencia
-        var existingPerson = repository.GetByIdAsync(request.Person.Id, ct) ?? throw new DomainException("La persona no existe.");
+        // 3. Verificar existencia
+        var existingPerson = await repository.GetByIdAsync(request.PersonDTO.Id, ct) ?? throw new ApplicationException("La persona no existe.");
 
-        // 3. Actualizar entidad
-        await repository.UpdateAsync(request.Person, ct);
+        // 4. Actualizar entidad
+        await repository.UpdateAsync(personEntity, ct);
 
         return Unit.Value;
     }

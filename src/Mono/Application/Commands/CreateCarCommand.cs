@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Integrador.Domain.Entities;
+using Integrador.Application.DTOs;
 
 namespace Integrador.Application.Commands;
 
-public record CreateCarCommand(Car Car) : IRequest<Unit>;
+public record CreateCarCommand(CarDTO CarDTO) : IRequest<Unit>;

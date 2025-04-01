@@ -15,8 +15,8 @@ public class RemoveCarHandler
     public async Task<Unit> Handle(RemoveCarCommand request, CancellationToken ct)
     {
         // 1. Validar existencia
-        var existingCar = await carRepository.GetByIdAsync(request.Car.Id, ct);
-        var existingPerson = await personRepository.GetByIdAsync(request.Person.Id, ct);
+        var existingCar = await carRepository.GetByIdAsync(request.CarId, ct);
+        var existingPerson = await personRepository.GetByIdAsync(request.PersonId, ct);
 
         if (existingCar == null || existingPerson == null)
         {

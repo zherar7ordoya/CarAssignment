@@ -1,36 +1,29 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
-using FluentValidation;
-using Integrador.Application.Commands;
 using Integrador.Domain.Exceptions;
+using Integrador.Application.Commands;
 using Integrador.Application.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
 public class DeletePersonHandler
 (
-    IGenericRepository<Person> repository,
-    IValidator<Person> validator
+    IGenericRepository<Person> repository
 ) : IRequestHandler<DeletePersonCommand, Unit>
 {
     public async Task<Unit> Handle(DeletePersonCommand request, CancellationToken ct)
     {
-        // 1. Validación Técnica con FluentValidation
-        var validationResult = await validator.ValidateAsync(request.Person, ct);
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-            throw new DomainException(errors);
-        }
+        // 1. Obtener la persona por Id
+        var person = await repository.GetByIdAsync(request.PersonId, ct) ?? throw new ApplicationException("La persona no existe.");
 
         // 2. Validación de Negocio: No permitir eliminar si hay autos asociados
-        if (request.Person.HasCars())
+        if (person.HasCars())
         {
-            throw new DomainException("No se puede eliminar una persona que tiene autos asociados");
+            throw new ApplicationException("No se puede eliminar una persona que tiene autos asociados");
         }
 
         // 3. Eliminar la persona
-        await repository.DeleteAsync(request.Person, ct);
+        await repository.DeleteAsync(person, ct);
 
         return Unit.Value;
     }

@@ -67,7 +67,7 @@ static class Program
         // 3. Manejo global de excepciones
         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
         Application.ThreadException += (sender, e) => HandleException(e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += (sender, e) => HandleException(e.ExceptionObject as Exception);
+        AppDomain.CurrentDomain.UnhandledException += (sender, e) => HandleException(ex: (Exception)e.ExceptionObject);
 
         // 4. Ejecución de la aplicación
         Application.Run(host.Services.GetRequiredService<ViewForm>());

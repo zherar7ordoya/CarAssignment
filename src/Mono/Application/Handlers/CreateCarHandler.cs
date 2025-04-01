@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Application.Commands;
+using Integrador.Application.DTOs;
 using Integrador.Domain.Exceptions;
 using FluentValidation;
 using Integrador.Application.Interfaces;
@@ -15,15 +16,27 @@ public class CreateCarHandler
 {
     public async Task<Unit> Handle(CreateCarCommand request, CancellationToken ct)
     {
-        var validationResult = await validator.ValidateAsync(request.Car, ct);
+        // Convertimos el DTO a la entidad correspondiente
+        var carEntity = new Car
+        (
+            request.CarDTO.Patente,
+            request.CarDTO.Marca,
+            request.CarDTO.Modelo,
+            request.CarDTO.Año,
+            request.CarDTO.Precio
+        );
 
-        if (!validationResult.IsValid)
+        // Validamos la entidad Car
+        var validation = await validator.ValidateAsync(carEntity, ct);
+
+        if (!validation.IsValid)
         {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-            throw new DomainException(errors);
+            var errors = string.Join(", ", validation.Errors.Select(e => e.ErrorMessage));
+            throw new ApplicationException(errors);
         }
 
-        await repository.CreateAsync(request.Car, ct);
+        // Persistimos la entidad Car
+        await repository.CreateAsync(carEntity, ct);
 
         return Unit.Value;
     }

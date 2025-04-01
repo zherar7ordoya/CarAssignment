@@ -16,6 +16,19 @@ public class Person : BaseEntity, IPerson
         Apellido = apellido;
     }
 
+    public Person(int id,
+                  string dni,
+                  string nombre,
+                  string apellido,
+                  List<Car> autos)
+    {
+        Id = id;
+        DNI = dni;
+        Nombre = nombre;
+        Apellido = apellido;
+        Autos = autos ?? []; // Evitar null en la lista de autos
+    }
+
     // Public setters required for serialization.
     // Default values required by empty constructor.
     public string DNI { get; set; } = string.Empty;

@@ -7,30 +7,22 @@ using Integrador.Application.Interfaces;
 
 namespace Integrador.Application.Handlers;
 
-public class DeleteCarHandler
-(
-    IGenericRepository<Car> repository,
-    IValidator<Car> validator
-) : IRequestHandler<DeleteCarCommand, Unit>
+public class DeleteCarHandler(IGenericRepository<Car> repository)
+           : IRequestHandler<DeleteCarCommand, Unit>
 {
     public async Task<Unit> Handle(DeleteCarCommand request, CancellationToken ct)
     {
-        // Validación técnica con FluentValidation
-        var validationResult = await validator.ValidateAsync(request.Car, ct);
+        // Obtenemos el auto usando su Id
+        var existingCar = await repository.GetByIdAsync(request.CarId, ct) ?? throw new ApplicationException("El auto no existe.");
 
-        if (!validationResult.IsValid)
+        // Validación de negocio: No se puede eliminar un auto que tiene dueño
+        if (existingCar.HasOwner())
         {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-            throw new DomainException(errors);
+            throw new ApplicationException("No se puede eliminar un auto que tiene dueño.");
         }
 
-        // Validación de negocio
-        if (request.Car.HasOwner())
-        {
-            throw new DomainException("No se puede eliminar un auto que tiene dueño");
-        }
-
-        await repository.DeleteAsync(request.Car, ct);
+        // Eliminación
+        await repository.DeleteAsync(existingCar, ct);
 
         return Unit.Value;
     }

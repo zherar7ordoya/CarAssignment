@@ -4,6 +4,7 @@ using Integrador.Application.Commands;
 using Integrador.Domain.Exceptions;
 using FluentValidation;
 using Integrador.Application.Interfaces;
+using Integrador.Application.DTOs;
 
 namespace Integrador.Application.Handlers;
 
@@ -15,17 +16,25 @@ public class CreatePersonHandler
 {
     public async Task<Unit> Handle(CreatePersonCommand request, CancellationToken ct)
     {
-        // Validación asíncrona
-        var validationResult = await validator.ValidateAsync(request.Person, ct);
+        // Convertimos el DTO a la entidad correspondiente
+        var personEntity = new Person
+        (
+            request.PersonDTO.Nombre,
+            request.PersonDTO.Apellido,
+            request.PersonDTO.DNI
+        );
 
-        if (!validationResult.IsValid)
+        // Validación de la entidad Person
+        var validation = await validator.ValidateAsync(personEntity, ct);
+
+        if (!validation.IsValid)
         {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            var errors = validation.Errors.Select(e => e.ErrorMessage).ToList();
             throw new DomainException(errors);
         }
 
-        // Crear persona (retorna booleano)
-        await repository.CreateAsync(request.Person, ct);
+        // Persistimos la entidad Person
+        await repository.CreateAsync(personEntity, ct);
 
         return Unit.Value;
     }

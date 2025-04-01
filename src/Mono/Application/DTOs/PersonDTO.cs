@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Application.DTOs;
 
-public record PersonDto(int Id,
+public record PersonDTO(int Id,
                         string DNI,
                         string Nombre,
                         string Apellido,
