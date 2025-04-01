@@ -1,4 +1,4 @@
-﻿using Integrador.Domain.Interfaces;
+﻿using Integrador.Shared.Interfaces;
 
 namespace Integrador.Domain.Entities;
 

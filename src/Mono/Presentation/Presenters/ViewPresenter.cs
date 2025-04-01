@@ -8,67 +8,42 @@ namespace Integrador.Presentation.Presenters;
 
 public class ViewPresenter(IMediator mediator)
 {
-    private readonly IMediator _mediator = mediator;
 
     // --- PERSONAS ---
     public async Task<List<Person>> ListarPersonas()
     {
-        return await _mediator.Send(new ReadPersonsQuery());
+        return await mediator.Send(new ReadPersonsQuery());
     }
 
-    public async Task<bool> GuardarPersona(Person persona)
+    public void GuardarPersona(Person persona)
     {
-        if (persona.Id == 0)
-        {
-            return await _mediator.Send(new CreatePersonCommand(persona));
-        }
-        else
-        {
-            return await _mediator.Send(new UpdatePersonCommand(persona));
-        }
+        if (persona.Id == 0) mediator.Send(new CreatePersonCommand(persona));
+        else mediator.Send(new UpdatePersonCommand(persona));
     }
 
-    public async Task<bool> EliminarPersona(Person persona)
-    {
-        return await _mediator.Send(new DeletePersonCommand(persona));
-    }
+    public void EliminarPersona(Person persona) => mediator.Send(new DeletePersonCommand(persona));
 
     // --- AUTOS ---
     public async Task<List<Car>> ListarAutosDisponibles()
     {
-        return await _mediator.Send(new ReadAvailableCarsQuery());
+        return await mediator.Send(new ReadAvailableCarsQuery());
     }
 
     public async Task<List<AssignedCarDTO>> ListarAutosAsignados()
     {
-        return await _mediator.Send(new ReadAssignedCarsQuery());
+        return await mediator.Send(new ReadAssignedCarsQuery());
     }
 
-    public async Task<bool> GuardarAuto(Car auto)
+    public void GuardarAuto(Car auto)
     {
-        if (auto.Id == 0)
-        {
-            return await _mediator.Send(new CreateCarCommand(auto));
-        }
-        else
-        {
-            return await _mediator.Send(new UpdateCarCommand(auto));
-        }
+        if (auto.Id == 0) mediator.Send(new CreateCarCommand(auto));
+        else mediator.Send(new UpdateCarCommand(auto));
     }
 
-    public async Task<bool> EliminarAuto(Car auto)
-    {
-        return await _mediator.Send(new DeleteCarCommand(auto));
-    }
+    public void EliminarAuto(Car auto) => mediator.Send(new DeleteCarCommand(auto));
 
     // --- ASIGNACIONES ---
-    public async Task<bool> AsignarAuto(Person persona, Car auto)
-    {
-        return await _mediator.Send(new AssignCarCommand(persona, auto));
-    }
+    public void AsignarAuto(Person persona, Car auto) => mediator.Send(new AssignCarCommand(persona, auto));
 
-    public async Task<bool> DesasignarAuto(Person persona, Car auto)
-    {
-        return await _mediator.Send(new RemoveCarCommand(persona, auto));
-    }
+    public void DesasignarAuto(Person persona, Car auto) => mediator.Send(new RemoveCarCommand(persona, auto));
 }

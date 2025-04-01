@@ -1,13 +1,13 @@
 ﻿using Integrador.Domain.Exceptions;
-using Integrador.Infrastructure.Interfaces;
+using Integrador.Shared.Interfaces;
 
 using Serilog;
 
-namespace Integrador.Infrastructure.Exceptions;
+namespace Integrador.Shared.Exceptions;
 
 public class ExceptionHandler(IMessenger messenger) : IExceptionHandler
 {
-    private readonly Serilog.ILogger _logger = Log.ForContext<ExceptionHandler>();
+    private readonly ILogger _logger = Log.ForContext<ExceptionHandler>();
 
     public void Handle(Exception ex) => Handle(ex, "Ocurrió un error inesperado.");
 

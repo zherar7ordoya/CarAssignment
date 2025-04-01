@@ -1,4 +1,4 @@
-﻿namespace Integrador.Infrastructure.Interfaces;
+﻿namespace Integrador.Shared.Interfaces;
 
 public interface IMessenger
 {

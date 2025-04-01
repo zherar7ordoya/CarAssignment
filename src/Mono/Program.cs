@@ -6,10 +6,11 @@ using Integrador.Infrastructure.Persistence;
 using Integrador;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Messaging;
-using Integrador.Infrastructure.Exceptions;
 using Integrador.Domain.Interfaces;
 using Integrador.Domain.Entities;
 using Serilog;
+using Integrador.Shared.Exceptions;
+using Integrador.Shared.Interfaces;
 
 static class Program
 {
@@ -49,7 +50,7 @@ static class Program
                 services.AddSingleton(typeof(IDataSource<>), typeof(DataSource<>));
                 
                 // Reemplaza tu logger actual con Serilog
-                services.AddSingleton<Serilog.ILogger>(Log.Logger); // Usa directamente el logger de Serilog
+                services.AddSingleton<ILogger>(Log.Logger); // Usa directamente el logger de Serilog
                 
                 services.AddSingleton<IMessenger, Messenger>();
                 services.AddSingleton<IExceptionHandler, ExceptionHandler>();
@@ -81,10 +82,9 @@ static class Program
         Log.Fatal(ex, "Excepción no manejada: {ErrorMessage}", ex.Message);
 
         // Muestra un mensaje al usuario
-        MessageBox.Show(
-            "Ocurrió un error inesperado. Consulte el log para más detalles.",
-            "Error Crítico",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Error);
+        MessageBox.Show("Ocurrió un error inesperado. Consulte el log para más detalles.",
+                        "Error Crítico",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
     }
 }
