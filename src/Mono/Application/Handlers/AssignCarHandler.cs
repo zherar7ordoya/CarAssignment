@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Integrador.Domain.Exceptions;
 using Integrador.Application.Commands;
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
@@ -19,12 +18,12 @@ public class AssignCarHandler
 
         if (existingCar == null || existingPerson == null)
         {
-            throw new DomainException("Auto o persona no existen.");
+            throw new Exception("Auto o persona no existen.");
         }
 
         if (existingCar.HasOwner())
         {
-            throw new DomainException("El auto ya tiene un dueño.");
+            throw new Exception("El auto ya tiene un dueño.");
         }
 
         // Asignamos el dueño sin modificar directamente la entidad

@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.DTOs;
+using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
-using Integrador.Presentation.Exceptions;
 using Integrador.Presentation.Presenters;
 
 using MediatR;
@@ -24,9 +24,6 @@ public partial class ViewForm : Form
         _exceptionHandler = exceptionHandler;
 
         _presenter = new ViewPresenter(mediator);
-
-        System.Windows.Forms.Application.ThreadException += (sender, e) => _exceptionHandler.Handle(e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += (sender, e) => _exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("Excepción al cargar el Form."));
 
         try
         {

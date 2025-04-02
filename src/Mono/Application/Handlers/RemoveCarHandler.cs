@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
-using Integrador.Domain.Exceptions;
 using Integrador.Application.Commands;
 using Integrador.Application.Interfaces;
 
@@ -20,13 +19,13 @@ public class RemoveCarHandler
 
         if (existingCar == null || existingPerson == null)
         {
-            throw new DomainException("Auto o persona no existen.");
+            throw new Exception("Auto o persona no existen.");
         }
 
         // 2. Validar relación
         if (!existingPerson.OwnsCar(existingCar))
         {
-            throw new DomainException("El auto no pertenece a la persona.");
+            throw new Exception("El auto no pertenece a la persona.");
         }
 
         // 3. Remover relación bidireccional

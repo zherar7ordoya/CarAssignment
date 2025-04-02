@@ -2,6 +2,7 @@
 using Integrador.Application.Commands;
 using Integrador.Application.Queries;
 using Integrador.Application.DTOs;
+using Integrador.Application.Validators;
 
 namespace Integrador.Presentation.Presenters;
 
@@ -15,19 +16,7 @@ public class ViewPresenter(IMediator mediator)
 
     public async Task SavePerson(PersonDTO person)
     {
-        //var dto = new PersonDTO(person.Id,
-        //                        person.DNI,
-        //                        person.Nombre,
-        //                        person.Apellido,
-        //                        [.. person.Autos.Select(auto =>
-        //                        new CarDTO(auto.Id,
-        //                                   auto.Patente,
-        //                                   auto.Marca,
-        //                                   auto.Modelo,
-        //                                   auto.Año,
-        //                                   auto.Precio,
-        //                                   auto.DueñoId))]);
-
+        ValidationHelper.Validate(person);
         if (person.Id == 0) await mediator.Send(new CreatePersonCommand(person));
         else await mediator.Send(new UpdatePersonCommand(person));
     }
@@ -50,14 +39,7 @@ public class ViewPresenter(IMediator mediator)
 
     public async Task SaveCar(CarDTO car)
     {
-        //var dto = new CarDTO(car.Id,
-        //                     car.Patente,
-        //                     car.Marca,
-        //                     car.Modelo,
-        //                     car.Año,
-        //                     car.Precio,
-        //                     car.DueñoId);
-
+        ValidationHelper.Validate(car);
         if (car.Id == 0) await mediator.Send(new CreateCarCommand(car));
         else await mediator.Send(new UpdateCarCommand(car));
     }

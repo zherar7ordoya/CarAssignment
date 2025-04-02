@@ -1,9 +1,11 @@
-﻿namespace Integrador.Application.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Integrador.Application.DTOs;
 
 public record PersonDTO(int Id,
-                        string DNI,
-                        string Nombre,
-                        string Apellido,
+                        [Required, RegularExpression("^\\d{7,8}$", ErrorMessage = "El DNI debe tener entre 7 y 8 dígitos.")] string DNI,
+                        [Required, StringLength(50)] string Nombre,
+                        [Required, StringLength(50)] string Apellido,
                         List<CarDTO> Autos)
 {
     // Los DTOs suelen usarse solo como contenedores de datos sin lógica de negocio.

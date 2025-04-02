@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Application.Queries;
-using Integrador.Domain.Exceptions;
 using Integrador.Application.Interfaces;
 using Integrador.Application.DTOs;
 
@@ -10,7 +9,8 @@ namespace Integrador.Application.Handlers;
 public class ReadPersonsHandler(IGenericRepository<Person> repository)
            : IRequestHandler<ReadPersonsQuery, List<PersonDTO>>
 {
-    public async Task<List<PersonDTO>> Handle(ReadPersonsQuery request, CancellationToken ct)
+    public async Task<List<PersonDTO>> Handle(ReadPersonsQuery request,
+                                              CancellationToken ct)
     {
         try
         {
@@ -36,7 +36,7 @@ public class ReadPersonsHandler(IGenericRepository<Person> repository)
         }
         catch (Exception ex)
         {
-            throw new DomainException("Error al listar personas: " + ex.Message);
+            throw new Exception("Error al listar personas: " + ex.Message);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Infrastructure.Exceptions;
 
 namespace Integrador.Infrastructure.Persistence;
 
-public class GenericRepository<T>(IDataSource<T> dataSource) : IGenericRepository<T> where T : IEntity
+public class GenericRepository<T>(IDataSource<T> dataSource)
+           : IGenericRepository<T> where T : IEntity
 {
     public async Task<bool> CreateAsync(T entity, CancellationToken ct = default)
     {
@@ -14,17 +14,17 @@ public class GenericRepository<T>(IDataSource<T> dataSource) : IGenericRepositor
         return await dataSource.WriteAsync(entities, ct);
     }
 
-    public async Task<bool> DeleteAsync(T entity, CancellationToken ct)
+    public async Task<bool> DeleteAsync(int id, CancellationToken ct)
     {
         try
         {
             var entities = await dataSource.ReadAsync(ct);
-            var removed = entities.RemoveAll(e => e.Id == entity.Id) > 0;
+            var removed = entities.RemoveAll(e => e.Id == id) > 0;
             return removed && await dataSource.WriteAsync(entities, ct);
         }
         catch (Exception ex)
         {
-            throw new InfrastructureException("Error eliminando entidad", ex);
+            throw new Exception("Error eliminando entidad", ex);
         }
     }
 
@@ -51,7 +51,7 @@ public class GenericRepository<T>(IDataSource<T> dataSource) : IGenericRepositor
         }
         catch (Exception ex)
         {
-            throw new InfrastructureException("Error actualizando entidad", ex);
+            throw new Exception("Error actualizando entidad", ex);
         }
     }
 }

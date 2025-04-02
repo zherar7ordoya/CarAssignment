@@ -20,7 +20,7 @@ public class DeleteCarHandler(IGenericRepository<Car> repository)
         }
 
         // Eliminación
-        await repository.DeleteAsync(existingCar, ct);
+        await repository.DeleteAsync(request.CarId, ct);
 
         return Unit.Value;
     }

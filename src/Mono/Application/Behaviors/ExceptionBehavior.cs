@@ -1,13 +1,11 @@
-﻿using Integrador.Domain.Exceptions;
-
-using MediatR;
+﻿using MediatR;
 
 using System.Net;
 
 namespace Integrador.Application.Behaviors;
 
 public class ExceptionBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+           : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
     public async Task<TResponse> Handle(TRequest request,
                                         RequestHandlerDelegate<TResponse> next,
@@ -17,15 +15,10 @@ public class ExceptionBehavior<TRequest, TResponse>
         {
             return await next();
         }
-        catch (DomainException ex)
+        catch (Exception ex)
         {
             // Mapear a un resultado de error
             return ExceptionBehavior<TRequest, TResponse>.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-        }
-        catch (Exception)
-        {
-            // Loguear excepción inesperada
-            return ExceptionBehavior<TRequest, TResponse>.CreateErrorResponse(HttpStatusCode.InternalServerError, "Error interno");
         }
     }
 
