@@ -6,7 +6,7 @@ using Integrador.Application.Interfaces;
 
 namespace Integrador.Presentation.Presenters;
 
-public class ViewPresenter(IMediator mediator) : IViewPresenter
+public class ViewPresenter(IMediator mediator)
 {
     // --- PERSONAS ---
     public async Task<List<PersonDTO>> ReadPersons()
@@ -14,23 +14,23 @@ public class ViewPresenter(IMediator mediator) : IViewPresenter
         return await mediator.Send(new ReadPersonsQuery());
     }
 
-    public async Task SavePerson(IPerson person)
+    public async Task SavePerson(PersonDTO person)
     {
-        var dto = new PersonDTO(person.Id,
-                                person.DNI,
-                                person.Nombre,
-                                person.Apellido,
-                                [.. person.Autos.Select(auto =>
-                                new CarDTO(auto.Id,
-                                           auto.Patente,
-                                           auto.Marca,
-                                           auto.Modelo,
-                                           auto.Año,
-                                           auto.Precio,
-                                           auto.DueñoId))]);
+        //var dto = new PersonDTO(person.Id,
+        //                        person.DNI,
+        //                        person.Nombre,
+        //                        person.Apellido,
+        //                        [.. person.Autos.Select(auto =>
+        //                        new CarDTO(auto.Id,
+        //                                   auto.Patente,
+        //                                   auto.Marca,
+        //                                   auto.Modelo,
+        //                                   auto.Año,
+        //                                   auto.Precio,
+        //                                   auto.DueñoId))]);
 
-        if (person.Id == 0) await mediator.Send(new CreatePersonCommand(dto));
-        else await mediator.Send(new UpdatePersonCommand(dto));
+        if (person.Id == 0) await mediator.Send(new CreatePersonCommand(person));
+        else await mediator.Send(new UpdatePersonCommand(person));
     }
 
     public async Task DeletePerson(int personId)
@@ -49,18 +49,18 @@ public class ViewPresenter(IMediator mediator) : IViewPresenter
         return await mediator.Send(new ReadAssignedCarsQuery());
     }
 
-    public async Task SaveCar(ICar car)
+    public async Task SaveCar(CarDTO car)
     {
-        var dto = new CarDTO(car.Id,
-                             car.Patente,
-                             car.Marca,
-                             car.Modelo,
-                             car.Año,
-                             car.Precio,
-                             car.DueñoId);
+        //var dto = new CarDTO(car.Id,
+        //                     car.Patente,
+        //                     car.Marca,
+        //                     car.Modelo,
+        //                     car.Año,
+        //                     car.Precio,
+        //                     car.DueñoId);
 
-        if (car.Id == 0) await mediator.Send(new CreateCarCommand(dto));
-        else await mediator.Send(new UpdateCarCommand(dto));
+        if (car.Id == 0) await mediator.Send(new CreateCarCommand(car));
+        else await mediator.Send(new UpdateCarCommand(car));
     }
 
     public async Task DeleteCar(int carId)

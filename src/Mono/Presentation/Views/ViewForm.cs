@@ -1,4 +1,4 @@
-using Integrador.Application.Factories;
+using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Exceptions;
 using Integrador.Presentation.Presenters;
@@ -18,14 +18,12 @@ public partial class ViewForm : Form
         IExceptionHandler exceptionHandler
     )
     {
-        _mediator = mediator;
         _messenger = messenger;
         _carFactory = carFactory;
         _personFactory = personFactory;
         _exceptionHandler = exceptionHandler;
 
-        //_presenter = GenericFactory.Create<IViewPresenter>(_mediator) ?? throw new InvalidOperationException("Failed to create IViewPresenter instance.");
-        _presenter = new ViewPresenter(_mediator);
+        _presenter = new ViewPresenter(mediator);
 
         System.Windows.Forms.Application.ThreadException += (sender, e) => _exceptionHandler.Handle(e.Exception);
         AppDomain.CurrentDomain.UnhandledException += (sender, e) => _exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("Excepción al cargar el Form."));
@@ -42,13 +40,12 @@ public partial class ViewForm : Form
         }
     }
 
-    private readonly IMediator _mediator;
     private readonly IMessenger _messenger;
     private readonly ICarFactory _carFactory;
     private readonly IPersonFactory _personFactory;
     private readonly IExceptionHandler _exceptionHandler;
 
-    private readonly IViewPresenter _presenter;
+    private readonly ViewPresenter _presenter;
 
     private readonly BindingSource _persons = [];
     private readonly BindingSource _personCars = [];
@@ -61,12 +58,12 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_persons.Current is IPerson person)
+            if (_persons.Current is PersonDTO person)
             {
                 _personCars.DataSource = person.Autos;
                 _personCars.ResetBindings(false);
-                ValorTotalAutosLabel.Text = person.GetValorAutos().ToString("C");
-                CantidadAutosTextBox.Text = person.GetCantidadAutos().ToString();
+                //ValorTotalAutosLabel.Text = person.GetValorAutos().ToString("C");
+                //CantidadAutosTextBox.Text = person.GetCantidadAutos().ToString();
             }
         }
         catch (Exception ex)
@@ -79,7 +76,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            IPerson person = _personFactory.CreateDefault();
+            PersonDTO person = _personFactory.CreateDefault();
             _persons.Add(person);
             _persons.MoveLast();
             NewPersonButton.Enabled = false;
@@ -94,7 +91,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_persons.Current is IPerson person)
+            if (_persons.Current is PersonDTO person)
             {
                 await _presenter.SavePerson(person);
                 LoadData();
@@ -113,7 +110,7 @@ public partial class ViewForm : Form
         {
             var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
 
-            if (_persons.Current is IPerson persona && confirmacion)
+            if (_persons.Current is PersonDTO persona && confirmacion)
             {
                 await _presenter.DeletePerson(persona.Id);
                 LoadData();
@@ -129,7 +126,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_persons.Current is IPerson persona && _availableCars.Current is ICar auto)
+            if (_persons.Current is PersonDTO persona && _availableCars.Current is CarDTO auto)
             {
                 await _presenter.AssignCar(persona.Id, auto.Id);
                 LoadData();
@@ -146,7 +143,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_persons.Current is IPerson persona && _personCars.Current is ICar auto)
+            if (_persons.Current is PersonDTO persona && _personCars.Current is CarDTO auto)
             {
                 await _presenter.RemoveCar(persona.Id, auto.Id);
                 LoadData();
@@ -178,7 +175,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_availableCars.Current is ICar car)
+            if (_availableCars.Current is CarDTO car)
             {
                 await _presenter.SaveCar(car);
                 LoadData();
@@ -197,7 +194,7 @@ public partial class ViewForm : Form
         {
             var confirmation = _messenger.ShowQuestion("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
 
-            if (_availableCars.Current is ICar car && confirmation)
+            if (_availableCars.Current is CarDTO car && confirmation)
             {
                 await _presenter.DeleteCar(car.Id);
                 LoadData();
@@ -222,16 +219,16 @@ public partial class ViewForm : Form
     {
         var bindings = new (Control Control, string Property, BindingSource Source)[]
         {
-            (IdPersonaTextBox, nameof(IPerson.Id), _persons),
-            (DniTextBox, nameof(IPerson.DNI), _persons),
-            (NombreTextBox, nameof(IPerson.Nombre), _persons),
-            (ApellidoTextBox, nameof(IPerson.Apellido), _persons),
-            (IdAutoTextBox, nameof(ICar.Id), _availableCars),
-            (PatenteTextBox, nameof(ICar.Patente), _availableCars),
-            (MarcaTextBox, nameof(ICar.Marca), _availableCars),
-            (ModeloTextBox, nameof(ICar.Modelo), _availableCars),
-            (AñoTextBox, nameof(ICar.Año), _availableCars),
-            (PrecioTextBox, nameof(ICar.Precio), _availableCars)
+            (IdPersonaTextBox, nameof(PersonDTO.Id), _persons),
+            (DniTextBox, nameof(PersonDTO.DNI), _persons),
+            (NombreTextBox, nameof(PersonDTO.Nombre), _persons),
+            (ApellidoTextBox, nameof(PersonDTO.Apellido), _persons),
+            (IdAutoTextBox, nameof(CarDTO.Id), _availableCars),
+            (PatenteTextBox, nameof(CarDTO.Patente), _availableCars),
+            (MarcaTextBox, nameof(CarDTO.Marca), _availableCars),
+            (ModeloTextBox, nameof(CarDTO.Modelo), _availableCars),
+            (AñoTextBox, nameof(CarDTO.Año), _availableCars),
+            (PrecioTextBox, nameof(CarDTO.Precio), _availableCars)
         };
 
         ConfigurarBindingSources(bindings);
@@ -302,10 +299,10 @@ public partial class ViewForm : Form
         }
     }
 
-    private void LoadData()
+    private async void LoadData()
     {
-        _persons.DataSource = _presenter.ReadPersons();
-        _availableCars.DataSource = _presenter.ReadAvailableCars();
-        _assignedCars.DataSource = _presenter.ReadAssignedCars();
+        _persons.DataSource = await _presenter.ReadPersons();
+        _availableCars.DataSource = await _presenter.ReadAvailableCars();
+        _assignedCars.DataSource = await _presenter.ReadAssignedCars();
     }
 }

@@ -1,6 +1,4 @@
-﻿using Integrador.Domain.Interfaces;
-
-namespace Integrador.Application.Interfaces;
+﻿namespace Integrador.Application.Interfaces;
 
 public interface IGenericRepository<T> where T : IEntity
 {

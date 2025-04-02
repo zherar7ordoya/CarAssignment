@@ -1,16 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MediatR;
-using FluentValidation;
-using Integrador.Infrastructure.Persistence;
+﻿using FluentValidation;
+
 using Integrador;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Messaging;
-using Serilog;
-using Integrador.Application.Interfaces;
-using Integrador.Presentation.Exceptions;
 using Integrador.Application.Factories;
-using Integrador.Presentation.Presenters;
+using Integrador.Application.Interfaces;
+using Integrador.Infrastructure.Messaging;
+using Integrador.Infrastructure.Persistence;
+using Integrador.Presentation.Exceptions;
+
+using MediatR;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using Serilog;
 
 static class Program
 {

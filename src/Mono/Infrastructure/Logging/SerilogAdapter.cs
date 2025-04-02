@@ -7,7 +7,7 @@ namespace Integrador.Infrastructure.Logging;
 
 public class SerilogAdapter : ILogger
 {
-    private readonly Serilog.ILogger _logger;
+    private readonly ILogger _logger;
 
     public SerilogAdapter()
     {

@@ -1,4 +1,4 @@
-﻿using Integrador.Domain.Interfaces;
+﻿using Integrador.Application.Interfaces;
 
 using System.Xml.Serialization;
 

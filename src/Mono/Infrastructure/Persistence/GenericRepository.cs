@@ -1,7 +1,5 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Interfaces;
 using Integrador.Infrastructure.Exceptions;
-using Integrador.Infrastructure.Interfaces;
 
 namespace Integrador.Infrastructure.Persistence;
 

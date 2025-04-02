@@ -1,7 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Interfaces;
+using Integrador.Application.Interfaces;
 using Integrador.Presentation.Exceptions;
 
 namespace Integrador.Infrastructure.Persistence;
