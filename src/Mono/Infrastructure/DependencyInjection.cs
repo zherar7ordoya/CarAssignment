@@ -10,10 +10,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddLogging(); // Agregar configuración de Serilog aquí
+        // --- Configuración de Logging ---
+        services.AddLogging();
 
+        // --- Persistencia de Datos ---
         services.AddSingleton(typeof(IDataSource<>), typeof(DataSource<>));
-        services.AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        // Repositorios deben ser Scoped para evitar problemas con la concurrencia del contexto.
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        // --- Mensajería / Comunicación ---
         services.AddSingleton<IMessenger, Messenger>();
 
         return services;

@@ -12,6 +12,6 @@ public record PersonDTO(int Id,
     // Sin embargo, dado que estos métodos (GetCantidadAutos() y GetValorAutos())
     // solo procesan datos que ya están en el DTO sin realizar lógica compleja ni
     // acceder a dependencias externas, no hay problema en incluirlos.
-    public int CantidadAutos => Autos.Count;
-    public decimal ValorAutos => Autos.Sum(auto => auto.Precio);
+    public int GetCarsCount => Autos.Count;
+    public decimal GetCarsPrice => Autos.Sum(auto => auto.Precio);
 };

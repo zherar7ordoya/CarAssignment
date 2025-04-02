@@ -3,27 +3,24 @@ using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Presenters;
 
-using MediatR;
-
 namespace Integrador;
 
 public partial class ViewForm : Form
 {
     public ViewForm
     (
-        IMediator mediator,
         IMessenger messenger,
         ICarFactory carFactory,
         IPersonFactory personFactory,
+        IViewPresenter viewPresenter,
         IExceptionHandler exceptionHandler
     )
     {
         _messenger = messenger;
         _carFactory = carFactory;
         _personFactory = personFactory;
+        _viewPresenter = viewPresenter;
         _exceptionHandler = exceptionHandler;
-
-        _presenter = new ViewPresenter(mediator);
 
         try
         {
@@ -40,9 +37,8 @@ public partial class ViewForm : Form
     private readonly IMessenger _messenger;
     private readonly ICarFactory _carFactory;
     private readonly IPersonFactory _personFactory;
+    private readonly IViewPresenter _viewPresenter;
     private readonly IExceptionHandler _exceptionHandler;
-
-    private readonly ViewPresenter _presenter;
 
     private readonly BindingSource _persons = [];
     private readonly BindingSource _personCars = [];
@@ -59,8 +55,8 @@ public partial class ViewForm : Form
             {
                 _personCars.DataSource = person.Autos;
                 _personCars.ResetBindings(false);
-                ValorTotalAutosLabel.Text = person.ValorAutos.ToString("C");
-                CantidadAutosTextBox.Text = person.CantidadAutos.ToString();
+                ValorTotalAutosLabel.Text = person.GetCarsPrice.ToString("C");
+                CantidadAutosTextBox.Text = person.GetCarsCount.ToString();
             }
         }
         catch (Exception ex)
@@ -90,7 +86,7 @@ public partial class ViewForm : Form
         {
             if (_persons.Current is PersonDTO person)
             {
-                await _presenter.SavePerson(person);
+                await _viewPresenter.SavePerson(person);
                 LoadData();
                 NewCarButton.Enabled = true;
             }
@@ -109,7 +105,7 @@ public partial class ViewForm : Form
 
             if (_persons.Current is PersonDTO persona && confirmacion)
             {
-                await _presenter.DeletePerson(persona.Id);
+                await _viewPresenter.DeletePerson(persona.Id);
                 LoadData();
             }
         }
@@ -125,7 +121,7 @@ public partial class ViewForm : Form
         {
             if (_persons.Current is PersonDTO persona && _availableCars.Current is CarDTO auto)
             {
-                await _presenter.AssignCar(persona.Id, auto.Id);
+                await _viewPresenter.AssignCar(persona.Id, auto.Id);
                 LoadData();
                 _messenger.ShowInformation("Auto asignado correctamente.", "Asignación de auto");
             }
@@ -142,7 +138,7 @@ public partial class ViewForm : Form
         {
             if (_persons.Current is PersonDTO persona && _personCars.Current is CarDTO auto)
             {
-                await _presenter.RemoveCar(persona.Id, auto.Id);
+                await _viewPresenter.RemoveCar(persona.Id, auto.Id);
                 LoadData();
             }
         }
@@ -174,7 +170,7 @@ public partial class ViewForm : Form
         {
             if (_availableCars.Current is CarDTO car)
             {
-                await _presenter.SaveCar(car);
+                await _viewPresenter.SaveCar(car);
                 LoadData();
                 NewCarButton.Enabled = true;
             }
@@ -193,7 +189,7 @@ public partial class ViewForm : Form
 
             if (_availableCars.Current is CarDTO car && confirmation)
             {
-                await _presenter.DeleteCar(car.Id);
+                await _viewPresenter.DeleteCar(car.Id);
                 LoadData();
             }
         }
@@ -310,9 +306,9 @@ public partial class ViewForm : Form
             _availableCars.DataSource = new List<CarDTO>();
             _assignedCars.DataSource = new List<AssignedCarDTO>();
 
-            _persons.DataSource = await _presenter.ReadPersons();
-            _availableCars.DataSource = await _presenter.ReadAvailableCars();
-            _assignedCars.DataSource = await _presenter.ReadAssignedCars();
+            _persons.DataSource = await _viewPresenter.ReadPersons();
+            _availableCars.DataSource = await _viewPresenter.ReadAvailableCars();
+            _assignedCars.DataSource = await _viewPresenter.ReadAssignedCars();
         }
         catch (Exception ex)
         {

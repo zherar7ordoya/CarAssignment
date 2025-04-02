@@ -6,23 +6,23 @@ using Microsoft.Extensions.Hosting;
 
 static class Program
 {
-    private static IHost host = null!; // Se inicializa en Main
+    // Se inicializa en Main y se mantiene de solo lectura para evitar modificaciones accidentales.
+    private static readonly IHost host = Host.CreateDefaultBuilder()
+        .ConfigureServices((context, services) =>
+        {
+            // Se configura la inyección de dependencias llamando a Startup.
+            Startup.ConfigureServices(services);
+        })
+        .Build();
 
     [STAThread]
     static void Main()
     {
-        // Crear el Host con DI
-        host = Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) =>
-            {
-                var startup = new Startup();
-                Startup.ConfigureServices(services);
-            })
-            .Build();
+        // Habilitar estilos visuales de Windows Forms para una mejor apariencia.
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
 
-        // Ejecutar la aplicación
+        // Obtener e iniciar el formulario principal desde el contenedor de dependencias.
         Application.Run(host.Services.GetRequiredService<ViewForm>());
     }
-
-    
 }

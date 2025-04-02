@@ -2,8 +2,6 @@
 using Integrador.Application.Factories;
 using Integrador.Application.Interfaces;
 
-using MediatR;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Integrador.Application;
@@ -12,13 +10,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-        });
-
+        // --- Fábricas ---
         services.AddSingleton<ICarFactory, CarFactory>();
         services.AddSingleton<IPersonFactory, PersonFactory>();
+
+        // --- Manejador de Excepciones ---
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
 
         return services;
