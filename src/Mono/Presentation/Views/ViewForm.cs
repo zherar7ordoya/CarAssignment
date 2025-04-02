@@ -1,4 +1,4 @@
-using Integrador.Application.DTOs;
+Ôªøusing Integrador.Application.DTOs;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Exceptions;
 using Integrador.Presentation.Presenters;
@@ -26,7 +26,7 @@ public partial class ViewForm : Form
         _presenter = new ViewPresenter(mediator);
 
         System.Windows.Forms.Application.ThreadException += (sender, e) => _exceptionHandler.Handle(e.Exception);
-        AppDomain.CurrentDomain.UnhandledException += (sender, e) => _exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("ExcepciÛn al cargar el Form."));
+        AppDomain.CurrentDomain.UnhandledException += (sender, e) => _exceptionHandler.Handle(e.ExceptionObject as Exception ?? new Exception("Excepci√≥n al cargar el Form."));
 
         try
         {
@@ -36,7 +36,7 @@ public partial class ViewForm : Form
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, "Error durante la inicializaciÛn del formulario.");
+            _exceptionHandler.Handle(ex, "Error durante la inicializaci√≥n del formulario.");
         }
     }
 
@@ -62,8 +62,8 @@ public partial class ViewForm : Form
             {
                 _personCars.DataSource = person.Autos;
                 _personCars.ResetBindings(false);
-                //ValorTotalAutosLabel.Text = person.GetValorAutos().ToString("C");
-                //CantidadAutosTextBox.Text = person.GetCantidadAutos().ToString();
+                ValorTotalAutosLabel.Text = person.ValorAutos.ToString("C");
+                CantidadAutosTextBox.Text = person.CantidadAutos.ToString();
             }
         }
         catch (Exception ex)
@@ -108,7 +108,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            var confirmacion = _messenger.ShowQuestion("øEst· seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
+            var confirmacion = _messenger.ShowQuestion("¬øEst√° seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
 
             if (_persons.Current is PersonDTO persona && confirmacion)
             {
@@ -130,7 +130,7 @@ public partial class ViewForm : Form
             {
                 await _presenter.AssignCar(persona.Id, auto.Id);
                 LoadData();
-                _messenger.ShowInformation("Auto asignado correctamente.", "AsignaciÛn de auto");
+                _messenger.ShowInformation("Auto asignado correctamente.", "Asignaci√≥n de auto");
             }
         }
         catch (Exception ex)
@@ -192,7 +192,7 @@ public partial class ViewForm : Form
     {
         try
         {
-            var confirmation = _messenger.ShowQuestion("øEst· seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
+            var confirmation = _messenger.ShowQuestion("¬øEst√° seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
 
             if (_availableCars.Current is CarDTO car && confirmation)
             {
@@ -227,7 +227,7 @@ public partial class ViewForm : Form
             (PatenteTextBox, nameof(CarDTO.Patente), _availableCars),
             (MarcaTextBox, nameof(CarDTO.Marca), _availableCars),
             (ModeloTextBox, nameof(CarDTO.Modelo), _availableCars),
-            (AÒoTextBox, nameof(CarDTO.AÒo), _availableCars),
+            (A√±oTextBox, nameof(CarDTO.A√±o), _availableCars),
             (PrecioTextBox, nameof(CarDTO.Precio), _availableCars)
         };
 
@@ -258,7 +258,7 @@ public partial class ViewForm : Form
             ("Patente", "Patente"),
             ("Marca", "Marca"),
             ("Modelo", "Modelo"),
-            ("AÒo", "AÒo"),
+            ("A√±o", "A√±o"),
             ("Precio", "Precio")
         ]);
 
@@ -268,18 +268,18 @@ public partial class ViewForm : Form
             ("Patente", "Patente"),
             ("Marca", "Marca"),
             ("Modelo", "Modelo"),
-            ("AÒo", "AÒo"),
+            ("A√±o", "A√±o"),
             ("Precio", "Precio")
         ]);
 
         ConfigurarDataGridView(AutosAsignadosDGV, _assignedCars,
         [
             ("Marca", "Marca"),
-            ("AÒo", "AÒo"),
+            ("A√±o", "A√±o"),
             ("Modelo", "Modelo"),
             ("Patente", "Patente"),
             ("Documento", "Documento"),
-            ("DueÒo", "DueÒo")
+            ("Due√±o", "Due√±o")
         ]);
     }
 
@@ -301,8 +301,25 @@ public partial class ViewForm : Form
 
     private async void LoadData()
     {
-        _persons.DataSource = await _presenter.ReadPersons();
-        _availableCars.DataSource = await _presenter.ReadAvailableCars();
-        _assignedCars.DataSource = await _presenter.ReadAssignedCars();
+        try
+        {
+            // Asignamos listas vac√≠as antes de la carga real:
+            // Dado que la carga es as√≠ncrona, en alg√∫n momento entre que el Form
+            // se abre y los datos llegan, los DataGridView est√°n en un estado
+            // inconsistente. Entonces, cuando los DataGridView intentan acceder
+            // a sus columnas antes de que los datos est√©n completamente
+            // cargados, se produce una excepci√≥n.
+            _persons.DataSource = new List<PersonDTO>();
+            _availableCars.DataSource = new List<CarDTO>();
+            _assignedCars.DataSource = new List<AssignedCarDTO>();
+
+            _persons.DataSource = await _presenter.ReadPersons();
+            _availableCars.DataSource = await _presenter.ReadAvailableCars();
+            _assignedCars.DataSource = await _presenter.ReadAssignedCars();
+        }
+        catch (Exception ex)
+        {
+            _exceptionHandler.Handle(ex, "Error al cargar datos.");
+        }
     }
 }

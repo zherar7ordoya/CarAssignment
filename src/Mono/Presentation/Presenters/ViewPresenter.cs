@@ -2,7 +2,6 @@
 using Integrador.Application.Commands;
 using Integrador.Application.Queries;
 using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
 
 namespace Integrador.Presentation.Presenters;
 
