@@ -6,25 +6,40 @@ using Integrador.Application.Interfaces;
 
 namespace Integrador.Presentation.Presenters;
 
-public class ViewPresenter(IMediator mediator)
+public class ViewPresenter(IMediator mediator) : IViewPresenter
 {
-
     // --- PERSONAS ---
-    public async Task<List<IPerson>> ReadPersons()
+    public async Task<List<PersonDTO>> ReadPersons()
     {
         return await mediator.Send(new ReadPersonsQuery());
     }
 
-    public void SavePerson(IPerson person)
+    public async Task SavePerson(IPerson person)
     {
-        if (person.Id == 0) mediator.Send(new CreatePersonCommand(person));
-        else mediator.Send(new UpdatePersonCommand(person));
+        var dto = new PersonDTO(person.Id,
+                                person.DNI,
+                                person.Nombre,
+                                person.Apellido,
+                                [.. person.Autos.Select(auto =>
+                                new CarDTO(auto.Id,
+                                           auto.Patente,
+                                           auto.Marca,
+                                           auto.Modelo,
+                                           auto.Año,
+                                           auto.Precio,
+                                           auto.DueñoId))]);
+
+        if (person.Id == 0) await mediator.Send(new CreatePersonCommand(dto));
+        else await mediator.Send(new UpdatePersonCommand(dto));
     }
 
-    public void DeletePerson(IPerson person) => mediator.Send(new DeletePersonCommand(person));
+    public async Task DeletePerson(int personId)
+    {
+        await mediator.Send(new DeletePersonCommand(personId));
+    }
 
     // --- AUTOS ---
-    public async Task<List<ICar>> ReadAvailableCars()
+    public async Task<List<CarDTO>> ReadAvailableCars()
     {
         return await mediator.Send(new ReadAvailableCarsQuery());
     }
@@ -34,16 +49,33 @@ public class ViewPresenter(IMediator mediator)
         return await mediator.Send(new ReadAssignedCarsQuery());
     }
 
-    public void SaveCar(ICar car)
+    public async Task SaveCar(ICar car)
     {
-        if (car.Id == 0) mediator.Send(new CreateCarCommand(car));
-        else mediator.Send(new UpdateCarCommand(car));
+        var dto = new CarDTO(car.Id,
+                             car.Patente,
+                             car.Marca,
+                             car.Modelo,
+                             car.Año,
+                             car.Precio,
+                             car.DueñoId);
+
+        if (car.Id == 0) await mediator.Send(new CreateCarCommand(dto));
+        else await mediator.Send(new UpdateCarCommand(dto));
     }
 
-    public void DeleteCar(ICar car) => mediator.Send(new DeleteCarCommand(car));
+    public async Task DeleteCar(int carId)
+    {
+        await mediator.Send(new DeleteCarCommand(carId));
+    }
 
     // --- ASIGNACIONES ---
-    public void AssignCar(IPerson person, ICar car) => mediator.Send(new AssignCarCommand(person, car));
+    public async Task AssignCar(int personId, int carId)
+    {
+        await mediator.Send(new AssignCarCommand(carId, personId));
+    }
 
-    public void RemoveCar(IPerson person, ICar car) => mediator.Send(new RemoveCarCommand(person, car));
+    public async Task RemoveCar(int personId, int carId)
+    {
+        await mediator.Send(new RemoveCarCommand(personId, carId));
+    }
 }

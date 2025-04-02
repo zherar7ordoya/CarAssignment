@@ -2,7 +2,6 @@
 using Integrador.Domain.Exceptions;
 using Integrador.Application.Commands;
 using Integrador.Application.Interfaces;
-using Integrador.Application.DTOs;
 using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Handlers;

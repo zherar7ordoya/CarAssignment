@@ -10,6 +10,7 @@ using Serilog;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Exceptions;
 using Integrador.Application.Factories;
+using Integrador.Presentation.Presenters;
 
 static class Program
 {
@@ -52,9 +53,9 @@ static class Program
                 services.AddSingleton<ILogger>(Log.Logger); // Usa directamente el logger de Serilog
                 
                 services.AddSingleton<IMessenger, Messenger>();
-                services.AddSingleton<IExceptionHandler, ExceptionHandler>();
                 services.AddSingleton<ICarFactory, CarFactory>();
                 services.AddSingleton<IPersonFactory, PersonFactory>();
+                services.AddSingleton<IExceptionHandler, ExceptionHandler>();
 
                 // Repositorios genéricos
                 services.AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>));

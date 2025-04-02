@@ -1,5 +1,4 @@
-﻿using Integrador.Application.Interfaces;
-using Integrador.Application.DTOs;
+﻿using Integrador.Application.DTOs;
 
 using MediatR;
 

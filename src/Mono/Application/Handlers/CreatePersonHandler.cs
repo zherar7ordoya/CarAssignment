@@ -4,7 +4,6 @@ using Integrador.Application.Commands;
 using Integrador.Domain.Exceptions;
 using FluentValidation;
 using Integrador.Application.Interfaces;
-using Integrador.Application.DTOs;
 
 namespace Integrador.Application.Handlers;
 

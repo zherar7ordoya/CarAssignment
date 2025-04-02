@@ -2,9 +2,7 @@
 using Integrador.Domain.Entities;
 using FluentValidation;
 using Integrador.Application.Commands;
-using Integrador.Domain.Exceptions;
 using Integrador.Application.Interfaces;
-using Integrador.Application.DTOs;  // Asegúrate de importar el namespace de DTOs
 
 namespace Integrador.Application.Handlers;
 

@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Integrador.Domain.Entities;
 using Integrador.Application.Commands;
-using Integrador.Application.DTOs;
-using Integrador.Domain.Exceptions;
 using FluentValidation;
 using Integrador.Application.Interfaces;
 

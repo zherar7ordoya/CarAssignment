@@ -1,3 +1,4 @@
+using Integrador.Application.Factories;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Exceptions;
 using Integrador.Presentation.Presenters;
@@ -22,6 +23,8 @@ public partial class ViewForm : Form
         _carFactory = carFactory;
         _personFactory = personFactory;
         _exceptionHandler = exceptionHandler;
+
+        //_presenter = GenericFactory.Create<IViewPresenter>(_mediator) ?? throw new InvalidOperationException("Failed to create IViewPresenter instance.");
         _presenter = new ViewPresenter(_mediator);
 
         System.Windows.Forms.Application.ThreadException += (sender, e) => _exceptionHandler.Handle(e.Exception);
@@ -45,12 +48,12 @@ public partial class ViewForm : Form
     private readonly IPersonFactory _personFactory;
     private readonly IExceptionHandler _exceptionHandler;
 
-    private readonly ViewPresenter _presenter;
+    private readonly IViewPresenter _presenter;
 
-    private readonly BindingSource _personasBS = [];
-    private readonly BindingSource _autosPersonaBS = [];
-    private readonly BindingSource _autosDisponiblesBS = [];
-    private readonly BindingSource _autosAsignadosBS = [];
+    private readonly BindingSource _persons = [];
+    private readonly BindingSource _personCars = [];
+    private readonly BindingSource _assignedCars = [];
+    private readonly BindingSource _availableCars = [];
 
     ////////////////////////////////////////////////////////////////////////////
 
@@ -58,10 +61,10 @@ public partial class ViewForm : Form
     {
         try
         {
-            if (_personasBS.Current is IPerson person)
+            if (_persons.Current is IPerson person)
             {
-                _autosPersonaBS.DataSource = person.Autos;
-                _autosPersonaBS.ResetBindings(false); // Forzar actualización
+                _personCars.DataSource = person.Autos;
+                _personCars.ResetBindings(false);
                 ValorTotalAutosLabel.Text = person.GetValorAutos().ToString("C");
                 CantidadAutosTextBox.Text = person.GetCantidadAutos().ToString();
             }
@@ -77,8 +80,8 @@ public partial class ViewForm : Form
         try
         {
             IPerson person = _personFactory.CreateDefault();
-            _personasBS.Add(person);
-            _personasBS.MoveLast();
+            _persons.Add(person);
+            _persons.MoveLast();
             NewPersonButton.Enabled = false;
         }
         catch (Exception ex)
@@ -87,13 +90,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private void GuardarPersonaButton_Click(object sender, EventArgs e)
+    private async void GuardarPersonaButton_Click(object sender, EventArgs e)
     {
         try
         {
-            if (_personasBS.Current is IPerson person)
+            if (_persons.Current is IPerson person)
             {
-                _presenter.SavePerson(person);
+                await _presenter.SavePerson(person);
                 LoadData();
                 NewCarButton.Enabled = true;
             }
@@ -104,15 +107,15 @@ public partial class ViewForm : Form
         }
     }
 
-    private void EliminarPersonaButton_Click(object sender, EventArgs e)
+    private async void EliminarPersonaButton_Click(object sender, EventArgs e)
     {
         try
         {
             var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar la persona seleccionada?", "Eliminar persona");
 
-            if (_personasBS.Current is IPerson persona && confirmacion)
+            if (_persons.Current is IPerson persona && confirmacion)
             {
-                _presenter.DeletePerson(persona);
+                await _presenter.DeletePerson(persona.Id);
                 LoadData();
             }
         }
@@ -122,14 +125,14 @@ public partial class ViewForm : Form
         }
     }
 
-    private void AsignarAutoButton_Click(object sender, EventArgs e)
+    private async void AsignarAutoButton_Click(object sender, EventArgs e)
     {
         try
         {
-            if (_personasBS.Current is Person persona && _autosDisponiblesBS.Current is Car auto)
+            if (_persons.Current is IPerson persona && _availableCars.Current is ICar auto)
             {
-                _presenter.AsignarAuto(persona, auto);
-                LoadData(); // Recargar todo
+                await _presenter.AssignCar(persona.Id, auto.Id);
+                LoadData();
                 _messenger.ShowInformation("Auto asignado correctamente.", "Asignación de auto");
             }
         }
@@ -139,14 +142,14 @@ public partial class ViewForm : Form
         }
     }
 
-    private void DesasignarAutoButton_Click(object sender, EventArgs e)
+    private async void DesasignarAutoButton_Click(object sender, EventArgs e)
     {
         try
         {
-            if (_personasBS.Current is Person persona && _autosPersonaBS.Current is Car auto)
+            if (_persons.Current is IPerson persona && _personCars.Current is ICar auto)
             {
-                _presenter.DesasignarAuto(persona, auto);
-                LoadData(); // Recargar todo
+                await _presenter.RemoveCar(persona.Id, auto.Id);
+                LoadData();
             }
         }
         catch (Exception ex)
@@ -160,9 +163,9 @@ public partial class ViewForm : Form
     {
         try
         {
-            var nuevoAuto = _carFactory.CreateDefault(); // Datos por defecto
-            _autosDisponiblesBS.Add(nuevoAuto);
-            _autosDisponiblesBS.MoveLast();
+            var newCar = _carFactory.CreateDefault(); // Datos por defecto
+            _availableCars.Add(newCar);
+            _availableCars.MoveLast();
             NewCarButton.Enabled = false;
         }
         catch (Exception ex)
@@ -171,13 +174,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private void GuardarAutoButton_Click(object sender, EventArgs e)
+    private async void GuardarAutoButton_Click(object sender, EventArgs e)
     {
         try
         {
-            if (_autosDisponiblesBS.Current is Car auto)
+            if (_availableCars.Current is ICar car)
             {
-                _presenter.GuardarAuto(auto);
+                await _presenter.SaveCar(car);
                 LoadData();
                 NewCarButton.Enabled = true;
             }
@@ -188,15 +191,15 @@ public partial class ViewForm : Form
         }
     }
 
-    private void EliminarAutoButton_Click(object sender, EventArgs e)
+    private async void EliminarAutoButton_Click(object sender, EventArgs e)
     {
         try
         {
-            var confirmacion = _messenger.ShowQuestion("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
+            var confirmation = _messenger.ShowQuestion("¿Está seguro que desea eliminar el auto seleccionado?", "Eliminar auto");
 
-            if (_autosDisponiblesBS.Current is Car auto && confirmacion)
+            if (_availableCars.Current is ICar car && confirmation)
             {
-                _presenter.EliminarAuto(auto);
+                await _presenter.DeleteCar(car.Id);
                 LoadData();
             }
         }
@@ -219,16 +222,16 @@ public partial class ViewForm : Form
     {
         var bindings = new (Control Control, string Property, BindingSource Source)[]
         {
-            (IdPersonaTextBox, nameof(Person.Id), _personasBS),
-            (DniTextBox, nameof(Person.DNI), _personasBS),
-            (NombreTextBox, nameof(Person.Nombre), _personasBS),
-            (ApellidoTextBox, nameof(Person.Apellido), _personasBS),
-            (IdAutoTextBox, nameof(Car.Id), _autosDisponiblesBS),
-            (PatenteTextBox, nameof(Car.Patente), _autosDisponiblesBS),
-            (MarcaTextBox, nameof(Car.Marca), _autosDisponiblesBS),
-            (ModeloTextBox, nameof(Car.Modelo), _autosDisponiblesBS),
-            (AñoTextBox, nameof(Car.Año), _autosDisponiblesBS),
-            (PrecioTextBox, nameof(Car.Precio), _autosDisponiblesBS)
+            (IdPersonaTextBox, nameof(IPerson.Id), _persons),
+            (DniTextBox, nameof(IPerson.DNI), _persons),
+            (NombreTextBox, nameof(IPerson.Nombre), _persons),
+            (ApellidoTextBox, nameof(IPerson.Apellido), _persons),
+            (IdAutoTextBox, nameof(ICar.Id), _availableCars),
+            (PatenteTextBox, nameof(ICar.Patente), _availableCars),
+            (MarcaTextBox, nameof(ICar.Marca), _availableCars),
+            (ModeloTextBox, nameof(ICar.Modelo), _availableCars),
+            (AñoTextBox, nameof(ICar.Año), _availableCars),
+            (PrecioTextBox, nameof(ICar.Precio), _availableCars)
         };
 
         ConfigurarBindingSources(bindings);
@@ -244,7 +247,7 @@ public partial class ViewForm : Form
 
     private void ConfigurarDataGridView()
     {
-        ConfigurarDataGridView(PersonasDGV, _personasBS,
+        ConfigurarDataGridView(PersonasDGV, _persons,
         [
             ("Id", "ID"),
             ("DNI", "DNI"),
@@ -252,7 +255,7 @@ public partial class ViewForm : Form
             ("Apellido", "Apellido")
         ]);
 
-        ConfigurarDataGridView(AutosPersonaDGV, _autosPersonaBS,
+        ConfigurarDataGridView(AutosPersonaDGV, _personCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -262,7 +265,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigurarDataGridView(AutosDisponiblesDGV, _autosDisponiblesBS,
+        ConfigurarDataGridView(AutosDisponiblesDGV, _availableCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -272,7 +275,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigurarDataGridView(AutosAsignadosDGV, _autosAsignadosBS,
+        ConfigurarDataGridView(AutosAsignadosDGV, _assignedCars,
         [
             ("Marca", "Marca"),
             ("Año", "Año"),
@@ -301,8 +304,8 @@ public partial class ViewForm : Form
 
     private void LoadData()
     {
-        _personasBS.DataSource = _presenter.ReadPersons();
-        _autosDisponiblesBS.DataSource = _presenter.ReadAvailableCars();
-        _autosAsignadosBS.DataSource = _presenter.ReadAssignedCars();
+        _persons.DataSource = _presenter.ReadPersons();
+        _availableCars.DataSource = _presenter.ReadAvailableCars();
+        _assignedCars.DataSource = _presenter.ReadAssignedCars();
     }
 }

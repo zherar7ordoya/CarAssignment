@@ -2,8 +2,6 @@
 using Integrador.Domain.Entities;
 using FluentValidation;
 using Integrador.Application.Commands;
-using Integrador.Application.DTOs;
-using Integrador.Domain.Exceptions;
 using Integrador.Application.Interfaces;
 
 namespace Integrador.Application.Handlers;

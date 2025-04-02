@@ -8,11 +8,11 @@ public class AssignCarValidator : AbstractValidator<AssignCarCommand>
 {
     public AssignCarValidator()
     {
-        RuleFor(cmd => cmd.Car)
+        RuleFor(cmd => cmd.CarId)
             .NotNull()
             .WithMessage("Auto no puede ser nulo.");
 
-        RuleFor(cmd => cmd.Person)
+        RuleFor(cmd => cmd.PersonId)
             .NotNull()
             .WithMessage("Persona no puede ser nula.");
     }
