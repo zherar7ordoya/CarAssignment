@@ -1,5 +1,4 @@
-﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces;
 
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;

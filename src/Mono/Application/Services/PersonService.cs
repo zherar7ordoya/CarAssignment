@@ -2,8 +2,6 @@
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
-using System.CodeDom;
-
 namespace Integrador.Application.Services;
 
 public class PersonService
@@ -23,7 +21,13 @@ public class PersonService
 
     public async Task UpdatePerson(PersonDTO personDto, CancellationToken ct)
     {
-        var person = await repository.GetByIdAsync(personDto.Id, ct) ?? throw new Exception("La persona no existe.");
+        var person = await repository.GetByIdAsync(personDto.Id, ct);
+
+        if (person is null)
+        {
+            exceptionHandler.Handle("La persona no existe.");
+            return;
+        }
 
         person.Nombre = personDto.Nombre.Trim();
         person.Apellido = personDto.Apellido.Trim();
@@ -31,9 +35,16 @@ public class PersonService
 
         await repository.UpdateAsync(person, ct);
     }
+
     public async Task DeletePerson(int personId, CancellationToken ct)
     {
-        var person = await repository.GetByIdAsync(personId, ct) ?? throw new Exception("La persona no existe.");
+        var person = await repository.GetByIdAsync(personId, ct);
+
+        if (person is null)
+        {
+            exceptionHandler.Handle("La persona no existe.");
+            return;
+        }
 
         if (person.HasCars())
         {

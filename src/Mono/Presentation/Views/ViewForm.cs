@@ -2,9 +2,6 @@
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Presenters;
 
-using System.Diagnostics;
-using System.Windows.Forms;
-
 namespace Integrador;
 
 public partial class ViewForm : Form

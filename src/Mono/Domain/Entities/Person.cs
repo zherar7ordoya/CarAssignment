@@ -1,6 +1,4 @@
-﻿using Integrador.Application.Interfaces;
-
-namespace Integrador.Domain.Entities;
+﻿namespace Integrador.Domain.Entities;
 
 public class Person : BaseEntity
 {

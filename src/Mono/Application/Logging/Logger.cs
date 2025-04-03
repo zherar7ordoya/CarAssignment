@@ -1,7 +1,5 @@
 ﻿using ILogger = Integrador.Application.Interfaces.ILogger;
 
-using Microsoft.Extensions.Logging;
-
 namespace Integrador.Application.Logging;
 
 public class Logger : ILogger

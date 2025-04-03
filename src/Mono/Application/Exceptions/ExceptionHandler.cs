@@ -1,7 +1,5 @@
 ﻿using Integrador.Application.Interfaces;
 
-using Microsoft.Extensions.Logging;
-
 using ILogger = Integrador.Application.Interfaces.ILogger;
 
 namespace Integrador.Application.Exceptions;

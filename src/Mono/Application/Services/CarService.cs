@@ -4,7 +4,7 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Services;
 
-public class CarService(IGenericRepository<Car> repository) : ICarManager
+public class CarService(IGenericRepository<Car> repository, IExceptionHandler exceptionHandler) : ICarManager
 {
     public async Task CreateCar(CarDTO carDto, CancellationToken ct)
     {
@@ -19,7 +19,13 @@ public class CarService(IGenericRepository<Car> repository) : ICarManager
 
     public async Task UpdateCar(CarDTO carDto, CancellationToken ct)
     {
-        var car = await repository.GetByIdAsync(carDto.Id, ct) ?? throw new Exception("El auto no existe.");
+        var car = await repository.GetByIdAsync(carDto.Id, ct);
+        
+        if (car is null)
+        {
+            exceptionHandler.Handle("El auto no existe.");
+            return;
+        }
 
         car.Patente = carDto.Patente.Trim();
         car.Marca = carDto.Marca.Trim();
@@ -32,11 +38,18 @@ public class CarService(IGenericRepository<Car> repository) : ICarManager
 
     public async Task DeleteCar(int carId, CancellationToken ct)
     {
-        var car = await repository.GetByIdAsync(carId, ct) ?? throw new Exception("El auto no existe.");
+        var car = await repository.GetByIdAsync(carId, ct);
+
+        if (car is null)
+        {
+            exceptionHandler.Handle("El auto no existe.");
+            return;
+        }
 
         if (car.HasOwner())
         {
-            throw new ApplicationException("No se puede eliminar un auto que tiene dueño.");
+            exceptionHandler.Handle("No se puede eliminar un auto que tiene dueño.");
+            return;
         }
 
         await repository.DeleteAsync(carId, ct);

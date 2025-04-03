@@ -6,7 +6,8 @@ namespace Integrador.Application.Services
     public class AssignmentService
     (
         IGenericRepository<Car> carRepository,
-        IGenericRepository<Person> personRepository
+        IGenericRepository<Person> personRepository,
+        IExceptionHandler exceptionHandler
     ) : IAssignmentManager
     {
         public async Task AssignCar(int carId, int personId, CancellationToken ct)
@@ -16,12 +17,14 @@ namespace Integrador.Application.Services
 
             if (car == null || person == null)
             {
-                throw new Exception("Auto o persona no existen.");
+                exceptionHandler.Handle("Auto o persona no existen.");
+                return;
             }
 
             if (car.HasOwner())
             {
-                throw new Exception("El auto ya tiene un dueño.");
+                exceptionHandler.Handle("El auto ya tiene un dueño.");
+                return;
             }
 
             car.DueñoId = person.Id;
@@ -38,12 +41,14 @@ namespace Integrador.Application.Services
 
             if (car == null || person == null)
             {
-                throw new Exception("Auto o persona no existen.");
+                exceptionHandler.Handle("Auto o persona no existen.");
+                return;
             }
 
             if (!person.OwnsCar(car))
             {
-                throw new Exception("El auto no pertenece a la persona.");
+                exceptionHandler.Handle("La persona no es dueña del auto.");
+                return;
             }
 
             person.RemoveCar(car);
