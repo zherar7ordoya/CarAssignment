@@ -1,10 +1,15 @@
 ﻿using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
+using System.Reflection;
+
 namespace Integrador.Infrastructure.Persistence;
 
-public class GenericRepository<T>(IDataSource<T> dataSource)
-           : IGenericRepository<T> where T : IEntity
+public class GenericRepository<T>
+(
+    IDataSource<T> dataSource,
+    IExceptionHandler exceptionHandler
+) : IGenericRepository<T> where T : IEntity
 {
     public async Task<bool> CreateAsync(T entity, CancellationToken ct = default)
     {
@@ -25,7 +30,8 @@ public class GenericRepository<T>(IDataSource<T> dataSource)
         }
         catch (Exception ex)
         {
-            throw new Exception("Error eliminando entidad", ex);
+            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
+            return false; // Return false in case of exception
         }
     }
 
@@ -52,7 +58,8 @@ public class GenericRepository<T>(IDataSource<T> dataSource)
         }
         catch (Exception ex)
         {
-            throw new Exception("Error actualizando entidad", ex);
+            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
+            return false; // Return false in case of exception
         }
     }
 }

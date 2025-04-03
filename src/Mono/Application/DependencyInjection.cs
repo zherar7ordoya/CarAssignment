@@ -1,5 +1,7 @@
 ﻿using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
+using Integrador.Application.Logging;
+using Integrador.Infrastructure.Messaging;
 using Integrador.Presentation.Factories;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ public static class DependencyInjection
 
         // --- Manejador de Excepciones ---
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
+        services.AddSingleton<ILogger, Logger>();
+        services.AddSingleton<IMessenger, Messenger>();
 
         return services;
     }

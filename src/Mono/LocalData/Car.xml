@@ -1,83 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Car Id="1">
-    <Patente>AA123AA</Patente>
-    <Marca>Marsillion</Marca>
-    <Modelo>Venture</Modelo>
-    <Año>2000</Año>
-    <Precio>3000</Precio>
+    <Patente>
+		AC174UJ
+	</Patente>
+    <Marca>
+		AUDI
+	</Marca>
+    <Modelo>
+		A4 2.0 T L/16 190HP S-TRONIC
+	</Modelo>
+    <Año>
+		2018
+	</Año>
+    <Precio>
+		7500000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="2">
-    <Patente>BB123BB</Patente>
-    <Marca>Ford</Marca>
-    <Modelo>Fire</Modelo>
-    <Año>2022</Año>
-    <Precio>2000</Precio>
+    <Patente>
+		AC182YK
+	</Patente>
+    <Marca>
+		BMW
+	</Marca>
+    <Modelo>
+		118I ACTIVE 5 P.
+	</Modelo>
+    <Año>
+		2017
+	</Año>
+    <Precio>
+		5200000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="3">
-    <Patente>CC123CC</Patente>
-    <Marca>Renault</Marca>
-    <Modelo>3008</Modelo>
-    <Año>2023</Año>
-    <Precio>1000</Precio>
+    <Patente>
+		MQP266
+	</Patente>
+    <Marca>
+		CHERY
+	</Marca>
+    <Modelo>
+		QQ 1.1 LIGHT
+	</Modelo>
+    <Año>
+		2013
+	</Año>
+    <Precio>
+		989900
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="4">
-    <Patente>DD123DD</Patente>
-    <Marca>VW</Marca>
-    <Modelo>Beetle</Modelo>
-    <Año>1980</Año>
-    <Precio>1000</Precio>
+    <Patente>
+		LVP150
+	</Patente>
+    <Marca>
+		CHEVROLET
+	</Marca>
+    <Modelo>
+		AGILE 1.4 LT
+	</Modelo>
+    <Año>
+		2012
+	</Año>
+    <Precio>
+		950000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="5">
-    <Patente>EE123EE</Patente>
-    <Marca>Tesla</Marca>
-    <Modelo>Router</Modelo>
-    <Año>2025</Año>
-    <Precio>5000</Precio>
+    <Patente>
+		PFK991
+	</Patente>
+    <Marca>
+		CITROEN
+	</Marca>
+    <Modelo>
+		BERLINGO MULTISPACE 1.6 XTR HDI
+	</Modelo>
+    <Año>
+		2015
+	</Año>
+    <Precio>
+		1950000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="6">
-    <Patente>FF123FF</Patente>
-    <Marca>Thunder</Marca>
-    <Modelo>Blue</Modelo>
-    <Año>2023</Año>
-    <Precio>4000</Precio>
+    <Patente>
+		PEJ554
+	</Patente>
+    <Marca>
+		FIAT
+	</Marca>
+    <Modelo>
+		500 1.4 SPORT
+	</Modelo>
+    <Año>
+		2014
+	</Año>
+    <Precio>
+		2150000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="7">
-    <Patente>GG123GG</Patente>
-    <Marca>Torino</Marca>
-    <Modelo>Cruze</Modelo>
-    <Año>1980</Año>
-    <Precio>1000</Precio>
+    <Patente>
+		AC426OV
+	</Patente>
+    <Marca>
+		FORD
+	</Marca>
+    <Modelo>
+		ECO SPORT 1.5 SE L/18
+	</Modelo>
+    <Año>
+		2018
+	</Año>
+    <Precio>
+		2979248
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="8">
-    <Patente>HH123HH</Patente>
-    <Marca>Chevrolet</Marca>
-    <Modelo>Malibu</Modelo>
-    <Año>2019</Año>
-    <Precio>15000</Precio>
+    <Patente>
+		NCS788
+	</Patente>
+    <Marca>
+		HONDA
+	</Marca>
+    <Modelo>
+		CRV 2.4 4X2 LX AUT L/12
+	</Modelo>
+    <Año>
+		2013
+	</Año>
+    <Precio>
+		2700000
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="9">
-    <Patente>II123II</Patente>
-    <Marca>BMW</Marca>
-    <Modelo>X5</Modelo>
-    <Año>2021</Año>
-    <Precio>35000</Precio>
+    <Patente>
+		AC802MS
+	</Patente>
+    <Marca>
+		NISSAN
+	</Marca>
+    <Modelo>
+		KICKS 1.6 EXCLUSIVE CVT
+	</Modelo>
+    <Año>
+		2018
+	</Año>
+    <Precio>
+		3658725
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
   <Car Id="10">
-    <Patente>JJ123JJ</Patente>
-    <Marca>Honda</Marca>
-    <Modelo>Civic</Modelo>
-    <Año>2020</Año>
-    <Precio>20000</Precio>
+    <Patente>
+		OUX062
+	</Patente>
+    <Marca>
+		PEUGEOT
+	</Marca>
+    <Modelo>
+		208 1.5 5P ACTIVE (RES 2016)
+	</Modelo>
+    <Año>
+		2015
+	</Año>
+    <Precio>
+		1667200
+	</Precio>
     <DueñoId>0</DueñoId>
   </Car>
+
+
+
+
+
+
+	<Car Id="11">
+		<Patente>
+			AD110JT
+
+		</Patente>
+		<Marca>
+			RENAULT
+
+		</Marca>
+		<Modelo>
+			CAPTUR 1.6 INTENS CVT
+
+		</Modelo>
+		<Año>
+			2018
+
+		</Año>
+		<Precio>
+			3230132
+
+		</Precio>
+		<DueñoId>0</DueñoId>
+	</Car>
+
+	
+	
+	
+	
+	<Car Id="12">
+		<Patente>
+			AD042VQ
+
+		</Patente>
+		<Marca>
+			TOYOTA
+
+		</Marca>
+		<Modelo>
+			COROLLA 1.8 XEI L/17
+
+		</Modelo>
+		<Año>
+			2018
+
+		</Año>
+		<Precio>
+			3550000
+
+		</Precio>
+		<DueñoId>0</DueñoId>
+	</Car>
+
+	<Car Id="13">
+		<Patente>
+			AD755ZO
+
+		</Patente>
+		<Marca>
+			VOLKSWAGEN
+
+		</Marca>
+		<Modelo>
+			AMAROK 20TD 4X2 DC HIG.180HP PK
+
+		</Modelo>
+		<Año>
+			2019
+
+		</Año>
+		<Precio>
+			6043600
+
+		</Precio>
+		<DueñoId>0</DueñoId>
+	</Car>
+	
+	
+	
+	
 </ArrayOfCar>

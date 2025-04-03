@@ -1,4 +1,6 @@
-﻿namespace Integrador.Domain.Entities;
+﻿using Integrador.Application.Interfaces;
+
+namespace Integrador.Domain.Entities;
 
 public class Person : BaseEntity
 {
@@ -52,6 +54,7 @@ public class Person : BaseEntity
 
         if (carToRemove == null)
         {
+
             throw new Exception("El auto no pertenece a la persona.");
         }
         else
