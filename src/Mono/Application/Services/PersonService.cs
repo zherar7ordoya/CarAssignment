@@ -2,9 +2,15 @@
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
+using System.CodeDom;
+
 namespace Integrador.Application.Services;
 
-public class PersonService(IGenericRepository<Person> repository) : IPersonManager
+public class PersonService
+(
+    IGenericRepository<Person> repository,
+    IExceptionHandler exceptionHandler
+) : IPersonManager
 {
     public async Task CreatePerson(PersonDTO personDto, CancellationToken ct)
     {
@@ -31,7 +37,8 @@ public class PersonService(IGenericRepository<Person> repository) : IPersonManag
 
         if (person.HasCars())
         {
-            throw new ApplicationException("No se puede eliminar una persona que tiene autos.");
+            exceptionHandler.Handle("No se puede eliminar una persona que tiene autos.");
+            return;
         }
 
         await repository.DeleteAsync(personId, ct);
@@ -75,7 +82,7 @@ public class PersonService(IGenericRepository<Person> repository) : IPersonManag
                 auto.Modelo ?? "Desconocido",
                 auto.Patente ?? "Sin patente",
                 persona.GetIdentityNumber(),
-                persona.GetApellidoNombre()
+                persona.GetNameSurname()
             )))
             .ToList();
 

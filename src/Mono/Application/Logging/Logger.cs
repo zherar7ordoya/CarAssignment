@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.Interfaces;
 
-namespace Integrador.Infrastructure.Logging;
+namespace Integrador.Application.Logging;
 
 public class Logger : ILogger
 {

@@ -6,14 +6,21 @@ namespace Integrador.Application.Exceptions;
 
 public class ExceptionHandler(IMessenger messenger, ILogger<ExceptionHandler> logger) : IExceptionHandler
 {
-    private readonly ILogger<ExceptionHandler> _logger = logger;
-
-    public void Handle(Exception ex) => Handle(ex, "Ocurrió un error inesperado.");
-
-    public void Handle(Exception ex, string defaultMessage)
+    public void Handle(Exception ex)
     {
-        // Loguea con contexto estructurado
-        _logger.LogError(ex, "Error capturado: {Message}", defaultMessage);
-        messenger.ShowError(ex, $"{defaultMessage}\nConsulte el log para más detalles.");
+        logger.LogError(ex, "Error capturado: {Message}", ex.Message);
+        messenger.ShowError(ex, $"{ex.Message}\nConsulte el log para más detalles.");
+    }
+
+    public void Handle(string msg)
+    {
+        logger.LogError("Error capturado: {Message}", msg);
+        messenger.ShowError(new Exception(msg), $"{msg}\nConsulte el log para más detalles.");
+    }
+
+    public void Handle(Exception ex, string msg)
+    {
+        logger.LogError(ex, "Error capturado: {Message}", msg);
+        messenger.ShowError(ex, $"{msg}\nConsulte el log para más detalles.");
     }
 }

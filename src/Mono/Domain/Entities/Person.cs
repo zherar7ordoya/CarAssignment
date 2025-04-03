@@ -63,6 +63,6 @@ public class Person : BaseEntity
     ////////////////////////////////////////////////////////////////////////////
 
     public List<Car> GetCarsList() => Autos;
-    public string GetApellidoNombre() => $"{Apellido}, {Nombre}";
+    public string GetNameSurname() => $"{Apellido}, {Nombre}";
     public string GetIdentityNumber() => DNI;
 }

@@ -1,5 +1,4 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Presenters;
 
@@ -25,7 +24,7 @@ public partial class ViewForm : Form
         try
         {
             InitializeComponent();
-            ConfigurarEnlaces();
+            ConfigureBingings();
             LoadData();
         }
         catch (Exception ex)
@@ -47,7 +46,7 @@ public partial class ViewForm : Form
 
     ////////////////////////////////////////////////////////////////////////////
 
-    private void PersonasDataGridView_SelectionChanged(object sender, EventArgs e)
+    private void PersonsDataGridView_SelectionChanged(object sender, EventArgs e)
     {
         try
         {
@@ -65,7 +64,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private void NuevoPersonaButton_Click(object sender, EventArgs e)
+    private void NewPersonButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -80,7 +79,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void GuardarPersonaButton_Click(object sender, EventArgs e)
+    private async void SavePersonButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -97,7 +96,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void EliminarPersonaButton_Click(object sender, EventArgs e)
+    private async void DeletePersonButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -115,7 +114,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void AsignarAutoButton_Click(object sender, EventArgs e)
+    private async void AssignCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -132,7 +131,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void DesasignarAutoButton_Click(object sender, EventArgs e)
+    private async void RemoveCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -149,7 +148,7 @@ public partial class ViewForm : Form
 
     }
 
-    private void NuevoAutoButton_Click(object sender, EventArgs e)
+    private void NewCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -164,7 +163,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void GuardarAutoButton_Click(object sender, EventArgs e)
+    private async void SaveCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -181,7 +180,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void EliminarAutoButton_Click(object sender, EventArgs e)
+    private async void DeleteCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -202,13 +201,13 @@ public partial class ViewForm : Form
 
     ////////////////////////////////////////////////////////////////////////////
 
-    private void ConfigurarEnlaces()
+    private void ConfigureBingings()
     {
-        ConfigurarBindingSources();
-        ConfigurarDataGridView();
+        ConfigureBindingSources();
+        ConfigureDataGridView();
     }
 
-    private void ConfigurarBindingSources()
+    private void ConfigureBindingSources()
     {
         var bindings = new (Control Control, string Property, BindingSource Source)[]
         {
@@ -224,10 +223,13 @@ public partial class ViewForm : Form
             (PrecioTextBox, nameof(CarDTO.Precio), _availableCars)
         };
 
-        ConfigurarBindingSources(bindings);
+        ConfigureBindingSources(bindings);
     }
 
-    private static void ConfigurarBindingSources((Control Control, string Property, BindingSource Source)[] bindings)
+    private static void ConfigureBindingSources
+    (
+        (Control Control, string Property, BindingSource Source)[] bindings
+    )
     {
         foreach (var (control, property, source) in bindings)
         {
@@ -235,9 +237,9 @@ public partial class ViewForm : Form
         }
     }
 
-    private void ConfigurarDataGridView()
+    private void ConfigureDataGridView()
     {
-        ConfigurarDataGridView(PersonasDGV, _persons,
+        ConfigureDataGridView(PersonsDGV, _persons,
         [
             ("Id", "ID"),
             ("DNI", "DNI"),
@@ -245,7 +247,7 @@ public partial class ViewForm : Form
             ("Apellido", "Apellido")
         ]);
 
-        ConfigurarDataGridView(AutosPersonaDGV, _personCars,
+        ConfigureDataGridView(PersonCarsDGV, _personCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -255,7 +257,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigurarDataGridView(AutosDisponiblesDGV, _availableCars,
+        ConfigureDataGridView(AvailableCarsDGV, _availableCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -265,7 +267,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigurarDataGridView(AutosAsignadosDGV, _assignedCars,
+        ConfigureDataGridView(AssignedCarsDGV, _assignedCars,
         [
             ("Marca", "Marca"),
             ("Año", "Año"),
@@ -276,7 +278,9 @@ public partial class ViewForm : Form
         ]);
     }
 
-    private static void ConfigurarDataGridView(DataGridView dataGridView, BindingSource bindingSource, (string Property, string Header)[] columns)
+    private static void ConfigureDataGridView(DataGridView dataGridView,
+                                              BindingSource bindingSource,
+                                              (string Property, string Header)[] columns)
     {
         dataGridView.AutoGenerateColumns = false;
         dataGridView.DataSource = bindingSource;

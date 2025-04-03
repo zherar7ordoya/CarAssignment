@@ -1,6 +1,5 @@
 ﻿using System.Xml.Serialization;
 
-using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
