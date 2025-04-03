@@ -2,9 +2,9 @@
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
-namespace Integrador.Application.Managers;
+namespace Integrador.Application.Services;
 
-public class PersonManager(IGenericRepository<Person> repository) : IPersonManager
+public class PersonService(IGenericRepository<Person> repository) : IPersonManager
 {
     public async Task CreatePerson(PersonDTO personDto, CancellationToken ct)
     {

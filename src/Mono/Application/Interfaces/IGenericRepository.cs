@@ -1,4 +1,6 @@
-﻿namespace Integrador.Application.Interfaces;
+﻿using Integrador.Domain.Entities;
+
+namespace Integrador.Application.Interfaces;
 
 public interface IGenericRepository<T> where T : IEntity
 {

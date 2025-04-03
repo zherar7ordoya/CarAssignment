@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces;
+﻿namespace Integrador.Domain.Entities;
 
 public interface IEntity
 {

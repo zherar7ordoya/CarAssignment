@@ -2,9 +2,9 @@
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
-namespace Integrador.Application.Managers;
+namespace Integrador.Application.Services;
 
-public class CarManager(IGenericRepository<Car> repository) : ICarManager
+public class CarService(IGenericRepository<Car> repository) : ICarManager
 {
     public async Task CreateCar(CarDTO carDto, CancellationToken ct)
     {

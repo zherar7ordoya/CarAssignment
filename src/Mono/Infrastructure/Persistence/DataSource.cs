@@ -2,13 +2,14 @@
 
 using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
+using Integrador.Domain.Entities;
 
 namespace Integrador.Infrastructure.Persistence;
 
 public class DataSource<T>
 (
     IExceptionHandler exceptionHandler,
-    string dataDirectory = "Data"
+    string dataDirectory = "LocalData"
 ) : IDataSource<T> where T : IEntity
 {
     private readonly string _filePath = Path.Combine(Environment.CurrentDirectory,

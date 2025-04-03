@@ -1,9 +1,9 @@
 ﻿using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
-namespace Integrador.Application.Managers
+namespace Integrador.Application.Services
 {
-    public class AssignmentManager
+    public class AssignmentService
     (
         IGenericRepository<Car> carRepository,
         IGenericRepository<Person> personRepository

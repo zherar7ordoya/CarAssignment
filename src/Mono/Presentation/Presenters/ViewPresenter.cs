@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Validators;
 using Integrador.Application.Interfaces;
+using Integrador.Presentation.Validators;
 
 namespace Integrador.Presentation.Presenters;
 

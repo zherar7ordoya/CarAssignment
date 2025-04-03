@@ -9,10 +9,10 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<None Update="Data\Car.xml">
+		<None Update="LocalData\Car.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Data\Person.xml">
+		<None Update="LocalData\Person.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

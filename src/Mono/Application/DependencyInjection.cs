@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Factories;
 using Integrador.Application.Interfaces;
+using Integrador.Presentation.Factories;
 
 using Microsoft.Extensions.DependencyInjection;
 

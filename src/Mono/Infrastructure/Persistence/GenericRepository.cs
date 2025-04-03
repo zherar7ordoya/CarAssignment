@@ -1,4 +1,5 @@
 ﻿using Integrador.Application.Interfaces;
+using Integrador.Domain.Entities;
 
 namespace Integrador.Infrastructure.Persistence;
 

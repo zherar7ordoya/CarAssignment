@@ -1,4 +1,4 @@
-﻿namespace Integrador.Infrastructure.Interfaces;
+﻿namespace Integrador.Application.Interfaces;
 
 public interface ILogger
 {

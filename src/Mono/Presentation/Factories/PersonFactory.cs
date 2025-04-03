@@ -1,7 +1,7 @@
 ﻿using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces;
 
-namespace Integrador.Application.Factories;
+namespace Integrador.Presentation.Factories;
 
 public class PersonFactory : IPersonFactory
 {

@@ -1,6 +1,6 @@
 ﻿using Integrador.Application;
 using Integrador.Application.Interfaces;
-using Integrador.Application.Managers;
+using Integrador.Application.Services;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure;
 using Integrador.Infrastructure.Persistence;
@@ -27,9 +27,9 @@ public class Startup
         services.AddScoped<IGenericRepository<Car>, GenericRepository<Car>>();
 
         // --- Managers (Lógica de Negocio) ---
-        services.AddScoped<IPersonManager, PersonManager>();
-        services.AddScoped<ICarManager, CarManager>();
-        services.AddScoped<IAssignmentManager, AssignmentManager>();
+        services.AddScoped<IPersonManager, PersonService>();
+        services.AddScoped<ICarManager, CarService>();
+        services.AddScoped<IAssignmentManager, AssignmentService>();
 
         // --- Presenters (Interacción con la UI) ---
         services.AddScoped<IViewPresenter, ViewPresenter>();
