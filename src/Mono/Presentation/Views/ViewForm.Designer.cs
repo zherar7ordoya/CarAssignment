@@ -29,73 +29,73 @@ partial class ViewForm
     private void InitializeComponent()
     {
         panel1 = new Panel();
-        CantidadAutosTextBox = new TextBox();
+        txtCarsCount = new TextBox();
         label2 = new Label();
-        ApellidoTextBox = new TextBox();
-        NombreTextBox = new TextBox();
-        DniTextBox = new TextBox();
-        IdPersonaTextBox = new TextBox();
+        txtApellido = new TextBox();
+        txtNombre = new TextBox();
+        txtDNI = new TextBox();
+        txtPersonId = new TextBox();
         label6 = new Label();
         label5 = new Label();
         label4 = new Label();
         label3 = new Label();
-        ValorTotalAutosLabel = new Label();
-        PersonCarsDGV = new DataGridView();
-        EliminarPersonaButton = new Button();
-        GuardarPersonaButton = new Button();
-        NewPersonButton = new Button();
-        PersonsDGV = new DataGridView();
+        lblCarsPrice = new Label();
+        dgvPersonCars = new DataGridView();
+        btnDeletePerson = new Button();
+        btnSavePerson = new Button();
+        btnNewPerson = new Button();
+        dgvPersons = new DataGridView();
         label1 = new Label();
         panel2 = new Panel();
-        PrecioTextBox = new TextBox();
-        AñoTextBox = new TextBox();
+        txtModelo = new TextBox();
+        txtPrecio = new TextBox();
+        txtAño = new TextBox();
         label14 = new Label();
         label11 = new Label();
-        ModeloTextBox = new TextBox();
-        MarcaTextBox = new TextBox();
-        PatenteTextBox = new TextBox();
-        IdAutoTextBox = new TextBox();
+        txtMarca = new TextBox();
+        txtPatente = new TextBox();
+        txtCarId = new TextBox();
         label7 = new Label();
         label8 = new Label();
         label9 = new Label();
         label10 = new Label();
-        EliminarAutoButton = new Button();
-        GuardarAutoButton = new Button();
-        NewCarButton = new Button();
-        AvailableCarsDGV = new DataGridView();
+        btnDeleteCar = new Button();
+        btnSaveCar = new Button();
+        btnNewCar = new Button();
+        dgvAvailableCars = new DataGridView();
         label12 = new Label();
-        AsignarAutoButton = new Button();
-        QuitarAutoButton = new Button();
-        AssignedCarsDGV = new DataGridView();
+        btnAssignCar = new Button();
+        btnRemoveCar = new Button();
+        dgvAssignedCars = new DataGridView();
         label13 = new Label();
         panel1.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)PersonCarsDGV).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)PersonsDGV).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         panel2.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)AvailableCarsDGV).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)AssignedCarsDGV).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)dgvAssignedCars).BeginInit();
         SuspendLayout();
         // 
         // panel1
         // 
         panel1.BackColor = Color.White;
         panel1.BorderStyle = BorderStyle.FixedSingle;
-        panel1.Controls.Add(CantidadAutosTextBox);
+        panel1.Controls.Add(txtCarsCount);
         panel1.Controls.Add(label2);
-        panel1.Controls.Add(ApellidoTextBox);
-        panel1.Controls.Add(NombreTextBox);
-        panel1.Controls.Add(DniTextBox);
-        panel1.Controls.Add(IdPersonaTextBox);
+        panel1.Controls.Add(txtApellido);
+        panel1.Controls.Add(txtNombre);
+        panel1.Controls.Add(txtDNI);
+        panel1.Controls.Add(txtPersonId);
         panel1.Controls.Add(label6);
         panel1.Controls.Add(label5);
         panel1.Controls.Add(label4);
         panel1.Controls.Add(label3);
-        panel1.Controls.Add(ValorTotalAutosLabel);
-        panel1.Controls.Add(PersonCarsDGV);
-        panel1.Controls.Add(EliminarPersonaButton);
-        panel1.Controls.Add(GuardarPersonaButton);
-        panel1.Controls.Add(NewPersonButton);
-        panel1.Controls.Add(PersonsDGV);
+        panel1.Controls.Add(lblCarsPrice);
+        panel1.Controls.Add(dgvPersonCars);
+        panel1.Controls.Add(btnDeletePerson);
+        panel1.Controls.Add(btnSavePerson);
+        panel1.Controls.Add(btnNewPerson);
+        panel1.Controls.Add(dgvPersons);
         panel1.Controls.Add(label1);
         panel1.Location = new Point(12, 12);
         panel1.Name = "panel1";
@@ -103,13 +103,13 @@ partial class ViewForm
         panel1.Size = new Size(535, 490);
         panel1.TabIndex = 0;
         // 
-        // CantidadAutosTextBox
+        // txtCarsCount
         // 
-        CantidadAutosTextBox.Location = new Point(419, 414);
-        CantidadAutosTextBox.Name = "CantidadAutosTextBox";
-        CantidadAutosTextBox.ReadOnly = true;
-        CantidadAutosTextBox.Size = new Size(100, 25);
-        CantidadAutosTextBox.TabIndex = 16;
+        txtCarsCount.Location = new Point(419, 414);
+        txtCarsCount.Name = "txtCarsCount";
+        txtCarsCount.ReadOnly = true;
+        txtCarsCount.Size = new Size(100, 25);
+        txtCarsCount.TabIndex = 16;
         // 
         // label2
         // 
@@ -120,34 +120,34 @@ partial class ViewForm
         label2.TabIndex = 15;
         label2.Text = "Cantidad autos";
         // 
-        // ApellidoTextBox
+        // txtApellido
         // 
-        ApellidoTextBox.Location = new Point(221, 414);
-        ApellidoTextBox.Name = "ApellidoTextBox";
-        ApellidoTextBox.Size = new Size(100, 25);
-        ApellidoTextBox.TabIndex = 14;
+        txtApellido.Location = new Point(221, 414);
+        txtApellido.Name = "txtApellido";
+        txtApellido.Size = new Size(100, 25);
+        txtApellido.TabIndex = 14;
         // 
-        // NombreTextBox
+        // txtNombre
         // 
-        NombreTextBox.Location = new Point(221, 379);
-        NombreTextBox.Name = "NombreTextBox";
-        NombreTextBox.Size = new Size(100, 25);
-        NombreTextBox.TabIndex = 13;
+        txtNombre.Location = new Point(221, 379);
+        txtNombre.Name = "txtNombre";
+        txtNombre.Size = new Size(100, 25);
+        txtNombre.TabIndex = 13;
         // 
-        // DniTextBox
+        // txtDNI
         // 
-        DniTextBox.Location = new Point(48, 414);
-        DniTextBox.Name = "DniTextBox";
-        DniTextBox.Size = new Size(100, 25);
-        DniTextBox.TabIndex = 12;
+        txtDNI.Location = new Point(48, 414);
+        txtDNI.Name = "txtDNI";
+        txtDNI.Size = new Size(100, 25);
+        txtDNI.TabIndex = 12;
         // 
-        // IdPersonaTextBox
+        // txtPersonId
         // 
-        IdPersonaTextBox.Location = new Point(48, 379);
-        IdPersonaTextBox.Name = "IdPersonaTextBox";
-        IdPersonaTextBox.ReadOnly = true;
-        IdPersonaTextBox.Size = new Size(100, 25);
-        IdPersonaTextBox.TabIndex = 11;
+        txtPersonId.Location = new Point(48, 379);
+        txtPersonId.Name = "txtPersonId";
+        txtPersonId.ReadOnly = true;
+        txtPersonId.Size = new Size(100, 25);
+        txtPersonId.TabIndex = 11;
         // 
         // label6
         // 
@@ -185,78 +185,78 @@ partial class ViewForm
         label3.TabIndex = 7;
         label3.Text = "Id";
         // 
-        // ValorTotalAutosLabel
+        // lblCarsPrice
         // 
-        ValorTotalAutosLabel.Font = new Font("Calibri", 22F);
-        ValorTotalAutosLabel.Location = new Point(11, 445);
-        ValorTotalAutosLabel.Name = "ValorTotalAutosLabel";
-        ValorTotalAutosLabel.Size = new Size(214, 37);
-        ValorTotalAutosLabel.TabIndex = 6;
-        ValorTotalAutosLabel.Text = "Total";
-        ValorTotalAutosLabel.TextAlign = ContentAlignment.MiddleLeft;
+        lblCarsPrice.Font = new Font("Calibri", 22F);
+        lblCarsPrice.Location = new Point(11, 445);
+        lblCarsPrice.Name = "lblCarsPrice";
+        lblCarsPrice.Size = new Size(214, 37);
+        lblCarsPrice.TabIndex = 6;
+        lblCarsPrice.Text = "Total";
+        lblCarsPrice.TextAlign = ContentAlignment.MiddleLeft;
         // 
-        // AutosPersonaDGV
+        // dgvPersonCars
         // 
-        PersonCarsDGV.AllowUserToAddRows = false;
-        PersonCarsDGV.AllowUserToDeleteRows = false;
-        PersonCarsDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        PersonCarsDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        PersonCarsDGV.Location = new Point(11, 246);
-        PersonCarsDGV.Name = "AutosPersonaDGV";
-        PersonCarsDGV.ReadOnly = true;
-        PersonCarsDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        PersonCarsDGV.Size = new Size(506, 127);
-        PersonCarsDGV.TabIndex = 5;
+        dgvPersonCars.AllowUserToAddRows = false;
+        dgvPersonCars.AllowUserToDeleteRows = false;
+        dgvPersonCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dgvPersonCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dgvPersonCars.Location = new Point(11, 246);
+        dgvPersonCars.Name = "dgvPersonCars";
+        dgvPersonCars.ReadOnly = true;
+        dgvPersonCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dgvPersonCars.Size = new Size(509, 127);
+        dgvPersonCars.TabIndex = 5;
         // 
-        // EliminarPersonaButton
+        // btnDeletePerson
         // 
-        EliminarPersonaButton.AutoSize = true;
-        EliminarPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        EliminarPersonaButton.Location = new Point(451, 445);
-        EliminarPersonaButton.Name = "EliminarPersonaButton";
-        EliminarPersonaButton.Size = new Size(69, 28);
-        EliminarPersonaButton.TabIndex = 4;
-        EliminarPersonaButton.Text = "Eliminar";
-        EliminarPersonaButton.UseVisualStyleBackColor = true;
-        EliminarPersonaButton.Click += DeletePersonButton_Click;
+        btnDeletePerson.AutoSize = true;
+        btnDeletePerson.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnDeletePerson.Location = new Point(451, 445);
+        btnDeletePerson.Name = "btnDeletePerson";
+        btnDeletePerson.Size = new Size(69, 28);
+        btnDeletePerson.TabIndex = 4;
+        btnDeletePerson.Text = "Eliminar";
+        btnDeletePerson.UseVisualStyleBackColor = true;
+        btnDeletePerson.Click += DeletePersonButton_Click;
         // 
-        // GuardarPersonaButton
+        // btnSavePerson
         // 
-        GuardarPersonaButton.AutoSize = true;
-        GuardarPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        GuardarPersonaButton.Location = new Point(378, 445);
-        GuardarPersonaButton.Name = "GuardarPersonaButton";
-        GuardarPersonaButton.Size = new Size(67, 28);
-        GuardarPersonaButton.TabIndex = 3;
-        GuardarPersonaButton.Text = "Guardar";
-        GuardarPersonaButton.UseVisualStyleBackColor = true;
-        GuardarPersonaButton.Click += SavePersonButton_Click;
+        btnSavePerson.AutoSize = true;
+        btnSavePerson.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnSavePerson.Location = new Point(378, 445);
+        btnSavePerson.Name = "btnSavePerson";
+        btnSavePerson.Size = new Size(67, 28);
+        btnSavePerson.TabIndex = 3;
+        btnSavePerson.Text = "Guardar";
+        btnSavePerson.UseVisualStyleBackColor = true;
+        btnSavePerson.Click += SavePersonButton_Click;
         // 
-        // NuevoPersonaButton
+        // btnNewPerson
         // 
-        NewPersonButton.AutoSize = true;
-        NewPersonButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        NewPersonButton.Location = new Point(313, 445);
-        NewPersonButton.Name = "NuevoPersonaButton";
-        NewPersonButton.Size = new Size(59, 28);
-        NewPersonButton.TabIndex = 2;
-        NewPersonButton.Text = "Nuevo";
-        NewPersonButton.UseVisualStyleBackColor = true;
-        NewPersonButton.Click += NewPersonButton_Click;
+        btnNewPerson.AutoSize = true;
+        btnNewPerson.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnNewPerson.Location = new Point(313, 445);
+        btnNewPerson.Name = "btnNewPerson";
+        btnNewPerson.Size = new Size(59, 28);
+        btnNewPerson.TabIndex = 2;
+        btnNewPerson.Text = "Nuevo";
+        btnNewPerson.UseVisualStyleBackColor = true;
+        btnNewPerson.Click += NewPersonButton_Click;
         // 
-        // PersonasDGV
+        // dgvPersons
         // 
-        PersonsDGV.AllowUserToAddRows = false;
-        PersonsDGV.AllowUserToDeleteRows = false;
-        PersonsDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        PersonsDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        PersonsDGV.Location = new Point(13, 50);
-        PersonsDGV.Name = "PersonasDGV";
-        PersonsDGV.ReadOnly = true;
-        PersonsDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        PersonsDGV.Size = new Size(506, 190);
-        PersonsDGV.TabIndex = 1;
-        PersonsDGV.SelectionChanged += PersonsDataGridView_SelectionChanged;
+        dgvPersons.AllowUserToAddRows = false;
+        dgvPersons.AllowUserToDeleteRows = false;
+        dgvPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dgvPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dgvPersons.Location = new Point(13, 50);
+        dgvPersons.Name = "dgvPersons";
+        dgvPersons.ReadOnly = true;
+        dgvPersons.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dgvPersons.Size = new Size(506, 190);
+        dgvPersons.TabIndex = 1;
+        dgvPersons.SelectionChanged += PersonsDataGridView_SelectionChanged;
         // 
         // label1
         // 
@@ -272,22 +272,22 @@ partial class ViewForm
         // 
         panel2.BackColor = Color.White;
         panel2.BorderStyle = BorderStyle.FixedSingle;
-        panel2.Controls.Add(PrecioTextBox);
-        panel2.Controls.Add(AñoTextBox);
+        panel2.Controls.Add(txtModelo);
+        panel2.Controls.Add(txtPrecio);
+        panel2.Controls.Add(txtAño);
         panel2.Controls.Add(label14);
         panel2.Controls.Add(label11);
-        panel2.Controls.Add(ModeloTextBox);
-        panel2.Controls.Add(MarcaTextBox);
-        panel2.Controls.Add(PatenteTextBox);
-        panel2.Controls.Add(IdAutoTextBox);
+        panel2.Controls.Add(txtMarca);
+        panel2.Controls.Add(txtPatente);
+        panel2.Controls.Add(txtCarId);
         panel2.Controls.Add(label7);
         panel2.Controls.Add(label8);
         panel2.Controls.Add(label9);
         panel2.Controls.Add(label10);
-        panel2.Controls.Add(EliminarAutoButton);
-        panel2.Controls.Add(GuardarAutoButton);
-        panel2.Controls.Add(NewCarButton);
-        panel2.Controls.Add(AvailableCarsDGV);
+        panel2.Controls.Add(btnDeleteCar);
+        panel2.Controls.Add(btnSaveCar);
+        panel2.Controls.Add(btnNewCar);
+        panel2.Controls.Add(dgvAvailableCars);
         panel2.Controls.Add(label12);
         panel2.Location = new Point(709, 12);
         panel2.Name = "panel2";
@@ -295,19 +295,26 @@ partial class ViewForm
         panel2.Size = new Size(528, 490);
         panel2.TabIndex = 1;
         // 
-        // PrecioTextBox
+        // txtModelo
         // 
-        PrecioTextBox.Location = new Point(413, 414);
-        PrecioTextBox.Name = "PrecioTextBox";
-        PrecioTextBox.Size = new Size(100, 25);
-        PrecioTextBox.TabIndex = 19;
+        txtModelo.Location = new Point(245, 414);
+        txtModelo.Name = "txtModelo";
+        txtModelo.Size = new Size(100, 25);
+        txtModelo.TabIndex = 20;
         // 
-        // AñoTextBox
+        // txtPrecio
         // 
-        AñoTextBox.Location = new Point(413, 383);
-        AñoTextBox.Name = "AñoTextBox";
-        AñoTextBox.Size = new Size(100, 25);
-        AñoTextBox.TabIndex = 18;
+        txtPrecio.Location = new Point(413, 414);
+        txtPrecio.Name = "txtPrecio";
+        txtPrecio.Size = new Size(100, 25);
+        txtPrecio.TabIndex = 19;
+        // 
+        // txtAño
+        // 
+        txtAño.Location = new Point(413, 383);
+        txtAño.Name = "txtAño";
+        txtAño.Size = new Size(100, 25);
+        txtAño.TabIndex = 18;
         // 
         // label14
         // 
@@ -327,34 +334,27 @@ partial class ViewForm
         label11.TabIndex = 16;
         label11.Text = "Precio";
         // 
-        // ModeloTextBox
+        // txtMarca
         // 
-        ModeloTextBox.Location = new Point(245, 414);
-        ModeloTextBox.Name = "ModeloTextBox";
-        ModeloTextBox.Size = new Size(100, 25);
-        ModeloTextBox.TabIndex = 14;
+        txtMarca.Location = new Point(245, 383);
+        txtMarca.Name = "txtMarca";
+        txtMarca.Size = new Size(100, 25);
+        txtMarca.TabIndex = 13;
         // 
-        // MarcaTextBox
+        // txtPatente
         // 
-        MarcaTextBox.Location = new Point(245, 383);
-        MarcaTextBox.Name = "MarcaTextBox";
-        MarcaTextBox.Size = new Size(100, 25);
-        MarcaTextBox.TabIndex = 13;
+        txtPatente.Location = new Point(77, 414);
+        txtPatente.Name = "txtPatente";
+        txtPatente.Size = new Size(100, 25);
+        txtPatente.TabIndex = 12;
         // 
-        // PatenteTextBox
+        // txtCarId
         // 
-        PatenteTextBox.Location = new Point(77, 414);
-        PatenteTextBox.Name = "PatenteTextBox";
-        PatenteTextBox.Size = new Size(100, 25);
-        PatenteTextBox.TabIndex = 12;
-        // 
-        // IdAutoTextBox
-        // 
-        IdAutoTextBox.Location = new Point(77, 383);
-        IdAutoTextBox.Name = "IdAutoTextBox";
-        IdAutoTextBox.ReadOnly = true;
-        IdAutoTextBox.Size = new Size(100, 25);
-        IdAutoTextBox.TabIndex = 11;
+        txtCarId.Location = new Point(77, 383);
+        txtCarId.Name = "txtCarId";
+        txtCarId.ReadOnly = true;
+        txtCarId.Size = new Size(100, 25);
+        txtCarId.TabIndex = 11;
         // 
         // label7
         // 
@@ -392,54 +392,54 @@ partial class ViewForm
         label10.TabIndex = 7;
         label10.Text = "Id";
         // 
-        // EliminarAutoButton
+        // btnDeleteCar
         // 
-        EliminarAutoButton.AutoSize = true;
-        EliminarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        EliminarAutoButton.Location = new Point(443, 445);
-        EliminarAutoButton.Name = "EliminarAutoButton";
-        EliminarAutoButton.Size = new Size(69, 28);
-        EliminarAutoButton.TabIndex = 4;
-        EliminarAutoButton.Text = "Eliminar";
-        EliminarAutoButton.UseVisualStyleBackColor = true;
-        EliminarAutoButton.Click += DeleteCarButton_Click;
+        btnDeleteCar.AutoSize = true;
+        btnDeleteCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnDeleteCar.Location = new Point(443, 445);
+        btnDeleteCar.Name = "btnDeleteCar";
+        btnDeleteCar.Size = new Size(69, 28);
+        btnDeleteCar.TabIndex = 4;
+        btnDeleteCar.Text = "Eliminar";
+        btnDeleteCar.UseVisualStyleBackColor = true;
+        btnDeleteCar.Click += DeleteCarButton_Click;
         // 
-        // GuardarAutoButton
+        // btnSaveCar
         // 
-        GuardarAutoButton.AutoSize = true;
-        GuardarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        GuardarAutoButton.Location = new Point(370, 445);
-        GuardarAutoButton.Name = "GuardarAutoButton";
-        GuardarAutoButton.Size = new Size(67, 28);
-        GuardarAutoButton.TabIndex = 3;
-        GuardarAutoButton.Text = "Guardar";
-        GuardarAutoButton.UseVisualStyleBackColor = true;
-        GuardarAutoButton.Click += SaveCarButton_Click;
+        btnSaveCar.AutoSize = true;
+        btnSaveCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnSaveCar.Location = new Point(370, 445);
+        btnSaveCar.Name = "btnSaveCar";
+        btnSaveCar.Size = new Size(67, 28);
+        btnSaveCar.TabIndex = 3;
+        btnSaveCar.Text = "Guardar";
+        btnSaveCar.UseVisualStyleBackColor = true;
+        btnSaveCar.Click += SaveCarButton_Click;
         // 
-        // NuevoAutoButton
+        // btnNewCar
         // 
-        NewCarButton.AutoSize = true;
-        NewCarButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        NewCarButton.Location = new Point(305, 445);
-        NewCarButton.Name = "NuevoAutoButton";
-        NewCarButton.Size = new Size(59, 28);
-        NewCarButton.TabIndex = 2;
-        NewCarButton.Text = "Nuevo";
-        NewCarButton.UseVisualStyleBackColor = true;
-        NewCarButton.Click += NewCarButton_Click;
+        btnNewCar.AutoSize = true;
+        btnNewCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnNewCar.Location = new Point(305, 445);
+        btnNewCar.Name = "btnNewCar";
+        btnNewCar.Size = new Size(59, 28);
+        btnNewCar.TabIndex = 2;
+        btnNewCar.Text = "Nuevo";
+        btnNewCar.UseVisualStyleBackColor = true;
+        btnNewCar.Click += NewCarButton_Click;
         // 
-        // AutosDisponiblesDGV
+        // dgvAvailableCars
         // 
-        AvailableCarsDGV.AllowUserToAddRows = false;
-        AvailableCarsDGV.AllowUserToDeleteRows = false;
-        AvailableCarsDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        AvailableCarsDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        AvailableCarsDGV.Location = new Point(13, 50);
-        AvailableCarsDGV.Name = "AutosDisponiblesDGV";
-        AvailableCarsDGV.ReadOnly = true;
-        AvailableCarsDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        AvailableCarsDGV.Size = new Size(499, 323);
-        AvailableCarsDGV.TabIndex = 1;
+        dgvAvailableCars.AllowUserToAddRows = false;
+        dgvAvailableCars.AllowUserToDeleteRows = false;
+        dgvAvailableCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dgvAvailableCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dgvAvailableCars.Location = new Point(13, 50);
+        dgvAvailableCars.Name = "dgvAvailableCars";
+        dgvAvailableCars.ReadOnly = true;
+        dgvAvailableCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dgvAvailableCars.Size = new Size(499, 323);
+        dgvAvailableCars.TabIndex = 1;
         // 
         // label12
         // 
@@ -451,42 +451,42 @@ partial class ViewForm
         label12.TabIndex = 0;
         label12.Text = "Autos disponibles";
         // 
-        // AsignarAutoButton
+        // btnAssignCar
         // 
-        AsignarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        AsignarAutoButton.Location = new Point(553, 297);
-        AsignarAutoButton.Name = "AsignarAutoButton";
-        AsignarAutoButton.Size = new Size(150, 30);
-        AsignarAutoButton.TabIndex = 15;
-        AsignarAutoButton.Text = "← Asignar auto";
-        AsignarAutoButton.TextImageRelation = TextImageRelation.TextBeforeImage;
-        AsignarAutoButton.UseVisualStyleBackColor = true;
-        AsignarAutoButton.Click += AssignCarButton_Click;
+        btnAssignCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnAssignCar.Location = new Point(553, 297);
+        btnAssignCar.Name = "btnAssignCar";
+        btnAssignCar.Size = new Size(150, 30);
+        btnAssignCar.TabIndex = 15;
+        btnAssignCar.Text = "← Asignar auto";
+        btnAssignCar.TextImageRelation = TextImageRelation.TextBeforeImage;
+        btnAssignCar.UseVisualStyleBackColor = true;
+        btnAssignCar.Click += AssignCarButton_Click;
         // 
-        // QuitarAutoButton
+        // btnRemoveCar
         // 
-        QuitarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        QuitarAutoButton.Location = new Point(553, 333);
-        QuitarAutoButton.Name = "QuitarAutoButton";
-        QuitarAutoButton.Size = new Size(150, 30);
-        QuitarAutoButton.TabIndex = 16;
-        QuitarAutoButton.Text = "Desasignar auto →";
-        QuitarAutoButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-        QuitarAutoButton.UseVisualStyleBackColor = true;
-        QuitarAutoButton.Click += RemoveCarButton_Click;
+        btnRemoveCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        btnRemoveCar.Location = new Point(553, 333);
+        btnRemoveCar.Name = "btnRemoveCar";
+        btnRemoveCar.Size = new Size(150, 30);
+        btnRemoveCar.TabIndex = 16;
+        btnRemoveCar.Text = "Desasignar auto →";
+        btnRemoveCar.TextImageRelation = TextImageRelation.ImageBeforeText;
+        btnRemoveCar.UseVisualStyleBackColor = true;
+        btnRemoveCar.Click += RemoveCarButton_Click;
         // 
-        // AutosAsignadosDGV
+        // dgvAssignedCars
         // 
-        AssignedCarsDGV.AllowUserToAddRows = false;
-        AssignedCarsDGV.AllowUserToDeleteRows = false;
-        AssignedCarsDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        AssignedCarsDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        AssignedCarsDGV.Location = new Point(234, 508);
-        AssignedCarsDGV.Name = "AutosAsignadosDGV";
-        AssignedCarsDGV.ReadOnly = true;
-        AssignedCarsDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        AssignedCarsDGV.Size = new Size(1003, 150);
-        AssignedCarsDGV.TabIndex = 17;
+        dgvAssignedCars.AllowUserToAddRows = false;
+        dgvAssignedCars.AllowUserToDeleteRows = false;
+        dgvAssignedCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dgvAssignedCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dgvAssignedCars.Location = new Point(234, 508);
+        dgvAssignedCars.Name = "dgvAssignedCars";
+        dgvAssignedCars.ReadOnly = true;
+        dgvAssignedCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dgvAssignedCars.Size = new Size(1003, 150);
+        dgvAssignedCars.TabIndex = 17;
         // 
         // label13
         // 
@@ -505,9 +505,9 @@ partial class ViewForm
         BackColor = SystemColors.Control;
         ClientSize = new Size(1247, 668);
         Controls.Add(label13);
-        Controls.Add(AssignedCarsDGV);
-        Controls.Add(QuitarAutoButton);
-        Controls.Add(AsignarAutoButton);
+        Controls.Add(dgvAssignedCars);
+        Controls.Add(btnRemoveCar);
+        Controls.Add(btnAssignCar);
         Controls.Add(panel2);
         Controls.Add(panel1);
         Font = new Font("Calibri", 11F);
@@ -517,12 +517,12 @@ partial class ViewForm
         Text = "Integrador";
         panel1.ResumeLayout(false);
         panel1.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)PersonCarsDGV).EndInit();
-        ((System.ComponentModel.ISupportInitialize)PersonsDGV).EndInit();
+        ((System.ComponentModel.ISupportInitialize)dgvPersonCars).EndInit();
+        ((System.ComponentModel.ISupportInitialize)dgvPersons).EndInit();
         panel2.ResumeLayout(false);
         panel2.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)AvailableCarsDGV).EndInit();
-        ((System.ComponentModel.ISupportInitialize)AssignedCarsDGV).EndInit();
+        ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).EndInit();
+        ((System.ComponentModel.ISupportInitialize)dgvAssignedCars).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -531,42 +531,42 @@ partial class ViewForm
 
     internal Panel panel1;
     internal Label label1;
-    internal DataGridView PersonsDGV;
-    internal Button EliminarPersonaButton;
-    internal Button GuardarPersonaButton;
-    internal Button NewPersonButton;
-    internal DataGridView PersonCarsDGV;
-    internal Label ValorTotalAutosLabel;
+    internal DataGridView dgvPersons;
+    internal Button btnDeletePerson;
+    internal Button btnSavePerson;
+    internal Button btnNewPerson;
+    internal DataGridView dgvPersonCars;
+    internal Label lblCarsPrice;
     internal Label label6;
     internal Label label5;
     internal Label label4;
     internal Label label3;
-    internal TextBox ApellidoTextBox;
-    internal TextBox NombreTextBox;
-    internal TextBox DniTextBox;
-    internal TextBox IdPersonaTextBox;
+    internal TextBox txtApellido;
+    internal TextBox txtNombre;
+    internal TextBox txtDNI;
+    internal TextBox txtPersonId;
     internal Panel panel2;
-    internal TextBox ModeloTextBox;
-    internal TextBox MarcaTextBox;
-    internal TextBox PatenteTextBox;
-    internal TextBox IdAutoTextBox;
+    internal TextBox txtMarca;
+    internal TextBox txtPatente;
+    internal TextBox txtCarId;
     internal Label label7;
     internal Label label8;
     internal Label label9;
     internal Label label10;
-    internal Button EliminarAutoButton;
-    internal Button GuardarAutoButton;
-    internal Button NewCarButton;
-    internal DataGridView AvailableCarsDGV;
+    internal Button btnDeleteCar;
+    internal Button btnSaveCar;
+    internal Button btnNewCar;
+    internal DataGridView dgvAvailableCars;
     internal Label label12;
     internal Label label11;
-    internal Button AsignarAutoButton;
-    internal Button QuitarAutoButton;
-    internal DataGridView AssignedCarsDGV;
+    internal Button btnAssignCar;
+    internal Button btnRemoveCar;
+    internal DataGridView dgvAssignedCars;
     internal Label label13;
-    internal TextBox AñoTextBox;
+    internal TextBox txtAño;
     internal Label label14;
-    internal TextBox PrecioTextBox;
-    internal TextBox CantidadAutosTextBox;
+    internal TextBox txtPrecio;
+    internal TextBox txtCarsCount;
     internal Label label2;
+    private TextBox txtModelo;
 }

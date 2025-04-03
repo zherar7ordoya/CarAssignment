@@ -8,9 +8,9 @@ public class CarService(IGenericRepository<Car> repository) : ICarManager
 {
     public async Task CreateCar(CarDTO carDto, CancellationToken ct)
     {
-        var car = new Car(carDto.Patente,
-                          carDto.Marca,
-                          carDto.Modelo,
+        var car = new Car(carDto.Patente.Trim(),
+                          carDto.Marca.Trim(),
+                          carDto.Modelo.Trim(),
                           carDto.Año,
                           carDto.Precio);
 
@@ -21,9 +21,9 @@ public class CarService(IGenericRepository<Car> repository) : ICarManager
     {
         var car = await repository.GetByIdAsync(carDto.Id, ct) ?? throw new Exception("El auto no existe.");
 
-        car.Patente = carDto.Patente;
-        car.Marca = carDto.Marca;
-        car.Modelo = carDto.Modelo;
+        car.Patente = carDto.Patente.Trim();
+        car.Marca = carDto.Marca.Trim();
+        car.Modelo = carDto.Modelo.Trim();
         car.Año = carDto.Año;
         car.Precio = carDto.Precio;
 

@@ -14,9 +14,9 @@ public class PersonService
 {
     public async Task CreatePerson(PersonDTO personDto, CancellationToken ct)
     {
-        var person = new Person(personDto.Nombre,
-                                personDto.Apellido,
-                                personDto.DNI);
+        var person = new Person(personDto.Nombre.Trim(),
+                                personDto.Apellido.Trim(),
+                                personDto.DNI.Trim());
 
         await repository.CreateAsync(person, ct);
     }
@@ -25,9 +25,9 @@ public class PersonService
     {
         var person = await repository.GetByIdAsync(personDto.Id, ct) ?? throw new Exception("La persona no existe.");
 
-        person.Nombre = personDto.Nombre;
-        person.Apellido = personDto.Apellido;
-        person.DNI = personDto.DNI;
+        person.Nombre = personDto.Nombre.Trim();
+        person.Apellido = personDto.Apellido.Trim();
+        person.DNI = personDto.DNI.Trim();
 
         await repository.UpdateAsync(person, ct);
     }

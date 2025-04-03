@@ -2,6 +2,9 @@
 using Integrador.Application.Interfaces;
 using Integrador.Presentation.Presenters;
 
+using System.Diagnostics;
+using System.Windows.Forms;
+
 namespace Integrador;
 
 public partial class ViewForm : Form
@@ -54,8 +57,8 @@ public partial class ViewForm : Form
             {
                 _personCars.DataSource = person.Autos;
                 _personCars.ResetBindings(false);
-                ValorTotalAutosLabel.Text = person.GetCarsPrice.ToString("C");
-                CantidadAutosTextBox.Text = person.GetCarsCount.ToString();
+                lblCarsPrice.Text = person.GetCarsPrice.ToString("C");
+                txtCarsCount.Text = person.GetCarsCount.ToString();
             }
         }
         catch (Exception ex)
@@ -71,7 +74,7 @@ public partial class ViewForm : Form
             PersonDTO person = _personFactory.CreateDefault();
             _persons.Add(person);
             _persons.MoveLast();
-            NewPersonButton.Enabled = false;
+            btnNewPerson.Enabled = false;
         }
         catch (Exception ex)
         {
@@ -87,7 +90,7 @@ public partial class ViewForm : Form
             {
                 await _viewPresenter.SavePerson(person);
                 LoadData();
-                NewCarButton.Enabled = true;
+                btnNewCar.Enabled = true;
             }
         }
         catch (Exception ex)
@@ -155,7 +158,7 @@ public partial class ViewForm : Form
             var newCar = _carFactory.CreateDefault(); // Datos por defecto
             _availableCars.Add(newCar);
             _availableCars.MoveLast();
-            NewCarButton.Enabled = false;
+            btnNewCar.Enabled = false;
         }
         catch (Exception ex)
         {
@@ -171,7 +174,7 @@ public partial class ViewForm : Form
             {
                 await _viewPresenter.SaveCar(car);
                 LoadData();
-                NewCarButton.Enabled = true;
+                btnNewCar.Enabled = true;
             }
         }
         catch (Exception ex)
@@ -211,16 +214,18 @@ public partial class ViewForm : Form
     {
         var bindings = new (Control Control, string Property, BindingSource Source)[]
         {
-            (IdPersonaTextBox, nameof(PersonDTO.Id), _persons),
-            (DniTextBox, nameof(PersonDTO.DNI), _persons),
-            (NombreTextBox, nameof(PersonDTO.Nombre), _persons),
-            (ApellidoTextBox, nameof(PersonDTO.Apellido), _persons),
-            (IdAutoTextBox, nameof(CarDTO.Id), _availableCars),
-            (PatenteTextBox, nameof(CarDTO.Patente), _availableCars),
-            (MarcaTextBox, nameof(CarDTO.Marca), _availableCars),
-            (ModeloTextBox, nameof(CarDTO.Modelo), _availableCars),
-            (AñoTextBox, nameof(CarDTO.Año), _availableCars),
-            (PrecioTextBox, nameof(CarDTO.Precio), _availableCars)
+            // Persons
+            (txtPersonId, nameof(PersonDTO.Id),       _persons),
+            (txtDNI,      nameof(PersonDTO.DNI),      _persons),
+            (txtNombre,   nameof(PersonDTO.Nombre),   _persons),
+            (txtApellido, nameof(PersonDTO.Apellido), _persons),
+            // Cars
+            (txtCarId,   nameof(CarDTO.Id),      _availableCars),
+            (txtPatente, nameof(CarDTO.Patente), _availableCars),
+            (txtMarca,   nameof(CarDTO.Marca),   _availableCars),
+            (txtModelo,  nameof(CarDTO.Modelo),  _availableCars),
+            (txtAño,     nameof(CarDTO.Año),     _availableCars),
+            (txtPrecio,  nameof(CarDTO.Precio),  _availableCars)
         };
 
         ConfigureBindingSources(bindings);
@@ -233,13 +238,13 @@ public partial class ViewForm : Form
     {
         foreach (var (control, property, source) in bindings)
         {
-            control.DataBindings.Add("Text", source, property);
+            control.DataBindings.Add("Text", source, property); // ORIGINAL
         }
     }
 
     private void ConfigureDataGridView()
     {
-        ConfigureDataGridView(PersonsDGV, _persons,
+        ConfigureDataGridView(dgvPersons, _persons,
         [
             ("Id", "ID"),
             ("DNI", "DNI"),
@@ -247,7 +252,7 @@ public partial class ViewForm : Form
             ("Apellido", "Apellido")
         ]);
 
-        ConfigureDataGridView(PersonCarsDGV, _personCars,
+        ConfigureDataGridView(dgvPersonCars, _personCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -257,7 +262,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigureDataGridView(AvailableCarsDGV, _availableCars,
+        ConfigureDataGridView(dgvAvailableCars, _availableCars,
         [
             ("Id", "ID"),
             ("Patente", "Patente"),
@@ -267,7 +272,7 @@ public partial class ViewForm : Form
             ("Precio", "Precio")
         ]);
 
-        ConfigureDataGridView(AssignedCarsDGV, _assignedCars,
+        ConfigureDataGridView(dgvAssignedCars, _assignedCars,
         [
             ("Marca", "Marca"),
             ("Año", "Año"),
