@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Integrador;
+using Integrador.Presentation.Composition;
 
 static class Program
 {

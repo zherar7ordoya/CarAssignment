@@ -1,107 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Car Id="1">
-    <Patente>AC174UJ</Patente>
-    <Marca>AUDI</Marca>
-    <Modelo>A4 2.0 T L/16 190HP S-TRONIC</Modelo>
-    <Año>2018</Año>
-    <Precio>7500000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="2">
-    <Patente>AC182YK</Patente>
-    <Marca>BMW</Marca>
-    <Modelo>118I ACTIVE 5 P.</Modelo>
-    <Año>2017</Año>
-    <Precio>5200000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="3">
-    <Patente>MQP266</Patente>
-    <Marca>CHERY</Marca>
-    <Modelo>QQ 1.1 LIGHT</Modelo>
-    <Año>2013</Año>
-    <Precio>989900</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="4">
-    <Patente>LVP150</Patente>
-    <Marca>CHEVROLET</Marca>
-    <Modelo>AGILE 1.4 LT</Modelo>
-    <Año>2012</Año>
-    <Precio>950000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="5">
-    <Patente>PFK991</Patente>
-    <Marca>CITROEN</Marca>
-    <Modelo>BERLINGO MULTISPACE 1.6 XTR HDI</Modelo>
-    <Año>2015</Año>
-    <Precio>1950000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="6">
-    <Patente>PEJ554</Patente>
-    <Marca>FIAT</Marca>
-    <Modelo>500 1.4 SPORT</Modelo>
-    <Año>2014</Año>
-    <Precio>2150000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="7">
-    <Patente>AC426OV</Patente>
-    <Marca>FORD</Marca>
-    <Modelo>ECO SPORT 1.5 SE L/18</Modelo>
-    <Año>2018</Año>
-    <Precio>2979248</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="8">
-    <Patente>NCS788</Patente>
-    <Marca>HONDA</Marca>
-    <Modelo>CRV 2.4 4X2 LX AUT L/12</Modelo>
-    <Año>2013</Año>
-    <Precio>2700000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="9">
-    <Patente>AC802MS</Patente>
-    <Marca>NISSAN</Marca>
-    <Modelo>KICKS 1.6 EXCLUSIVE CVT</Modelo>
-    <Año>2018</Año>
-    <Precio>3658725</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="10">
-    <Patente>OUX062</Patente>
-    <Marca>PEUGEOT</Marca>
-    <Modelo>208 1.5 5P ACTIVE (RES 2016)</Modelo>
-    <Año>2015</Año>
-    <Precio>1667200</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="11">
-    <Patente>AD110JT</Patente>
-    <Marca>RENAULT</Marca>
-    <Modelo>CAPTUR 1.6 INTENS CVT</Modelo>
-    <Año>2018</Año>
-    <Precio>3230132</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="12">
-    <Patente>AD042VQ</Patente>
-    <Marca>TOYOTA</Marca>
-    <Modelo>COROLLA 1.8 XEI L/17</Modelo>
-    <Año>2018</Año>
-    <Precio>3550000</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
-  <Car Id="13">
-    <Patente>AD755ZO</Patente>
-    <Marca>VOLKSWAGEN</Marca>
-    <Modelo>AMAROK 20TD 4X2 DC HIG.180HP PK</Modelo>
-    <Año>2019</Año>
-    <Precio>6043600</Precio>
-    <DueñoId>0</DueñoId>
-  </Car>
+<ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Car Id="1">
+        <Patente>AC182YK</Patente>
+        <Marca>BMW</Marca>
+        <Modelo>118I Active 5 P.</Modelo>
+        <Año>2017</Año>
+        <Precio>5200000</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="2">
+        <Patente>MQP266</Patente>
+        <Marca>Chery</Marca>
+        <Modelo>QQ 1.1 Light</Modelo>
+        <Año>2013</Año>
+        <Precio>989900</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="3">
+        <Patente>LVP150</Patente>
+        <Marca>Chevrolet</Marca>
+        <Modelo>Agile 1.4 LT</Modelo>
+        <Año>2012</Año>
+        <Precio>950000</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="4">
+        <Patente>PEJ554</Patente>
+        <Marca>Fiat</Marca>
+        <Modelo>500 1.4 Sport</Modelo>
+        <Año>2014</Año>
+        <Precio>2150000</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="5">
+        <Patente>AC426OV</Patente>
+        <Marca>Ford</Marca>
+        <Modelo>Eco Sport 1.5 SE L/18</Modelo>
+        <Año>2018</Año>
+        <Precio>2979248</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="6">
+        <Patente>NCS788</Patente>
+        <Marca>Honda</Marca>
+        <Modelo>CRV 2.4 4X2 LX Aut L/12</Modelo>
+        <Año>2013</Año>
+        <Precio>2700000</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="7">
+        <Patente>AC802MS</Patente>
+        <Marca>Nissan</Marca>
+        <Modelo>Kicks 1.6 Exclusive CVT</Modelo>
+        <Año>2018</Año>
+        <Precio>3658725</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="8">
+        <Patente>OUX062</Patente>
+        <Marca>Peugeot</Marca>
+        <Modelo>208 1.5 5P Active</Modelo>
+        <Año>2015</Año>
+        <Precio>1667200</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="9">
+        <Patente>AD110JT</Patente>
+        <Marca>Renault</Marca>
+        <Modelo>Captur 1.6 Intens CVT</Modelo>
+        <Año>2018</Año>
+        <Precio>3230132</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
+    <Car Id="10">
+        <Patente>AD042VQ</Patente>
+        <Marca>Toyota</Marca>
+        <Modelo>Corolla 1.8 XEI L/17</Modelo>
+        <Año>2018</Año>
+        <Precio>3550000</Precio>
+        <DueñoId>0</DueñoId>
+    </Car>
 </ArrayOfCar>

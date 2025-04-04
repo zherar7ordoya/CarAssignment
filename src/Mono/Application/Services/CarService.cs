@@ -18,6 +18,15 @@ public class CarService
                           carDto.Año,
                           carDto.Precio);
 
+        // Verify patente uniqueness
+        var cars = repository.GetAll();
+        var exists = cars.FirstOrDefault(c => c.Patente == car.Patente);
+        if (exists is not null)
+        {
+            messenger.ShowError("Car with the same patente already exists.");
+            return;
+        }
+
         repository.Create(car);
     }
 
@@ -36,6 +45,15 @@ public class CarService
         car.Modelo = carDto.Modelo.Trim();
         car.Año = carDto.Año;
         car.Precio = carDto.Precio;
+
+        // Verify patente uniqueness
+        var cars = repository.GetAll();
+        var exists = cars.FirstOrDefault(c => c.Patente == car.Patente);
+        if (exists is not null)
+        {
+            messenger.ShowError("Car with the same patente already exists.");
+            return;
+        }
 
         repository.Update(car);
     }

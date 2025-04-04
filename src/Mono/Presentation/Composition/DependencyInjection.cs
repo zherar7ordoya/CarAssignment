@@ -10,7 +10,7 @@ using Integrador.Presentation.Presenters;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Integrador;
+namespace Integrador.Presentation.Composition;
 
 public class DependencyInjection
 {

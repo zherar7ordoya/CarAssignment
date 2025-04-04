@@ -16,6 +16,15 @@ public class PersonService
                                 personDto.Apellido.Trim(),
                                 personDto.DNI.Trim());
 
+        // Verify dni uniqueness
+        var persons = repository.GetAll();
+        var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
+        if (exists is not null)
+        {
+            messenger.ShowError("Person with the same DNI already exists.");
+            return;
+        }
+
         repository.Create(person);
     }
 
@@ -32,6 +41,15 @@ public class PersonService
         person.Nombre = personDto.Nombre.Trim();
         person.Apellido = personDto.Apellido.Trim();
         person.DNI = personDto.DNI.Trim();
+
+        // Verify dni uniqueness
+        var persons = repository.GetAll();
+        var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
+        if (exists is not null)
+        {
+            messenger.ShowError("Person with the same DNI already exists.");
+            return;
+        }
 
         repository.Update(person);
     }

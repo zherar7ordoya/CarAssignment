@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Integrador;
+namespace Integrador.Presentation.Composition;
 
 public static class AppServices
 {
