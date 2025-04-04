@@ -4,9 +4,13 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Services;
 
-public class CarService(IGenericRepository<Car> repository, IExceptionHandler exceptionHandler) : ICarManager
+public class CarService
+(
+    IGenericRepository<Car> repository,
+    IExceptionHandler exceptionHandler
+) : ICarService
 {
-    public async Task CreateCar(CarDTO carDto, CancellationToken ct)
+    public bool CreateCar(CarDTO carDto)
     {
         var car = new Car(carDto.Patente.Trim(),
                           carDto.Marca.Trim(),
@@ -14,17 +18,17 @@ public class CarService(IGenericRepository<Car> repository, IExceptionHandler ex
                           carDto.Año,
                           carDto.Precio);
 
-        await repository.CreateAsync(car, ct);
+        return repository.Create(car);
     }
 
-    public async Task UpdateCar(CarDTO carDto, CancellationToken ct)
+    public bool UpdateCar(CarDTO carDto)
     {
-        var car = await repository.GetByIdAsync(carDto.Id, ct);
+        var car = repository.GetById(carDto.Id);
         
         if (car is null)
         {
             exceptionHandler.Handle("El auto no existe.");
-            return;
+            return false;
         }
 
         car.Patente = carDto.Patente.Trim();
@@ -33,31 +37,31 @@ public class CarService(IGenericRepository<Car> repository, IExceptionHandler ex
         car.Año = carDto.Año;
         car.Precio = carDto.Precio;
 
-        await repository.UpdateAsync(car, ct);
+        return repository.Update(car);
     }
 
-    public async Task DeleteCar(int carId, CancellationToken ct)
+    public bool DeleteCar(int carId)
     {
-        var car = await repository.GetByIdAsync(carId, ct);
+        var car = repository.GetById(carId);
 
         if (car is null)
         {
             exceptionHandler.Handle("El auto no existe.");
-            return;
+            return false;
         }
 
         if (car.HasOwner())
         {
             exceptionHandler.Handle("No se puede eliminar un auto que tiene dueño.");
-            return;
+            return false;
         }
 
-        await repository.DeleteAsync(carId, ct);
+        return repository.Delete(carId);
     }
 
-    public async Task<List<CarDTO>> GetAvailableCars(CancellationToken ct)
+    public List<CarDTO> GetAvailableCars()
     {
-        var cars = await repository.GetAllAsync(ct);
+        var cars = repository.GetAll();
 
         var available = cars
             .Where(c => c.DueñoId == 0)

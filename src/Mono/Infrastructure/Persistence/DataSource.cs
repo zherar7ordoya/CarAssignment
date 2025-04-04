@@ -11,30 +11,32 @@ public class DataSource<T>
     string dataDirectory = "LocalData"
 ) : IDataSource<T> where T : IEntity
 {
-    private readonly string _filePath = Path.Combine(Environment.CurrentDirectory,
-                                                     dataDirectory,
+    private readonly string _filePath = Path.Combine(EnsureDirectory(dataDirectory),
                                                      $"{typeof(T).Name}.xml");
 
-    public async Task<List<T>> ReadAsync(CancellationToken ct)
+    private static string EnsureDirectory(string directory)
+    {
+        string fullPath = Path.Combine(Environment.CurrentDirectory, directory);
+        if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
+        return fullPath;
+    }
+
+    public List<T> Read()
     {
         if (!File.Exists(_filePath))
         {
-            await CreateEmptyFileAsync(ct);
+            CreateEmptyFile();
             return [];
         }
 
         try
         {
-            await using var stream = new FileStream(_filePath,
-                                                    FileMode.Open,
-                                                    FileAccess.Read,
-                                                    FileShare.Read,
-                                                    bufferSize: 4096,
-                                                    useAsync: true);
-
+            using var stream = new FileStream(_filePath,
+                                              FileMode.Open,
+                                              FileAccess.Read,
+                                              FileShare.Read);
             var serializer = new XmlSerializer(typeof(List<T>));
-            var result = await Task.Run(() => serializer.Deserialize(stream) as List<T>, ct);
-            return result ?? [];
+            return serializer.Deserialize(stream) as List<T> ?? [];
         }
         catch (Exception ex)
         {
@@ -43,19 +45,16 @@ public class DataSource<T>
         }
     }
 
-    public async Task<bool> WriteAsync(List<T> data, CancellationToken ct)
+    public bool Write(List<T> data)
     {
         try
         {
-            await using var stream = new FileStream(_filePath,
-                                                    FileMode.Create,
-                                                    FileAccess.Write,
-                                                    FileShare.None,
-                                                    bufferSize: 4096,
-                                                    useAsync: true);
-
+            using var stream = new FileStream(_filePath,
+                                              FileMode.Create,
+                                              FileAccess.Write,
+                                              FileShare.None);
             var serializer = new XmlSerializer(typeof(List<T>));
-            await Task.Run(() => serializer.Serialize(stream, data), ct);
+            serializer.Serialize(stream, data);
             return true;
         }
         catch (Exception ex)
@@ -65,20 +64,16 @@ public class DataSource<T>
         }
     }
 
-    private async Task CreateEmptyFileAsync(CancellationToken ct)
+    private void CreateEmptyFile()
     {
         try
         {
-            var emptyList = new List<T>();
-            await using var stream = new FileStream(_filePath,
-                                                    FileMode.CreateNew,
-                                                    FileAccess.Write,
-                                                    FileShare.None,
-                                                    bufferSize: 4096,
-                                                    useAsync: true);
-
+            using var stream = new FileStream(_filePath,
+                                              FileMode.Create,
+                                              FileAccess.Write,
+                                              FileShare.None);
             var serializer = new XmlSerializer(typeof(List<T>));
-            await Task.Run(() => serializer.Serialize(stream, emptyList), ct);
+            serializer.Serialize(stream, new List<T>());
         }
         catch (Exception ex)
         {

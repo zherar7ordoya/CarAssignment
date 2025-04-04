@@ -79,13 +79,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void SavePersonButton_Click(object sender, EventArgs e)
+    private void SavePersonButton_Click(object sender, EventArgs e)
     {
         try
         {
             if (_persons.Current is PersonDTO person)
             {
-                await _viewPresenter.SavePerson(person);
+                _viewPresenter.SavePerson(person);
                 LoadData();
                 btnNewCar.Enabled = true;
             }
@@ -96,7 +96,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void DeletePersonButton_Click(object sender, EventArgs e)
+    private void DeletePersonButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -104,7 +104,7 @@ public partial class ViewForm : Form
 
             if (_persons.Current is PersonDTO persona && confirmacion)
             {
-                await _viewPresenter.DeletePerson(persona.Id);
+                _viewPresenter.DeletePerson(persona.Id);
                 LoadData();
             }
         }
@@ -114,13 +114,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void AssignCarButton_Click(object sender, EventArgs e)
+    private void AssignCarButton_Click(object sender, EventArgs e)
     {
         try
         {
             if (_persons.Current is PersonDTO persona && _availableCars.Current is CarDTO auto)
             {
-                await _viewPresenter.AssignCar(persona.Id, auto.Id);
+                _viewPresenter.AssignCar(persona.Id, auto.Id);
                 LoadData();
                 _messenger.ShowInformation("Auto asignado correctamente.", "Asignación de auto");
             }
@@ -131,13 +131,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void RemoveCarButton_Click(object sender, EventArgs e)
+    private void RemoveCarButton_Click(object sender, EventArgs e)
     {
         try
         {
             if (_persons.Current is PersonDTO persona && _personCars.Current is CarDTO auto)
             {
-                await _viewPresenter.RemoveCar(persona.Id, auto.Id);
+                _viewPresenter.RemoveCar(persona.Id, auto.Id);
                 LoadData();
             }
         }
@@ -163,13 +163,13 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void SaveCarButton_Click(object sender, EventArgs e)
+    private void SaveCarButton_Click(object sender, EventArgs e)
     {
         try
         {
             if (_availableCars.Current is CarDTO car)
             {
-                await _viewPresenter.SaveCar(car);
+                _viewPresenter.SaveCar(car);
                 LoadData();
                 btnNewCar.Enabled = true;
             }
@@ -180,7 +180,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void DeleteCarButton_Click(object sender, EventArgs e)
+    private void DeleteCarButton_Click(object sender, EventArgs e)
     {
         try
         {
@@ -188,7 +188,7 @@ public partial class ViewForm : Form
 
             if (_availableCars.Current is CarDTO car && confirmation)
             {
-                await _viewPresenter.DeleteCar(car.Id);
+                _viewPresenter.DeleteCar(car.Id);
                 LoadData();
             }
         }
@@ -298,7 +298,7 @@ public partial class ViewForm : Form
         }
     }
 
-    private async void LoadData()
+    private void LoadData()
     {
         try
         {
@@ -312,9 +312,9 @@ public partial class ViewForm : Form
             _availableCars.DataSource = new List<CarDTO>();
             _assignedCars.DataSource = new List<AssignedCarDTO>();
 
-            _persons.DataSource = await _viewPresenter.ReadPersons();
-            _availableCars.DataSource = await _viewPresenter.ReadAvailableCars();
-            _assignedCars.DataSource = await _viewPresenter.ReadAssignedCars();
+            _persons.DataSource = _viewPresenter.ReadPersons();
+            _availableCars.DataSource = _viewPresenter.ReadAvailableCars();
+            _assignedCars.DataSource = _viewPresenter.ReadAssignedCars();
         }
         catch (Exception ex)
         {

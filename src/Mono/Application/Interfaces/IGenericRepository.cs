@@ -4,9 +4,9 @@ namespace Integrador.Application.Interfaces;
 
 public interface IGenericRepository<T> where T : IEntity
 {
-    Task<bool> CreateAsync(T entity, CancellationToken ct = default);
-    Task<List<T>> GetAllAsync(CancellationToken ct = default);
-    Task<T?> GetByIdAsync(int id, CancellationToken ct = default);
-    Task<bool> UpdateAsync(T entity, CancellationToken ct = default);
-    Task<bool> DeleteAsync(int id, CancellationToken ct = default);
+    bool Create(T entity);
+    List<T> GetAll();
+    T? GetById(int id);
+    bool Update(T entity);
+    bool Delete(int id);
 }

@@ -4,14 +4,14 @@ namespace Integrador.Presentation.Presenters
 {
     public interface IViewPresenter
     {
-        Task AssignCar(int personId, int carId);
-        Task DeleteCar(int carId);
-        Task DeletePerson(int personId);
-        Task<List<AssignedCarDTO>> ReadAssignedCars();
-        Task<List<CarDTO>> ReadAvailableCars();
-        Task<List<PersonDTO>> ReadPersons();
-        Task RemoveCar(int personId, int carId);
-        Task SaveCar(CarDTO carDto);
-        Task SavePerson(PersonDTO personDto);
+        bool AssignCar(int personId, int carId);
+        bool DeleteCar(int carId);
+        bool DeletePerson(int personId);
+        List<AssignedCarDTO> ReadAssignedCars();
+        List<CarDTO> ReadAvailableCars();
+        List<PersonDTO> ReadPersons();
+        bool RemoveCar(int personId, int carId);
+        bool SaveCar(CarDTO carDto);
+        bool SavePerson(PersonDTO personDto);
     }
 }

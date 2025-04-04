@@ -6,60 +6,60 @@ namespace Integrador.Presentation.Presenters;
 
 public class ViewPresenter
 (
-    IAssignmentManager assignmentManager,
-    ICarManager carManager,
-    IPersonManager personManager
+    IAssignmentService assignmentService,
+    ICarService carService,
+    IPersonService personService
 ) : IViewPresenter
 {
     // --- PERSONAS ---
-    public async Task<List<PersonDTO>> ReadPersons()
+    public List<PersonDTO> ReadPersons()
     {
-        return await personManager.GetPersons(CancellationToken.None);
+        return personService.GetPersons();
     }
 
-    public async Task SavePerson(PersonDTO person)
+    public bool SavePerson(PersonDTO person)
     {
         ValidationHelper.Validate(person);
-        if (person.Id == 0) await personManager.CreatePerson(person, CancellationToken.None);
-        else await personManager.UpdatePerson(person, CancellationToken.None);
+        if (person.Id == 0) return personService.CreatePerson(person);
+        else return personService.UpdatePerson(person);
     }
 
-    public async Task DeletePerson(int personId)
+    public bool DeletePerson(int personId)
     {
-        await personManager.DeletePerson(personId, CancellationToken.None);
+        return personService.DeletePerson(personId);
     }
 
     // --- AUTOS ---
-    public async Task<List<CarDTO>> ReadAvailableCars()
+    public List<CarDTO> ReadAvailableCars()
     {
-        return await carManager.GetAvailableCars(CancellationToken.None);
+        return carService.GetAvailableCars();
     }
 
-    public async Task<List<AssignedCarDTO>> ReadAssignedCars()
+    public List<AssignedCarDTO> ReadAssignedCars()
     {
-        return await personManager.GetAssignedCars(CancellationToken.None);
+        return personService.GetAssignedCars();
     }
 
-    public async Task SaveCar(CarDTO car)
+    public bool SaveCar(CarDTO car)
     {
         ValidationHelper.Validate(car);
-        if (car.Id == 0) await carManager.CreateCar(car, CancellationToken.None);
-        else await carManager.UpdateCar(car, CancellationToken.None);
+        if (car.Id == 0) return carService.CreateCar(car);
+        else return carService.UpdateCar(car);
     }
 
-    public async Task DeleteCar(int carId)
+    public bool DeleteCar(int carId)
     {
-        await carManager.DeleteCar(carId, CancellationToken.None);
+        return carService.DeleteCar(carId);
     }
 
     // --- ASIGNACIONES ---
-    public async Task AssignCar(int personId, int carId)
+    public bool AssignCar(int personId, int carId)
     {
-        await assignmentManager.AssignCar(carId, personId, CancellationToken.None);
+        return assignmentService.AssignCar(carId, personId);
     }
 
-    public async Task RemoveCar(int personId, int carId)
+    public bool RemoveCar(int personId, int carId)
     {
-        await assignmentManager.RemoveCar(carId, personId, CancellationToken.None);
+        return assignmentService.RemoveCar(carId, personId);
     }
 }

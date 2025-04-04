@@ -8,54 +8,52 @@ namespace Integrador.Application.Services
         IGenericRepository<Car> carRepository,
         IGenericRepository<Person> personRepository,
         IExceptionHandler exceptionHandler
-    ) : IAssignmentManager
+    ) : IAssignmentService
     {
-        public async Task AssignCar(int carId, int personId, CancellationToken ct)
+        public bool AssignCar(int carId, int personId)
         {
-            var car = await carRepository.GetByIdAsync(carId, ct);
-            var person = await personRepository.GetByIdAsync(personId, ct);
+            var car = carRepository.GetById(carId);
+            var person = personRepository.GetById(personId);
 
             if (car == null || person == null)
             {
                 exceptionHandler.Handle("Auto o persona no existen.");
-                return;
+                return false;
             }
 
             if (car.HasOwner())
             {
                 exceptionHandler.Handle("El auto ya tiene un dueño.");
-                return;
+                return false;
             }
 
             car.DueñoId = person.Id;
             person.Autos.Add(car);
 
-            await carRepository.UpdateAsync(car, ct);
-            await personRepository.UpdateAsync(person, ct);
+            return carRepository.Update(car) && personRepository.Update(person);
         }
 
-        public async Task RemoveCar(int carId, int personId, CancellationToken ct)
+        public bool RemoveCar(int carId, int personId)
         {
-            var car = await carRepository.GetByIdAsync(carId, ct);
-            var person = await personRepository.GetByIdAsync(personId, ct);
+            var car = carRepository.GetById(carId);
+            var person = personRepository.GetById(personId);
 
             if (car == null || person == null)
             {
                 exceptionHandler.Handle("Auto o persona no existen.");
-                return;
+                return false;
             }
 
             if (!person.OwnsCar(car))
             {
                 exceptionHandler.Handle("La persona no es dueña del auto.");
-                return;
+                return false;
             }
 
             person.RemoveCar(car);
             car.RemoveOwner();
 
-            await carRepository.UpdateAsync(car, ct);
-            await personRepository.UpdateAsync(person, ct);
+            return carRepository.Update(car) && personRepository.Update(person);
         }
     }
 }

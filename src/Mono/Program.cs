@@ -1,28 +1,28 @@
-﻿using Integrador;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Integrador.Presentation;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Integrador;
 
 static class Program
 {
-    // Se inicializa en Main y se mantiene de solo lectura para evitar modificaciones accidentales.
-    private static readonly IHost host = Host.CreateDefaultBuilder()
-        .ConfigureServices((context, services) =>
-        {
-            // Se configura la inyección de dependencias llamando a Startup.
-            Startup.ConfigureServices(services);
-        })
-        .Build();
+    private static ServiceProvider? serviceProvider;
 
     [STAThread]
     static void Main()
     {
-        // Habilitar estilos visuales de Windows Forms para una mejor apariencia.
+        var services = new ServiceCollection();
+
+        // Configurar servicios como antes
+        DependencyInjection.ConfigureServices(services);
+
+        // Construir el contenedor
+        serviceProvider = services.BuildServiceProvider();
+
+        // Inicializar WinForms
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
-        // Obtener e iniciar el formulario principal desde el contenedor de dependencias.
-        Application.Run(host.Services.GetRequiredService<ViewForm>());
+        // Lanzar el formulario principal
+        var mainForm = serviceProvider.GetRequiredService<ViewForm>();
+        Application.Run(mainForm);
     }
 }

@@ -8,56 +8,56 @@ public class PersonService
 (
     IGenericRepository<Person> repository,
     IExceptionHandler exceptionHandler
-) : IPersonManager
+) : IPersonService
 {
-    public async Task CreatePerson(PersonDTO personDto, CancellationToken ct)
+    public bool CreatePerson(PersonDTO personDto)
     {
         var person = new Person(personDto.Nombre.Trim(),
                                 personDto.Apellido.Trim(),
                                 personDto.DNI.Trim());
 
-        await repository.CreateAsync(person, ct);
+        return repository.Create(person);
     }
 
-    public async Task UpdatePerson(PersonDTO personDto, CancellationToken ct)
+    public bool UpdatePerson(PersonDTO personDto)
     {
-        var person = await repository.GetByIdAsync(personDto.Id, ct);
+        var person = repository.GetById(personDto.Id);
 
         if (person is null)
         {
             exceptionHandler.Handle("La persona no existe.");
-            return;
+            return false;
         }
 
         person.Nombre = personDto.Nombre.Trim();
         person.Apellido = personDto.Apellido.Trim();
         person.DNI = personDto.DNI.Trim();
 
-        await repository.UpdateAsync(person, ct);
+        return repository.Update(person);
     }
 
-    public async Task DeletePerson(int personId, CancellationToken ct)
+    public bool DeletePerson(int personId)
     {
-        var person = await repository.GetByIdAsync(personId, ct);
+        var person = repository.GetById(personId);
 
         if (person is null)
         {
             exceptionHandler.Handle("La persona no existe.");
-            return;
+            return false;
         }
 
         if (person.HasCars())
         {
             exceptionHandler.Handle("No se puede eliminar una persona que tiene autos.");
-            return;
+            return false;
         }
 
-        await repository.DeleteAsync(personId, ct);
+        return repository.Delete(personId);
     }
 
-    public async Task<List<PersonDTO>> GetPersons(CancellationToken ct)
+    public List<PersonDTO> GetPersons()
     {
-        var persons = await repository.GetAllAsync(ct);
+        var persons = repository.GetAll();
 
         return [.. persons
             .Select(p => new PersonDTO
@@ -79,9 +79,9 @@ public class PersonService
             ))];
     }
 
-    public async Task<List<AssignedCarDTO>> GetAssignedCars(CancellationToken ct)
+    public List<AssignedCarDTO> GetAssignedCars()
     {
-        var persons = await repository.GetAllAsync(ct);
+        var persons = repository.GetAll();
 
         var assigned = persons
             .SelectMany(persona => persona
