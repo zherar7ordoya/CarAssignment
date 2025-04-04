@@ -1,8 +1,6 @@
-﻿using Integrador.Domain.Entities;
+﻿namespace Integrador.Application.Interfaces;
 
-namespace Integrador.Application.Interfaces;
-
-public interface IGenericRepository<T> where T : IEntity
+public interface IGenericRepository<T> where T : Domain.Entities.IEntity
 {
     void Create(T entity);
     List<T> GetAll();

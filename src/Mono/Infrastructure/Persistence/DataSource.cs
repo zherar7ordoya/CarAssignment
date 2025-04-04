@@ -2,7 +2,6 @@
 using System.Xml.Serialization;
 
 using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
 
 namespace Integrador.Infrastructure.Persistence;
 
@@ -10,7 +9,7 @@ public class DataSource<T>
 (
     IExceptionHandler exceptionHandler,
     string dataDirectory = "LocalData"
-) : IDataSource<T> where T : IEntity
+) : IDataSource<T> where T : Domain.Entities.IEntity
 {
     private readonly string _filePath = Path.Combine(EnsureDirectory(dataDirectory),
                                                      $"{typeof(T).Name}.xml");

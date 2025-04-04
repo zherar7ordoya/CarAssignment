@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Integrador.Presentation.Validators;
+namespace Integrador.Presentation.Presenters.Helpers;
 
 public static class ValidationHelper
 {
@@ -13,8 +13,6 @@ public static class ValidationHelper
     {
         _exceptionHandler = exceptionHandler;
     }
-
-    /*////////////////////////////////////////////////////////////////////////*/
 
     public static void Validate<T>(T obj)
     {

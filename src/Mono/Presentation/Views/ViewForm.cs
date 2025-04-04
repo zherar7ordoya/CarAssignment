@@ -1,6 +1,5 @@
 ﻿using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces;
-using Integrador.Presentation.Presenters;
 
 namespace Integrador;
 

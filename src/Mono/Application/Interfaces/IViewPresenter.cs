@@ -1,6 +1,6 @@
 ﻿using Integrador.Application.DTOs;
 
-namespace Integrador.Presentation.Presenters
+namespace Integrador.Application.Interfaces
 {
     public interface IViewPresenter
     {

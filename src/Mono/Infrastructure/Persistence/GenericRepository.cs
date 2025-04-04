@@ -1,5 +1,4 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
 
 using System.Reflection;
 
@@ -11,7 +10,7 @@ public class GenericRepository<T>
     IExceptionHandler exceptionHandler,
     IMessenger messenger,
     ILogger logger
-) : IGenericRepository<T> where T : IEntity
+) : IGenericRepository<T> where T : Domain.Entities.IEntity
 {
     public void Create(T entity)
     {

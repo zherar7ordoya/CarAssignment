@@ -1,8 +1,6 @@
-﻿using Integrador.Domain.Entities;
+﻿namespace Integrador.Application.Interfaces;
 
-namespace Integrador.Application.Interfaces;
-
-public interface IDataSource<T> where T : IEntity
+public interface IDataSource<T> where T : Domain.Entities.IEntity
 {
     List<T> Read();
     void Write(List<T> data);
