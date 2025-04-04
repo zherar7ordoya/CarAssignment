@@ -1,10 +1,8 @@
-﻿using Integrador.Application;
-using Integrador.Application.Exceptions;
+﻿using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
 using Integrador.Application.Logging;
 using Integrador.Application.Services;
 using Integrador.Domain.Entities;
-using Integrador.Infrastructure;
 using Integrador.Infrastructure.Messaging;
 using Integrador.Infrastructure.Persistence;
 using Integrador.Presentation.Factories;

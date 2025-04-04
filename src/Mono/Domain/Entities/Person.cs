@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace Integrador.Domain.Entities;
+﻿namespace Integrador.Domain.Entities;
 
 public class Person : BaseEntity
 {
