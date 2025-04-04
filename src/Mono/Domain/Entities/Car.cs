@@ -1,4 +1,6 @@
-﻿namespace Integrador.Domain.Entities;
+﻿using System.Xml.Linq;
+
+namespace Integrador.Domain.Entities;
 
 public class Car : BaseEntity
 {
@@ -41,4 +43,6 @@ public class Car : BaseEntity
     {
         DueñoId = 0;
     }
+
+    public override string ToString() => $"{nameof(Car)} Id {Id}: {Patente} - {Marca} {Modelo}";
 }

@@ -1,5 +1,8 @@
 ﻿using Integrador.Application.DTOs;
+using Integrador.Application.Exceptions;
 using Integrador.Application.Interfaces;
+using Integrador.Infrastructure.Messaging;
+using Integrador.Presentation.Factories;
 using Integrador.Presentation.Presenters;
 
 namespace Integrador;
@@ -24,7 +27,7 @@ public partial class ViewForm : Form
         try
         {
             InitializeComponent();
-            ConfigureBingings();
+            ConfigureBindings();
             LoadData();
         }
         catch (Exception ex)
@@ -122,7 +125,6 @@ public partial class ViewForm : Form
             {
                 _viewPresenter.AssignCar(persona.Id, auto.Id);
                 LoadData();
-                _messenger.ShowInformation("Auto asignado correctamente.", "Asignación de auto");
             }
         }
         catch (Exception ex)
@@ -201,7 +203,7 @@ public partial class ViewForm : Form
 
     ////////////////////////////////////////////////////////////////////////////
 
-    private void ConfigureBingings()
+    private void ConfigureBindings()
     {
         ConfigureBindingSources();
         ConfigureDataGridView();
@@ -302,12 +304,6 @@ public partial class ViewForm : Form
     {
         try
         {
-            // Asignamos listas vacías antes de la carga real:
-            // Dado que la carga es asíncrona, en algún momento entre que el Form
-            // se abre y los datos llegan, los DataGridView están en un estado
-            // inconsistente. Entonces, cuando los DataGridView intentan acceder
-            // a sus columnas antes de que los datos estén completamente
-            // cargados, se produce una excepción.
             _persons.DataSource = new List<PersonDTO>();
             _availableCars.DataSource = new List<CarDTO>();
             _assignedCars.DataSource = new List<AssignedCarDTO>();

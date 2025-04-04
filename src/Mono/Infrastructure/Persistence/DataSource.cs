@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Reflection;
+using System.Xml.Serialization;
 
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
@@ -40,12 +41,16 @@ public class DataSource<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error leyendo {_filePath}");
+            exceptionHandler.Handle
+            (
+                ex,
+                $"Error in {MethodBase.GetCurrentMethod()?.Name} (File: {_filePath})"
+            );
             return [];
         }
     }
 
-    public bool Write(List<T> data)
+    public void Write(List<T> data)
     {
         try
         {
@@ -55,12 +60,14 @@ public class DataSource<T>
                                               FileShare.None);
             var serializer = new XmlSerializer(typeof(List<T>));
             serializer.Serialize(stream, data);
-            return true;
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error escribiendo {_filePath}");
-            return false;
+            exceptionHandler.Handle
+            (
+                ex,
+                $"Error in {MethodBase.GetCurrentMethod()?.Name} (File: {_filePath})"
+            );
         }
     }
 
@@ -77,7 +84,11 @@ public class DataSource<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error creando {_filePath}");
+            exceptionHandler.Handle
+            (
+                ex,
+                $"Error in {MethodBase.GetCurrentMethod()?.Name} (File: {_filePath})"
+            );
         }
     }
 }

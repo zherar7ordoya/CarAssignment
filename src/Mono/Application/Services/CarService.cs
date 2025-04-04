@@ -7,10 +7,10 @@ namespace Integrador.Application.Services;
 public class CarService
 (
     IGenericRepository<Car> repository,
-    IExceptionHandler exceptionHandler
+    IMessenger messenger
 ) : ICarService
 {
-    public bool CreateCar(CarDTO carDto)
+    public void CreateCar(CarDTO carDto)
     {
         var car = new Car(carDto.Patente.Trim(),
                           carDto.Marca.Trim(),
@@ -18,17 +18,17 @@ public class CarService
                           carDto.Año,
                           carDto.Precio);
 
-        return repository.Create(car);
+        repository.Create(car);
     }
 
-    public bool UpdateCar(CarDTO carDto)
+    public void UpdateCar(CarDTO carDto)
     {
         var car = repository.GetById(carDto.Id);
         
         if (car is null)
         {
-            exceptionHandler.Handle("El auto no existe.");
-            return false;
+            messenger.ShowInformation("Car not found.");
+            return;
         }
 
         car.Patente = carDto.Patente.Trim();
@@ -37,26 +37,26 @@ public class CarService
         car.Año = carDto.Año;
         car.Precio = carDto.Precio;
 
-        return repository.Update(car);
+        repository.Update(car);
     }
 
-    public bool DeleteCar(int carId)
+    public void DeleteCar(int carId)
     {
         var car = repository.GetById(carId);
 
         if (car is null)
         {
-            exceptionHandler.Handle("El auto no existe.");
-            return false;
+            messenger.ShowInformation("Car not found.");
+            return;
         }
 
         if (car.HasOwner())
         {
-            exceptionHandler.Handle("No se puede eliminar un auto que tiene dueño.");
-            return false;
+            messenger.ShowError("Cannot delete a car that has an owner.");
+            return;
         }
 
-        return repository.Delete(carId);
+        repository.Delete(carId);
     }
 
     public List<CarDTO> GetAvailableCars()

@@ -5,5 +5,5 @@ namespace Integrador.Application.Interfaces;
 public interface IDataSource<T> where T : IEntity
 {
     List<T> Read();
-    bool Write(List<T> data);
+    void Write(List<T> data);
 }

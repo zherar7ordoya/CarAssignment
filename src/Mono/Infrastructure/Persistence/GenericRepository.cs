@@ -9,10 +9,11 @@ public class GenericRepository<T>
 (
     IDataSource<T> dataSource,
     IExceptionHandler exceptionHandler,
+    IMessenger messenger,
     ILogger logger
 ) : IGenericRepository<T> where T : IEntity
 {
-    public bool Create(T entity)
+    public void Create(T entity)
     {
         try
         {
@@ -20,36 +21,36 @@ public class GenericRepository<T>
             int nextId = entities.Count == 0 ? 1 : entities.Max(e => e.Id) + 1;
             entity.Id = nextId;
             entities.Add(entity);
-            return dataSource.Write(entities);
+            dataSource.Write(entities);
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
-            return false;
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            TryLog($"CreateAsync completed for entity with ID: {entity.Id}");
+            TryLog($"Create completed for {entity}");
         }
     }
 
-    public bool Delete(int id)
+    public void Delete(int id)
     {
+        var entities = dataSource.Read() ?? [];
+        var entity = entities.FirstOrDefault(e => e.Id == id);
+
         try
         {
-            var entities = dataSource.Read() ?? [];
-            if (entities.Count == 0) return false;
-            bool removed = entities.RemoveAll(e => e.Id == id) > 0;
-            return removed && dataSource.Write(entities);
+            if (entity == null) throw new Exception($"Entity with ID {id} not found.");
+            entities.Remove(entity);
+            dataSource.Write(entities);
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
-            return false;
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            TryLog($"DeleteAsync completed for entity with ID: {id}");
+            TryLog($"Delete completed for {entity}");
         }
     }
 
@@ -61,12 +62,8 @@ public class GenericRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
             return [];
-        }
-        finally
-        {
-            TryLog("GetAllAsync completed");
         }
     }
 
@@ -77,37 +74,33 @@ public class GenericRepository<T>
             var entities = dataSource.Read() ?? [];
             var entity = entities.FirstOrDefault(e => e.Id == id);
 
-            if (entity == null) TryLog($"GetByIdAsync: Entity with ID {id} not found.");
-            else TryLog($"GetByIdAsync completed for entity with ID: {id}");
+            if (entity == null) messenger.ShowInformation($"Entity with ID {id} not found.");
 
             return entity;
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
             return default;
         }
     }
 
-    public bool Update(T entity)
+    public void Update(T entity)
     {
         try
         {
             var entities = dataSource.Read() ?? [];
             var index = entities.FindIndex(e => e.Id == entity.Id);
-            if (index == -1) return false;
-            if (entities[index].Id != entity.Id) return false;
             entities[index] = entity;
-            return dataSource.Write(entities);
+            dataSource.Write(entities);
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error en {MethodBase.GetCurrentMethod()?.Name}");
-            return false;
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            TryLog($"UpdateAsync completed for entity with ID: {entity.Id}");
+            TryLog($"Update completed for {entity}");
         }
     }
 
@@ -132,7 +125,7 @@ public class GenericRepository<T>
         }
         catch (Exception logEx)
         {
-            System.Diagnostics.Debug.WriteLine($"Error al intentar loguear: {logEx.Message}");
+            System.Diagnostics.Debug.WriteLine($"Logging error: {logEx.Message}");
         }
     }
 }

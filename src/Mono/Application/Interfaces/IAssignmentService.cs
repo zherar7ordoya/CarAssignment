@@ -2,7 +2,7 @@
 {
     public interface IAssignmentService
     {
-        bool AssignCar(int carId, int personId);
-        bool RemoveCar(int carId, int personId);
+        void AssignCar(int carId, int personId);
+        void RemoveCar(int carId, int personId);
     }
 }

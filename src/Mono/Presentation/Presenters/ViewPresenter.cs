@@ -17,16 +17,16 @@ public class ViewPresenter
         return personService.GetPersons();
     }
 
-    public bool SavePerson(PersonDTO person)
+    public void SavePerson(PersonDTO person)
     {
         ValidationHelper.Validate(person);
-        if (person.Id == 0) return personService.CreatePerson(person);
-        else return personService.UpdatePerson(person);
+        if (person.Id == 0) personService.CreatePerson(person);
+        else personService.UpdatePerson(person);
     }
 
-    public bool DeletePerson(int personId)
+    public void DeletePerson(int personId)
     {
-        return personService.DeletePerson(personId);
+        personService.DeletePerson(personId);
     }
 
     // --- AUTOS ---
@@ -40,26 +40,26 @@ public class ViewPresenter
         return personService.GetAssignedCars();
     }
 
-    public bool SaveCar(CarDTO car)
+    public void SaveCar(CarDTO car)
     {
         ValidationHelper.Validate(car);
-        if (car.Id == 0) return carService.CreateCar(car);
-        else return carService.UpdateCar(car);
+        if (car.Id == 0) carService.CreateCar(car);
+        else carService.UpdateCar(car);
     }
 
-    public bool DeleteCar(int carId)
+    public void DeleteCar(int carId)
     {
-        return carService.DeleteCar(carId);
+        carService.DeleteCar(carId);
     }
 
     // --- ASIGNACIONES ---
-    public bool AssignCar(int personId, int carId)
+    public void AssignCar(int personId, int carId)
     {
-        return assignmentService.AssignCar(carId, personId);
+        assignmentService.AssignCar(carId, personId);
     }
 
-    public bool RemoveCar(int personId, int carId)
+    public void RemoveCar(int personId, int carId)
     {
-        return assignmentService.RemoveCar(carId, personId);
+        assignmentService.RemoveCar(carId, personId);
     }
 }

@@ -4,10 +4,10 @@ namespace Integrador.Application.Interfaces
 {
     public interface IPersonService
     {
-        bool CreatePerson(PersonDTO personDto);
-        bool DeletePerson(int personId);
+        void CreatePerson(PersonDTO personDto);
+        void DeletePerson(int personId);
         List<AssignedCarDTO> GetAssignedCars();
         List<PersonDTO> GetPersons();
-        bool UpdatePerson(PersonDTO personDto);
+        void UpdatePerson(PersonDTO personDto);
     }
 }

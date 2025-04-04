@@ -1,4 +1,6 @@
-﻿namespace Integrador.Domain.Entities;
+﻿using System.Xml.Linq;
+
+namespace Integrador.Domain.Entities;
 
 public class Person : BaseEntity
 {
@@ -61,9 +63,9 @@ public class Person : BaseEntity
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////
-
     public List<Car> GetCarsList() => Autos;
     public string GetNameSurname() => $"{Apellido}, {Nombre}";
     public string GetIdentityNumber() => DNI;
+
+    public override string ToString() => $"{nameof(Person)} Id {Id}: {DNI} - {Nombre} {Apellido}";
 }

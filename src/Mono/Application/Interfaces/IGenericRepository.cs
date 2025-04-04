@@ -4,9 +4,9 @@ namespace Integrador.Application.Interfaces;
 
 public interface IGenericRepository<T> where T : IEntity
 {
-    bool Create(T entity);
+    void Create(T entity);
     List<T> GetAll();
     T? GetById(int id);
-    bool Update(T entity);
-    bool Delete(int id);
+    void Update(T entity);
+    void Delete(int id);
 }

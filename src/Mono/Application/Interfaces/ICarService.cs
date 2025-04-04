@@ -4,9 +4,9 @@ namespace Integrador.Application.Interfaces
 {
     public interface ICarService
     {
-        bool CreateCar(CarDTO carDto);
-        bool DeleteCar(int carId);
+        void CreateCar(CarDTO carDto);
+        void DeleteCar(int carId);
         List<CarDTO> GetAvailableCars();
-        bool UpdateCar(CarDTO carDto);
+        void UpdateCar(CarDTO carDto);
     }
 }

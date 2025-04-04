@@ -7,53 +7,55 @@ namespace Integrador.Application.Services
     (
         IGenericRepository<Car> carRepository,
         IGenericRepository<Person> personRepository,
-        IExceptionHandler exceptionHandler
+        IMessenger messenger
     ) : IAssignmentService
     {
-        public bool AssignCar(int carId, int personId)
+        public void AssignCar(int carId, int personId)
         {
             var car = carRepository.GetById(carId);
             var person = personRepository.GetById(personId);
 
             if (car == null || person == null)
             {
-                exceptionHandler.Handle("Auto o persona no existen.");
-                return false;
+                messenger.ShowInformation("Car or person do not exist.");
+                return;
             }
 
             if (car.HasOwner())
             {
-                exceptionHandler.Handle("El auto ya tiene un dueño.");
-                return false;
+                messenger.ShowInformation("Car already has an owner.");
+                return;
             }
 
             car.DueñoId = person.Id;
             person.Autos.Add(car);
 
-            return carRepository.Update(car) && personRepository.Update(person);
+            carRepository.Update(car);
+            personRepository.Update(person);
         }
 
-        public bool RemoveCar(int carId, int personId)
+        public void RemoveCar(int carId, int personId)
         {
             var car = carRepository.GetById(carId);
             var person = personRepository.GetById(personId);
 
             if (car == null || person == null)
             {
-                exceptionHandler.Handle("Auto o persona no existen.");
-                return false;
+                messenger.ShowInformation("Car or person do not exist.");
+                return;
             }
 
             if (!person.OwnsCar(car))
             {
-                exceptionHandler.Handle("La persona no es dueña del auto.");
-                return false;
+                messenger.ShowInformation("Car does not belong to the person.");
+                return;
             }
 
             person.RemoveCar(car);
             car.RemoveOwner();
 
-            return carRepository.Update(car) && personRepository.Update(person);
+            carRepository.Update(car);
+            personRepository.Update(person);
         }
     }
 }

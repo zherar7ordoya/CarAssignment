@@ -7,52 +7,52 @@ namespace Integrador.Application.Services;
 public class PersonService
 (
     IGenericRepository<Person> repository,
-    IExceptionHandler exceptionHandler
+    IMessenger messenger
 ) : IPersonService
 {
-    public bool CreatePerson(PersonDTO personDto)
+    public void CreatePerson(PersonDTO personDto)
     {
         var person = new Person(personDto.Nombre.Trim(),
                                 personDto.Apellido.Trim(),
                                 personDto.DNI.Trim());
 
-        return repository.Create(person);
+        repository.Create(person);
     }
 
-    public bool UpdatePerson(PersonDTO personDto)
+    public void UpdatePerson(PersonDTO personDto)
     {
         var person = repository.GetById(personDto.Id);
 
         if (person is null)
         {
-            exceptionHandler.Handle("La persona no existe.");
-            return false;
+            messenger.ShowInformation("Person not found");
+            return;
         }
 
         person.Nombre = personDto.Nombre.Trim();
         person.Apellido = personDto.Apellido.Trim();
         person.DNI = personDto.DNI.Trim();
 
-        return repository.Update(person);
+        repository.Update(person);
     }
 
-    public bool DeletePerson(int personId)
+    public void DeletePerson(int personId)
     {
         var person = repository.GetById(personId);
 
         if (person is null)
         {
-            exceptionHandler.Handle("La persona no existe.");
-            return false;
+            messenger.ShowInformation("Person not found");
+            return;
         }
 
         if (person.HasCars())
         {
-            exceptionHandler.Handle("No se puede eliminar una persona que tiene autos.");
-            return false;
+            messenger.ShowInformation("Cannot delete a person who has cars.");
+            return;
         }
 
-        return repository.Delete(personId);
+        repository.Delete(personId);
     }
 
     public List<PersonDTO> GetPersons()
