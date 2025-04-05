@@ -28,6 +28,7 @@ partial class ViewForm
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewForm));
         txtCarsCount = new TextBox();
         label2 = new Label();
         txtApellido = new TextBox();
@@ -75,16 +76,16 @@ partial class ViewForm
         // 
         // txtCarsCount
         // 
-        txtCarsCount.Location = new Point(1044, 210);
+        txtCarsCount.Location = new Point(77, 250);
         txtCarsCount.Name = "txtCarsCount";
         txtCarsCount.ReadOnly = true;
-        txtCarsCount.Size = new Size(91, 25);
+        txtCarsCount.Size = new Size(207, 25);
         txtCarsCount.TabIndex = 16;
         // 
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(976, 213);
+        label2.Location = new Point(12, 253);
         label2.Name = "label2";
         label2.Size = new Size(62, 18);
         label2.TabIndex = 15;
@@ -158,9 +159,9 @@ partial class ViewForm
         // lblCarsPrice
         // 
         lblCarsPrice.Font = new Font("Calibri", 22F);
-        lblCarsPrice.Location = new Point(1141, 207);
+        lblCarsPrice.Location = new Point(12, 278);
         lblCarsPrice.Name = "lblCarsPrice";
-        lblCarsPrice.Size = new Size(291, 37);
+        lblCarsPrice.Size = new Size(272, 37);
         lblCarsPrice.TabIndex = 6;
         lblCarsPrice.Text = "Total";
         lblCarsPrice.TextAlign = ContentAlignment.MiddleRight;
@@ -169,13 +170,13 @@ partial class ViewForm
         // 
         dgvPersonCars.AllowUserToAddRows = false;
         dgvPersonCars.AllowUserToDeleteRows = false;
-        dgvPersonCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        dgvPersonCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvPersonCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvPersonCars.Location = new Point(822, 49);
+        dgvPersonCars.Location = new Point(290, 210);
         dgvPersonCars.Name = "dgvPersonCars";
         dgvPersonCars.ReadOnly = true;
         dgvPersonCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvPersonCars.Size = new Size(610, 155);
+        dgvPersonCars.Size = new Size(526, 105);
         dgvPersonCars.TabIndex = 5;
         // 
         // btnDeletePerson
@@ -218,7 +219,7 @@ partial class ViewForm
         // 
         dgvPersons.AllowUserToAddRows = false;
         dgvPersons.AllowUserToDeleteRows = false;
-        dgvPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        dgvPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvPersons.Location = new Point(290, 12);
         dgvPersons.Name = "dgvPersons";
@@ -240,21 +241,21 @@ partial class ViewForm
         // 
         // txtModelo
         // 
-        txtModelo.Location = new Point(77, 377);
+        txtModelo.Location = new Point(77, 488);
         txtModelo.Name = "txtModelo";
         txtModelo.Size = new Size(207, 25);
         txtModelo.TabIndex = 20;
         // 
         // txtPrecio
         // 
-        txtPrecio.Location = new Point(77, 439);
+        txtPrecio.Location = new Point(77, 550);
         txtPrecio.Name = "txtPrecio";
         txtPrecio.Size = new Size(207, 25);
         txtPrecio.TabIndex = 19;
         // 
         // txtAño
         // 
-        txtAño.Location = new Point(77, 408);
+        txtAño.Location = new Point(77, 519);
         txtAño.Name = "txtAño";
         txtAño.Size = new Size(207, 25);
         txtAño.TabIndex = 18;
@@ -262,7 +263,7 @@ partial class ViewForm
         // label14
         // 
         label14.AutoSize = true;
-        label14.Location = new Point(12, 410);
+        label14.Location = new Point(12, 521);
         label14.Name = "label14";
         label14.Size = new Size(33, 18);
         label14.TabIndex = 17;
@@ -271,7 +272,7 @@ partial class ViewForm
         // label11
         // 
         label11.AutoSize = true;
-        label11.Location = new Point(12, 442);
+        label11.Location = new Point(12, 553);
         label11.Name = "label11";
         label11.Size = new Size(47, 18);
         label11.TabIndex = 16;
@@ -279,21 +280,21 @@ partial class ViewForm
         // 
         // txtMarca
         // 
-        txtMarca.Location = new Point(77, 346);
+        txtMarca.Location = new Point(77, 457);
         txtMarca.Name = "txtMarca";
         txtMarca.Size = new Size(207, 25);
         txtMarca.TabIndex = 13;
         // 
         // txtPatente
         // 
-        txtPatente.Location = new Point(77, 315);
+        txtPatente.Location = new Point(77, 426);
         txtPatente.Name = "txtPatente";
         txtPatente.Size = new Size(207, 25);
         txtPatente.TabIndex = 12;
         // 
         // txtCarId
         // 
-        txtCarId.Location = new Point(77, 284);
+        txtCarId.Location = new Point(77, 395);
         txtCarId.Name = "txtCarId";
         txtCarId.ReadOnly = true;
         txtCarId.Size = new Size(207, 25);
@@ -302,7 +303,7 @@ partial class ViewForm
         // label7
         // 
         label7.AutoSize = true;
-        label7.Location = new Point(12, 380);
+        label7.Location = new Point(12, 491);
         label7.Name = "label7";
         label7.Size = new Size(56, 18);
         label7.TabIndex = 10;
@@ -311,7 +312,7 @@ partial class ViewForm
         // label8
         // 
         label8.AutoSize = true;
-        label8.Location = new Point(12, 349);
+        label8.Location = new Point(12, 460);
         label8.Name = "label8";
         label8.Size = new Size(45, 18);
         label8.TabIndex = 9;
@@ -320,7 +321,7 @@ partial class ViewForm
         // label9
         // 
         label9.AutoSize = true;
-        label9.Location = new Point(12, 318);
+        label9.Location = new Point(12, 429);
         label9.Name = "label9";
         label9.Size = new Size(57, 18);
         label9.TabIndex = 8;
@@ -329,7 +330,7 @@ partial class ViewForm
         // label10
         // 
         label10.AutoSize = true;
-        label10.Location = new Point(12, 287);
+        label10.Location = new Point(12, 398);
         label10.Name = "label10";
         label10.Size = new Size(20, 18);
         label10.TabIndex = 7;
@@ -339,7 +340,7 @@ partial class ViewForm
         // 
         btnDeleteCar.AutoSize = true;
         btnDeleteCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnDeleteCar.Location = new Point(215, 470);
+        btnDeleteCar.Location = new Point(215, 581);
         btnDeleteCar.Name = "btnDeleteCar";
         btnDeleteCar.Size = new Size(69, 28);
         btnDeleteCar.TabIndex = 4;
@@ -351,7 +352,7 @@ partial class ViewForm
         // 
         btnSaveCar.AutoSize = true;
         btnSaveCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnSaveCar.Location = new Point(142, 470);
+        btnSaveCar.Location = new Point(142, 581);
         btnSaveCar.Name = "btnSaveCar";
         btnSaveCar.Size = new Size(67, 28);
         btnSaveCar.TabIndex = 3;
@@ -363,7 +364,7 @@ partial class ViewForm
         // 
         btnNewCar.AutoSize = true;
         btnNewCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnNewCar.Location = new Point(77, 470);
+        btnNewCar.Location = new Point(77, 581);
         btnNewCar.Name = "btnNewCar";
         btnNewCar.Size = new Size(59, 28);
         btnNewCar.TabIndex = 2;
@@ -375,9 +376,9 @@ partial class ViewForm
         // 
         dgvAvailableCars.AllowUserToAddRows = false;
         dgvAvailableCars.AllowUserToDeleteRows = false;
-        dgvAvailableCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        dgvAvailableCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvAvailableCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvAvailableCars.Location = new Point(290, 244);
+        dgvAvailableCars.Location = new Point(290, 355);
         dgvAvailableCars.Name = "dgvAvailableCars";
         dgvAvailableCars.ReadOnly = true;
         dgvAvailableCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -388,17 +389,18 @@ partial class ViewForm
         // 
         label12.AutoSize = true;
         label12.Font = new Font("Calibri", 22F);
-        label12.Location = new Point(12, 244);
+        label12.Location = new Point(12, 355);
         label12.Name = "label12";
         label12.Size = new Size(235, 37);
         label12.TabIndex = 0;
         label12.Text = "Autos disponibles";
+        label12.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // btnAssignCar
         // 
         btnAssignCar.AutoSize = true;
         btnAssignCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnAssignCar.Location = new Point(290, 210);
+        btnAssignCar.Location = new Point(290, 321);
         btnAssignCar.Name = "btnAssignCar";
         btnAssignCar.Size = new Size(81, 28);
         btnAssignCar.TabIndex = 15;
@@ -411,7 +413,7 @@ partial class ViewForm
         // 
         btnRemoveCar.AutoSize = true;
         btnRemoveCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnRemoveCar.Location = new Point(822, 210);
+        btnRemoveCar.Location = new Point(725, 321);
         btnRemoveCar.Name = "btnRemoveCar";
         btnRemoveCar.Size = new Size(91, 28);
         btnRemoveCar.TabIndex = 16;
@@ -424,20 +426,20 @@ partial class ViewForm
         // 
         dgvAssignedCars.AllowUserToAddRows = false;
         dgvAssignedCars.AllowUserToDeleteRows = false;
-        dgvAssignedCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        dgvAssignedCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvAssignedCars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvAssignedCars.Location = new Point(825, 284);
+        dgvAssignedCars.Location = new Point(290, 615);
         dgvAssignedCars.Name = "dgvAssignedCars";
         dgvAssignedCars.ReadOnly = true;
         dgvAssignedCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvAssignedCars.Size = new Size(607, 214);
+        dgvAssignedCars.Size = new Size(526, 159);
         dgvAssignedCars.TabIndex = 17;
         // 
         // label13
         // 
         label13.AutoSize = true;
         label13.Font = new Font("Calibri", 22F);
-        label13.Location = new Point(822, 244);
+        label13.Location = new Point(12, 612);
         label13.Name = "label13";
         label13.Size = new Size(216, 37);
         label13.TabIndex = 18;
@@ -447,7 +449,7 @@ partial class ViewForm
         // 
         label15.AutoSize = true;
         label15.Font = new Font("Calibri", 22F);
-        label15.Location = new Point(822, 9);
+        label15.Location = new Point(12, 210);
         label15.Name = "label15";
         label15.Size = new Size(231, 37);
         label15.TabIndex = 19;
@@ -458,7 +460,7 @@ partial class ViewForm
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
-        ClientSize = new Size(1444, 514);
+        ClientSize = new Size(837, 786);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
@@ -499,6 +501,7 @@ partial class ViewForm
         Controls.Add(label5);
         Controls.Add(label4);
         Font = new Font("Calibri", 11F);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
         Name = "ViewForm";
         StartPosition = FormStartPosition.CenterScreen;

@@ -86,7 +86,7 @@ public partial class ViewForm : Form
             {
                 _viewPresenter.SavePerson(person);
                 LoadData();
-                btnNewCar.Enabled = true;
+                btnNewPerson.Enabled = true;
             }
         }
         catch (Exception ex)

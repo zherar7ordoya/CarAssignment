@@ -12,9 +12,9 @@ public class PersonService
 {
     public void CreatePerson(PersonDTO personDto)
     {
-        var person = new Person(personDto.Nombre.Trim(),
-                                personDto.Apellido.Trim(),
-                                personDto.DNI.Trim());
+        var person = new Person(personDto.DNI.Trim(),
+                                personDto.Nombre.Trim(),
+                                personDto.Apellido.Trim());
 
         // Verify dni uniqueness
         var persons = repository.GetAll();
