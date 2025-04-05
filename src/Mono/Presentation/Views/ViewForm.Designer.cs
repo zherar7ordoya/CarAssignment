@@ -80,7 +80,7 @@ partial class ViewForm
         txtCarsCount.Name = "txtCarsCount";
         txtCarsCount.ReadOnly = true;
         txtCarsCount.Size = new Size(207, 25);
-        txtCarsCount.TabIndex = 16;
+        txtCarsCount.TabIndex = 8;
         // 
         // label2
         // 
@@ -96,21 +96,21 @@ partial class ViewForm
         txtApellido.Location = new Point(77, 145);
         txtApellido.Name = "txtApellido";
         txtApellido.Size = new Size(207, 25);
-        txtApellido.TabIndex = 14;
+        txtApellido.TabIndex = 4;
         // 
         // txtNombre
         // 
         txtNombre.Location = new Point(77, 114);
         txtNombre.Name = "txtNombre";
         txtNombre.Size = new Size(207, 25);
-        txtNombre.TabIndex = 13;
+        txtNombre.TabIndex = 3;
         // 
         // txtDNI
         // 
         txtDNI.Location = new Point(77, 83);
         txtDNI.Name = "txtDNI";
         txtDNI.Size = new Size(207, 25);
-        txtDNI.TabIndex = 12;
+        txtDNI.TabIndex = 2;
         // 
         // txtPersonId
         // 
@@ -118,7 +118,7 @@ partial class ViewForm
         txtPersonId.Name = "txtPersonId";
         txtPersonId.ReadOnly = true;
         txtPersonId.Size = new Size(207, 25);
-        txtPersonId.TabIndex = 11;
+        txtPersonId.TabIndex = 1;
         // 
         // label6
         // 
@@ -177,7 +177,7 @@ partial class ViewForm
         dgvPersonCars.ReadOnly = true;
         dgvPersonCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dgvPersonCars.Size = new Size(526, 105);
-        dgvPersonCars.TabIndex = 5;
+        dgvPersonCars.TabIndex = 19;
         // 
         // btnDeletePerson
         // 
@@ -186,7 +186,7 @@ partial class ViewForm
         btnDeletePerson.Location = new Point(215, 176);
         btnDeletePerson.Name = "btnDeletePerson";
         btnDeletePerson.Size = new Size(69, 28);
-        btnDeletePerson.TabIndex = 4;
+        btnDeletePerson.TabIndex = 7;
         btnDeletePerson.Text = "Eliminar";
         btnDeletePerson.UseVisualStyleBackColor = true;
         btnDeletePerson.Click += DeletePersonButton_Click;
@@ -198,7 +198,7 @@ partial class ViewForm
         btnSavePerson.Location = new Point(142, 176);
         btnSavePerson.Name = "btnSavePerson";
         btnSavePerson.Size = new Size(67, 28);
-        btnSavePerson.TabIndex = 3;
+        btnSavePerson.TabIndex = 6;
         btnSavePerson.Text = "Guardar";
         btnSavePerson.UseVisualStyleBackColor = true;
         btnSavePerson.Click += SavePersonButton_Click;
@@ -210,7 +210,7 @@ partial class ViewForm
         btnNewPerson.Location = new Point(77, 176);
         btnNewPerson.Name = "btnNewPerson";
         btnNewPerson.Size = new Size(59, 28);
-        btnNewPerson.TabIndex = 2;
+        btnNewPerson.TabIndex = 5;
         btnNewPerson.Text = "Nuevo";
         btnNewPerson.UseVisualStyleBackColor = true;
         btnNewPerson.Click += NewPersonButton_Click;
@@ -226,7 +226,7 @@ partial class ViewForm
         dgvPersons.ReadOnly = true;
         dgvPersons.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dgvPersons.Size = new Size(526, 192);
-        dgvPersons.TabIndex = 1;
+        dgvPersons.TabIndex = 18;
         dgvPersons.SelectionChanged += PersonsDataGridView_SelectionChanged;
         // 
         // label1
@@ -244,21 +244,21 @@ partial class ViewForm
         txtModelo.Location = new Point(77, 488);
         txtModelo.Name = "txtModelo";
         txtModelo.Size = new Size(207, 25);
-        txtModelo.TabIndex = 20;
+        txtModelo.TabIndex = 12;
         // 
         // txtPrecio
         // 
         txtPrecio.Location = new Point(77, 550);
         txtPrecio.Name = "txtPrecio";
         txtPrecio.Size = new Size(207, 25);
-        txtPrecio.TabIndex = 19;
+        txtPrecio.TabIndex = 14;
         // 
         // txtAño
         // 
         txtAño.Location = new Point(77, 519);
         txtAño.Name = "txtAño";
         txtAño.Size = new Size(207, 25);
-        txtAño.TabIndex = 18;
+        txtAño.TabIndex = 13;
         // 
         // label14
         // 
@@ -283,14 +283,14 @@ partial class ViewForm
         txtMarca.Location = new Point(77, 457);
         txtMarca.Name = "txtMarca";
         txtMarca.Size = new Size(207, 25);
-        txtMarca.TabIndex = 13;
+        txtMarca.TabIndex = 11;
         // 
         // txtPatente
         // 
         txtPatente.Location = new Point(77, 426);
         txtPatente.Name = "txtPatente";
         txtPatente.Size = new Size(207, 25);
-        txtPatente.TabIndex = 12;
+        txtPatente.TabIndex = 10;
         // 
         // txtCarId
         // 
@@ -298,7 +298,7 @@ partial class ViewForm
         txtCarId.Name = "txtCarId";
         txtCarId.ReadOnly = true;
         txtCarId.Size = new Size(207, 25);
-        txtCarId.TabIndex = 11;
+        txtCarId.TabIndex = 9;
         // 
         // label7
         // 
@@ -343,7 +343,7 @@ partial class ViewForm
         btnDeleteCar.Location = new Point(215, 581);
         btnDeleteCar.Name = "btnDeleteCar";
         btnDeleteCar.Size = new Size(69, 28);
-        btnDeleteCar.TabIndex = 4;
+        btnDeleteCar.TabIndex = 17;
         btnDeleteCar.Text = "Eliminar";
         btnDeleteCar.UseVisualStyleBackColor = true;
         btnDeleteCar.Click += DeleteCarButton_Click;
@@ -355,7 +355,7 @@ partial class ViewForm
         btnSaveCar.Location = new Point(142, 581);
         btnSaveCar.Name = "btnSaveCar";
         btnSaveCar.Size = new Size(67, 28);
-        btnSaveCar.TabIndex = 3;
+        btnSaveCar.TabIndex = 16;
         btnSaveCar.Text = "Guardar";
         btnSaveCar.UseVisualStyleBackColor = true;
         btnSaveCar.Click += SaveCarButton_Click;
@@ -367,7 +367,7 @@ partial class ViewForm
         btnNewCar.Location = new Point(77, 581);
         btnNewCar.Name = "btnNewCar";
         btnNewCar.Size = new Size(59, 28);
-        btnNewCar.TabIndex = 2;
+        btnNewCar.TabIndex = 15;
         btnNewCar.Text = "Nuevo";
         btnNewCar.UseVisualStyleBackColor = true;
         btnNewCar.Click += NewCarButton_Click;
@@ -383,7 +383,7 @@ partial class ViewForm
         dgvAvailableCars.ReadOnly = true;
         dgvAvailableCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dgvAvailableCars.Size = new Size(526, 254);
-        dgvAvailableCars.TabIndex = 1;
+        dgvAvailableCars.TabIndex = 22;
         // 
         // label12
         // 
@@ -403,7 +403,7 @@ partial class ViewForm
         btnAssignCar.Location = new Point(290, 321);
         btnAssignCar.Name = "btnAssignCar";
         btnAssignCar.Size = new Size(81, 28);
-        btnAssignCar.TabIndex = 15;
+        btnAssignCar.TabIndex = 20;
         btnAssignCar.Text = "↑ Asignar";
         btnAssignCar.TextImageRelation = TextImageRelation.TextBeforeImage;
         btnAssignCar.UseVisualStyleBackColor = true;
@@ -416,7 +416,7 @@ partial class ViewForm
         btnRemoveCar.Location = new Point(725, 321);
         btnRemoveCar.Name = "btnRemoveCar";
         btnRemoveCar.Size = new Size(91, 28);
-        btnRemoveCar.TabIndex = 16;
+        btnRemoveCar.TabIndex = 21;
         btnRemoveCar.Text = "↓ Remover";
         btnRemoveCar.TextImageRelation = TextImageRelation.ImageBeforeText;
         btnRemoveCar.UseVisualStyleBackColor = true;
@@ -433,7 +433,7 @@ partial class ViewForm
         dgvAssignedCars.ReadOnly = true;
         dgvAssignedCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dgvAssignedCars.Size = new Size(526, 159);
-        dgvAssignedCars.TabIndex = 17;
+        dgvAssignedCars.TabIndex = 23;
         // 
         // label13
         // 
@@ -460,7 +460,7 @@ partial class ViewForm
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
-        ClientSize = new Size(837, 786);
+        ClientSize = new Size(829, 786);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
@@ -503,6 +503,7 @@ partial class ViewForm
         Font = new Font("Calibri", 11F);
         Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
+        MaximizeBox = false;
         Name = "ViewForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Integrador";
