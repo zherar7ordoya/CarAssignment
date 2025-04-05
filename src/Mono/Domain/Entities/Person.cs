@@ -48,16 +48,16 @@ public class Person : BaseEntity
 
     public void RemoveCar(Car car)
     {
-        var carToRemove = Autos.FirstOrDefault(c => c.Id == car.Id);
+        var removable = Autos.FirstOrDefault(c => c.Id == car.Id);
 
-        if (carToRemove == null)
+        if (removable == null)
         {
 
             throw new Exception("El auto no pertenece a la persona.");
         }
         else
         {
-            Autos.Remove(carToRemove);
+            Autos.Remove(removable);
         }
     }
 

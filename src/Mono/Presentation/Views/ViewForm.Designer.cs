@@ -160,7 +160,7 @@ partial class ViewForm
         lblCarsPrice.Font = new Font("Calibri", 22F);
         lblCarsPrice.Location = new Point(1141, 207);
         lblCarsPrice.Name = "lblCarsPrice";
-        lblCarsPrice.Size = new Size(316, 37);
+        lblCarsPrice.Size = new Size(291, 37);
         lblCarsPrice.TabIndex = 6;
         lblCarsPrice.Text = "Total";
         lblCarsPrice.TextAlign = ContentAlignment.MiddleRight;
@@ -175,7 +175,7 @@ partial class ViewForm
         dgvPersonCars.Name = "dgvPersonCars";
         dgvPersonCars.ReadOnly = true;
         dgvPersonCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvPersonCars.Size = new Size(635, 155);
+        dgvPersonCars.Size = new Size(610, 155);
         dgvPersonCars.TabIndex = 5;
         // 
         // btnDeletePerson
@@ -430,7 +430,7 @@ partial class ViewForm
         dgvAssignedCars.Name = "dgvAssignedCars";
         dgvAssignedCars.ReadOnly = true;
         dgvAssignedCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvAssignedCars.Size = new Size(632, 214);
+        dgvAssignedCars.Size = new Size(607, 214);
         dgvAssignedCars.TabIndex = 17;
         // 
         // label13
@@ -458,7 +458,7 @@ partial class ViewForm
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
-        ClientSize = new Size(1469, 514);
+        ClientSize = new Size(1444, 514);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
