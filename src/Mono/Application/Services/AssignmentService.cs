@@ -12,8 +12,8 @@ namespace Integrador.Application.Services
     {
         public void AssignCar(int carId, int personId)
         {
-            var car = carRepository.GetById(carId);
-            var person = personRepository.GetById(personId);
+            var car = carRepository.ReadById(carId);
+            var person = personRepository.ReadById(personId);
 
             if (car == null || person == null)
             {
@@ -36,8 +36,8 @@ namespace Integrador.Application.Services
 
         public void RemoveCar(int carId, int personId)
         {
-            var car = carRepository.GetById(carId);
-            var person = personRepository.GetById(personId);
+            var car = carRepository.ReadById(carId);
+            var person = personRepository.ReadById(personId);
 
             if (car == null || person == null)
             {

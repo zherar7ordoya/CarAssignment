@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Integrador.Infrastructure.Persistence.SQLite.Records;
+﻿namespace Integrador.Infrastructure.Persistence.SQLite.Records;
 
 public class CarRecord
 {

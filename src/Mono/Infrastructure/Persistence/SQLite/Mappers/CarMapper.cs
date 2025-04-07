@@ -2,15 +2,9 @@
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Persistence.SQLite.Records;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Integrador.Infrastructure.Persistence.SQLite.Mappers;
 
-public class CarMapper : IEntityMapper<Car, CarRecord>
+public class CarMapper : IMapper<Car, CarRecord>
 {
     public CarRecord ToStorage(Car entity) => new()
     {
@@ -21,6 +15,7 @@ public class CarMapper : IEntityMapper<Car, CarRecord>
         Año = entity.Año,
         Precio = entity.Precio
     };
+
     public Car ToDomain(CarRecord storage) => new()
     {
         Id = storage.Id,

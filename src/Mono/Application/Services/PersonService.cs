@@ -17,7 +17,7 @@ public class PersonService
                                 personDto.Apellido.Trim());
 
         // Verify dni uniqueness
-        var persons = repository.GetAll();
+        var persons = repository.ReadAll();
         var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
         if (exists is not null)
         {
@@ -30,7 +30,7 @@ public class PersonService
 
     public void UpdatePerson(PersonDTO personDto)
     {
-        var person = repository.GetById(personDto.Id);
+        var person = repository.ReadById(personDto.Id);
 
         if (person is null)
         {
@@ -43,7 +43,7 @@ public class PersonService
         var newDNI = personDto.DNI.Trim();
 
         // Verify dni uniqueness excluding the current person
-        var exists = repository.GetAll()
+        var exists = repository.ReadAll()
                                .Any(p => p.DNI == newDNI && p.Id != personDto.Id);
 
         if (exists)
@@ -63,7 +63,7 @@ public class PersonService
 
     public void DeletePerson(int personId)
     {
-        var person = repository.GetById(personId);
+        var person = repository.ReadById(personId);
 
         if (person is null)
         {
@@ -82,7 +82,7 @@ public class PersonService
 
     public List<PersonDTO> GetPersons()
     {
-        var persons = repository.GetAll();
+        var persons = repository.ReadAll();
 
         return [.. persons
             .Select(p => new PersonDTO
@@ -106,7 +106,7 @@ public class PersonService
 
     public List<AssignedCarDTO> GetAssignedCars()
     {
-        var persons = repository.GetAll();
+        var persons = repository.ReadAll();
 
         var assigned = persons
             .SelectMany(persona => persona

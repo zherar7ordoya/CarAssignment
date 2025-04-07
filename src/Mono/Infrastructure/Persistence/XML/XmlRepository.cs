@@ -53,7 +53,7 @@ public class XmlRepository<T>
         }
     }
 
-    public List<T> GetAll()
+    public List<T> ReadAll()
     {
         try
         {
@@ -66,7 +66,7 @@ public class XmlRepository<T>
         }
     }
 
-    public T? GetById(int id)
+    public T? ReadById(int id)
     {
         try
         {

@@ -19,7 +19,7 @@ public class CarService
                           carDto.Precio);
 
         // Verify patente uniqueness
-        var cars = repository.GetAll();
+        var cars = repository.ReadAll();
         var exists = cars.FirstOrDefault(c => c.Patente == car.Patente);
         if (exists is not null)
         {
@@ -32,7 +32,7 @@ public class CarService
 
     public void UpdateCar(CarDTO carDto)
     {
-        var car = repository.GetById(carDto.Id);
+        var car = repository.ReadById(carDto.Id);
         
         if (car is null)
         {
@@ -47,7 +47,7 @@ public class CarService
         var newAño = carDto.Año;
         var newPrecio = carDto.Precio;
 
-        var exists = repository.GetAll()
+        var exists = repository.ReadAll()
                                .Any(p => p.Patente == newPatente && p.Id != carDto.Id);
 
         if (exists)
@@ -68,7 +68,7 @@ public class CarService
 
     public void DeleteCar(int carId)
     {
-        var car = repository.GetById(carId);
+        var car = repository.ReadById(carId);
 
         if (car is null)
         {
@@ -87,7 +87,7 @@ public class CarService
 
     public List<CarDTO> GetAvailableCars()
     {
-        var cars = repository.GetAll();
+        var cars = repository.ReadAll();
 
         var available = cars
             .Where(c => c.DueñoId == 0)

@@ -9,8 +9,11 @@ public class XmlDataSource<T>(IExceptionHandler exceptionHandler)
            : IXmlDataSource<T> where T : Domain.Entities.IEntity
 {
     private static readonly string _directory = "LocalData";
-    private readonly string _filePath = Path.Combine(EnsureDirectory(_directory),
-                                                     $"{typeof(T).Name}.xml");
+    private readonly string _filePath = Path.Combine
+                                        (
+                                            EnsureDirectory(_directory),
+                                            $"{typeof(T).Name}.xml"
+                                        );
 
     private static string EnsureDirectory(string directory)
     {

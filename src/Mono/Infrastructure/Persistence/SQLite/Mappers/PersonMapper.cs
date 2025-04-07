@@ -2,15 +2,9 @@
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Persistence.SQLite.Records;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Integrador.Infrastructure.Persistence.SQLite.Mappers;
 
-public class PersonMapper : IEntityMapper<Person, PersonRecord>
+public class PersonMapper : IMapper<Person, PersonRecord>
 {
     public PersonRecord ToStorage(Person entity) => new()
     {
