@@ -6,7 +6,7 @@ namespace Integrador.Application.Services;
 
 public class PersonService
 (
-    IGenericRepository<Person> repository,
+    IRepository<Person> repository,
     IMessenger messenger
 ) : IPersonService
 {
@@ -38,21 +38,28 @@ public class PersonService
             return;
         }
 
-        person.Nombre = personDto.Nombre.Trim();
-        person.Apellido = personDto.Apellido.Trim();
-        person.DNI = personDto.DNI.Trim();
+        var newNombre = personDto.Nombre.Trim();
+        var newApellido = personDto.Apellido.Trim();
+        var newDNI = personDto.DNI.Trim();
 
-        // Verify dni uniqueness
-        var persons = repository.GetAll();
-        var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
-        if (exists is not null)
+        // Verify dni uniqueness excluding the current person
+        var exists = repository.GetAll()
+                               .Any(p => p.DNI == newDNI && p.Id != personDto.Id);
+
+        if (exists)
         {
-            messenger.ShowError("Person with the same DNI already exists.");
+            messenger.ShowError("Another person with the same DNI already exists.");
             return;
         }
 
+        // Update person properties
+        person.Nombre = newNombre;
+        person.Apellido = newApellido;
+        person.DNI = newDNI;
+
         repository.Update(person);
     }
+
 
     public void DeletePerson(int personId)
     {

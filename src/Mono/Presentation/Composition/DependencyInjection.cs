@@ -4,31 +4,33 @@ using Integrador.Application.Services;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
-using Integrador.Infrastructure.Persistence;
+using Integrador.Infrastructure.Persistence.XML;
 using Integrador.Presentation.Factories;
 using Integrador.Presentation.Presenters;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Integrador.Presentation.Composition;
 
 public class DependencyInjection
 {
-    public static void ConfigureServices(IServiceCollection services)
+    public static SimpleServiceProvider Configure()
     {
-        services.AddScoped<IGenericRepository<Person>, GenericRepository<Person>>();
-        services.AddScoped<IGenericRepository<Car>, GenericRepository<Car>>();
-        services.AddSingleton<ILogger, Logger>();
-        services.AddSingleton(typeof(IDataSource<>), typeof(DataSource<>));
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddSingleton<IMessenger, Messenger>();
-        services.AddSingleton<ICarFactory, CarFactory>();
-        services.AddSingleton<IPersonFactory, PersonFactory>();
-        services.AddScoped<IViewPresenter, ViewPresenter>();
-        services.AddSingleton<IExceptionHandler, ExceptionHandler>();
-        services.AddScoped<IPersonService, PersonService>();
-        services.AddScoped<ICarService, CarService>();
-        services.AddScoped<IAssignmentService, AssignmentService>();
-        services.AddTransient<ViewForm>();
+        var provider = new SimpleServiceProvider();
+
+        provider.Register<IRepository<Person>, XmlRepository<Person>>();
+        provider.Register<IRepository<Car>, XmlRepository<Car>>();
+        provider.Register<ILogger, Logger>();
+        provider.Register(typeof(IXmlDataSource<>), typeof(XmlDataSource<>));
+        provider.Register(typeof(IRepository<>), typeof(XmlRepository<>));
+        provider.Register<IMessenger, Messenger>();
+        provider.Register<ICarFactory, CarFactory>();
+        provider.Register<IPersonFactory, PersonFactory>();
+        provider.Register<IViewPresenter, ViewPresenter>();
+        provider.Register<IExceptionHandler, ExceptionHandler>();
+        provider.Register<IPersonService, PersonService>();
+        provider.Register<ICarService, CarService>();
+        provider.Register<IAssignmentService, AssignmentService>();
+        provider.Register<ViewForm, ViewForm>();
+
+        return provider;
     }
 }

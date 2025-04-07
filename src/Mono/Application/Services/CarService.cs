@@ -6,7 +6,7 @@ namespace Integrador.Application.Services;
 
 public class CarService
 (
-    IGenericRepository<Car> repository,
+    IRepository<Car> repository,
     IMessenger messenger
 ) : ICarService
 {
@@ -40,20 +40,28 @@ public class CarService
             return;
         }
 
-        car.Patente = carDto.Patente.Trim();
-        car.Marca = carDto.Marca.Trim();
-        car.Modelo = carDto.Modelo.Trim();
-        car.Año = carDto.Año;
-        car.Precio = carDto.Precio;
+        // Verify patente uniqueness excluding the current car
+        var newPatente = carDto.Patente.Trim();
+        var newMarca = carDto.Marca.Trim();
+        var newModelo = carDto.Modelo.Trim();
+        var newAño = carDto.Año;
+        var newPrecio = carDto.Precio;
 
-        // Verify patente uniqueness
-        var cars = repository.GetAll();
-        var exists = cars.FirstOrDefault(c => c.Patente == car.Patente);
-        if (exists is not null)
+        var exists = repository.GetAll()
+                               .Any(p => p.Patente == newPatente && p.Id != carDto.Id);
+
+        if (exists)
         {
             messenger.ShowError("Car with the same patente already exists.");
             return;
         }
+
+        // Update car properties
+        car.Patente = newPatente;
+        car.Marca = newMarca;
+        car.Modelo = newModelo;
+        car.Año = newAño;
+        car.Precio = newPrecio;
 
         repository.Update(car);
     }

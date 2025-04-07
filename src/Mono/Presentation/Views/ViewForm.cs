@@ -300,17 +300,40 @@ public partial class ViewForm : Form
     {
         try
         {
+            var currentPerson = _persons.Current as PersonDTO;
+            var currentCar = _availableCars.Current as CarDTO;
+
+            int personId = currentPerson?.Id ?? -1;
+            int carId = currentCar?.Id ?? -1;
+
             _persons.DataSource = new List<PersonDTO>();
             _availableCars.DataSource = new List<CarDTO>();
             _assignedCars.DataSource = new List<AssignedCarDTO>();
 
-            _persons.DataSource = _viewPresenter.ReadPersons();
-            _availableCars.DataSource = _viewPresenter.ReadAvailableCars();
-            _assignedCars.DataSource = _viewPresenter.ReadAssignedCars();
+            var persons = _viewPresenter.ReadPersons();
+            var cars = _viewPresenter.ReadAvailableCars();
+            var assigned = _viewPresenter.ReadAssignedCars();
+
+            _persons.DataSource = persons;
+            _availableCars.DataSource = cars;
+            _assignedCars.DataSource = assigned;
+
+            if (personId != -1)
+            {
+                int newPersonIndex = persons.FindIndex(p => p.Id == personId);
+                if (newPersonIndex >= 0) _persons.Position = newPersonIndex;
+            }
+
+            if (carId != -1)
+            {
+                int newCarIndex = cars.FindIndex(c => c.Id == carId);
+                if (newCarIndex >= 0) _availableCars.Position = newCarIndex;
+            }
         }
         catch (Exception ex)
         {
             _exceptionHandler.Handle(ex, "Error al cargar datos.");
         }
     }
+
 }

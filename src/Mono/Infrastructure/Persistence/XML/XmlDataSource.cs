@@ -3,15 +3,13 @@ using System.Xml.Serialization;
 
 using Integrador.Application.Interfaces;
 
-namespace Integrador.Infrastructure.Persistence;
+namespace Integrador.Infrastructure.Persistence.XML;
 
-public class DataSource<T>
-(
-    IExceptionHandler exceptionHandler,
-    string dataDirectory = "LocalData"
-) : IDataSource<T> where T : Domain.Entities.IEntity
+public class XmlDataSource<T>(IExceptionHandler exceptionHandler)
+           : IXmlDataSource<T> where T : Domain.Entities.IEntity
 {
-    private readonly string _filePath = Path.Combine(EnsureDirectory(dataDirectory),
+    private static readonly string _directory = "LocalData";
+    private readonly string _filePath = Path.Combine(EnsureDirectory(_directory),
                                                      $"{typeof(T).Name}.xml");
 
     private static string EnsureDirectory(string directory)

@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Application.Interfaces;
 
-public interface IGenericRepository<T> where T : Domain.Entities.IEntity
+public interface IRepository<T> where T : Domain.Entities.IEntity
 {
     void Create(T entity);
     List<T> GetAll();

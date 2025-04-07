@@ -2,15 +2,15 @@
 
 using System.Reflection;
 
-namespace Integrador.Infrastructure.Persistence;
+namespace Integrador.Infrastructure.Persistence.XML;
 
-public class GenericRepository<T>
+public class XmlRepository<T>
 (
-    IDataSource<T> dataSource,
+    IXmlDataSource<T> dataSource,
     IExceptionHandler exceptionHandler,
     IMessenger messenger,
     ILogger logger
-) : IGenericRepository<T> where T : Domain.Entities.IEntity
+) : IRepository<T> where T : Domain.Entities.IEntity
 {
     public void Create(T entity)
     {

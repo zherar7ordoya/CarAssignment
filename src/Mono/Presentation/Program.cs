@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Integrador;
+﻿using Integrador;
 using Integrador.Presentation.Composition;
 
 static class Program
@@ -7,14 +6,12 @@ static class Program
     [STAThread]
     static void Main()
     {
-        var services = new ServiceCollection();
-        DependencyInjection.ConfigureServices(services);
-        var provider = services.BuildServiceProvider();
-        AppServices.Provider = provider;
+        ApplicationConfiguration.Initialize();
+        AppServices.Provider = DependencyInjection.Configure();
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
-        Application.Run(provider.GetRequiredService<ViewForm>());
+        Application.Run(AppServices.Get<ViewForm>());
     }
 }

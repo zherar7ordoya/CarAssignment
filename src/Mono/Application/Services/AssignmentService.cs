@@ -5,8 +5,8 @@ namespace Integrador.Application.Services
 {
     public class AssignmentService
     (
-        IGenericRepository<Car> carRepository,
-        IGenericRepository<Person> personRepository,
+        IRepository<Car> carRepository,
+        IRepository<Person> personRepository,
         IMessenger messenger
     ) : IAssignmentService
     {
