@@ -1,6 +1,8 @@
 ﻿using Integrador;
 using Integrador.Presentation.Composition;
 
+using SQLitePCL;
+
 static class Program
 {
     [STAThread]
@@ -11,6 +13,8 @@ static class Program
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
+
+        Batteries.Init();
 
         Application.Run(AppServices.Get<ViewForm>());
     }

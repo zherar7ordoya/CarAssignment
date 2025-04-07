@@ -7,17 +7,17 @@ using Microsoft.Data.Sqlite;
 
 namespace Integrador.Infrastructure.Persistence.SQLite;
 
-public class SQLiteRepository<T>
+public class SQLiteRepository<T, TRecord>
 (
-    SQLiteDataSource<T> sqliteDataSource,
-    IMapper<T, object> mapper
+    ISQLiteDataSource<T> sqliteDataSource,
+    IMapper<T, TRecord> mapper
 ) : IRepository<T> where T : IEntity
 {
     private readonly string _tableName = typeof(T).Name;
 
     public void Create(T entity)
     {
-        var record = toRecord(entity); // el record tiene las propiedades planas
+        var record = mapper.ToStorage(entity) ?? throw new InvalidOperationException("Record cannot be null."); // el record tiene las propiedades planas
         var recordType = record.GetType();
         var properties = recordType.GetProperties();
 
@@ -47,7 +47,7 @@ public class SQLiteRepository<T>
         using var command = new SqliteCommand(sql, connection);
         using var reader = command.ExecuteReader();
 
-        var recordType = toRecord(default!)!.GetType();
+        var recordType = typeof(TRecord) ?? throw new InvalidOperationException("Record type cannot be determined.");
         var properties = recordType.GetProperties();
 
         while (reader.Read())
@@ -58,10 +58,30 @@ public class SQLiteRepository<T>
             {
                 var value = reader[prop.Name];
                 if (value is DBNull) value = null;
+
+                if (value != null)
+                {
+                    var targetType = prop.PropertyType;
+                    var actualType = value.GetType();
+
+                    if (targetType != actualType)
+                    {
+                        try
+                        {
+                            value = Convert.ChangeType(value, targetType);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new InvalidOperationException(
+                                $"No se pudo convertir {prop.Name} de {actualType} a {targetType}", ex);
+                        }
+                    }
+                }
+
                 prop.SetValue(record, value);
             }
 
-            var entity = toEntity(record);
+            var entity = mapper.ToDomain((TRecord)record);
             results.Add(entity);
         }
 
@@ -80,7 +100,7 @@ public class SQLiteRepository<T>
 
         if (!reader.Read()) return default;
 
-        var recordType = toRecord(default!)!.GetType();
+        var recordType = mapper.ToDomain(default!)!.GetType();
         var properties = recordType.GetProperties();
         var record = Activator.CreateInstance(recordType)!;
 
@@ -88,16 +108,36 @@ public class SQLiteRepository<T>
         {
             var value = reader[prop.Name];
             if (value is DBNull) value = null;
+
+            if (value != null)
+            {
+                var targetType = prop.PropertyType;
+                var actualType = value.GetType();
+
+                if (targetType != actualType)
+                {
+                    try
+                    {
+                        value = Convert.ChangeType(value, targetType);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new InvalidOperationException(
+                            $"No se pudo convertir {prop.Name} de {actualType} a {targetType}", ex);
+                    }
+                }
+            }
+
             prop.SetValue(record, value);
         }
 
-        return toEntity(record);
+        return mapper.ToDomain((TRecord)record);
     }
 
     public void Update(T entity)
     {
-        var record = toRecord(entity);
-        var recordType = record!.GetType();
+        var record = mapper.ToStorage(entity) ?? throw new InvalidOperationException("Record cannot be null.");
+        var recordType = record.GetType();
         var properties = recordType.GetProperties().Where(p => p.Name != "Id").ToArray(); // No se actualiza el Id
 
         var setClause = string.Join(", ", properties.Select(p => $"{p.Name} = @{p.Name}"));

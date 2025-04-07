@@ -67,8 +67,10 @@ public class SQLiteDataSource<T>() : ISQLiteDataSource<T>
     private static string GenerateCreateTableSql(Type type)
     {
         var columns = type
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Select(prop => $"{prop.Name} {MapToSqliteType(prop.PropertyType)}");
+        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        .Select(prop => new { prop.Name, SqlType = MapToSqliteType(prop.PropertyType) })
+        .Where(x => x.SqlType != null)
+        .Select(x => $"{x.Name} {x.SqlType}");
 
         var columnsDef = string.Join(", ", columns);
         return $"CREATE TABLE IF NOT EXISTS {type.Name} ({columnsDef})";
@@ -76,12 +78,18 @@ public class SQLiteDataSource<T>() : ISQLiteDataSource<T>
 
     private static string MapToSqliteType(Type type)
     {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+            return null!; // Las listas no deben ser persistidas así
+
         return type switch
         {
             _ when type == typeof(int) => "INTEGER",
+            _ when type == typeof(long) => "INTEGER",
+            _ when type == typeof(decimal) => "REAL",
+            _ when type == typeof(double) => "REAL",
             _ when type == typeof(string) => "TEXT",
-            _ when type == typeof(bool) => "INTEGER",
-            _ when type == typeof(DateTime) => "TEXT",
+            _ when type == typeof(bool) => "INTEGER", // 0 o 1
+            _ when type == typeof(DateTime) => "TEXT", // se puede parsear luego
             _ => "TEXT"
         };
     }
