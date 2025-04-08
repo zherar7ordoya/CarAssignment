@@ -24,9 +24,7 @@ public class SQLiteRepository<T, TRecord>
             entity.Id = nextId;
         }
 
-        // El record tiene las propiedades planas
-        var record = mapper.ToStorage(entity)
-                     ?? throw new InvalidOperationException("Record cannot be null.");
+        var record = mapper.ToStorage(entity) ?? throw new InvalidOperationException("Record cannot be null."); // el record tiene las propiedades planas
         var recordType = record.GetType();
         var properties = recordType.GetProperties();
 
@@ -56,8 +54,7 @@ public class SQLiteRepository<T, TRecord>
         using var command = new SqliteCommand(sql, connection);
         using var reader = command.ExecuteReader();
 
-        var recordType = typeof(TRecord)
-                         ?? throw new InvalidOperationException("Record type cannot be determined.");
+        var recordType = typeof(TRecord) ?? throw new InvalidOperationException("Record type cannot be determined.");
         var properties = recordType.GetProperties();
 
         while (reader.Read())
@@ -85,10 +82,8 @@ public class SQLiteRepository<T, TRecord>
                         }
                         catch (Exception ex)
                         {
-                            throw new InvalidOperationException
-                            (
-                                $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex
-                            );
+                            throw new InvalidOperationException(
+                                $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex);
                         }
                     }
                 }
@@ -115,8 +110,7 @@ public class SQLiteRepository<T, TRecord>
 
         if (!reader.Read()) return default;
 
-        var recordType = typeof(TRecord)
-                         ?? throw new InvalidOperationException("Record type cannot be determined.");
+        var recordType = typeof(TRecord) ?? throw new InvalidOperationException("Record type cannot be determined.");
         var properties = recordType.GetProperties();
         var record = Activator.CreateInstance(recordType)!;
 
@@ -141,10 +135,8 @@ public class SQLiteRepository<T, TRecord>
                     }
                     catch (Exception ex)
                     {
-                        throw new InvalidOperationException
-                        (
-                            $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex
-                        );
+                        throw new InvalidOperationException(
+                            $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex);
                     }
                 }
             }
@@ -157,12 +149,9 @@ public class SQLiteRepository<T, TRecord>
 
     public void Update(T entity)
     {
-        var record = mapper.ToStorage(entity)
-                     ?? throw new InvalidOperationException("Record cannot be null.");
+        var record = mapper.ToStorage(entity) ?? throw new InvalidOperationException("Record cannot be null.");
         var recordType = record.GetType();
-
-        // No se actualiza el Id
-        var properties = recordType.GetProperties().Where(p => p.Name != "Id").ToArray();
+        var properties = recordType.GetProperties().Where(p => p.Name != "Id").ToArray(); // No se actualiza el Id
 
         var setClause = string.Join(", ", properties.Select(p => $"{p.Name} = @{p.Name}"));
         var sql = $"UPDATE {_tableName} SET {setClause} WHERE Id = @Id";
@@ -179,8 +168,7 @@ public class SQLiteRepository<T, TRecord>
 
         // Agregamos el parámetro Id al final
         var idProp = recordType.GetProperty("Id");
-        var idValue = idProp?.GetValue(record)
-                      ?? throw new InvalidOperationException("Entity must have an Id");
+        var idValue = idProp?.GetValue(record) ?? throw new InvalidOperationException("Entity must have an Id");
         command.Parameters.AddWithValue("@Id", idValue);
 
         var rowsAffected = command.ExecuteNonQuery();

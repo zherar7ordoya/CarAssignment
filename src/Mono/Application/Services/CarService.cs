@@ -4,7 +4,6 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Services;
 
-// TODO: Bring logging to the service layer from the repository layer.
 public class CarService
 (
     IRepository<Car> repository,

@@ -11,8 +11,7 @@ public class PersonMapper : IMapper<Person, PersonRecord>
         Id = entity.Id,
         Nombre = entity.Nombre,
         Apellido = entity.Apellido,
-        DNI = entity.DNI,
-        Autos = string.Join(",", entity.Autos)
+        DNI = entity.DNI
     };
 
     public Person ToDomain(PersonRecord storage) => new()
@@ -20,9 +19,6 @@ public class PersonMapper : IMapper<Person, PersonRecord>
         Id = storage.Id,
         Nombre = storage.Nombre,
         Apellido = storage.Apellido,
-        DNI = storage.DNI,
-        Autos = string.IsNullOrWhiteSpace(storage.Autos)
-        ? []
-        : [.. storage.Autos.Split(',').Select(int.Parse)]
+        DNI = storage.DNI
     };
 }

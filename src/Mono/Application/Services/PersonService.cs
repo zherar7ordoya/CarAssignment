@@ -4,11 +4,9 @@ using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Services;
 
-// TODO: Bring logging to the service layer from the repository layer.
 public class PersonService
 (
-    IRepository<Car> carRepository,
-    IRepository<Person> personRepository,
+    IRepository<Person> repository,
     IMessenger messenger
 ) : IPersonService
 {
@@ -19,7 +17,7 @@ public class PersonService
                                 personDto.Apellido.Trim());
 
         // Verify dni uniqueness
-        var persons = personRepository.ReadAll();
+        var persons = repository.ReadAll();
         var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
         if (exists is not null)
         {
@@ -27,12 +25,12 @@ public class PersonService
             return;
         }
 
-        personRepository.Create(person);
+        repository.Create(person);
     }
 
     public void UpdatePerson(PersonDTO personDto)
     {
-        var person = personRepository.ReadById(personDto.Id);
+        var person = repository.ReadById(personDto.Id);
 
         if (person is null)
         {
@@ -45,7 +43,7 @@ public class PersonService
         var newDNI = personDto.DNI.Trim();
 
         // Verify dni uniqueness excluding the current person
-        var exists = personRepository.ReadAll()
+        var exists = repository.ReadAll()
                                .Any(p => p.DNI == newDNI && p.Id != personDto.Id);
 
         if (exists)
@@ -59,13 +57,13 @@ public class PersonService
         person.Apellido = newApellido;
         person.DNI = newDNI;
 
-        personRepository.Update(person);
+        repository.Update(person);
     }
 
 
     public void DeletePerson(int personId)
     {
-        var person = personRepository.ReadById(personId);
+        var person = repository.ReadById(personId);
 
         if (person is null)
         {
@@ -79,12 +77,12 @@ public class PersonService
             return;
         }
 
-        personRepository.Delete(personId);
+        repository.Delete(personId);
     }
 
     public List<PersonDTO> GetPersons()
     {
-        var persons = personRepository.ReadAll();
+        var persons = repository.ReadAll();
 
         return [.. persons
             .Select(p => new PersonDTO
@@ -93,40 +91,36 @@ public class PersonService
                 p.DNI,
                 p.Nombre,
                 p.Apellido,
-                [.. p.Autos
-                .Select(carId => carRepository.ReadById(carId))
-                .Where(car => car is not null) // Ensure car is not null
-                .Select(car => new CarDTO
+                [.. p.GetCarsList().Select(a => new CarDTO
                 (
-                    car!.Id, // Use null-forgiving operator since we filtered nulls
-                    car.Patente,
-                    car.Marca,
-                    car.Modelo,
-                    car.Año,
-                    car.Precio,
-                    car.DueñoId
+                    a.Id,
+                    a.Patente,
+                    a.Marca,
+                    a.Modelo,
+                    a.Año,
+                    a.Precio,
+                    a.DueñoId
                 ))]
             ))];
     }
 
     public List<AssignedCarDTO> GetAssignedCars()
     {
-        var persons = personRepository.ReadAll();
+        var persons = repository.ReadAll();
 
         var assigned = persons
-            .SelectMany(persona =>
-            persona.Autos
-            .Select(carId => carRepository.ReadById(carId))
-            .Where(car => car is not null)
+            .SelectMany(persona => persona
+            .GetCarsList()
             .Select(auto => new AssignedCarDTO
             (
-                auto!.Marca ?? "Desconocido",
+                auto.Marca ?? "Desconocido",
                 auto.Año,
                 auto.Modelo ?? "Desconocido",
                 auto.Patente ?? "Sin patente",
                 persona.GetIdentityNumber(),
                 persona.GetNameSurname()
-            ))).ToList(); // Add ToList() here to explicitly convert to List<AssignedCarDTO>
+            )))
+            .ToList();
 
         return assigned;
     }
