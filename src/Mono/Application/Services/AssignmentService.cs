@@ -1,6 +1,8 @@
 ﻿using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
 
+// TODO: Bring logging to the service layer from the repository layer.
+
 namespace Integrador.Application.Services
 {
     public class AssignmentService
@@ -28,7 +30,7 @@ namespace Integrador.Application.Services
             }
 
             car.DueñoId = person.Id;
-            person.Autos.Add(car);
+            person.Autos.Add(carId);
 
             carRepository.Update(car);
             personRepository.Update(person);
@@ -45,13 +47,13 @@ namespace Integrador.Application.Services
                 return;
             }
 
-            if (!person.OwnsCar(car))
+            if (!person.OwnsCar(carId))
             {
                 messenger.ShowInformation("Car does not belong to the person.");
                 return;
             }
 
-            person.RemoveCar(car);
+            person.RemoveCar(carId);
             car.RemoveOwner();
 
             carRepository.Update(car);

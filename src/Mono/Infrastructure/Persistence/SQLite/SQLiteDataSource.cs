@@ -79,7 +79,20 @@ public class SQLiteDataSource<T>() : ISQLiteDataSource<T>
     private static string MapToSqliteType(Type type)
     {
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
-            return null!; // Las listas no deben ser persistidas así
+        {
+            var innerType = type.GetGenericArguments()[0];
+
+            // Se almacenará como string de ids separados por coma
+            if (innerType == typeof(int) || innerType == typeof(long)) return "TEXT";
+
+            // Otros tipos de listas no se persisten
+            return null!;
+
+            /*
+             * PROVISORIO: Creo que, más que evaluar si es un int, debería
+             * evaluar si no es un tipo primitivo.
+             */
+        }
 
         return type switch
         {
@@ -89,7 +102,7 @@ public class SQLiteDataSource<T>() : ISQLiteDataSource<T>
             _ when type == typeof(double) => "REAL",
             _ when type == typeof(string) => "TEXT",
             _ when type == typeof(bool) => "INTEGER", // 0 o 1
-            _ when type == typeof(DateTime) => "TEXT", // se puede parsear luego
+            _ when type == typeof(DateTime) => "TEXT",
             _ => "TEXT"
         };
     }

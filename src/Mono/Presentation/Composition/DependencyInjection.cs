@@ -21,19 +21,19 @@ public class DependencyInjection
         //
         // Xml persistence
         //
-        //provider.Register(typeof(IXmlDataSource<>), typeof(XmlDataSource<>));
-        //provider.Register(typeof(IRepository<>), typeof(XmlRepository<>));
-        //provider.Register<IRepository<Person>, XmlRepository<Person>>();
-        //provider.Register<IRepository<Car>, XmlRepository<Car>>();
+        provider.Register(typeof(IXmlDataSource<>), typeof(XmlDataSource<>));
+        provider.Register(typeof(IRepository<>), typeof(XmlRepository<>));
+        provider.Register<IRepository<Person>, XmlRepository<Person>>();
+        provider.Register<IRepository<Car>, XmlRepository<Car>>();
         //
         // Sqlite persistence
         //
-        provider.Register<IMapper<Person, PersonRecord>, PersonMapper>();
-        provider.Register<IMapper<Car, CarRecord>, CarMapper>();
-        provider.Register<ISQLiteDataSource<Person>, SQLiteDataSource<Person>>();
-        provider.Register<ISQLiteDataSource<Car>, SQLiteDataSource<Car>>();
-        provider.Register<IRepository<Person>, SQLiteRepository<Person, PersonRecord>>();
-        provider.Register<IRepository<Car>, SQLiteRepository<Car, CarRecord>>();
+        //provider.Register<IMapper<Person, PersonRecord>, PersonMapper>();
+        //provider.Register<IMapper<Car, CarRecord>, CarMapper>();
+        //provider.Register<ISQLiteDataSource<Person>, SQLiteDataSource<Person>>();
+        //provider.Register<ISQLiteDataSource<Car>, SQLiteDataSource<Car>>();
+        //provider.Register<IRepository<Person>, SQLiteRepository<Person, PersonRecord>>();
+        //provider.Register<IRepository<Car>, SQLiteRepository<Car, CarRecord>>();
         //
         // Exception handling
         //
