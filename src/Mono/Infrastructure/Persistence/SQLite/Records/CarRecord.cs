@@ -8,4 +8,5 @@ public class CarRecord
     public string Modelo { get; set; } = "";
     public int Año { get; set; } = 0;
     public decimal Precio { get; set; } = 0;
+    public int? DueñoId { get; set; }
 }

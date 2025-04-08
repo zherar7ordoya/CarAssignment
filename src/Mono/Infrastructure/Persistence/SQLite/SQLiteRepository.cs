@@ -17,6 +17,13 @@ public class SQLiteRepository<T, TRecord>
 
     public void Create(T entity)
     {
+        if (entity.Id == 0)
+        {
+            var existing = ReadAll();
+            int nextId = existing.Count == 0 ? 1 : existing.Max(e => e.Id) + 1;
+            entity.Id = nextId;
+        }
+
         var record = mapper.ToStorage(entity) ?? throw new InvalidOperationException("Record cannot be null."); // el record tiene las propiedades planas
         var recordType = record.GetType();
         var properties = recordType.GetProperties();
@@ -64,16 +71,19 @@ public class SQLiteRepository<T, TRecord>
                     var targetType = prop.PropertyType;
                     var actualType = value.GetType();
 
-                    if (targetType != actualType)
+                    // Soporte para Nullable<T>
+                    var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+
+                    if (actualType != underlyingType)
                     {
                         try
                         {
-                            value = Convert.ChangeType(value, targetType);
+                            value = Convert.ChangeType(value, underlyingType);
                         }
                         catch (Exception ex)
                         {
                             throw new InvalidOperationException(
-                                $"No se pudo convertir {prop.Name} de {actualType} a {targetType}", ex);
+                                $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex);
                         }
                     }
                 }
@@ -100,7 +110,7 @@ public class SQLiteRepository<T, TRecord>
 
         if (!reader.Read()) return default;
 
-        var recordType = mapper.ToDomain(default!)!.GetType();
+        var recordType = typeof(TRecord) ?? throw new InvalidOperationException("Record type cannot be determined.");
         var properties = recordType.GetProperties();
         var record = Activator.CreateInstance(recordType)!;
 
@@ -114,16 +124,19 @@ public class SQLiteRepository<T, TRecord>
                 var targetType = prop.PropertyType;
                 var actualType = value.GetType();
 
-                if (targetType != actualType)
+                // Soporte para Nullable<T>
+                var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+
+                if (actualType != underlyingType)
                 {
                     try
                     {
-                        value = Convert.ChangeType(value, targetType);
+                        value = Convert.ChangeType(value, underlyingType);
                     }
                     catch (Exception ex)
                     {
                         throw new InvalidOperationException(
-                            $"No se pudo convertir {prop.Name} de {actualType} a {targetType}", ex);
+                            $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex);
                     }
                 }
             }
@@ -158,7 +171,12 @@ public class SQLiteRepository<T, TRecord>
         var idValue = idProp?.GetValue(record) ?? throw new InvalidOperationException("Entity must have an Id");
         command.Parameters.AddWithValue("@Id", idValue);
 
-        command.ExecuteNonQuery();
+        var rowsAffected = command.ExecuteNonQuery();
+
+        if (rowsAffected == 0)
+        {
+            throw new InvalidOperationException($"Update failed: no record with Id {idValue} found.");
+        }
     }
 
     public void Delete(int id)
@@ -170,6 +188,11 @@ public class SQLiteRepository<T, TRecord>
 
         command.Parameters.AddWithValue("@Id", id);
 
-        command.ExecuteNonQuery();
+        var rowsAffected = command.ExecuteNonQuery();
+
+        if (rowsAffected == 0)
+        {
+            throw new InvalidOperationException($"Update failed: no record with Id {id} found.");
+        }
     }
 }

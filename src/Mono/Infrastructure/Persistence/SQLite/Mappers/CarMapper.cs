@@ -13,7 +13,8 @@ public class CarMapper : IMapper<Car, CarRecord>
         Marca = entity.Marca,
         Modelo = entity.Modelo,
         Año = entity.Año,
-        Precio = entity.Precio
+        Precio = entity.Precio,
+        DueñoId = entity.DueñoId
     };
 
     public Car ToDomain(CarRecord storage) => new()
@@ -23,6 +24,7 @@ public class CarMapper : IMapper<Car, CarRecord>
         Marca = storage.Marca,
         Modelo = storage.Modelo,
         Año = storage.Año,
-        Precio = storage.Precio
+        Precio = storage.Precio,
+        DueñoId = storage.DueñoId ?? 0
     };
 }
