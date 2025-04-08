@@ -17,7 +17,7 @@ public class Person : BaseEntity
                   string dni,
                   string nombre,
                   string apellido,
-                  List<Car> autos)
+                  List<int> autos)
     {
         Id = id;
         DNI = dni;
@@ -31,28 +31,27 @@ public class Person : BaseEntity
     public string DNI { get; set; } = string.Empty;
     public string Nombre { get; set; } = string.Empty;
     public string Apellido { get; set; } = string.Empty;
-    public List<Car> Autos { get; set; } = [];
+    public List<int> Autos { get; set; } = [];
 
     public bool HasCars() => Autos.Count > 0;
 
-    public bool OwnsCar(Car car)
+    public bool OwnsCar(int id)
     {
-        var ownedCar = Autos.FirstOrDefault(c => c.Id == car.Id);
-        return ownedCar != null;
+        var owned = Autos.FirstOrDefault(x => x == id);
+        return owned != 0;
     }
 
-    public void AssignCar(Car car)
-    {
-        Autos.Add(car);
-    }
+    //public void AssignCar(Car car)
+    //{
+    //    Autos.Add(car.Id);
+    //}
 
-    public void RemoveCar(Car car)
+    public void RemoveCar(int id)
     {
-        var removable = Autos.FirstOrDefault(c => c.Id == car.Id);
+        var removable = Autos.FirstOrDefault(x => x == id);
 
-        if (removable == null)
+        if (removable == 0)
         {
-
             throw new Exception("El auto no pertenece a la persona.");
         }
         else
@@ -61,7 +60,7 @@ public class Person : BaseEntity
         }
     }
 
-    public List<Car> GetCarsList() => Autos;
+    public List<int> GetCarsList() => Autos;
     public string GetNameSurname() => $"{Apellido}, {Nombre}";
     public string GetIdentityNumber() => DNI;
 

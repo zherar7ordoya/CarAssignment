@@ -4,6 +4,8 @@ using System.Reflection;
 
 namespace Integrador.Infrastructure.Persistence.XML;
 
+// TODO: Mover logging a services.
+
 public class XmlRepository<T>
 (
     IXmlDataSource<T> dataSource,
