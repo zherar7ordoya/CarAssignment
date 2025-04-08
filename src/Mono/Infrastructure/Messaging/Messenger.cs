@@ -1,4 +1,4 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Infrastructure;
 
 namespace Integrador.Infrastructure.Messaging;
 

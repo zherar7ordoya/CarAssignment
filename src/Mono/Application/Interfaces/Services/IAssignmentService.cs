@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces
+﻿namespace Integrador.Application.Interfaces.Services
 {
     public interface IAssignmentService
     {

@@ -1,12 +1,14 @@
 ﻿using System.Reflection;
 using System.Xml.Serialization;
 
-using Integrador.Application.Interfaces;
+using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Persistence;
+using Integrador.Domain.Interfaces;
 
-namespace Integrador.Infrastructure.Persistence.XML;
+namespace Integrador.Infrastructure.Persistence.XML.Context;
 
-public class XmlDataSource<T>(IExceptionHandler exceptionHandler)
-           : IXmlDataSource<T> where T : Domain.Entities.IEntity
+public class XmlContext<T>(IExceptionHandler exceptionHandler)
+           : IXmlContext<T> where T : IEntity
 {
     private static readonly string _directory = "LocalData";
     private readonly string _filePath = Path.Combine

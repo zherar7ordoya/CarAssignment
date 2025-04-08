@@ -1,6 +1,6 @@
 ﻿namespace Integrador;
 
-partial class ViewForm
+partial class MainForm
 {
     /// <summary>
     ///  Required designer variable.
@@ -28,7 +28,7 @@ partial class ViewForm
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewForm));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         txtCarsCount = new TextBox();
         label2 = new Label();
         txtApellido = new TextBox();

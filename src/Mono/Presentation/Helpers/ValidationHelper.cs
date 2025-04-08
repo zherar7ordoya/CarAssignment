@@ -1,9 +1,9 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Infrastructure;
 
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Integrador.Presentation.Presenters.Helpers;
+namespace Integrador.Presentation.Helpers;
 
 public static class ValidationHelper
 {

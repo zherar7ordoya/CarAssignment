@@ -1,4 +1,6 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Persistence;
+using Integrador.Application.Interfaces.Services;
 using Integrador.Domain.Entities;
 
 // TODO: Bring logging to the service layer from the repository layer.

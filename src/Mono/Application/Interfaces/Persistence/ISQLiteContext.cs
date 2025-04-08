@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace Integrador.Application.Interfaces;
+namespace Integrador.Application.Interfaces.Persistence;
 
-public interface ISQLiteDataSource<T>
+public interface ISQLiteContext<T>
 {
     SqliteConnection GetConnection();
     string TableName { get; }

@@ -1,15 +1,15 @@
 ﻿using System.Data;
 
-using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
+using Integrador.Application.Interfaces.Persistence;
+using Integrador.Domain.Interfaces;
 
 using Microsoft.Data.Sqlite;
 
-namespace Integrador.Infrastructure.Persistence.SQLite;
+namespace Integrador.Infrastructure.Persistence.SQLite.Repository;
 
 public class SQLiteRepository<T, TRecord>
 (
-    ISQLiteDataSource<T> sqliteDataSource,
+    ISQLiteContext<T> sqliteDataSource,
     IMapper<T, TRecord> mapper
 ) : IRepository<T> where T : IEntity
 {
@@ -20,7 +20,7 @@ public class SQLiteRepository<T, TRecord>
         if (entity.Id == 0)
         {
             var existing = ReadAll();
-            int nextId = existing.Count == 0 ? 1 : existing.Max(e => e.Id) + 1;
+            int nextId = !existing.Any() ? 1 : existing.Max(e => e.Id) + 1;
             entity.Id = nextId;
         }
 
@@ -47,7 +47,7 @@ public class SQLiteRepository<T, TRecord>
         command.ExecuteNonQuery();
     }
 
-    public List<T> ReadAll()
+    public IEnumerable<T> ReadAll()
     {
         var results = new List<T>();
         var sql = $"SELECT * FROM {_tableName}";
@@ -57,7 +57,7 @@ public class SQLiteRepository<T, TRecord>
         using var reader = command.ExecuteReader();
 
         var recordType = typeof(TRecord)
-                         ?? throw new InvalidOperationException("Record type cannot be determined.");
+                     ?? throw new InvalidOperationException("Record type cannot be determined.");
         var properties = recordType.GetProperties();
 
         while (reader.Read())
@@ -74,7 +74,6 @@ public class SQLiteRepository<T, TRecord>
                     var targetType = prop.PropertyType;
                     var actualType = value.GetType();
 
-                    // Soporte para Nullable<T>
                     var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
 
                     if (actualType != underlyingType)
@@ -85,8 +84,7 @@ public class SQLiteRepository<T, TRecord>
                         }
                         catch (Exception ex)
                         {
-                            throw new InvalidOperationException
-                            (
+                            throw new InvalidOperationException(
                                 $"No se pudo convertir {prop.Name} de {actualType} a {underlyingType}", ex
                             );
                         }
@@ -100,7 +98,7 @@ public class SQLiteRepository<T, TRecord>
             results.Add(entity);
         }
 
-        return results;
+        return results; // Como IEnumerable<T>
     }
 
     public T? ReadById(int id)

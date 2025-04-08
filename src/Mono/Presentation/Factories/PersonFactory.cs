@@ -1,5 +1,5 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
+using Integrador.Application.Interfaces.Utilities;
 
 namespace Integrador.Presentation.Factories;
 

@@ -1,15 +1,15 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Persistence;
 
 using Microsoft.Data.Sqlite;
 
 using System.Configuration;
 using System.Reflection;
 
-namespace Integrador.Infrastructure.Persistence.SQLite;
+namespace Integrador.Infrastructure.Persistence.SQLite.Context;
 
-public class SQLiteDataSource<T>() : ISQLiteDataSource<T>
+public class SQLiteContext<T>() : ISQLiteContext<T>
 {
-    static SQLiteDataSource()
+    static SQLiteContext()
     {
         EnsureDatabaseAndTable();
     }

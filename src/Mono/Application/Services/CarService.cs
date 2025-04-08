@@ -1,5 +1,7 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
+using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Persistence;
+using Integrador.Application.Interfaces.Services;
 using Integrador.Domain.Entities;
 
 namespace Integrador.Application.Services;

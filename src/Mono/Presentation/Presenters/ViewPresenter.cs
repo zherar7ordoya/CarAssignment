@@ -1,6 +1,7 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
-using Integrador.Presentation.Presenters.Helpers;
+using Integrador.Application.Interfaces.Presentation;
+using Integrador.Application.Interfaces.Services;
+using Integrador.Presentation.Helpers;
 
 namespace Integrador.Presentation.Presenters;
 

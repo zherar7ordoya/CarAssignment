@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Domain.Entities;
 
-public class Person : BaseEntity
+public class Person : EntityBase
 {
     // Empty constructor required by serialization.
     public Person() { }
@@ -35,32 +35,20 @@ public class Person : BaseEntity
 
     public bool HasCars() => Autos.Count > 0;
 
-    public bool OwnsCar(int id)
-    {
-        var owned = Autos.FirstOrDefault(x => x == id);
-        return owned != 0;
-    }
+    public bool OwnsCar(int id) => Autos.Contains(id);
 
-    //public void AssignCar(Car car)
-    //{
-    //    Autos.Add(car.Id);
-    //}
+    public void AssignCar(int id)
+    {
+        if (Autos.Contains(id)) throw new Exception("El auto ya pertenece a la persona.");
+        Autos.Add(id);
+    }
 
     public void RemoveCar(int id)
     {
-        var removable = Autos.FirstOrDefault(x => x == id);
-
-        if (removable == 0)
-        {
-            throw new Exception("El auto no pertenece a la persona.");
-        }
-        else
-        {
-            Autos.Remove(removable);
-        }
+        if (!Autos.Contains(id)) throw new Exception("El auto no pertenece a la persona.");
+        Autos.Remove(id);
     }
 
-    public List<int> GetCarsList() => Autos;
     public string GetNameSurname() => $"{Apellido}, {Nombre}";
     public string GetIdentityNumber() => DNI;
 

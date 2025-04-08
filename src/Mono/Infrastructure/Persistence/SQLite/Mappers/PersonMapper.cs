@@ -1,4 +1,4 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Persistence.SQLite.Records;
 

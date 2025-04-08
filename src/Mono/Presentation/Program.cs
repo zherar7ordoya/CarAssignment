@@ -16,6 +16,6 @@ static class Program
 
         Batteries.Init();
 
-        Application.Run(AppServices.Get<ViewForm>());
+        Application.Run(AppServices.Get<MainForm>());
     }
 }

@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Infrastructure;
 
-using ILogger = Integrador.Application.Interfaces.ILogger;
+using ILogger = Integrador.Application.Interfaces.Infrastructure.ILogger;
 
 namespace Integrador.Application.Exceptions;
 

@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Domain.Entities;
 
-public class Car : BaseEntity
+public class Car : EntityBase
 {
     // Empty constructor required by serialization
     public Car() { }

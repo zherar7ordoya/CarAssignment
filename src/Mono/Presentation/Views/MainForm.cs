@@ -1,11 +1,13 @@
 ﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
+using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Presentation;
+using Integrador.Application.Interfaces.Utilities;
 
 namespace Integrador;
 
-public partial class ViewForm : Form
+public partial class MainForm : Form
 {
-    public ViewForm
+    public MainForm
     (
         IMessenger messenger,
         ICarFactory carFactory,

@@ -1,18 +1,20 @@
-﻿using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Persistence;
+using Integrador.Domain.Interfaces;
 
 using System.Reflection;
 
-namespace Integrador.Infrastructure.Persistence.XML;
+namespace Integrador.Infrastructure.Persistence.XML.Repository;
 
 // TODO: Mover logging a services.
 
 public class XmlRepository<T>
 (
-    IXmlDataSource<T> dataSource,
+    IXmlContext<T> dataSource,
     IExceptionHandler exceptionHandler,
     IMessenger messenger,
     ILogger logger
-) : IRepository<T> where T : Domain.Entities.IEntity
+) : IRepository<T> where T : IEntity
 {
     public void Create(T entity)
     {
@@ -55,11 +57,11 @@ public class XmlRepository<T>
         }
     }
 
-    public List<T> ReadAll()
+    public IEnumerable<T> ReadAll()
     {
         try
         {
-            return dataSource.Read() ?? [];
+            return dataSource.Read() ?? Enumerable.Empty<T>();
         }
         catch (Exception ex)
         {
