@@ -1,6 +1,6 @@
 ﻿namespace Integrador.Presentation.Composition;
 
-public sealed class SimpleServiceProvider
+public sealed class ServiceProvider
 {
     private readonly Dictionary<Type, Type> _registrations = [];
 

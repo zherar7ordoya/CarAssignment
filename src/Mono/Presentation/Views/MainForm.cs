@@ -2,6 +2,7 @@
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
+using Integrador.Presentation.Views;
 
 namespace Integrador;
 
@@ -13,7 +14,8 @@ public partial class MainForm : Form
         ICarFactory carFactory,
         IPersonFactory personFactory,
         IViewPresenter viewPresenter,
-        IExceptionHandler exceptionHandler
+        IExceptionHandler exceptionHandler,
+        ILocalizationService localization
     )
     {
         _messenger = messenger;
@@ -22,11 +24,15 @@ public partial class MainForm : Form
         _viewPresenter = viewPresenter;
         _exceptionHandler = exceptionHandler;
 
+        _localization = localization;
+
         try
         {
             InitializeComponent();
             ConfigureBindings();
             LoadData();
+
+            ApplyLocalization();
         }
         catch (Exception ex)
         {
@@ -34,11 +40,43 @@ public partial class MainForm : Form
         }
     }
 
+    private void ApplyLocalization()
+    {
+        this.Text = _localization["FormTitle"];
+        lblPersons.Text = _localization["LabelPersons"];
+        lblIdentityCard.Text = _localization["PersonIdentityCard"];
+        lblFirstname.Text = _localization["PersonFirstname"];
+        lblLastname.Text = _localization["PersonLastname"];
+        btnNewPerson.Text = _localization["PersonNew"];
+        btnSavePerson.Text = _localization["PersonSave"];
+        btnDeletePerson.Text = _localization["PersonDelete"];
+
+        lblPersonCars.Text = _localization["LabelPersonCars"];
+        lblQuantity.Text = _localization["PersonCarsQuantity"];
+
+        btnAssignCar.Text = _localization["ButtonAssignCar"];
+        btnRemoveCar.Text = _localization["ButtonRemoveCar"];
+
+        lblAvailableCars.Text = _localization["LabelAvailableCars"];
+        lblLicensePlate.Text = _localization["CarLicensePlate"];
+        lblMark.Text = _localization["CarMark"]; // Aparentemente es "Brand"...
+        lblModel.Text = _localization["CarModel"];
+        lblYear.Text = _localization["CarYear"];
+        lblPrice.Text = _localization["CarPrice"];
+        btnNewCar.Text = _localization["CarNew"];
+        btnSaveCar.Text = _localization["CarSave"];
+        btnDeleteCar.Text = _localization["CarDelete"];
+
+        lblAssignedCars.Text = _localization["LabelAssignedCars"];
+    }
+
     private readonly IMessenger _messenger;
     private readonly ICarFactory _carFactory;
     private readonly IPersonFactory _personFactory;
     private readonly IViewPresenter _viewPresenter;
     private readonly IExceptionHandler _exceptionHandler;
+
+    private readonly ILocalizationService _localization;
 
     private readonly BindingSource _persons = [];
     private readonly BindingSource _personCars = [];

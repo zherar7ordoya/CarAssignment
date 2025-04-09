@@ -19,14 +19,15 @@ using Integrador.Infrastructure.Persistence.XML.Context;
 using Integrador.Infrastructure.Persistence.XML.Repository;
 using Integrador.Infrastructure.Persistence.SQLite.Repository;
 using Integrador.Infrastructure.Configuration;
+using Integrador.Presentation.Views;
 
 namespace Integrador.Presentation.Composition;
 
 public class DependencyInjection
 {
-    public static SimpleServiceProvider Configure()
+    public static ServiceProvider Configure()
     {
-        var provider = new SimpleServiceProvider();
+        var provider = new ServiceProvider();
         var tech = SystemSettings.GetPersistenceTechnology();
 
         switch (tech)
@@ -50,7 +51,7 @@ public class DependencyInjection
 
     /* ////////////////////////////////////////////////////////////////////// */
 
-    private static void RegisterXmlPersistence(SimpleServiceProvider provider)
+    private static void RegisterXmlPersistence(ServiceProvider provider)
     {
         provider.Register(typeof(IXmlContext<>), typeof(XmlContext<>));
         provider.Register(typeof(IRepository<>), typeof(XmlRepository<>));
@@ -58,7 +59,7 @@ public class DependencyInjection
         provider.Register<IRepository<Car>, XmlRepository<Car>>();
     }
 
-    private static void RegisterSQLitePersistence(SimpleServiceProvider provider)
+    private static void RegisterSQLitePersistence(ServiceProvider provider)
     {
         provider.Register(typeof(ISQLiteContext<>), typeof(SQLiteContext<>));
         provider.Register<IRepository<Person>, SQLiteRepository<Person, PersonRecord>>();
@@ -67,13 +68,13 @@ public class DependencyInjection
         provider.Register<IMapper<Car, CarRecord>, CarMapper>();
     }
 
-    private static void RegisterLiteDbPersistence(SimpleServiceProvider provider)
+    private static void RegisterLiteDbPersistence(ServiceProvider provider)
     {
         provider.Register(typeof(ILiteDbContext<>), typeof(LiteDbContext<>));
         provider.Register(typeof(IRepository<>), typeof(LiteDbRepository<>));
     }
 
-    private static void RegisterCoreServices(SimpleServiceProvider provider)
+    private static void RegisterCoreServices(ServiceProvider provider)
     {
         provider.Register<IExceptionHandler, ExceptionHandler>();
         provider.Register<ILogger, Logger>();
@@ -86,6 +87,8 @@ public class DependencyInjection
         provider.Register<ICarFactory, CarFactory>();
         provider.Register<IPersonFactory, PersonFactory>();
         provider.Register<IViewPresenter, ViewPresenter>();
+
+        provider.Register<ILocalizationService, ResxLocalizationService>();
         provider.Register<MainForm, MainForm>();
     }
 }

@@ -30,44 +30,44 @@ partial class MainForm
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         txtCarsCount = new TextBox();
-        label2 = new Label();
+        lblQuantity = new Label();
         txtApellido = new TextBox();
         txtNombre = new TextBox();
         txtDNI = new TextBox();
         txtPersonId = new TextBox();
-        label6 = new Label();
-        label5 = new Label();
-        label4 = new Label();
-        label3 = new Label();
+        lblLastname = new Label();
+        lblFirstname = new Label();
+        lblIdentityCard = new Label();
+        lblPersonId = new Label();
         lblCarsPrice = new Label();
         dgvPersonCars = new DataGridView();
         btnDeletePerson = new Button();
         btnSavePerson = new Button();
         btnNewPerson = new Button();
         dgvPersons = new DataGridView();
-        label1 = new Label();
+        lblPersons = new Label();
         txtModelo = new TextBox();
         txtPrecio = new TextBox();
         txtAño = new TextBox();
-        label14 = new Label();
-        label11 = new Label();
+        lblYear = new Label();
+        lblPrice = new Label();
         txtMarca = new TextBox();
         txtPatente = new TextBox();
         txtCarId = new TextBox();
-        label7 = new Label();
-        label8 = new Label();
-        label9 = new Label();
-        label10 = new Label();
+        lblModel = new Label();
+        lblMark = new Label();
+        lblLicensePlate = new Label();
+        lblCarId = new Label();
         btnDeleteCar = new Button();
         btnSaveCar = new Button();
         btnNewCar = new Button();
         dgvAvailableCars = new DataGridView();
-        label12 = new Label();
+        lblAvailableCars = new Label();
         btnAssignCar = new Button();
         btnRemoveCar = new Button();
         dgvAssignedCars = new DataGridView();
-        label13 = new Label();
-        label15 = new Label();
+        lblAssignedCars = new Label();
+        lblPersonCars = new Label();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -82,14 +82,14 @@ partial class MainForm
         txtCarsCount.Size = new Size(207, 25);
         txtCarsCount.TabIndex = 8;
         // 
-        // label2
+        // lblQuantity
         // 
-        label2.AutoSize = true;
-        label2.Location = new Point(12, 253);
-        label2.Name = "label2";
-        label2.Size = new Size(62, 18);
-        label2.TabIndex = 15;
-        label2.Text = "Cantidad";
+        lblQuantity.AutoSize = true;
+        lblQuantity.Location = new Point(12, 253);
+        lblQuantity.Name = "lblQuantity";
+        lblQuantity.Size = new Size(62, 18);
+        lblQuantity.TabIndex = 15;
+        lblQuantity.Text = "Cantidad";
         // 
         // txtApellido
         // 
@@ -120,41 +120,41 @@ partial class MainForm
         txtPersonId.Size = new Size(207, 25);
         txtPersonId.TabIndex = 1;
         // 
-        // label6
+        // lblLastname
         // 
-        label6.AutoSize = true;
-        label6.Location = new Point(12, 148);
-        label6.Name = "label6";
-        label6.Size = new Size(61, 18);
-        label6.TabIndex = 10;
-        label6.Text = "Apellido";
+        lblLastname.AutoSize = true;
+        lblLastname.Location = new Point(12, 148);
+        lblLastname.Name = "lblLastname";
+        lblLastname.Size = new Size(61, 18);
+        lblLastname.TabIndex = 10;
+        lblLastname.Text = "Apellido";
         // 
-        // label5
+        // lblFirstname
         // 
-        label5.AutoSize = true;
-        label5.Location = new Point(12, 117);
-        label5.Name = "label5";
-        label5.Size = new Size(59, 18);
-        label5.TabIndex = 9;
-        label5.Text = "Nombre";
+        lblFirstname.AutoSize = true;
+        lblFirstname.Location = new Point(12, 117);
+        lblFirstname.Name = "lblFirstname";
+        lblFirstname.Size = new Size(59, 18);
+        lblFirstname.TabIndex = 9;
+        lblFirstname.Text = "Nombre";
         // 
-        // label4
+        // lblIdentityCard
         // 
-        label4.AutoSize = true;
-        label4.Location = new Point(12, 86);
-        label4.Name = "label4";
-        label4.Size = new Size(31, 18);
-        label4.TabIndex = 8;
-        label4.Text = "DNI";
+        lblIdentityCard.AutoSize = true;
+        lblIdentityCard.Location = new Point(12, 86);
+        lblIdentityCard.Name = "lblIdentityCard";
+        lblIdentityCard.Size = new Size(31, 18);
+        lblIdentityCard.TabIndex = 8;
+        lblIdentityCard.Text = "DNI";
         // 
-        // label3
+        // lblPersonId
         // 
-        label3.AutoSize = true;
-        label3.Location = new Point(12, 55);
-        label3.Name = "label3";
-        label3.Size = new Size(20, 18);
-        label3.TabIndex = 7;
-        label3.Text = "Id";
+        lblPersonId.AutoSize = true;
+        lblPersonId.Location = new Point(12, 55);
+        lblPersonId.Name = "lblPersonId";
+        lblPersonId.Size = new Size(20, 18);
+        lblPersonId.TabIndex = 7;
+        lblPersonId.Text = "Id";
         // 
         // lblCarsPrice
         // 
@@ -229,15 +229,15 @@ partial class MainForm
         dgvPersons.TabIndex = 18;
         dgvPersons.SelectionChanged += PersonsDataGridView_SelectionChanged;
         // 
-        // label1
+        // lblPersons
         // 
-        label1.AutoSize = true;
-        label1.Font = new Font("Calibri", 22F);
-        label1.Location = new Point(12, 12);
-        label1.Name = "label1";
-        label1.Size = new Size(126, 37);
-        label1.TabIndex = 0;
-        label1.Text = "Personas";
+        lblPersons.AutoSize = true;
+        lblPersons.Font = new Font("Calibri", 22F);
+        lblPersons.Location = new Point(12, 12);
+        lblPersons.Name = "lblPersons";
+        lblPersons.Size = new Size(126, 37);
+        lblPersons.TabIndex = 0;
+        lblPersons.Text = "Personas";
         // 
         // txtModelo
         // 
@@ -260,23 +260,23 @@ partial class MainForm
         txtAño.Size = new Size(207, 25);
         txtAño.TabIndex = 13;
         // 
-        // label14
+        // lblYear
         // 
-        label14.AutoSize = true;
-        label14.Location = new Point(12, 521);
-        label14.Name = "label14";
-        label14.Size = new Size(33, 18);
-        label14.TabIndex = 17;
-        label14.Text = "Año";
+        lblYear.AutoSize = true;
+        lblYear.Location = new Point(12, 521);
+        lblYear.Name = "lblYear";
+        lblYear.Size = new Size(33, 18);
+        lblYear.TabIndex = 17;
+        lblYear.Text = "Año";
         // 
-        // label11
+        // lblPrice
         // 
-        label11.AutoSize = true;
-        label11.Location = new Point(12, 553);
-        label11.Name = "label11";
-        label11.Size = new Size(47, 18);
-        label11.TabIndex = 16;
-        label11.Text = "Precio";
+        lblPrice.AutoSize = true;
+        lblPrice.Location = new Point(12, 553);
+        lblPrice.Name = "lblPrice";
+        lblPrice.Size = new Size(47, 18);
+        lblPrice.TabIndex = 16;
+        lblPrice.Text = "Precio";
         // 
         // txtMarca
         // 
@@ -300,41 +300,41 @@ partial class MainForm
         txtCarId.Size = new Size(207, 25);
         txtCarId.TabIndex = 9;
         // 
-        // label7
+        // lblModel
         // 
-        label7.AutoSize = true;
-        label7.Location = new Point(12, 491);
-        label7.Name = "label7";
-        label7.Size = new Size(56, 18);
-        label7.TabIndex = 10;
-        label7.Text = "Modelo";
+        lblModel.AutoSize = true;
+        lblModel.Location = new Point(12, 491);
+        lblModel.Name = "lblModel";
+        lblModel.Size = new Size(56, 18);
+        lblModel.TabIndex = 10;
+        lblModel.Text = "Modelo";
         // 
-        // label8
+        // lblMark
         // 
-        label8.AutoSize = true;
-        label8.Location = new Point(12, 460);
-        label8.Name = "label8";
-        label8.Size = new Size(45, 18);
-        label8.TabIndex = 9;
-        label8.Text = "Marca";
+        lblMark.AutoSize = true;
+        lblMark.Location = new Point(12, 460);
+        lblMark.Name = "lblMark";
+        lblMark.Size = new Size(45, 18);
+        lblMark.TabIndex = 9;
+        lblMark.Text = "Marca";
         // 
-        // label9
+        // lblLicensePlate
         // 
-        label9.AutoSize = true;
-        label9.Location = new Point(12, 429);
-        label9.Name = "label9";
-        label9.Size = new Size(57, 18);
-        label9.TabIndex = 8;
-        label9.Text = "Patente";
+        lblLicensePlate.AutoSize = true;
+        lblLicensePlate.Location = new Point(12, 429);
+        lblLicensePlate.Name = "lblLicensePlate";
+        lblLicensePlate.Size = new Size(57, 18);
+        lblLicensePlate.TabIndex = 8;
+        lblLicensePlate.Text = "Patente";
         // 
-        // label10
+        // lblCarId
         // 
-        label10.AutoSize = true;
-        label10.Location = new Point(12, 398);
-        label10.Name = "label10";
-        label10.Size = new Size(20, 18);
-        label10.TabIndex = 7;
-        label10.Text = "Id";
+        lblCarId.AutoSize = true;
+        lblCarId.Location = new Point(12, 398);
+        lblCarId.Name = "lblCarId";
+        lblCarId.Size = new Size(20, 18);
+        lblCarId.TabIndex = 7;
+        lblCarId.Text = "Id";
         // 
         // btnDeleteCar
         // 
@@ -385,24 +385,23 @@ partial class MainForm
         dgvAvailableCars.Size = new Size(526, 254);
         dgvAvailableCars.TabIndex = 22;
         // 
-        // label12
+        // lblAvailableCars
         // 
-        label12.AutoSize = true;
-        label12.Font = new Font("Calibri", 22F);
-        label12.Location = new Point(12, 355);
-        label12.Name = "label12";
-        label12.Size = new Size(235, 37);
-        label12.TabIndex = 0;
-        label12.Text = "Autos disponibles";
-        label12.TextAlign = ContentAlignment.MiddleLeft;
+        lblAvailableCars.AutoSize = true;
+        lblAvailableCars.Font = new Font("Calibri", 22F);
+        lblAvailableCars.Location = new Point(12, 355);
+        lblAvailableCars.Name = "lblAvailableCars";
+        lblAvailableCars.Size = new Size(235, 37);
+        lblAvailableCars.TabIndex = 0;
+        lblAvailableCars.Text = "Autos disponibles";
+        lblAvailableCars.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // btnAssignCar
         // 
-        btnAssignCar.AutoSize = true;
         btnAssignCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         btnAssignCar.Location = new Point(290, 321);
         btnAssignCar.Name = "btnAssignCar";
-        btnAssignCar.Size = new Size(81, 28);
+        btnAssignCar.Size = new Size(94, 28);
         btnAssignCar.TabIndex = 20;
         btnAssignCar.Text = "↑ Asignar";
         btnAssignCar.TextImageRelation = TextImageRelation.TextBeforeImage;
@@ -411,13 +410,12 @@ partial class MainForm
         // 
         // btnRemoveCar
         // 
-        btnRemoveCar.AutoSize = true;
         btnRemoveCar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        btnRemoveCar.Location = new Point(725, 321);
+        btnRemoveCar.Location = new Point(722, 321);
         btnRemoveCar.Name = "btnRemoveCar";
-        btnRemoveCar.Size = new Size(91, 28);
+        btnRemoveCar.Size = new Size(94, 28);
         btnRemoveCar.TabIndex = 21;
-        btnRemoveCar.Text = "↓ Remover";
+        btnRemoveCar.Text = "↓ Quitar";
         btnRemoveCar.TextImageRelation = TextImageRelation.ImageBeforeText;
         btnRemoveCar.UseVisualStyleBackColor = true;
         btnRemoveCar.Click += RemoveCarButton_Click;
@@ -435,27 +433,27 @@ partial class MainForm
         dgvAssignedCars.Size = new Size(526, 159);
         dgvAssignedCars.TabIndex = 23;
         // 
-        // label13
+        // lblAssignedCars
         // 
-        label13.AutoSize = true;
-        label13.Font = new Font("Calibri", 22F);
-        label13.Location = new Point(12, 612);
-        label13.Name = "label13";
-        label13.Size = new Size(216, 37);
-        label13.TabIndex = 18;
-        label13.Text = "Autos asignados";
+        lblAssignedCars.AutoSize = true;
+        lblAssignedCars.Font = new Font("Calibri", 22F);
+        lblAssignedCars.Location = new Point(12, 612);
+        lblAssignedCars.Name = "lblAssignedCars";
+        lblAssignedCars.Size = new Size(216, 37);
+        lblAssignedCars.TabIndex = 18;
+        lblAssignedCars.Text = "Autos asignados";
         // 
-        // label15
+        // lblPersonCars
         // 
-        label15.AutoSize = true;
-        label15.Font = new Font("Calibri", 22F);
-        label15.Location = new Point(12, 210);
-        label15.Name = "label15";
-        label15.Size = new Size(231, 37);
-        label15.TabIndex = 19;
-        label15.Text = "Autos de persona";
+        lblPersonCars.AutoSize = true;
+        lblPersonCars.Font = new Font("Calibri", 22F);
+        lblPersonCars.Location = new Point(12, 210);
+        lblPersonCars.Name = "lblPersonCars";
+        lblPersonCars.Size = new Size(231, 37);
+        lblPersonCars.TabIndex = 19;
+        lblPersonCars.Text = "Autos de persona";
         // 
-        // ViewForm
+        // MainForm
         // 
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
@@ -465,26 +463,26 @@ partial class MainForm
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
         Controls.Add(btnNewCar);
-        Controls.Add(label11);
+        Controls.Add(lblPrice);
         Controls.Add(txtModelo);
         Controls.Add(txtAño);
-        Controls.Add(label14);
-        Controls.Add(label15);
+        Controls.Add(lblYear);
+        Controls.Add(lblPersonCars);
         Controls.Add(lblCarsPrice);
         Controls.Add(txtCarsCount);
         Controls.Add(btnAssignCar);
-        Controls.Add(label7);
-        Controls.Add(label13);
+        Controls.Add(lblModel);
+        Controls.Add(lblAssignedCars);
         Controls.Add(txtMarca);
-        Controls.Add(label12);
-        Controls.Add(label8);
+        Controls.Add(lblAvailableCars);
+        Controls.Add(lblMark);
         Controls.Add(txtPatente);
-        Controls.Add(label2);
+        Controls.Add(lblQuantity);
         Controls.Add(txtCarId);
-        Controls.Add(label9);
+        Controls.Add(lblLicensePlate);
         Controls.Add(dgvAssignedCars);
         Controls.Add(btnRemoveCar);
-        Controls.Add(label10);
+        Controls.Add(lblCarId);
         Controls.Add(txtApellido);
         Controls.Add(dgvPersonCars);
         Controls.Add(btnDeletePerson);
@@ -494,17 +492,17 @@ partial class MainForm
         Controls.Add(dgvPersons);
         Controls.Add(dgvAvailableCars);
         Controls.Add(txtDNI);
-        Controls.Add(label1);
+        Controls.Add(lblPersons);
         Controls.Add(txtPersonId);
-        Controls.Add(label6);
-        Controls.Add(label3);
-        Controls.Add(label5);
-        Controls.Add(label4);
+        Controls.Add(lblLastname);
+        Controls.Add(lblPersonId);
+        Controls.Add(lblFirstname);
+        Controls.Add(lblIdentityCard);
         Font = new Font("Calibri", 11F);
         Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
         MaximizeBox = false;
-        Name = "ViewForm";
+        Name = "MainForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Integrador";
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).EndInit();
@@ -516,17 +514,17 @@ partial class MainForm
     }
 
     #endregion
-    internal Label label1;
+    internal Label lblPersons;
     internal DataGridView dgvPersons;
     internal Button btnDeletePerson;
     internal Button btnSavePerson;
     internal Button btnNewPerson;
     internal DataGridView dgvPersonCars;
     internal Label lblCarsPrice;
-    internal Label label6;
-    internal Label label5;
-    internal Label label4;
-    internal Label label3;
+    internal Label lblLastname;
+    internal Label lblFirstname;
+    internal Label lblIdentityCard;
+    internal Label lblPersonId;
     internal TextBox txtApellido;
     internal TextBox txtNombre;
     internal TextBox txtDNI;
@@ -534,25 +532,25 @@ partial class MainForm
     internal TextBox txtMarca;
     internal TextBox txtPatente;
     internal TextBox txtCarId;
-    internal Label label7;
-    internal Label label8;
-    internal Label label9;
-    internal Label label10;
+    internal Label lblModel;
+    internal Label lblMark;
+    internal Label lblLicensePlate;
+    internal Label lblCarId;
     internal Button btnDeleteCar;
     internal Button btnSaveCar;
     internal Button btnNewCar;
     internal DataGridView dgvAvailableCars;
-    internal Label label12;
-    internal Label label11;
+    internal Label lblAvailableCars;
+    internal Label lblPrice;
     internal Button btnAssignCar;
     internal Button btnRemoveCar;
     internal DataGridView dgvAssignedCars;
-    internal Label label13;
+    internal Label lblAssignedCars;
     internal TextBox txtAño;
-    internal Label label14;
+    internal Label lblYear;
     internal TextBox txtPrecio;
     internal TextBox txtCarsCount;
-    internal Label label2;
+    internal Label lblQuantity;
     private TextBox txtModelo;
-    internal Label label15;
+    internal Label lblPersonCars;
 }
