@@ -3,10 +3,7 @@ using LiteDB;
 using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
 
-
 namespace Integrador.Infrastructure.Persistence.LiteDB.Context;
-
-
 
 public class LiteDbContext<T>() : ILiteDbContext<T> where T : IEntity
 {
