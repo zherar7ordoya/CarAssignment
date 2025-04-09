@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Car Id="1">
-    <Patente>(XML)</Patente>
+    <Patente>AC182YK</Patente>
     <Marca>BMW</Marca>
     <Modelo>118I Active 5 P.</Modelo>
     <Año>2017</Año>
     <Precio>52000</Precio>
-    <DueñoId>1</DueñoId>
+    <DueñoId>0</DueñoId>
   </Car>
   <Car Id="2">
     <Patente>MQP266</Patente>
@@ -14,7 +14,7 @@
     <Modelo>QQ 1.1 Light</Modelo>
     <Año>2013</Año>
     <Precio>98990</Precio>
-    <DueñoId>2</DueñoId>
+    <DueñoId>0</DueñoId>
   </Car>
   <Car Id="3">
     <Patente>LVP150</Patente>
@@ -22,7 +22,7 @@
     <Modelo>Agile 1.4 LT</Modelo>
     <Año>2012</Año>
     <Precio>95000</Precio>
-    <DueñoId>2</DueñoId>
+    <DueñoId>0</DueñoId>
   </Car>
   <Car Id="4">
     <Patente>PEJ554</Patente>
@@ -30,7 +30,7 @@
     <Modelo>500 1.4 Sport</Modelo>
     <Año>2014</Año>
     <Precio>21500</Precio>
-    <DueñoId>3</DueñoId>
+    <DueñoId>7</DueñoId>
   </Car>
   <Car Id="5">
     <Patente>AC426OV</Patente>
@@ -38,7 +38,7 @@
     <Modelo>Eco Sport 1.5 SE L/18</Modelo>
     <Año>2018</Año>
     <Precio>29792</Precio>
-    <DueñoId>3</DueñoId>
+    <DueñoId>0</DueñoId>
   </Car>
   <Car Id="6">
     <Patente>NCS788</Patente>
@@ -62,7 +62,7 @@
     <Modelo>208 1.5 5P Active</Modelo>
     <Año>2015</Año>
     <Precio>16672</Precio>
-    <DueñoId>0</DueñoId>
+    <DueñoId>7</DueñoId>
   </Car>
   <Car Id="9">
     <Patente>AD110JT</Patente>
@@ -78,6 +78,6 @@
     <Modelo>Corolla 1.8 XEI L/17</Modelo>
     <Año>2018</Año>
     <Precio>35500</Precio>
-    <DueñoId>0</DueñoId>
+    <DueñoId>1</DueñoId>
   </Car>
 </ArrayOfCar>

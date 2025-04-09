@@ -32,28 +32,7 @@ public class XmlRepository<T>
         }
         finally
         {
-            TryLog($"Create completed for {entity}");
-        }
-    }
-
-    public void Delete(int id)
-    {
-        var entities = dataSource.Read() ?? [];
-        var entity = entities.FirstOrDefault(e => e.Id == id);
-
-        try
-        {
-            if (entity == null) throw new Exception($"Entity with ID {id} not found.");
-            entities.Remove(entity);
-            dataSource.Write(entities);
-        }
-        catch (Exception ex)
-        {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
-        }
-        finally
-        {
-            TryLog($"Delete completed for {entity}");
+            logger.TryLog($"Create completed for {entity}");
         }
     }
 
@@ -103,32 +82,28 @@ public class XmlRepository<T>
         }
         finally
         {
-            TryLog($"Update completed for {entity}");
+            logger.TryLog($"Update completed for {entity}");
         }
     }
 
-    /* ////////////////////////////////////////////////////////////////////// */
-
-    /*
-    Sí, el catch dentro de TryLog queda vacío a propósito, para evitar que un
-    error en el logger o en su configuración oculte errores más importantes.
-    Si el logger.LogInformation o logger.LogError falla por cualquier motivo
-    (por ejemplo, si el logger no está correctamente inyectado o hay un problema
-    con el almacenamiento de logs), no queremos que eso interrumpa la ejecución
-    del programa ni que tape la verdadera excepción.
-    Es una práctica común en logging evitar que los errores de logging generen
-    más problemas.
-     */
-    private void TryLog(string message, Exception? ex = null)
+    public void Delete(int id)
     {
+        var entities = dataSource.Read() ?? [];
+        var entity = entities.FirstOrDefault(e => e.Id == id);
+
         try
         {
-            if (ex is null) logger.LogInformation(message);
-            else logger.LogError(ex, message);
+            if (entity == null) throw new Exception($"Entity with ID {id} not found.");
+            entities.Remove(entity);
+            dataSource.Write(entities);
         }
-        catch (Exception logEx)
+        catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Logging error: {logEx.Message}");
+            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+        }
+        finally
+        {
+            logger.TryLog($"Delete completed for {typeof(T).Name} with Id {id}");
         }
     }
 }

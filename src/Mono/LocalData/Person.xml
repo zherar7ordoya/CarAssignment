@@ -5,25 +5,20 @@
     <Nombre>Homero</Nombre>
     <Apellido>Simpson</Apellido>
     <Autos>
-      <int>1</int>
+      <int>10</int>
     </Autos>
   </Person>
   <Person Id="2">
     <DNI>30111222</DNI>
     <Nombre>Marge</Nombre>
     <Apellido>Bouvier</Apellido>
-    <Autos>
-      <int>2</int>
-      <int>3</int>
-    </Autos>
+    <Autos />
   </Person>
   <Person Id="3">
     <DNI>42233445</DNI>
     <Nombre>Ned</Nombre>
     <Apellido>Flanders</Apellido>
     <Autos>
-      <int>4</int>
-      <int>5</int>
       <int>6</int>
     </Autos>
   </Person>
@@ -49,7 +44,10 @@
     <DNI>82546789</DNI>
     <Nombre>Montgomery</Nombre>
     <Apellido>Burns</Apellido>
-    <Autos />
+    <Autos>
+      <int>4</int>
+      <int>8</int>
+    </Autos>
   </Person>
   <Person Id="8">
     <DNI>93124578</DNI>
