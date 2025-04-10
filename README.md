@@ -111,3 +111,17 @@ A considerar para la resolución:
 \* Programación Orientada a Objetos
 
 \* Try…Catch.
+
+---
+
+Bueno, esta práctica se extendió mucho más allá de lo que originalmente se propuso. Así que algunas notas voy a estar incluyendo en este documento.
+
+# Modelo de datos
+
+| Tecnología             | Tipo de modelo de datos      | Nombre común        |
+| ---------------------- | ---------------------------- | ------------------- |
+| XML                    | Jerárquico / basado en nodos | Jerárquico          |
+| JSON (LiteDB, MongoDB) | Documento / árbol de objetos | Documental          |
+| CSV                    | Plano / tabular              | Tabular (no tipado) |
+| SQLite                 | Relacional                   | Relacional          |
+

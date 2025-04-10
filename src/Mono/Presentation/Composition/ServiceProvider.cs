@@ -1,5 +1,6 @@
 ﻿namespace Integrador.Presentation.Composition;
 
+[Obsolete("Use Microsoft.Extensions.DependencyInjection instead.")]
 public sealed class ServiceProvider
 {
     private readonly Dictionary<Type, Type> _registrations = [];

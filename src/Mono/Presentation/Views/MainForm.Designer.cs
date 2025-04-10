@@ -68,6 +68,7 @@ partial class MainForm
         dgvAssignedCars = new DataGridView();
         lblAssignedCars = new Label();
         lblPersonCars = new Label();
+        btnViewLog = new Button();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -451,12 +452,23 @@ partial class MainForm
         lblPersonCars.TabIndex = 19;
         lblPersonCars.Text = "Autos de persona";
         // 
+        // btnViewLog
+        // 
+        btnViewLog.Location = new Point(104, 708);
+        btnViewLog.Name = "btnViewLog";
+        btnViewLog.Size = new Size(75, 23);
+        btnViewLog.TabIndex = 24;
+        btnViewLog.Text = "Ver bitácora";
+        btnViewLog.UseVisualStyleBackColor = true;
+        btnViewLog.Click += ButtonViewLog_Click;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
         ClientSize = new Size(873, 791);
+        Controls.Add(btnViewLog);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
@@ -551,4 +563,5 @@ partial class MainForm
     internal Label lblQuantity;
     private TextBox txtModelo;
     internal Label lblPersonCars;
+    private Button btnViewLog;
 }

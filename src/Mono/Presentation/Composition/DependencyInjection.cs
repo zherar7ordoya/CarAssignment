@@ -21,75 +21,85 @@ using Integrador.Infrastructure.Persistence.SQLite.Repository;
 using Integrador.Presentation.Localization;
 using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Integrador.Presentation.Views;
 
 namespace Integrador.Presentation.Composition;
 
-public class DependencyInjection
+public static class DependencyInjection
 {
-    public static ServiceProvider Configure()
+    public static IServiceProvider Configure()
     {
-        var provider = new ServiceProvider();
-        var tech = SystemSettings.GetPersistenceTechnology(key => AppConfigReader.GetSetting(key) ?? throw new InvalidOperationException($"Setting '{key}' cannot be null."));
+        var services = new ServiceCollection();
+        var tech = SystemSettings.GetPersistenceTechnology(key => AppConfigReader.GetSetting(key)!);
 
         switch (tech)
         {
             case PersistenceProviderType.XML:
-                RegisterXmlPersistence(provider);
+                RegisterXmlPersistence(services);
                 break;
             case PersistenceProviderType.SQLite:
-                RegisterSQLitePersistence(provider);
+                RegisterSQLitePersistence(services);
                 break;
             case PersistenceProviderType.LiteDB:
-                RegisterLiteDbPersistence(provider);
+                RegisterLiteDbPersistence(services);
                 break;
-            default:
-                throw new InvalidOperationException("Unknown persistence technology.");
         }
 
-        RegisterCoreServices(provider);
-        return provider;
+        RegisterCoreServices(services);
+
+        return services.BuildServiceProvider();
     }
 
-    /* ////////////////////////////////////////////////////////////////////// */
-
-    private static void RegisterXmlPersistence(ServiceProvider provider)
+    private static void RegisterXmlPersistence(IServiceCollection services)
     {
-        provider.Register(typeof(IXmlContext<>), typeof(XmlContext<>));
-        provider.Register(typeof(IRepository<>), typeof(XmlRepository<>));
-        provider.Register<IRepository<Person>, XmlRepository<Person>>();
-        provider.Register<IRepository<Car>, XmlRepository<Car>>();
+        services.AddTransient(typeof(IXmlContext<>), typeof(XmlContext<>));
+        services.AddTransient(typeof(IRepository<>), typeof(XmlRepository<>));
+        services.AddTransient<IRepository<Person>, XmlRepository<Person>>();
+        services.AddTransient<IRepository<Car>, XmlRepository<Car>>();
     }
 
-    private static void RegisterSQLitePersistence(ServiceProvider provider)
+    private static void RegisterSQLitePersistence(IServiceCollection services)
     {
-        provider.Register(typeof(ISQLiteContext<>), typeof(SQLiteContext<>));
-        provider.Register<IRepository<Person>, SQLiteRepository<Person, PersonRecord>>();
-        provider.Register<IRepository<Car>, SQLiteRepository<Car, CarRecord>>();
-        provider.Register<IMapper<Person, PersonRecord>, PersonMapper>();
-        provider.Register<IMapper<Car, CarRecord>, CarMapper>();
+        services.AddTransient(typeof(ISQLiteContext<>), typeof(SQLiteContext<>));
+        services.AddTransient<IRepository<Person>, SQLiteRepository<Person, PersonRecord>>();
+        services.AddTransient<IRepository<Car>, SQLiteRepository<Car, CarRecord>>();
+        services.AddTransient<IMapper<Person, PersonRecord>, PersonMapper>();
+        services.AddTransient<IMapper<Car, CarRecord>, CarMapper>();
     }
 
-    private static void RegisterLiteDbPersistence(ServiceProvider provider)
+    private static void RegisterLiteDbPersistence(IServiceCollection services)
     {
-        provider.Register(typeof(ILiteDbContext<>), typeof(LiteDbContext<>));
-        provider.Register(typeof(IRepository<>), typeof(LiteDbRepository<>));
+        services.AddTransient(typeof(ILiteDbContext<>), typeof(LiteDbContext<>));
+        services.AddTransient(typeof(IRepository<>), typeof(LiteDbRepository<>));
     }
 
-    private static void RegisterCoreServices(ServiceProvider provider)
+    private static void RegisterCoreServices(IServiceCollection services)
     {
-        provider.Register<IExceptionHandler, ExceptionHandler>();
-        provider.Register<ILogger, Logger>();
-        provider.Register<IMessenger, Messenger>();
+        services.AddSingleton<IExceptionHandler, ExceptionHandler>();
+        services.AddSingleton<ILogger, Logger>();
+        services.AddSingleton<IMessenger, Messenger>();
 
-        provider.Register<IAssignmentService, AssignmentService>();
-        provider.Register<ICarService, CarService>();
-        provider.Register<IPersonService, PersonService>();
+        services.AddSingleton<ILogReader>(_ => new LiteDbLogReader("Log.db"));
+        services.AddTransient<LogViewerForm>();
 
-        provider.Register<ICarFactory, CarFactory>();
-        provider.Register<IPersonFactory, PersonFactory>();
-        provider.Register<IViewPresenter, ViewPresenter>();
 
-        provider.Register<ILocalizationService, ResxLocalizationService>();
-        provider.Register<MainForm, MainForm>();
+        services.AddTransient<IAssignmentService, AssignmentService>();
+        services.AddTransient<ICarService, CarService>();
+        services.AddTransient<IPersonService, PersonService>();
+
+        services.AddTransient<ICarFactory, CarFactory>();
+        services.AddTransient<IPersonFactory, PersonFactory>();
+        services.AddTransient<IViewPresenter, ViewPresenter>();
+
+        services.AddSingleton<ILocalizationService>(_ =>
+        {
+            var culture = AppConfigReader.GetSetting("DefaultCulture") ?? "es";
+            var localization = new ResxLocalizationService();
+            localization.SetCulture(culture);
+            return localization;
+        });
+
+        services.AddTransient<MainForm, MainForm>();
     }
 }

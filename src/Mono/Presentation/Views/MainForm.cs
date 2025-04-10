@@ -2,7 +2,9 @@
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
+using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
+using Integrador.Presentation.Views;
 
 namespace Integrador;
 
@@ -376,4 +378,9 @@ public partial class MainForm : Form
         }
     }
 
+    private void ButtonViewLog_Click(object sender, EventArgs e)
+    {
+        var visor = AppServices.Get<LogViewerForm>();
+        visor.Show();
+    }
 }

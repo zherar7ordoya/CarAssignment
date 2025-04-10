@@ -12,9 +12,6 @@ static class Program
         ApplicationConfiguration.Initialize();
         AppServices.Provider = DependencyInjection.Configure();
 
-        var localizationService = AppServices.Get<ILocalizationService>();
-        localizationService.SetCulture("en"); // o "en", etc.
-
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 

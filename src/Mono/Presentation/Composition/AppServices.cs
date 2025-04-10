@@ -1,7 +1,9 @@
-﻿namespace Integrador.Presentation.Composition;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Integrador.Presentation.Composition;
 
 public static class AppServices
 {
-    public static ServiceProvider Provider { get; set; } = default!;
-    public static T Get<T>() where T : notnull => Provider.Resolve<T>();
+    public static IServiceProvider Provider { get; set; } = default!;
+    public static T Get<T>() where T : notnull => Provider.GetRequiredService<T>();
 }
