@@ -1,8 +1,6 @@
-﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Interfaces.Infrastructure;
+﻿using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
-using Integrador.Infrastructure.Logging;
 
 using System.Reflection;
 

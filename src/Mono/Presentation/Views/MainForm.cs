@@ -2,7 +2,7 @@
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
-using Integrador.Presentation.Views;
+using Integrador.Presentation.Localization;
 
 namespace Integrador;
 
@@ -42,32 +42,32 @@ public partial class MainForm : Form
 
     private void ApplyLocalization()
     {
-        this.Text = _localization["FormTitle"];
-        lblPersons.Text = _localization["LabelPersons"];
-        lblIdentityCard.Text = _localization["PersonIdentityCard"];
-        lblFirstname.Text = _localization["PersonFirstname"];
-        lblLastname.Text = _localization["PersonLastname"];
-        btnNewPerson.Text = _localization["PersonNew"];
-        btnSavePerson.Text = _localization["PersonSave"];
-        btnDeletePerson.Text = _localization["PersonDelete"];
+        this.Text = _localization["MainForm"];
+        lblPersons.Text = _localization["lblPersons"];
+        lblIdentityCard.Text = _localization["lblIdentityCard"];
+        lblFirstname.Text = _localization["lblFirstname"];
+        lblLastname.Text = _localization["lblLastname"];
+        btnNewPerson.Text = _localization["btnNewPerson"];
+        btnSavePerson.Text = _localization["btnSavePerson"];
+        btnDeletePerson.Text = _localization["btnDeletePerson"];
 
-        lblPersonCars.Text = _localization["LabelPersonCars"];
-        lblQuantity.Text = _localization["PersonCarsQuantity"];
+        lblPersonCars.Text = _localization["lblPersonCars"];
+        lblQuantity.Text = _localization["lblQuantity"];
 
-        btnAssignCar.Text = _localization["ButtonAssignCar"];
-        btnRemoveCar.Text = _localization["ButtonRemoveCar"];
+        btnAssignCar.Text = _localization["btnAssignCar"];
+        btnRemoveCar.Text = _localization["btnRemoveCar"];
 
-        lblAvailableCars.Text = _localization["LabelAvailableCars"];
-        lblLicensePlate.Text = _localization["CarLicensePlate"];
-        lblMark.Text = _localization["CarMark"]; // Aparentemente es "Brand"...
-        lblModel.Text = _localization["CarModel"];
-        lblYear.Text = _localization["CarYear"];
-        lblPrice.Text = _localization["CarPrice"];
-        btnNewCar.Text = _localization["CarNew"];
-        btnSaveCar.Text = _localization["CarSave"];
-        btnDeleteCar.Text = _localization["CarDelete"];
+        lblAvailableCars.Text = _localization["lblAvailableCars"];
+        lblLicensePlate.Text = _localization["lblLicensePlate"];
+        lblBrand.Text = _localization["lblBrand"];
+        lblModel.Text = _localization["lblModel"];
+        lblYear.Text = _localization["lblYear"];
+        lblPrice.Text = _localization["lblPrice"];
+        btnNewCar.Text = _localization["btnNewCar"];
+        btnSaveCar.Text = _localization["btnSaveCar"];
+        btnDeleteCar.Text = _localization["btnDeleteCar"];
 
-        lblAssignedCars.Text = _localization["LabelAssignedCars"];
+        lblAssignedCars.Text = _localization["lblAssignedCars"];
     }
 
     private readonly IMessenger _messenger;

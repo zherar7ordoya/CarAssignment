@@ -1,14 +1,7 @@
-﻿using Integrador.Presentation.Views;
-
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Integrador.Presentation;
+namespace Integrador.Presentation.Localization;
 
 public class ResxLocalizationService : ILocalizationService
 {
@@ -18,7 +11,7 @@ public class ResxLocalizationService : ILocalizationService
     public ResxLocalizationService()
     {
         // Notá que usamos el namespace + Resources (sin .resx)
-        _resourceManager = new ResourceManager("Integrador.Properties.Resources", typeof(ResxLocalizationService).Assembly);
+        _resourceManager = new ResourceManager("Integrador.Presentation.Localization.Resources", typeof(ResxLocalizationService).Assembly);
         _culture = CultureInfo.CurrentUICulture;
     }
 

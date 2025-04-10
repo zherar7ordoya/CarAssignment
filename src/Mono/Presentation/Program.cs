@@ -1,6 +1,6 @@
 ﻿using Integrador;
 using Integrador.Presentation.Composition;
-using Integrador.Presentation.Views;
+using Integrador.Presentation.Localization;
 
 using SQLitePCL;
 
@@ -13,7 +13,7 @@ static class Program
         AppServices.Provider = DependencyInjection.Configure();
 
         var localizationService = AppServices.Get<ILocalizationService>();
-        localizationService.SetCulture("es"); // o "en", etc.
+        localizationService.SetCulture("en"); // o "en", etc.
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);

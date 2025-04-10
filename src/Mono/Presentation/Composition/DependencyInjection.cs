@@ -18,8 +18,9 @@ using Integrador.Infrastructure.Persistence.SQLite.Context;
 using Integrador.Infrastructure.Persistence.XML.Context;
 using Integrador.Infrastructure.Persistence.XML.Repository;
 using Integrador.Infrastructure.Persistence.SQLite.Repository;
+using Integrador.Presentation.Localization;
+using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
-using Integrador.Presentation.Views;
 
 namespace Integrador.Presentation.Composition;
 
@@ -28,7 +29,7 @@ public class DependencyInjection
     public static ServiceProvider Configure()
     {
         var provider = new ServiceProvider();
-        var tech = SystemSettings.GetPersistenceTechnology();
+        var tech = SystemSettings.GetPersistenceTechnology(key => AppConfigReader.GetSetting(key) ?? throw new InvalidOperationException($"Setting '{key}' cannot be null."));
 
         switch (tech)
         {

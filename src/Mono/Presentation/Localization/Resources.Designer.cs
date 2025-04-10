@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Integrador.Properties {
+namespace Integrador.Presentation.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Integrador.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Integrador.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Integrador.Presentation.Localization.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,200 +61,191 @@ namespace Integrador.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string ButtonAssignCar {
+        internal static string btnAssignCar {
             get {
-                return ResourceManager.GetString("ButtonAssignCar", resourceCulture);
+                return ResourceManager.GetString("btnAssignCar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string ButtonRemoveCar {
+        internal static string btnDeleteCar {
             get {
-                return ResourceManager.GetString("ButtonRemoveCar", resourceCulture);
+                return ResourceManager.GetString("btnDeleteCar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarDelete {
+        internal static string btnDeletePerson {
             get {
-                return ResourceManager.GetString("CarDelete", resourceCulture);
+                return ResourceManager.GetString("btnDeletePerson", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to License Plate.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarLicensePlate {
+        internal static string btnNewCar {
             get {
-                return ResourceManager.GetString("CarLicensePlate", resourceCulture);
+                return ResourceManager.GetString("btnNewCar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarMake {
+        internal static string btnNewPerson {
             get {
-                return ResourceManager.GetString("CarMake", resourceCulture);
+                return ResourceManager.GetString("btnNewPerson", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarModel {
+        internal static string btnRemoveCar {
             get {
-                return ResourceManager.GetString("CarModel", resourceCulture);
+                return ResourceManager.GetString("btnRemoveCar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarNew {
+        internal static string btnSaveCar {
             get {
-                return ResourceManager.GetString("CarNew", resourceCulture);
+                return ResourceManager.GetString("btnSaveCar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Price.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarPrice {
+        internal static string btnSavePerson {
             get {
-                return ResourceManager.GetString("CarPrice", resourceCulture);
+                return ResourceManager.GetString("btnSavePerson", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarSave {
+        internal static string lblAssignedCars {
             get {
-                return ResourceManager.GetString("CarSave", resourceCulture);
+                return ResourceManager.GetString("lblAssignedCars", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Year.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string CarYear {
+        internal static string lblAvailableCars {
             get {
-                return ResourceManager.GetString("CarYear", resourceCulture);
+                return ResourceManager.GetString("lblAvailableCars", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Car Assignment Manager.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string FormTitle {
+        internal static string lblBrand {
             get {
-                return ResourceManager.GetString("FormTitle", resourceCulture);
+                return ResourceManager.GetString("lblBrand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assigned Cars.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string LabelAssignedCars {
+        internal static string lblFirstname {
             get {
-                return ResourceManager.GetString("LabelAssignedCars", resourceCulture);
+                return ResourceManager.GetString("lblFirstname", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available Cars.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string LabelAvailableCars {
+        internal static string lblIdentityCard {
             get {
-                return ResourceManager.GetString("LabelAvailableCars", resourceCulture);
+                return ResourceManager.GetString("lblIdentityCard", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Person&apos;s Cars.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string LabelPersonCars {
+        internal static string lblLastname {
             get {
-                return ResourceManager.GetString("LabelPersonCars", resourceCulture);
+                return ResourceManager.GetString("lblLastname", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Persons.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string LabelPersons {
+        internal static string lblLicensePlate {
             get {
-                return ResourceManager.GetString("LabelPersons", resourceCulture);
+                return ResourceManager.GetString("lblLicensePlate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quantity.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonCarsQuantity {
+        internal static string lblModel {
             get {
-                return ResourceManager.GetString("PersonCarsQuantity", resourceCulture);
+                return ResourceManager.GetString("lblModel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonDelete {
+        internal static string lblPersonCars {
             get {
-                return ResourceManager.GetString("PersonDelete", resourceCulture);
+                return ResourceManager.GetString("lblPersonCars", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First Name.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonFirstname {
+        internal static string lblPersons {
             get {
-                return ResourceManager.GetString("PersonFirstname", resourceCulture);
+                return ResourceManager.GetString("lblPersons", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Identity Card.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonIdentityCard {
+        internal static string lblPrice {
             get {
-                return ResourceManager.GetString("PersonIdentityCard", resourceCulture);
+                return ResourceManager.GetString("lblPrice", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Name.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonLastname {
+        internal static string lblQuantity {
             get {
-                return ResourceManager.GetString("PersonLastname", resourceCulture);
+                return ResourceManager.GetString("lblQuantity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string PersonNew {
+        internal static string lblYear {
             get {
-                return ResourceManager.GetString("PersonNew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        internal static string PersonSave {
-            get {
-                return ResourceManager.GetString("PersonSave", resourceCulture);
+                return ResourceManager.GetString("lblYear", resourceCulture);
             }
         }
     }

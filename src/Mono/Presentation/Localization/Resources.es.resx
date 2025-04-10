@@ -117,70 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FormTitle" xml:space="preserve">
-    <value>Car Assignment Manager</value>
+  <data name="btnAssignCar" xml:space="preserve">
+    <value>Asignar</value>
   </data>
-  <data name="PersonIdentityCard" xml:space="preserve">
-    <value>Identity Card</value>
+  <data name="btnDeleteCar" xml:space="preserve">
+    <value>Borrar</value>
   </data>
-  <data name="PersonFirstname" xml:space="preserve">
-    <value>First Name</value>
+  <data name="btnDeletePerson" xml:space="preserve">
+    <value>Borrar</value>
   </data>
-  <data name="PersonLastname" xml:space="preserve">
-    <value>Last Name</value>
+  <data name="btnNewCar" xml:space="preserve">
+    <value>Nuevo</value>
   </data>
-  <data name="PersonNew" xml:space="preserve">
-    <value>New</value>
+  <data name="btnNewPerson" xml:space="preserve">
+    <value>Nuevo</value>
   </data>
-  <data name="LabelPersons" xml:space="preserve">
-    <value>Persons</value>
+  <data name="btnRemoveCar" xml:space="preserve">
+    <value>Quitar</value>
   </data>
-  <data name="PersonSave" xml:space="preserve">
-    <value>Save</value>
+  <data name="btnSaveCar" xml:space="preserve">
+    <value>Guardar</value>
   </data>
-  <data name="PersonDelete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="btnSavePerson" xml:space="preserve">
+    <value>Guardar</value>
   </data>
-  <data name="LabelPersonCars" xml:space="preserve">
-    <value>Person's Cars</value>
+  <data name="lblAssignedCars" xml:space="preserve">
+    <value>Autos asignados</value>
   </data>
-  <data name="PersonCarsQuantity" xml:space="preserve">
-    <value>Quantity</value>
+  <data name="lblAvailableCars" xml:space="preserve">
+    <value>Autos disponibles</value>
   </data>
-  <data name="ButtonAssignCar" xml:space="preserve">
-    <value>Assign</value>
+  <data name="lblBrand" xml:space="preserve">
+    <value>Marca</value>
   </data>
-  <data name="ButtonRemoveCar" xml:space="preserve">
-    <value>Remove</value>
+  <data name="lblFirstname" xml:space="preserve">
+    <value>Nombre</value>
   </data>
-  <data name="LabelAvailableCars" xml:space="preserve">
-    <value>Available Cars</value>
+  <data name="lblIdentityCard" xml:space="preserve">
+    <value>DNI</value>
   </data>
-  <data name="CarLicensePlate" xml:space="preserve">
-    <value>License Plate</value>
+  <data name="lblLastname" xml:space="preserve">
+    <value>Apellido</value>
   </data>
-  <data name="CarMake" xml:space="preserve">
-    <value>Make</value>
+  <data name="lblLicensePlate" xml:space="preserve">
+    <value>Patente</value>
   </data>
-  <data name="CarModel" xml:space="preserve">
-    <value>Model</value>
+  <data name="lblModel" xml:space="preserve">
+    <value>Modelo</value>
   </data>
-  <data name="CarYear" xml:space="preserve">
-    <value>Year</value>
+  <data name="lblPersonCars" xml:space="preserve">
+    <value>Autos de persona</value>
   </data>
-  <data name="CarPrice" xml:space="preserve">
-    <value>Price</value>
+  <data name="lblPersons" xml:space="preserve">
+    <value>Personas</value>
   </data>
-  <data name="CarNew" xml:space="preserve">
-    <value>New</value>
+  <data name="lblPrice" xml:space="preserve">
+    <value>Precio</value>
   </data>
-  <data name="CarSave" xml:space="preserve">
-    <value>Save</value>
+  <data name="lblQuantity" xml:space="preserve">
+    <value>Cantidad</value>
   </data>
-  <data name="CarDelete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="lblYear" xml:space="preserve">
+    <value>Año</value>
   </data>
-  <data name="LabelAssignedCars" xml:space="preserve">
-    <value>Assigned Cars</value>
+  <data name="MainForm" xml:space="preserve">
+    <value>Gestor de asignación de autos</value>
   </data>
 </root>
