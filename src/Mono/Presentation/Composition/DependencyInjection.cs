@@ -77,10 +77,12 @@ public static class DependencyInjection
     private static void RegisterCoreServices(IServiceCollection services)
     {
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
-        services.AddSingleton<ILogger, Logger>();
         services.AddSingleton<IMessenger, Messenger>();
 
-        services.AddSingleton<ILogReader>(_ => new LiteDbLogReader("Log.db"));
+        services.AddSingleton<ILogWriter, LiteDbLogWriter>();
+        services.AddSingleton<ILogReader, LiteDbLogReader>();
+        services.AddSingleton<ILogger, StructuredLogger>();
+
         services.AddTransient<LogViewerForm>();
 
 

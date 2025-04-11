@@ -21,7 +21,7 @@ public class LiteDbContext<T>() : ILiteDbContext<T> where T : IEntity
 
     private static string GetConnectionString()
     {
-        var config = ConfigurationManager.ConnectionStrings["LiteDbConnection"];
+        var config = ConfigurationManager.ConnectionStrings["LiteDbBusinessConnection"];
         return config == null
             ? throw new InvalidOperationException("LiteDB connection string not found.")
             : config.ConnectionString;

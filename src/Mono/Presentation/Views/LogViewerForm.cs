@@ -57,7 +57,7 @@ public partial class LogViewerForm : Form
         var nivel = cmbNivel.SelectedItem?.ToString() ?? "Todos";
 
         var filtrados = _todos
-        .Where(l => (nivel == "Todos" || l.Nivel == nivel) &&
+        .Where(l => (nivel == "Todos" || l.Nivel.ToString() == nivel) &&
                     (string.IsNullOrEmpty(texto) || l.Mensaje.Contains(texto, StringComparison.CurrentCultureIgnoreCase)))
         .ToList();
 
