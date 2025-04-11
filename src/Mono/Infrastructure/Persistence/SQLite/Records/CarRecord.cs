@@ -3,10 +3,10 @@
 public class CarRecord
 {
     public int Id { get; set; }
-    public string Patente { get; set; } = string.Empty;
-    public string Marca { get; set; } = string.Empty;
-    public string Modelo { get; set; } = string.Empty;
-    public int Año { get; set; } = 0;
-    public decimal Precio { get; set; } = 0;
-    public int? DueñoId { get; set; }
+    public string LicensePlate { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public int Year { get; set; } = 0;
+    public decimal Price { get; set; } = 0;
+    public int? PersonId { get; set; }
 }

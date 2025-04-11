@@ -7,6 +7,6 @@ public class PersonFactory : IPersonFactory
 {
     public PersonDTO CreateDefault()
     {
-        return new PersonDTO(0, "12345678", "Nombre", "Apellido", []);
+        return new PersonDTO(0, "12345678", "First Name", "Last Name", []);
     }
 }

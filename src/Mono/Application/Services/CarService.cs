@@ -14,15 +14,15 @@ public class CarService
 {
     public void CreateCar(CarDTO carDto)
     {
-        var car = new Car(carDto.Patente.Trim(),
-                          carDto.Marca.Trim(),
-                          carDto.Modelo.Trim(),
-                          carDto.Año,
-                          carDto.Precio);
+        var car = new Car(carDto.LicensePlate.Trim(),
+                          carDto.Brand.Trim(),
+                          carDto.Model.Trim(),
+                          carDto.Year,
+                          carDto.Price);
 
         // Verify patente uniqueness
         var cars = repository.ReadAll();
-        var exists = cars.FirstOrDefault(c => c.Patente == car.Patente);
+        var exists = cars.FirstOrDefault(c => c.LicensePlate == car.LicensePlate);
         if (exists is not null)
         {
             messenger.ShowError("Car with the same patente already exists.");
@@ -43,14 +43,14 @@ public class CarService
         }
 
         // Verify patente uniqueness excluding the current car
-        var newPatente = carDto.Patente.Trim();
-        var newMarca = carDto.Marca.Trim();
-        var newModelo = carDto.Modelo.Trim();
-        var newAño = carDto.Año;
-        var newPrecio = carDto.Precio;
+        var newLicensePlate = carDto.LicensePlate.Trim();
+        var newBrand = carDto.Brand.Trim();
+        var newModel = carDto.Model.Trim();
+        var newYear = carDto.Year;
+        var newPrice = carDto.Price;
 
         var exists = repository.ReadAll()
-                               .Any(p => p.Patente == newPatente && p.Id != carDto.Id);
+                               .Any(p => p.LicensePlate == newLicensePlate && p.Id != carDto.Id);
 
         if (exists)
         {
@@ -59,11 +59,11 @@ public class CarService
         }
 
         // Update car properties
-        car.Patente = newPatente;
-        car.Marca = newMarca;
-        car.Modelo = newModelo;
-        car.Año = newAño;
-        car.Precio = newPrecio;
+        car.LicensePlate = newLicensePlate;
+        car.Brand = newBrand;
+        car.Model = newModel;
+        car.Year = newYear;
+        car.Price = newPrice;
 
         repository.Update(car);
     }
@@ -92,16 +92,16 @@ public class CarService
         var cars = repository.ReadAll();
 
         var available = cars
-            .Where(c => c.DueñoId == 0)
-            .Select(c => new CarDTO
+            .Where(car => car.PersonId == 0)
+            .Select(dto => new CarDTO
             (
-                c.Id,
-                c.Patente,
-                c.Marca,
-                c.Modelo,
-                c.Año,
-                c.Precio,
-                c.DueñoId
+                dto.Id,
+                dto.LicensePlate,
+                dto.Brand,
+                dto.Model,
+                dto.Year,
+                dto.Price,
+                dto.PersonId
             ))
             .ToList();
 

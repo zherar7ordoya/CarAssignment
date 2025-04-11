@@ -20,16 +20,16 @@ public class LiteDbLogWriter : ILogWriter
         var connectionStringSetting = ConfigurationManager.ConnectionStrings["LiteDbLogConnection"];
         if (connectionStringSetting == null || string.IsNullOrWhiteSpace(connectionStringSetting.ConnectionString))
         {
-            throw new InvalidOperationException("Falta la cadena de conexión 'LiteDbLogConnection' en App.config.");
+            throw new InvalidOperationException("String connection (LiteDbLogConnection) missing in App.config.");
         }
 
         _connectionString = connectionStringSetting.ConnectionString;
     }
 
-    public void Escribir(LogEntry entry)
+    public void Write(LogEntry entry)
     {
         using var db = new LiteDatabase(_connectionString);
-        var col = db.GetCollection<LogEntry>("log");
+        var col = db.GetCollection<LogEntry>("Log");
         col.Insert(entry);
     }
 }

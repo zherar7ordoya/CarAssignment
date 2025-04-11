@@ -10,5 +10,5 @@ namespace Integrador.Infrastructure.Logging;
 
 public interface ILogReader
 {
-    IEnumerable<LogEntry> LeerTodos();
+    IEnumerable<LogEntry> Read();
 }

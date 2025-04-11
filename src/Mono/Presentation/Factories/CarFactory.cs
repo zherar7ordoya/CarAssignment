@@ -7,6 +7,6 @@ public class CarFactory : ICarFactory
 {
     public CarDTO CreateDefault()
     {
-        return new CarDTO(0, "12345678", "Marca", "Modelo", 0, 0, 0);
+        return new CarDTO(0, "12345678", "Brand", "Model", 0, 0, 0);
     }
 }

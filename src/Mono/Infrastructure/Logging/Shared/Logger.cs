@@ -21,14 +21,16 @@ public class Logger(params IEnumerable<ILogWriter> writers) : ILogger
         var entry = new LogEntry
         {
             Timestamp = DateTime.Now,
-            Nivel = nivel,
-            Mensaje = mensaje,
+            Level = nivel,
+            Message = mensaje,
             StackTrace = ex?.ToString(),
-            Fuente = GetCallerName()
+            Source = GetCallerName()
         };
 
         foreach (var writer in writers)
-            writer.Escribir(entry);
+        {
+            writer.Write(entry);
+        }
     }
 
     private static string? GetCallerName()

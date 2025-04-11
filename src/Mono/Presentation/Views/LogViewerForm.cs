@@ -35,7 +35,7 @@ public partial class LogViewerForm : Form
     {
         try
         {
-            _todos = [.. _logReader.LeerTodos()];
+            _todos = [.. _logReader.Read()];
             AplicarFiltro();
         }
         catch (Exception ex)
@@ -58,8 +58,8 @@ public partial class LogViewerForm : Form
         var nivel = cmbNivel.SelectedItem?.ToString() ?? "Todos";
 
         var filtrados = _todos
-        .Where(l => (nivel == "Todos" || l.Nivel.ToString() == nivel) &&
-                    (string.IsNullOrEmpty(texto) || l.Mensaje.Contains(texto, StringComparison.CurrentCultureIgnoreCase)))
+        .Where(l => (nivel == "Todos" || l.Level.ToString() == nivel) &&
+                    (string.IsNullOrEmpty(texto) || l.Message.Contains(texto, StringComparison.CurrentCultureIgnoreCase)))
         .ToList();
 
         dgvLogs.DataSource = filtrados;

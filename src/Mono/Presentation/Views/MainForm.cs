@@ -45,32 +45,32 @@ public partial class MainForm : Form
 
     private void ApplyLocalization()
     {
-        this.Text = _localization["MainForm"];
-        lblPersons.Text = _localization["lblPersons"];
-        lblIdentityCard.Text = _localization["lblIdentityCard"];
-        lblFirstname.Text = _localization["lblFirstname"];
-        lblLastname.Text = _localization["lblLastname"];
-        btnNewPerson.Text = _localization["btnNewPerson"];
-        btnSavePerson.Text = _localization["btnSavePerson"];
-        btnDeletePerson.Text = _localization["btnDeletePerson"];
+        this.Text = Resources.Title;
+        lblPersons.Text = Resources.Persons;
+        lblIdentityNumber.Text = Resources.IdentityNumber;
+        lblFirstname.Text = Resources.FirstName;
+        lblLastname.Text = Resources.LastName;
+        btnNewPerson.Text = Resources.New;
+        btnSavePerson.Text = Resources.Save;
+        btnDeletePerson.Text = Resources.Delete;
 
-        lblPersonCars.Text = _localization["lblPersonCars"];
-        lblQuantity.Text = _localization["lblQuantity"];
+        lblPersonCars.Text = Resources.PersonCars;
+        lblQuantity.Text = Resources.Quantity;
 
-        btnAssignCar.Text = _localization["btnAssignCar"];
-        btnRemoveCar.Text = _localization["btnRemoveCar"];
+        btnAssignCar.Text = Resources.AssignCar;
+        btnRemoveCar.Text = Resources.RemoveCar;
 
-        lblAvailableCars.Text = _localization["lblAvailableCars"];
-        lblLicensePlate.Text = _localization["lblLicensePlate"];
-        lblBrand.Text = _localization["lblBrand"];
-        lblModel.Text = _localization["lblModel"];
-        lblYear.Text = _localization["lblYear"];
-        lblPrice.Text = _localization["lblPrice"];
-        btnNewCar.Text = _localization["btnNewCar"];
-        btnSaveCar.Text = _localization["btnSaveCar"];
-        btnDeleteCar.Text = _localization["btnDeleteCar"];
+        lblAvailableCars.Text = Resources.AvailableCars;
+        lblLicensePlate.Text = Resources.LicensePlate;
+        lblBrand.Text = Resources.Brand;
+        lblModel.Text = Resources.Model;
+        lblYear.Text = Resources.Year;
+        lblPrice.Text = Resources.Price;
+        btnNewCar.Text = Resources.New;
+        btnSaveCar.Text = Resources.Save;
+        btnDeleteCar.Text = Resources.Delete;
 
-        lblAssignedCars.Text = _localization["lblAssignedCars"];
+        lblAssignedCars.Text = Resources.AssignedCars;
     }
 
     private readonly IMessenger _messenger;
@@ -94,7 +94,7 @@ public partial class MainForm : Form
         {
             if (_persons.Current is PersonDTO person)
             {
-                _personCars.DataSource = person.Autos;
+                _personCars.DataSource = person.CarIds;
                 _personCars.ResetBindings(false);
                 lblCarsPrice.Text = person.GetCarsPrice.ToString("C");
                 txtCarsCount.Text = person.GetCarsCount.ToString();
@@ -253,17 +253,17 @@ public partial class MainForm : Form
         var bindings = new (Control Control, string Property, BindingSource Source)[]
         {
             // Persons
-            (txtPersonId, nameof(PersonDTO.Id),       _persons),
-            (txtDNI,      nameof(PersonDTO.DNI),      _persons),
-            (txtNombre,   nameof(PersonDTO.Nombre),   _persons),
-            (txtApellido, nameof(PersonDTO.Apellido), _persons),
+            (txtPersonId, nameof(PersonDTO.Id),             _persons),
+            (txtDNI,      nameof(PersonDTO.IdentityNumber), _persons),
+            (txtNombre,   nameof(PersonDTO.FirstName),      _persons),
+            (txtApellido, nameof(PersonDTO.LastName),       _persons),
             // Cars
-            (txtCarId,   nameof(CarDTO.Id),      _availableCars),
-            (txtPatente, nameof(CarDTO.Patente), _availableCars),
-            (txtMarca,   nameof(CarDTO.Marca),   _availableCars),
-            (txtModelo,  nameof(CarDTO.Modelo),  _availableCars),
-            (txtAño,     nameof(CarDTO.Año),     _availableCars),
-            (txtPrecio,  nameof(CarDTO.Precio),  _availableCars)
+            (txtCarId,   nameof(CarDTO.Id),           _availableCars),
+            (txtPatente, nameof(CarDTO.LicensePlate), _availableCars),
+            (txtMarca,   nameof(CarDTO.Brand),        _availableCars),
+            (txtModelo,  nameof(CarDTO.Model),        _availableCars),
+            (txtAño,     nameof(CarDTO.Year),         _availableCars),
+            (txtPrecio,  nameof(CarDTO.Price),        _availableCars)
         };
 
         ConfigureBindingSources(bindings);
@@ -284,40 +284,40 @@ public partial class MainForm : Form
     {
         ConfigureDataGridView(dgvPersons, _persons,
         [
-            ("Id", "ID"),
-            ("DNI", "DNI"),
-            ("Nombre", "Nombre"),
-            ("Apellido", "Apellido")
+            ("Id", Resources.Id),
+            ("IdentityNumber", Resources.IdentityNumber),
+            ("FirstName", Resources.FirstName),
+            ("LastName", Resources.LastName)
         ]);
 
         ConfigureDataGridView(dgvPersonCars, _personCars,
         [
-            ("Id", "ID"),
-            ("Patente", "Patente"),
-            ("Marca", "Marca"),
-            ("Modelo", "Modelo"),
-            ("Año", "Año"),
-            ("Precio", "Precio")
+            ("Id", Resources.Id),
+            ("LicensePlate", Resources.LicensePlate),
+            ("Brand", Resources.Brand),
+            ("Model", Resources.Brand),
+            ("Year", Resources.Year),
+            ("Price", Resources.Price)
         ]);
 
         ConfigureDataGridView(dgvAvailableCars, _availableCars,
         [
-            ("Id", "ID"),
-            ("Patente", "Patente"),
-            ("Marca", "Marca"),
-            ("Modelo", "Modelo"),
-            ("Año", "Año"),
-            ("Precio", "Precio")
+            ("Id", Resources.Id),
+            ("LicensePlate", Resources.LicensePlate),
+            ("Brand", Resources.Brand),
+            ("Model", Resources.Model),
+            ("Year", Resources.Year),
+            ("Price", Resources.Price)
         ]);
 
         ConfigureDataGridView(dgvAssignedCars, _assignedCars,
         [
-            ("Marca", "Marca"),
-            ("Año", "Año"),
-            ("Modelo", "Modelo"),
-            ("Patente", "Patente"),
-            ("Documento", "Documento"),
-            ("Dueño", "Dueño")
+            ("Brand", Resources.Brand),
+            ("Year", Resources.Year),
+            ("Model", Resources.Model),
+            ("LicensePlate", Resources.LicensePlate),
+            ("IdentityNumber", Resources.IdentityNumber),
+            ("Person", Resources.Person)
         ]);
     }
 

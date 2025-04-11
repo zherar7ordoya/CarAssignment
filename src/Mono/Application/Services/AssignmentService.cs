@@ -29,8 +29,8 @@ namespace Integrador.Application.Services
                 return;
             }
 
-            car.DueñoId = person.Id;
-            person.Autos.Add(carId);
+            car.PersonId = person.Id;
+            person.CarIds.Add(carId);
 
             carRepository.Update(car);
             personRepository.Update(person);

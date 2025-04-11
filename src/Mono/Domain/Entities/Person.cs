@@ -4,53 +4,53 @@ public class Person : EntityBase
 {
     // Empty constructor required by serialization.
     public Person() { }
-    public Person(string dni,
-                  string nombre,
-                  string apellido)
+    public Person(string identityNumber,
+                  string firstName,
+                  string lastName)
     {
-        DNI = dni;
-        Nombre = nombre;
-        Apellido = apellido;
+        IdentityNumber = identityNumber;
+        FirstName = firstName;
+        LastName = lastName;
     }
 
     public Person(int id,
-                  string dni,
-                  string nombre,
-                  string apellido,
-                  List<int> autos)
+                  string identityNumber,
+                  string firstName,
+                  string lastName,
+                  List<int> carIds)
     {
         Id = id;
-        DNI = dni;
-        Nombre = nombre;
-        Apellido = apellido;
-        Autos = autos ?? []; // Evitar null en la lista de autos
+        IdentityNumber = identityNumber;
+        FirstName = firstName;
+        LastName = lastName;
+        CarIds = carIds ?? []; // Avoid null list
     }
 
     // Public setters required for serialization.
     // Default values required by empty constructor.
-    public string DNI { get; set; } = string.Empty;
-    public string Nombre { get; set; } = string.Empty;
-    public string Apellido { get; set; } = string.Empty;
-    public List<int> Autos { get; set; } = [];
+    public string IdentityNumber { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public List<int> CarIds { get; set; } = [];
 
-    public bool HasCars() => Autos.Count > 0;
+    public bool HasCars() => CarIds.Count > 0;
 
-    public bool OwnsCar(int id) => Autos.Contains(id);
+    public bool OwnsCar(int id) => CarIds.Contains(id);
 
     public void AssignCar(int id)
     {
-        if (Autos.Contains(id)) throw new Exception("El auto ya pertenece a la persona.");
-        Autos.Add(id);
+        if (CarIds.Contains(id)) throw new Exception("Car already assigned to person.");
+        CarIds.Add(id);
     }
 
     public void RemoveCar(int id)
     {
-        if (!Autos.Contains(id)) throw new Exception("El auto no pertenece a la persona.");
-        Autos.Remove(id);
+        if (!CarIds.Contains(id)) throw new Exception("Car is not assigned to this person.");
+        CarIds.Remove(id);
     }
 
-    public string GetNameSurname() => $"{Apellido}, {Nombre}";
-    public string GetIdentityNumber() => DNI;
+    public string GetNameSurname() => $"{LastName}, {FirstName}";
+    public string GetIdentityNumber() => IdentityNumber;
 
-    public override string ToString() => $"{nameof(Person)} Id {Id}: {DNI} - {Nombre} {Apellido}";
+    public override string ToString() => $"{nameof(Person)} Id {Id}: {IdentityNumber} - {FirstName} {LastName}";
 }

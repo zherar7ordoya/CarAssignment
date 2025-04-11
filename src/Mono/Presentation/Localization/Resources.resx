@@ -117,67 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnAssignCar" xml:space="preserve">
+  <data name="AssignCar" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDeleteCar" xml:space="preserve">
+  <data name="Delete" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDeletePerson" xml:space="preserve">
+  <data name="New" xml:space="preserve">
     <value />
   </data>
-  <data name="btnNewCar" xml:space="preserve">
+  <data name="RemoveCar" xml:space="preserve">
     <value />
   </data>
-  <data name="btnNewPerson" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value />
   </data>
-  <data name="btnRemoveCar" xml:space="preserve">
+  <data name="Id" xml:space="preserve">
     <value />
   </data>
-  <data name="btnSaveCar" xml:space="preserve">
+  <data name="AssignedCars" xml:space="preserve">
     <value />
   </data>
-  <data name="btnSavePerson" xml:space="preserve">
+  <data name="AvailableCars" xml:space="preserve">
     <value />
   </data>
-  <data name="lblAssignedCars" xml:space="preserve">
+  <data name="Brand" xml:space="preserve">
     <value />
   </data>
-  <data name="lblAvailableCars" xml:space="preserve">
+  <data name="FirstName" xml:space="preserve">
     <value />
   </data>
-  <data name="lblBrand" xml:space="preserve">
+  <data name="IdentityNumber" xml:space="preserve">
     <value />
   </data>
-  <data name="lblFirstname" xml:space="preserve">
+  <data name="LastName" xml:space="preserve">
     <value />
   </data>
-  <data name="lblIdentityCard" xml:space="preserve">
+  <data name="LicensePlate" xml:space="preserve">
     <value />
   </data>
-  <data name="lblLastname" xml:space="preserve">
+  <data name="Model" xml:space="preserve">
     <value />
   </data>
-  <data name="lblLicensePlate" xml:space="preserve">
+  <data name="PersonCars" xml:space="preserve">
     <value />
   </data>
-  <data name="lblModel" xml:space="preserve">
+  <data name="Persons" xml:space="preserve">
     <value />
   </data>
-  <data name="lblPersonCars" xml:space="preserve">
+  <data name="Price" xml:space="preserve">
     <value />
   </data>
-  <data name="lblPersons" xml:space="preserve">
+  <data name="Quantity" xml:space="preserve">
     <value />
   </data>
-  <data name="lblPrice" xml:space="preserve">
+  <data name="Year" xml:space="preserve">
     <value />
   </data>
-  <data name="lblQuantity" xml:space="preserve">
+  <data name="Person" xml:space="preserve">
     <value />
   </data>
-  <data name="lblYear" xml:space="preserve">
+  <data name="Title" xml:space="preserve">
     <value />
   </data>
 </root>

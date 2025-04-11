@@ -9,22 +9,22 @@ public class CarMapper : IMapper<Car, CarRecord>
     public CarRecord ToStorage(Car entity) => new()
     {
         Id = entity.Id,
-        Patente = entity.Patente,
-        Marca = entity.Marca,
-        Modelo = entity.Modelo,
-        Año = entity.Año,
-        Precio = entity.Precio,
-        DueñoId = entity.DueñoId
+        LicensePlate = entity.LicensePlate,
+        Brand = entity.Brand,
+        Model = entity.Model,
+        Year = entity.Year,
+        Price = entity.Price,
+        PersonId = entity.PersonId
     };
 
     public Car ToDomain(CarRecord storage) => new()
     {
         Id = storage.Id,
-        Patente = storage.Patente,
-        Marca = storage.Marca,
-        Modelo = storage.Modelo,
-        Año = storage.Año,
-        Precio = storage.Precio,
-        DueñoId = storage.DueñoId ?? 0
+        LicensePlate = storage.LicensePlate,
+        Brand = storage.Brand,
+        Model = storage.Model,
+        Year = storage.Year,
+        Price = storage.Price,
+        PersonId = storage.PersonId ?? 0
     };
 }

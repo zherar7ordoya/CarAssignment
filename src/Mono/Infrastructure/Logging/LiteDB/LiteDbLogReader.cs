@@ -21,12 +21,12 @@ public class LiteDbLogReader : ILogReader
         var connectionStringSetting = ConfigurationManager.ConnectionStrings["LiteDbLogConnection"];
         if (connectionStringSetting == null || string.IsNullOrWhiteSpace(connectionStringSetting.ConnectionString))
         {
-            throw new InvalidOperationException("Falta la cadena de conexión 'LiteDbLogConnection' en App.config.");
+            throw new InvalidOperationException("String connection (LiteDbLogConnection) missing in App.config.");
         }
         _connectionString = connectionStringSetting.ConnectionString;
     }
 
-    public IEnumerable<LogEntry> LeerTodos()
+    public IEnumerable<LogEntry> Read()
     {
         try
         {
@@ -34,9 +34,9 @@ public class LiteDbLogReader : ILogReader
             var col = db.GetCollection<LogEntry>("Log");
 
             col.EnsureIndex(x => x.Timestamp);
-            col.EnsureIndex(x => x.Nivel);
+            col.EnsureIndex(x => x.Level);
 
-            InicializarBitacoraSiEstaVacia(col);
+            InitializeIfEmpty(col);
 
             // Materializamos los datos ANTES de cerrar la conexión
             var lista = col.FindAll()
@@ -47,20 +47,20 @@ public class LiteDbLogReader : ILogReader
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error al leer los logs: {ex.Message}");
+            Debug.WriteLine($"Error reading logs: {ex.Message}");
             return [];
         }
     }
 
-    private static void InicializarBitacoraSiEstaVacia(ILiteCollection<LogEntry> col)
+    private static void InitializeIfEmpty(ILiteCollection<LogEntry> col)
     {
         if (!col.Exists(Query.All()))
         {
             col.Insert(new LogEntry
             {
                 Timestamp = DateTime.Now,
-                Nivel = LogLevel.Information,
-                Mensaje = "Bitácora iniciada. Bienvenid@."
+                Level = LogLevel.Information,
+                Message = "Welcome log."
             });
         }
     }

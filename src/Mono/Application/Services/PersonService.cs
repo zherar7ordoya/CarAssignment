@@ -15,13 +15,13 @@ public class PersonService
 {
     public void CreatePerson(PersonDTO personDto)
     {
-        var person = new Person(personDto.DNI.Trim(),
-                                personDto.Nombre.Trim(),
-                                personDto.Apellido.Trim());
+        var person = new Person(personDto.IdentityNumber.Trim(),
+                                personDto.FirstName.Trim(),
+                                personDto.LastName.Trim());
 
         // Verify dni uniqueness
         var persons = personRepository.ReadAll();
-        var exists = persons.FirstOrDefault(c => c.DNI == person.DNI);
+        var exists = persons.FirstOrDefault(c => c.IdentityNumber == person.IdentityNumber);
         if (exists is not null)
         {
             messenger.ShowError("Person with the same DNI already exists.");
@@ -41,13 +41,13 @@ public class PersonService
             return;
         }
 
-        var newNombre = personDto.Nombre.Trim();
-        var newApellido = personDto.Apellido.Trim();
-        var newDNI = personDto.DNI.Trim();
+        var newIdentityNumber = personDto.IdentityNumber.Trim();
+        var newFirstName = personDto.FirstName.Trim();
+        var newLastName = personDto.LastName.Trim();
 
-        // Verify dni uniqueness excluding the current person
+        // Verify identity number uniqueness excluding the current person
         var exists = personRepository.ReadAll()
-                               .Any(p => p.DNI == newDNI && p.Id != personDto.Id);
+                               .Any(p => p.IdentityNumber == newIdentityNumber && p.Id != personDto.Id);
 
         if (exists)
         {
@@ -56,9 +56,9 @@ public class PersonService
         }
 
         // Update person properties
-        person.Nombre = newNombre;
-        person.Apellido = newApellido;
-        person.DNI = newDNI;
+        person.FirstName = newFirstName;
+        person.LastName = newLastName;
+        person.IdentityNumber = newIdentityNumber;
 
         personRepository.Update(person);
     }
@@ -88,24 +88,24 @@ public class PersonService
         var persons = personRepository.ReadAll();
 
         return [.. persons
-            .Select(p => new PersonDTO
+            .Select(dto => new PersonDTO
             (
-                p.Id,
-                p.DNI,
-                p.Nombre,
-                p.Apellido,
-                [.. p.Autos
+                dto.Id,
+                dto.IdentityNumber,
+                dto.FirstName,
+                dto.LastName,
+                [.. dto.CarIds
                 .Select(carId => carRepository.ReadById(carId))
                 .Where(car => car is not null) // Ensure car is not null
                 .Select(car => new CarDTO
                 (
                     car!.Id, // Use null-forgiving operator since we filtered nulls
-                    car.Patente,
-                    car.Marca,
-                    car.Modelo,
-                    car.Año,
-                    car.Precio,
-                    car.DueñoId
+                    car.LicensePlate,
+                    car.Brand,
+                    car.Model,
+                    car.Year,
+                    car.Price,
+                    car.PersonId
                 ))]
             ))];
     }
@@ -115,18 +115,18 @@ public class PersonService
         var persons = personRepository.ReadAll();
 
         var assigned = persons
-            .SelectMany(persona =>
-            persona.Autos
+            .SelectMany(person =>
+            person.CarIds
             .Select(carId => carRepository.ReadById(carId))
-            .Where(car => car is not null)
-            .Select(auto => new AssignedCarDTO
+            .Where(entitiy => entitiy is not null)
+            .Select(car => new AssignedCarDTO
             (
-                auto!.Marca ?? "Desconocido",
-                auto.Año,
-                auto.Modelo ?? "Desconocido",
-                auto.Patente ?? "Sin patente",
-                persona.GetIdentityNumber(),
-                persona.GetNameSurname()
+                car!.Brand ?? "Desconocido",
+                car.Year,
+                car.Model ?? "Desconocido",
+                car.LicensePlate ?? "Sin patente",
+                person.GetIdentityNumber(),
+                person.GetNameSurname()
             ))).ToList(); // Add ToList() here to explicitly convert to List<AssignedCarDTO>
 
         return assigned;

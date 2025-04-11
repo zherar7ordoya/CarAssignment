@@ -5,42 +5,42 @@ public class Car : EntityBase
     // Empty constructor required by serialization
     public Car() { }
 
-    public Car(string patente,
-               string marca,
-               string modelo,
-               int año,
-               decimal precio)
+    public Car(string licensePlate,
+               string brand,
+               string model,
+               int year,
+               decimal price)
     {
-        Patente = patente;
-        Marca = marca;
-        Modelo = modelo;
-        Año = año;
-        Precio = precio;
+        LicensePlate = licensePlate;
+        Brand = brand;
+        Model = model;
+        Year = year;
+        Price = price;
     }
 
     // Public setters required for serialization.
     // Default values required by empty constructor.
-    public string Patente { get; set; } = string.Empty;
-    public string Marca { get; set; } = string.Empty;
-    public string Modelo { get; set; } = string.Empty;
-    public int Año { get; set; } = 0;
-    public decimal Precio { get; set; } = 0;
+    public string LicensePlate { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public int Year { get; set; } = 0;
+    public decimal Price { get; set; } = 0;
 
     // Relación manejada por ID (no referencia directa a Person)
     // para evitar referencias circulares en la serialización.
-    public int DueñoId { get; set; } = 0;
+    public int PersonId { get; set; } = 0;
 
-    public bool HasOwner() => DueñoId > 0;
+    public bool HasOwner() => PersonId > 0;
 
     public void AssignOwner(int id)
     {
-        DueñoId = id;
+        PersonId = id;
     }
 
     public void RemoveOwner()
     {
-        DueñoId = 0;
+        PersonId = 0;
     }
 
-    public override string ToString() => $"{nameof(Car)} Id {Id}: {Patente} - {Marca} {Modelo}";
+    public override string ToString() => $"{nameof(Car)} Id {Id}: {LicensePlate} - {Brand} {Model}";
 }

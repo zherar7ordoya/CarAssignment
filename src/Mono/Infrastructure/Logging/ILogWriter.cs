@@ -10,5 +10,5 @@ namespace Integrador.Infrastructure.Logging;
 
 public interface ILogWriter
 {
-    void Escribir(LogEntry entry);
+    void Write(LogEntry entry);
 }

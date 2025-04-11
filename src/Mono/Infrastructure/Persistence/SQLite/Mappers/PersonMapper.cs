@@ -9,20 +9,20 @@ public class PersonMapper : IMapper<Person, PersonRecord>
     public PersonRecord ToStorage(Person entity) => new()
     {
         Id = entity.Id,
-        Nombre = entity.Nombre,
-        Apellido = entity.Apellido,
-        DNI = entity.DNI,
-        Autos = string.Join(",", entity.Autos)
+        FirstName = entity.FirstName,
+        LastName = entity.LastName,
+        IdentityNumber = entity.IdentityNumber,
+        CarIds = string.Join(",", entity.CarIds)
     };
 
     public Person ToDomain(PersonRecord storage) => new()
     {
         Id = storage.Id,
-        Nombre = storage.Nombre,
-        Apellido = storage.Apellido,
-        DNI = storage.DNI,
-        Autos = string.IsNullOrWhiteSpace(storage.Autos)
+        FirstName = storage.FirstName,
+        LastName = storage.LastName,
+        IdentityNumber = storage.IdentityNumber,
+        CarIds = string.IsNullOrWhiteSpace(storage.CarIds)
         ? []
-        : [.. storage.Autos.Split(',').Select(int.Parse)]
+        : [.. storage.CarIds.Split(',').Select(int.Parse)]
     };
 }

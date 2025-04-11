@@ -37,7 +37,7 @@ partial class MainForm
         txtPersonId = new TextBox();
         lblLastname = new Label();
         lblFirstname = new Label();
-        lblIdentityCard = new Label();
+        lblIdentityNumber = new Label();
         lblPersonId = new Label();
         lblCarsPrice = new Label();
         dgvPersonCars = new DataGridView();
@@ -139,14 +139,14 @@ partial class MainForm
         lblFirstname.TabIndex = 9;
         lblFirstname.Text = "Nombre";
         // 
-        // lblIdentityCard
+        // lblIdentityNumber
         // 
-        lblIdentityCard.AutoSize = true;
-        lblIdentityCard.Location = new Point(12, 86);
-        lblIdentityCard.Name = "lblIdentityCard";
-        lblIdentityCard.Size = new Size(31, 18);
-        lblIdentityCard.TabIndex = 8;
-        lblIdentityCard.Text = "DNI";
+        lblIdentityNumber.AutoSize = true;
+        lblIdentityNumber.Location = new Point(12, 86);
+        lblIdentityNumber.Name = "lblIdentityNumber";
+        lblIdentityNumber.Size = new Size(31, 18);
+        lblIdentityNumber.TabIndex = 8;
+        lblIdentityNumber.Text = "DNI";
         // 
         // lblPersonId
         // 
@@ -507,7 +507,7 @@ partial class MainForm
         Controls.Add(lblLastname);
         Controls.Add(lblPersonId);
         Controls.Add(lblFirstname);
-        Controls.Add(lblIdentityCard);
+        Controls.Add(lblIdentityNumber);
         Font = new Font("Calibri", 11F);
         Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
@@ -533,7 +533,7 @@ partial class MainForm
     internal Label lblCarsPrice;
     internal Label lblLastname;
     internal Label lblFirstname;
-    internal Label lblIdentityCard;
+    internal Label lblIdentityNumber;
     internal Label lblPersonId;
     internal TextBox txtApellido;
     internal TextBox txtNombre;

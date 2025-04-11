@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Person Id="1">
-    <DNI>24123567</DNI>
-    <Nombre>Homero</Nombre>
-    <Apellido>Simpson</Apellido>
-    <Autos>
+    <IdentityNumber>24123567</IdentityNumber>
+    <FirstName>Homero</FirstName>
+    <LastName>Simpson</LastName>
+    <CarIds>
       <int>10</int>
-    </Autos>
+    </CarIds>
   </Person>
   <Person Id="2">
-    <DNI>30111222</DNI>
-    <Nombre>Marge</Nombre>
-    <Apellido>Bouvier</Apellido>
-    <Autos />
+    <IdentityNumber>30111222</IdentityNumber>
+    <FirstName>Marge</FirstName>
+    <LastName>Bouvier</LastName>
+    <CarIds />
   </Person>
   <Person Id="3">
-    <DNI>42233445</DNI>
-    <Nombre>Ned</Nombre>
-    <Apellido>Flanders</Apellido>
-    <Autos>
+    <IdentityNumber>42233445</IdentityNumber>
+    <FirstName>Ned</FirstName>
+    <LastName>Flanders</LastName>
+    <CarIds>
       <int>6</int>
-    </Autos>
+    </CarIds>
   </Person>
   <Person Id="4">
-    <DNI>50789123</DNI>
-    <Nombre>Kent</Nombre>
-    <Apellido>Brockman</Apellido>
-    <Autos />
+    <IdentityNumber>50789123</IdentityNumber>
+    <FirstName>Kent</FirstName>
+    <LastName>Brockman</LastName>
+    <CarIds />
   </Person>
   <Person Id="5">
-    <DNI>60987654</DNI>
-    <Nombre>Bart</Nombre>
-    <Apellido>Simpson</Apellido>
-    <Autos />
+    <IdentityNumber>60987654</IdentityNumber>
+    <FirstName>Bart</FirstName>
+    <LastName>Simpson</LastName>
+    <CarIds />
   </Person>
   <Person Id="6">
-    <DNI>71829374</DNI>
-    <Nombre>Lisa</Nombre>
-    <Apellido>Simpson</Apellido>
-    <Autos />
+    <IdentityNumber>71829374</IdentityNumber>
+    <FirstName>Lisa</FirstName>
+    <LastName>Simpson</LastName>
+    <CarIds />
   </Person>
   <Person Id="7">
-    <DNI>82546789</DNI>
-    <Nombre>Montgomery</Nombre>
-    <Apellido>Burns</Apellido>
-    <Autos>
+    <IdentityNumber>82546789</IdentityNumber>
+    <FirstName>Montgomery</FirstName>
+    <LastName>Burns</LastName>
+    <CarIds>
       <int>4</int>
       <int>8</int>
-    </Autos>
+    </CarIds>
   </Person>
   <Person Id="8">
-    <DNI>93124578</DNI>
-    <Nombre>Edna</Nombre>
-    <Apellido>Krabappel</Apellido>
-    <Autos />
+    <IdentityNumber>93124578</IdentityNumber>
+    <FirstName>Edna</FirstName>
+    <LastName>Krabappel</LastName>
+    <CarIds />
   </Person>
   <Person Id="9">
-    <DNI>10234567</DNI>
-    <Nombre>Moe</Nombre>
-    <Apellido>Szyslak</Apellido>
-    <Autos />
+    <IdentityNumber>10234567</IdentityNumber>
+    <FirstName>Moe</FirstName>
+    <LastName>Szyslak</LastName>
+    <CarIds />
   </Person>
   <Person Id="10">
-    <DNI>11456789</DNI>
-    <Nombre>Barney</Nombre>
-    <Apellido>Gumble</Apellido>
-    <Autos>
+    <IdentityNumber>11456789</IdentityNumber>
+    <FirstName>Barney</FirstName>
+    <LastName>Gumble</LastName>
+    <CarIds>
       <int>3</int>
-    </Autos>
+    </CarIds>
   </Person>
 </ArrayOfPerson>

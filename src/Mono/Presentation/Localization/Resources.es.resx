@@ -117,70 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnAssignCar" xml:space="preserve">
+  <data name="AssignCar" xml:space="preserve">
     <value>Asignar</value>
   </data>
-  <data name="btnDeleteCar" xml:space="preserve">
-    <value>Borrar</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Gestor de asignación de autos</value>
   </data>
-  <data name="btnDeletePerson" xml:space="preserve">
-    <value>Borrar</value>
-  </data>
-  <data name="btnNewCar" xml:space="preserve">
+  <data name="New" xml:space="preserve">
     <value>Nuevo</value>
   </data>
-  <data name="btnNewPerson" xml:space="preserve">
-    <value>Nuevo</value>
-  </data>
-  <data name="btnRemoveCar" xml:space="preserve">
+  <data name="RemoveCar" xml:space="preserve">
     <value>Quitar</value>
   </data>
-  <data name="btnSaveCar" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>Guardar</value>
   </data>
-  <data name="btnSavePerson" xml:space="preserve">
-    <value>Guardar</value>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
   </data>
-  <data name="lblAssignedCars" xml:space="preserve">
+  <data name="AssignedCars" xml:space="preserve">
     <value>Autos asignados</value>
   </data>
-  <data name="lblAvailableCars" xml:space="preserve">
+  <data name="AvailableCars" xml:space="preserve">
     <value>Autos disponibles</value>
   </data>
-  <data name="lblBrand" xml:space="preserve">
+  <data name="Brand" xml:space="preserve">
     <value>Marca</value>
   </data>
-  <data name="lblFirstname" xml:space="preserve">
+  <data name="FirstName" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="lblIdentityCard" xml:space="preserve">
+  <data name="IdentityNumber" xml:space="preserve">
     <value>DNI</value>
   </data>
-  <data name="lblLastname" xml:space="preserve">
+  <data name="LastName" xml:space="preserve">
     <value>Apellido</value>
   </data>
-  <data name="lblLicensePlate" xml:space="preserve">
+  <data name="LicensePlate" xml:space="preserve">
     <value>Patente</value>
   </data>
-  <data name="lblModel" xml:space="preserve">
+  <data name="Model" xml:space="preserve">
     <value>Modelo</value>
   </data>
-  <data name="lblPersonCars" xml:space="preserve">
+  <data name="PersonCars" xml:space="preserve">
     <value>Autos de persona</value>
   </data>
-  <data name="lblPersons" xml:space="preserve">
+  <data name="Persons" xml:space="preserve">
     <value>Personas</value>
   </data>
-  <data name="lblPrice" xml:space="preserve">
+  <data name="Price" xml:space="preserve">
     <value>Precio</value>
   </data>
-  <data name="lblQuantity" xml:space="preserve">
+  <data name="Quantity" xml:space="preserve">
     <value>Cantidad</value>
   </data>
-  <data name="lblYear" xml:space="preserve">
+  <data name="Year" xml:space="preserve">
     <value>Año</value>
   </data>
-  <data name="MainForm" xml:space="preserve">
-    <value>Gestor de asignación de autos</value>
+  <data name="Person" xml:space="preserve">
+    <value>Persona</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título</value>
   </data>
 </root>
