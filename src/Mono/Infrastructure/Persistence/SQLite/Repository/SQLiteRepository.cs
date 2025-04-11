@@ -34,7 +34,7 @@ public class SQLiteRepository<T, TRecord>
 
             // El record tiene las propiedades planas
             var record = mapper.ToStorage(entity)
-                     ?? throw new InvalidOperationException("Record cannot be null.");
+                     ?? throw new InvalidOperationException("SQLite: Record cannot be null.");
             var recordType = record.GetType();
             var properties = recordType.GetProperties();
 
@@ -56,11 +56,11 @@ public class SQLiteRepository<T, TRecord>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"SQLite: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Create completed for {entity}");
+            logger.TryLog($"SQLite: Create completed for {entity}");
         }
     }
 
@@ -76,7 +76,7 @@ public class SQLiteRepository<T, TRecord>
             using var reader = command.ExecuteReader();
 
             var recordType = typeof(TRecord)
-                     ?? throw new InvalidOperationException("Record type cannot be determined.");
+                     ?? throw new InvalidOperationException("SQLite: Record type cannot be determined.");
             var properties = recordType.GetProperties();
 
             while (reader.Read())
@@ -105,7 +105,7 @@ public class SQLiteRepository<T, TRecord>
                             {
                                 throw new InvalidOperationException
                                 (
-                                    $"Error converting {prop.Name} from {actualType} to {underlyingType}", ex
+                                    $"SQLite: Error converting {prop.Name} from {actualType} to {underlyingType}", ex
                                 );
                             }
                         }
@@ -122,7 +122,7 @@ public class SQLiteRepository<T, TRecord>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"SQLite: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return [];
         }
     }
@@ -142,7 +142,7 @@ public class SQLiteRepository<T, TRecord>
             if (!reader.Read()) return default;
 
             var recordType = typeof(TRecord)
-                         ?? throw new InvalidOperationException("Record type cannot be determined.");
+                         ?? throw new InvalidOperationException("SQLite: Record type cannot be determined.");
             var properties = recordType.GetProperties();
             var record = Activator.CreateInstance(recordType)!;
 
@@ -169,7 +169,7 @@ public class SQLiteRepository<T, TRecord>
                         {
                             throw new InvalidOperationException
                             (
-                                $"Error converting {prop.Name} from {actualType} to {underlyingType}", ex
+                                $"SQLite: Error converting {prop.Name} from {actualType} to {underlyingType}", ex
                             );
                         }
                     }
@@ -182,7 +182,7 @@ public class SQLiteRepository<T, TRecord>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"SQLite: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return default;
         }
     }
@@ -192,7 +192,7 @@ public class SQLiteRepository<T, TRecord>
         try
         {
             var record = mapper.ToStorage(entity)
-                     ?? throw new InvalidOperationException("Record cannot be null.");
+                     ?? throw new InvalidOperationException("SQLite: Record cannot be null.");
             var recordType = record.GetType();
 
             // No se actualiza el Id
@@ -214,23 +214,23 @@ public class SQLiteRepository<T, TRecord>
             // Agregamos el parámetro Id al final
             var idProp = recordType.GetProperty("Id");
             var idValue = idProp?.GetValue(record)
-                      ?? throw new InvalidOperationException("Entity must have an Id");
+                      ?? throw new InvalidOperationException("SQLite: Entity must have an Id");
             command.Parameters.AddWithValue("@Id", idValue);
 
             var rowsAffected = command.ExecuteNonQuery();
 
             if (rowsAffected == 0)
             {
-                throw new InvalidOperationException($"Update failed: no record with Id {idValue} found.");
+                throw new InvalidOperationException($"SQLite: Update failed (no record with Id {idValue} found).");
             }
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"SQLite: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Update completed for {entity}");
+            logger.TryLog($"SQLite: Update completed for {entity}");
         }
     }
 
@@ -249,16 +249,16 @@ public class SQLiteRepository<T, TRecord>
 
             if (rowsAffected == 0)
             {
-                throw new InvalidOperationException($"Update failed: no record with Id {id} found.");
+                throw new InvalidOperationException($"SQLite: Update failed (no record with Id {id} found).");
             }
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"SQLite: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Delete completed for {typeof(T).Name} with Id {id}");
+            logger.TryLog($"SQLite: Delete completed for {typeof(T).Name} with Id {id}");
         }
     }
 }

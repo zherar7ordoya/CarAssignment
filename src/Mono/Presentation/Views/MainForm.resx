@@ -121,7 +121,7 @@
   <data name="btnAssignCar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        1QAADdUBPdZY8QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJOSURBVEhLtVRN
+        0wAADdMBvdUcagAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJOSURBVEhLtVRN
         SxtRFFXwxyQaYpOM3RW660Ihy+76B7qLe50g2oX9oH5lAu2itF2IO4OLUbEVwaqEijGBMRMVqoQiodZd
         oJTbd57O9M17V+NCFwfunHs+MvNm0kVE9wqWvEuwZIDH9peedKE+ZBX90QHHL1lOownIueDb2EHDeQOw
         JJCerccHCn7Zcny6CdBAy2UAHNGdcfycMLf1sBvQhgdeJi9KZIoHw0zArQCvnhe5wK1ahfofzgyMrZ1K
@@ -138,7 +138,7 @@
   <data name="btnRemoveCar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        1QAADdUBPdZY8QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJCSURBVEhLtVTN
+        0wAADdMBvdUcagAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJCSURBVEhLtVTN
         ShtRGFXwYRINsclMVi7qAwiBPkLpE+iqIDqhiItIqWg6I3ZVaLuT0qxGQQVbTDVFWhWTjKCiDaWGmu4C
         pXy955qZ3rn3Q7PQxYFvznd+MnNn0kdE9wqWvEuwZIhRZ2Mg6zbG7KVgOucFZds7bgJydgMHO2g4bwiW
         BLKlRjLnBlXbC+gmQAMtlwFwRL/lBePC3NHDbkAHHniZvDhhLdUnmICeAK+eF7vArdpu4w9nBlrt3xLc

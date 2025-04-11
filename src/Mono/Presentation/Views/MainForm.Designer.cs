@@ -160,9 +160,9 @@ partial class MainForm
         // lblCarsPrice
         // 
         lblCarsPrice.Font = new Font("Calibri", 22F);
-        lblCarsPrice.Location = new Point(12, 278);
+        lblCarsPrice.Location = new Point(107, 278);
         lblCarsPrice.Name = "lblCarsPrice";
-        lblCarsPrice.Size = new Size(272, 37);
+        lblCarsPrice.Size = new Size(222, 37);
         lblCarsPrice.TabIndex = 6;
         lblCarsPrice.Text = "Total";
         lblCarsPrice.TextAlign = ContentAlignment.MiddleRight;
@@ -429,7 +429,7 @@ partial class MainForm
         dgvAssignedCars.Name = "dgvAssignedCars";
         dgvAssignedCars.ReadOnly = true;
         dgvAssignedCars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvAssignedCars.Size = new Size(526, 159);
+        dgvAssignedCars.Size = new Size(809, 159);
         dgvAssignedCars.TabIndex = 23;
         // 
         // lblAssignedCars
@@ -467,7 +467,7 @@ partial class MainForm
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
-        ClientSize = new Size(873, 791);
+        ClientSize = new Size(1156, 791);
         Controls.Add(btnViewLog);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);

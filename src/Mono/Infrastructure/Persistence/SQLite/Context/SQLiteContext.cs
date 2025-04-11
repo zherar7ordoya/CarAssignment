@@ -29,7 +29,7 @@ public class SQLiteContext<T>() : ISQLiteContext<T>
 
     private static string GetString()
     {
-        var config = ConfigurationManager.ConnectionStrings["SQLiteConnection"];
+        var config = ConfigurationManager.ConnectionStrings["SQLiteBusinessConnection"];
         return config == null
             ? throw new InvalidOperationException("Connection string not found.")
             : config.ConnectionString;

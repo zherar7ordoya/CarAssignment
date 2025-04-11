@@ -23,11 +23,11 @@ public class LiteDbRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"LiteDB: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Create completed for {entity}");
+            logger.TryLog($"LiteDB: Create completed for {entity}");
         }
     }
 
@@ -41,7 +41,7 @@ public class LiteDbRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"LiteDB: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return [];
         }
     }
@@ -56,7 +56,7 @@ public class LiteDbRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"LiteDB: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return default;
         }
     }
@@ -69,16 +69,16 @@ public class LiteDbRepository<T>
             var collection = db.GetCollection<T>(dataSource.CollectionName);
             if (!collection.Update(entity))
             {
-                throw new Exception($"No se pudo actualizar la entidad con Id {entity.Id}");
+                throw new Exception($"LiteDB: Could not update entity with Id {entity.Id}");
             }
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"LiteDB: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Update completed for {entity}");
+            logger.TryLog($"LiteDB: Update completed for {entity}");
         }
     }
 
@@ -90,16 +90,16 @@ public class LiteDbRepository<T>
             var collection = db.GetCollection<T>(dataSource.CollectionName);
             if (!collection.Delete(id))
             {
-                throw new Exception($"No se pudo eliminar la entidad con Id {id}");
+                throw new Exception($"LiteDB: Could not delete entity with Id {id}");
             }
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"LiteDB: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Delete completed for {typeof(T).Name} with Id {id}");
+            logger.TryLog($"LiteDB: Delete completed for {typeof(T).Name} with Id {id}");
         }
     }
 }

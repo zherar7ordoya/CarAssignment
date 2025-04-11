@@ -26,11 +26,11 @@ public class XmlRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"XML: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Create completed for {entity}");
+            logger.TryLog($"XML: Create completed for {entity}");
         }
     }
 
@@ -42,7 +42,7 @@ public class XmlRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"XML: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return [];
         }
     }
@@ -54,13 +54,13 @@ public class XmlRepository<T>
             var entities = dataSource.Read() ?? [];
             var entity = entities.FirstOrDefault(e => e.Id == id);
 
-            if (entity == null) messenger.ShowInformation($"Entity with ID {id} not found.");
+            if (entity == null) messenger.ShowInformation($"XML: Entity with ID {id} not found.");
 
             return entity;
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"XML: Error in {MethodBase.GetCurrentMethod()?.Name}");
             return default;
         }
     }
@@ -76,11 +76,11 @@ public class XmlRepository<T>
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"XML: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Update completed for {entity}");
+            logger.TryLog($"XML: Update completed for {entity}");
         }
     }
 
@@ -91,17 +91,17 @@ public class XmlRepository<T>
 
         try
         {
-            if (entity == null) throw new Exception($"Entity with ID {id} not found.");
+            if (entity == null) throw new Exception($"XML: Entity with ID {id} not found.");
             entities.Remove(entity);
             dataSource.Write(entities);
         }
         catch (Exception ex)
         {
-            exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            exceptionHandler.Handle(ex, $"XML: Error in {MethodBase.GetCurrentMethod()?.Name}");
         }
         finally
         {
-            logger.TryLog($"Delete completed for {typeof(T).Name} with Id {id}");
+            logger.TryLog($"XML: Delete completed for {typeof(T).Name} with Id {id}");
         }
     }
 }
