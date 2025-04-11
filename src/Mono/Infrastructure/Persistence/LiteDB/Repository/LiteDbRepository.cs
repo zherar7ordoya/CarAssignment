@@ -1,4 +1,5 @@
-﻿using Integrador.Application.Interfaces.Infrastructure;
+﻿using Integrador.Application.Interfaces.Exceptions;
+using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
 

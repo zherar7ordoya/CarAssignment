@@ -1,4 +1,4 @@
-﻿using Integrador.Application.Interfaces.Infrastructure;
+﻿using Integrador.Application.Interfaces.Exceptions;
 
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;

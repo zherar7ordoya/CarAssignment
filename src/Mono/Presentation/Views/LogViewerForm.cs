@@ -1,7 +1,8 @@
 ﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Domain.Interfaces;
 using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Logging.Shared;
 
 using System;
 using System.Collections.Generic;

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integrador.Infrastructure.Logging;
+namespace Integrador.Infrastructure.Logging.Shared;
 
-public class StructuredLogger(params IEnumerable<ILogWriter> writers) : ILogger
+public class Logger(params IEnumerable<ILogWriter> writers) : ILogger
 {
     public void LogInformation(string message) => Log(LogLevel.Information, message);
     public void LogError(string message) => Log(LogLevel.Error, message);

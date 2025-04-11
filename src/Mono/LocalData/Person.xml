@@ -65,6 +65,8 @@
     <DNI>11456789</DNI>
     <Nombre>Barney</Nombre>
     <Apellido>Gumble</Apellido>
-    <Autos />
+    <Autos>
+      <int>3</int>
+    </Autos>
   </Person>
 </ArrayOfPerson>

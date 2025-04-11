@@ -22,7 +22,7 @@
     <Modelo>Agile 1.4 LT</Modelo>
     <Año>2012</Año>
     <Precio>95000</Precio>
-    <DueñoId>0</DueñoId>
+    <DueñoId>10</DueñoId>
   </Car>
   <Car Id="4">
     <Patente>PEJ554</Patente>

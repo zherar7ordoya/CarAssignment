@@ -1,4 +1,5 @@
 ﻿using Integrador.Application.DTOs;
+using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;

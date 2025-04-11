@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integrador.Infrastructure.Logging;
+namespace Integrador.Infrastructure.Logging.Shared;
 
 public class LogEntry
 {

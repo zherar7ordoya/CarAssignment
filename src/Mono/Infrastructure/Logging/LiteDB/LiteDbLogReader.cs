@@ -1,4 +1,6 @@
-﻿using LiteDB;
+﻿using Integrador.Infrastructure.Logging.Shared;
+
+using LiteDB;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integrador.Infrastructure.Logging;
+namespace Integrador.Infrastructure.Logging.LiteDB;
 
 public class LiteDbLogReader : ILogReader
 {
@@ -46,11 +48,11 @@ public class LiteDbLogReader : ILogReader
         catch (Exception ex)
         {
             Debug.WriteLine($"Error al leer los logs: {ex.Message}");
-            return Enumerable.Empty<LogEntry>();
+            return [];
         }
     }
 
-    private void InicializarBitacoraSiEstaVacia(ILiteCollection<LogEntry> col)
+    private static void InicializarBitacoraSiEstaVacia(ILiteCollection<LogEntry> col)
     {
         if (!col.Exists(Query.All()))
         {
@@ -58,7 +60,7 @@ public class LiteDbLogReader : ILogReader
             {
                 Timestamp = DateTime.Now,
                 Nivel = LogLevel.Information,
-                Mensaje = "Bitácora iniciada. Bienvenido/a. 🌸"
+                Mensaje = "Bitácora iniciada. Bienvenid@."
             });
         }
     }

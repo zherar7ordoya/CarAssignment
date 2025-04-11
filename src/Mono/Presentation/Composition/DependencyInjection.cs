@@ -23,6 +23,9 @@ using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Integrador.Presentation.Views;
+using Integrador.Infrastructure.Logging.LiteDB;
+using Integrador.Infrastructure.Logging.Shared;
+using Integrador.Application.Interfaces.Exceptions;
 
 namespace Integrador.Presentation.Composition;
 
@@ -81,7 +84,7 @@ public static class DependencyInjection
 
         services.AddSingleton<ILogWriter, LiteDbLogWriter>();
         services.AddSingleton<ILogReader, LiteDbLogReader>();
-        services.AddSingleton<ILogger, StructuredLogger>();
+        services.AddSingleton<ILogger, Logger>();
 
         services.AddTransient<LogViewerForm>();
 
