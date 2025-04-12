@@ -69,6 +69,8 @@ partial class MainForm
         lblAssignedCars = new Label();
         lblPersonCars = new Label();
         btnViewLog = new Button();
+        cmbLanguages = new ComboBox();
+        lblLanguages = new Label();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -462,12 +464,33 @@ partial class MainForm
         btnViewLog.UseVisualStyleBackColor = true;
         btnViewLog.Click += ButtonViewLog_Click;
         // 
+        // cmbLanguages
+        // 
+        cmbLanguages.FormattingEnabled = true;
+        cmbLanguages.Items.AddRange(new object[] { "Español", "English" });
+        cmbLanguages.Location = new Point(109, 669);
+        cmbLanguages.Name = "cmbLanguages";
+        cmbLanguages.Size = new Size(121, 26);
+        cmbLanguages.TabIndex = 25;
+        cmbLanguages.SelectedIndexChanged += ComboBoxLanguages_SelectedIndexChanged;
+        // 
+        // lblLanguages
+        // 
+        lblLanguages.AutoSize = true;
+        lblLanguages.Location = new Point(17, 672);
+        lblLanguages.Name = "lblLanguages";
+        lblLanguages.Size = new Size(51, 18);
+        lblLanguages.TabIndex = 26;
+        lblLanguages.Text = "Idioma";
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
         ClientSize = new Size(1156, 791);
+        Controls.Add(lblLanguages);
+        Controls.Add(cmbLanguages);
         Controls.Add(btnViewLog);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
@@ -564,4 +587,6 @@ partial class MainForm
     private TextBox txtModelo;
     internal Label lblPersonCars;
     private Button btnViewLog;
+    private ComboBox cmbLanguages;
+    private Label lblLanguages;
 }

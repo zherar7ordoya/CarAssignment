@@ -3,9 +3,12 @@ using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
+using Integrador.Infrastructure.Configuration;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 using Integrador.Presentation.Views;
+
+using System.Globalization;
 
 namespace Integrador;
 
@@ -17,8 +20,7 @@ public partial class MainForm : Form
         ICarFactory carFactory,
         IPersonFactory personFactory,
         IViewPresenter viewPresenter,
-        IExceptionHandler exceptionHandler,
-        ILocalizationService localization
+        IExceptionHandler exceptionHandler
     )
     {
         _messenger = messenger;
@@ -27,11 +29,10 @@ public partial class MainForm : Form
         _viewPresenter = viewPresenter;
         _exceptionHandler = exceptionHandler;
 
-        _localization = localization;
-
         try
         {
             InitializeComponent();
+            ConfigureCulture();
             ConfigureBindings();
             LoadData();
 
@@ -41,6 +42,17 @@ public partial class MainForm : Form
         {
             _exceptionHandler.Handle(ex, "Error durante la inicialización del formulario.");
         }
+    }
+
+    private void ConfigureCulture()
+    {
+        var culture = AppConfigReader.GetSetting("DefaultCulture") ?? "es";
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+
+        if (culture == "es") cmbLanguages.SelectedIndex = 0; // Español
+        else if (culture == "en") cmbLanguages.SelectedIndex = 1; // Inglés
+        else cmbLanguages.SelectedIndex = 0; // Predeterminado a Español
     }
 
     private void ApplyLocalization()
@@ -79,8 +91,6 @@ public partial class MainForm : Form
     private readonly IViewPresenter _viewPresenter;
     private readonly IExceptionHandler _exceptionHandler;
 
-    private readonly ILocalizationService _localization;
-
     private readonly BindingSource _persons = [];
     private readonly BindingSource _personCars = [];
     private readonly BindingSource _assignedCars = [];
@@ -96,7 +106,7 @@ public partial class MainForm : Form
             {
                 _personCars.DataSource = person.CarIds;
                 _personCars.ResetBindings(false);
-                lblCarsPrice.Text = person.GetCarsPrice.ToString("C");
+                lblCarsPrice.Text = person.GetCarsPrice.ToString("C2", new CultureInfo("en-US"));
                 txtCarsCount.Text = person.GetCarsCount.ToString();
             }
         }
@@ -383,5 +393,27 @@ public partial class MainForm : Form
     {
         var visor = AppServices.Get<LogViewerForm>();
         visor.Show();
+    }
+
+    private void ComboBoxLanguages_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string cultureCode = "es"; // Predeterminado
+        if (cmbLanguages.SelectedIndex == 1) // Inglés
+        {
+            cultureCode = "en";
+        }
+        AppConfigWriter.SetSetting("DefaultCulture", cultureCode);
+        ChangeCulture(cultureCode);
+    }
+
+    private void ChangeCulture(string cultureCode)
+    {
+        // Cambiar la cultura
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureCode);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureCode);
+
+        // Actualizar los controles
+        ApplyLocalization();
+        ConfigureDataGridView();
     }
 }

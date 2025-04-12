@@ -97,14 +97,6 @@ public static class DependencyInjection
         services.AddTransient<IPersonFactory, PersonFactory>();
         services.AddTransient<IViewPresenter, ViewPresenter>();
 
-        services.AddSingleton<ILocalizationService>(_ =>
-        {
-            var culture = AppConfigReader.GetSetting("DefaultCulture") ?? "es";
-            var localization = new ResxLocalizationService();
-            localization.SetCulture(culture);
-            return localization;
-        });
-
         services.AddTransient<MainForm, MainForm>();
     }
 }
