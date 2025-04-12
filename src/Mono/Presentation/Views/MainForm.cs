@@ -57,7 +57,7 @@ public partial class MainForm : Form
 
     private void ApplyLocalization()
     {
-        this.Text = Resources.Title;
+        this.Text = Resources.TitleMain;
         lblPersons.Text = Resources.Persons;
         lblIdentityNumber.Text = Resources.IdentityNumber;
         lblFirstname.Text = Resources.FirstName;

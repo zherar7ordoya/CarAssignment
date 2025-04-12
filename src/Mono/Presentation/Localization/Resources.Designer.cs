@@ -61,7 +61,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car Assign to Owner.
         /// </summary>
         internal static string AssignCar {
             get {
@@ -70,7 +70,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Cars Assigned.
         /// </summary>
         internal static string AssignedCars {
             get {
@@ -79,7 +79,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Cars Available.
         /// </summary>
         internal static string AvailableCars {
             get {
@@ -88,7 +88,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car Brand.
         /// </summary>
         internal static string Brand {
             get {
@@ -97,7 +97,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entitiy Delete.
         /// </summary>
         internal static string Delete {
             get {
@@ -106,7 +106,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Person First Name.
         /// </summary>
         internal static string FirstName {
             get {
@@ -115,7 +115,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entitiy Id.
         /// </summary>
         internal static string Id {
             get {
@@ -124,7 +124,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Person Identity Number.
         /// </summary>
         internal static string IdentityNumber {
             get {
@@ -133,7 +133,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Person Last Name.
         /// </summary>
         internal static string LastName {
             get {
@@ -142,7 +142,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car License Plate.
         /// </summary>
         internal static string LicensePlate {
             get {
@@ -151,7 +151,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car Model.
         /// </summary>
         internal static string Model {
             get {
@@ -160,7 +160,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entity New.
         /// </summary>
         internal static string New {
             get {
@@ -169,7 +169,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entity Person.
         /// </summary>
         internal static string Person {
             get {
@@ -178,7 +178,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Cars of Person.
         /// </summary>
         internal static string PersonCars {
             get {
@@ -187,7 +187,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Persons List.
         /// </summary>
         internal static string Persons {
             get {
@@ -196,7 +196,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car Price.
         /// </summary>
         internal static string Price {
             get {
@@ -205,7 +205,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Person Quantity of Cars.
         /// </summary>
         internal static string Quantity {
             get {
@@ -214,7 +214,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Car Remove from Owner.
         /// </summary>
         internal static string RemoveCar {
             get {
@@ -223,7 +223,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entity Save.
         /// </summary>
         internal static string Save {
             get {
@@ -232,16 +232,25 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Title of Form Viewer.
         /// </summary>
-        internal static string Title {
+        internal static string TitleLog {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("TitleLog", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Title of Form Main.
+        /// </summary>
+        internal static string TitleMain {
+            get {
+                return ResourceManager.GetString("TitleMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car Year.
         /// </summary>
         internal static string Year {
             get {

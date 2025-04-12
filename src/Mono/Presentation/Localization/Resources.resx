@@ -118,66 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssignCar" xml:space="preserve">
-    <value />
+    <value>Car Assign to Owner</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value />
+    <value>Entitiy Delete</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value />
+    <value>Entity New</value>
   </data>
   <data name="RemoveCar" xml:space="preserve">
-    <value />
+    <value>Car Remove from Owner</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value />
+    <value>Entity Save</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value />
+    <value>Entitiy Id</value>
   </data>
   <data name="AssignedCars" xml:space="preserve">
-    <value />
+    <value>Cars Assigned</value>
   </data>
   <data name="AvailableCars" xml:space="preserve">
-    <value />
+    <value>Cars Available</value>
   </data>
   <data name="Brand" xml:space="preserve">
-    <value />
+    <value>Car Brand</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value />
+    <value>Person First Name</value>
   </data>
   <data name="IdentityNumber" xml:space="preserve">
-    <value />
+    <value>Person Identity Number</value>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value />
+    <value>Person Last Name</value>
   </data>
   <data name="LicensePlate" xml:space="preserve">
-    <value />
+    <value>Car License Plate</value>
   </data>
   <data name="Model" xml:space="preserve">
-    <value />
+    <value>Car Model</value>
   </data>
   <data name="PersonCars" xml:space="preserve">
-    <value />
+    <value>Cars of Person</value>
   </data>
   <data name="Persons" xml:space="preserve">
-    <value />
+    <value>Persons List</value>
   </data>
   <data name="Price" xml:space="preserve">
-    <value />
+    <value>Car Price</value>
   </data>
   <data name="Quantity" xml:space="preserve">
-    <value />
+    <value>Person Quantity of Cars</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value />
+    <value>Car Year</value>
   </data>
   <data name="Person" xml:space="preserve">
-    <value />
+    <value>Entity Person</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value />
+  <data name="TitleMain" xml:space="preserve">
+    <value>Title of Form Main</value>
+  </data>
+  <data name="TitleLog" xml:space="preserve">
+    <value>Title of Form Viewer</value>
   </data>
 </root>
