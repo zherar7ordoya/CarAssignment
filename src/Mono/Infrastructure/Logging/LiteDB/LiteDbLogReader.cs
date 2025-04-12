@@ -2,13 +2,8 @@
 
 using LiteDB;
 
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Integrador.Infrastructure.Logging.LiteDB;
 
@@ -30,20 +25,20 @@ public class LiteDbLogReader : ILogReader
     {
         try
         {
-            using var db = new LiteDatabase(_connectionString);
-            var col = db.GetCollection<LogEntry>("Log");
+            using var database = new LiteDatabase(_connectionString);
+            var collection = database.GetCollection<LogEntry>("Log");
 
-            col.EnsureIndex(x => x.Timestamp);
-            col.EnsureIndex(x => x.Level);
+            collection.EnsureIndex(x => x.Timestamp);
+            collection.EnsureIndex(x => x.Level);
 
-            InitializeIfEmpty(col);
+            InitializeIfEmpty(collection);
 
             // Materializamos los datos ANTES de cerrar la conexión
-            var lista = col.FindAll()
+            var entries = collection.FindAll()
                            .OrderByDescending(e => e.Timestamp)
                            .ToList(); // <- Esto es clave
 
-            return lista;
+            return entries;
         }
         catch (Exception ex)
         {

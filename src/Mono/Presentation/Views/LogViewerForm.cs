@@ -1,77 +1,92 @@
-﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Domain.Interfaces;
+﻿using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Logging.Shared;
+using Integrador.Presentation.Localization;
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Integrador.Presentation.Views;
 
 public partial class LogViewerForm : Form
 {
     private readonly ILogReader _logReader;
-    private List<LogEntry> _todos = [];
-    private IExceptionHandler _exceptionHandler;
+    private List<LogEntry> _logEntries = [];
+    private readonly IExceptionHandler _exceptionHandler;
 
     public LogViewerForm(ILogReader logReader, IExceptionHandler exceptionHandler)
     {
         InitializeComponent();
-        _logReader = logReader;
-        CargarLogs();
         _exceptionHandler = exceptionHandler;
+
+        ApplyLocalization();
+        LoadComboBoxLevels();
+
+        _logReader = logReader;
+        LoadLogs();
     }
 
-    private void CargarLogs()
+
+    private void ApplyLocalization()
+    {
+        this.Text = Resources.TitleLog;
+        lblSelect.Text = Resources.Select;
+        lblText.Text = Resources.Text;
+        lblLevel.Text = Resources.Level;
+        lblDate.Text = Resources.Date;
+        btnFilter.Text = Resources.Filter;
+    }
+
+    private void LoadComboBoxLevels()
+    {
+        cmbLevel.Items.Clear();
+
+        cmbLevel.Items.Add(Resources.All);
+        cmbLevel.Items.Add(Resources.Information);
+        cmbLevel.Items.Add(Resources.Warning);
+        cmbLevel.Items.Add(Resources.Error);
+        cmbLevel.Items.Add(Resources.Critical);
+        cmbLevel.Items.Add(Resources.Debug);
+
+        cmbLevel.SelectedIndex = 0;
+    }
+
+    private void LoadLogs()
     {
         try
         {
-            _todos = [.. _logReader.Read()];
-            AplicarFiltro();
+            _logEntries = [.. _logReader.Read()];
+            ApplyFilters();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al cargar los logs: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //_exceptionHandler.Handle(ex, $"Error in {MethodBase.GetCurrentMethod()?.Name}");
+            _exceptionHandler.Handle(ex, $"Error loading logs.");
         }
-        finally
-        {
-            //logger.TryLog($"Create completed for {entity}");
-        }
-
-
-
     }
 
-    private void AplicarFiltro()
+    private void ApplyFilters()
     {
-        var texto = txtBuscar.Text?.ToLower() ?? "";
-        var nivel = cmbNivel.SelectedItem?.ToString() ?? "Todos";
+        var text = txtText.Text?.ToLower() ?? "";
+        var level = cmbLevel.SelectedItem?.ToString();
+        var date = dtpDate.Value.Date;
 
-        var filtrados = _todos
-        .Where(l => (nivel == "Todos" || l.Level.ToString() == nivel) &&
-                    (string.IsNullOrEmpty(texto) || l.Message.Contains(texto, StringComparison.CurrentCultureIgnoreCase)))
+        var filtered = _logEntries
+        .Where(log =>
+            // Nivel
+            (level == Resources.All || log.Level.ToString() == level) &&
+
+            // Texto en el mensaje
+            (string.IsNullOrEmpty(text) || log.Message.Contains(text, StringComparison.CurrentCultureIgnoreCase)) &&
+
+            // Fecha
+            log.Timestamp.Date == date
+        )
         .ToList();
 
-        dgvLogs.DataSource = filtrados;
+        dgvLogEntries.DataSource = filtered;
     }
 
-    private void TextBoxBuscar_TextChanged(object sender, EventArgs e)
-    {
-        AplicarFiltro();
-    }
 
-    private void ComboBoxNivel_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        AplicarFiltro();
-    }
+    private void TextBoxText_TextChanged(object sender, EventArgs e) => ApplyFilters();
+    private void ComboBoxLevel_SelectedIndexChanged(object sender, EventArgs e) => ApplyFilters();
+    private void DateTimePickerDate_ValueChanged(object sender, EventArgs e) => ApplyFilters();
 }

@@ -18,7 +18,6 @@ using Integrador.Infrastructure.Persistence.SQLite.Context;
 using Integrador.Infrastructure.Persistence.XML.Context;
 using Integrador.Infrastructure.Persistence.XML.Repository;
 using Integrador.Infrastructure.Persistence.SQLite.Repository;
-using Integrador.Presentation.Localization;
 using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;

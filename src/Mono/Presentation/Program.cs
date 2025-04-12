@@ -1,11 +1,7 @@
 ﻿using Integrador;
-using Integrador.Infrastructure.Configuration;
 using Integrador.Presentation.Composition;
-using Integrador.Presentation.Localization;
 
 using SQLitePCL;
-
-using System.Configuration;
 
 static class Program
 {

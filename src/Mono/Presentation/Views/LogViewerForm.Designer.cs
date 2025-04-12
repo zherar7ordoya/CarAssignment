@@ -28,79 +28,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvLogs = new DataGridView();
-            txtBuscar = new TextBox();
-            cmbNivel = new ComboBox();
-            dateTimePicker1 = new DateTimePicker();
-            button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
+            dgvLogEntries = new DataGridView();
+            txtText = new TextBox();
+            cmbLevel = new ComboBox();
+            dtpDate = new DateTimePicker();
+            btnFilter = new Button();
+            lblSelect = new Label();
+            lblText = new Label();
+            lblLevel = new Label();
+            lblDate = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvLogEntries).BeginInit();
             SuspendLayout();
             // 
-            // dgvLogs
+            // dgvLogEntries
             // 
-            dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Location = new Point(12, 12);
-            dgvLogs.Name = "dgvLogs";
-            dgvLogs.Size = new Size(240, 150);
-            dgvLogs.TabIndex = 0;
+            dgvLogEntries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLogEntries.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLogEntries.Location = new Point(13, 13);
+            dgvLogEntries.Margin = new Padding(4);
+            dgvLogEntries.Name = "dgvLogEntries";
+            dgvLogEntries.Size = new Size(889, 180);
+            dgvLogEntries.TabIndex = 0;
             // 
-            // txtBuscar
+            // txtText
             // 
-            txtBuscar.Location = new Point(422, 63);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(100, 23);
-            txtBuscar.TabIndex = 1;
-            txtBuscar.TextChanged += TextBoxBuscar_TextChanged;
+            txtText.Location = new Point(410, 318);
+            txtText.Margin = new Padding(4);
+            txtText.Name = "txtText";
+            txtText.Size = new Size(113, 25);
+            txtText.TabIndex = 1;
+            txtText.TextChanged += TextBoxText_TextChanged;
             // 
-            // cmbNivel
+            // cmbLevel
             // 
-            cmbNivel.FormattingEnabled = true;
-            cmbNivel.Items.AddRange(new object[] { "Info", "Error", "Todos" });
-            cmbNivel.Location = new Point(430, 157);
-            cmbNivel.Name = "cmbNivel";
-            cmbNivel.Size = new Size(121, 23);
-            cmbNivel.TabIndex = 2;
-            cmbNivel.SelectedIndexChanged += ComboBoxNivel_SelectedIndexChanged;
+            cmbLevel.FormattingEnabled = true;
+            cmbLevel.Location = new Point(410, 370);
+            cmbLevel.Margin = new Padding(4);
+            cmbLevel.Name = "cmbLevel";
+            cmbLevel.Size = new Size(137, 26);
+            cmbLevel.TabIndex = 2;
+            cmbLevel.SelectedIndexChanged += ComboBoxLevel_SelectedIndexChanged;
             // 
-            // dateTimePicker1
+            // dtpDate
             // 
-            dateTimePicker1.Location = new Point(419, 267);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 3;
+            dtpDate.Format = DateTimePickerFormat.Short;
+            dtpDate.Location = new Point(410, 415);
+            dtpDate.Margin = new Padding(4);
+            dtpDate.Name = "dtpDate";
+            dtpDate.Size = new Size(228, 25);
+            dtpDate.TabIndex = 3;
+            dtpDate.ValueChanged += DateTimePickerDate_ValueChanged;
             // 
-            // button1
+            // btnFilter
             // 
-            button1.Location = new Point(331, 375);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnFilter.Location = new Point(386, 486);
+            btnFilter.Margin = new Padding(4);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(85, 27);
+            btnFilter.TabIndex = 4;
+            btnFilter.Text = "Filtrar";
+            btnFilter.UseVisualStyleBackColor = true;
+            // 
+            // lblSelect
+            // 
+            lblSelect.AutoSize = true;
+            lblSelect.Font = new Font("Calibri", 13F, FontStyle.Bold);
+            lblSelect.Location = new Point(28, 343);
+            lblSelect.Margin = new Padding(4, 0, 4, 0);
+            lblSelect.Name = "lblSelect";
+            lblSelect.Size = new Size(241, 22);
+            lblSelect.TabIndex = 5;
+            lblSelect.Text = "Seleccione criterios de filtrado:";
+            // 
+            // lblText
+            // 
+            lblText.AutoSize = true;
+            lblText.Location = new Point(280, 321);
+            lblText.Name = "lblText";
+            lblText.Size = new Size(42, 18);
+            lblText.TabIndex = 6;
+            lblText.Text = "Texto";
+            // 
+            // lblLevel
+            // 
+            lblLevel.AutoSize = true;
+            lblLevel.Location = new Point(304, 372);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(41, 18);
+            lblLevel.TabIndex = 7;
+            lblLevel.Text = "Nivel";
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(319, 421);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(44, 18);
+            lblDate.TabIndex = 8;
+            lblDate.Text = "Fecha";
             // 
             // LogViewerForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(cmbNivel);
-            Controls.Add(txtBuscar);
-            Controls.Add(dgvLogs);
+            ClientSize = new Size(915, 540);
+            Controls.Add(lblDate);
+            Controls.Add(lblLevel);
+            Controls.Add(lblText);
+            Controls.Add(lblSelect);
+            Controls.Add(btnFilter);
+            Controls.Add(dtpDate);
+            Controls.Add(cmbLevel);
+            Controls.Add(txtText);
+            Controls.Add(dgvLogEntries);
+            Font = new Font("Calibri", 11F);
+            Margin = new Padding(4);
             Name = "LogViewerForm";
             Text = "LogViewerForm";
-            ((System.ComponentModel.ISupportInitialize)dgvLogs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvLogEntries).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dgvLogs;
-        private TextBox txtBuscar;
-        private ComboBox cmbNivel;
-        private DateTimePicker dateTimePicker1;
-        private Button button1;
+        private DataGridView dgvLogEntries;
+        private TextBox txtText;
+        private ComboBox cmbLevel;
+        private DateTimePicker dtpDate;
+        private Button btnFilter;
+        private Label lblSelect;
+        private Label lblText;
+        private Label lblLevel;
+        private Label lblDate;
     }
 }

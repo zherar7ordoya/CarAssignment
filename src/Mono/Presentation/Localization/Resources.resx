@@ -183,4 +183,37 @@
   <data name="TitleLog" xml:space="preserve">
     <value>Title of Form Viewer</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Log Information</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Log Warning</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Log Error</value>
+  </data>
+  <data name="Critical" xml:space="preserve">
+    <value>Log Critical</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Log Debug</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Log All</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Log Filter</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Filter Level</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Filter Date</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Filter Text</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Filter Select</value>
+  </data>
 </root>
