@@ -2,6 +2,7 @@
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Logging.Shared;
 using Integrador.Presentation.Localization;
+using Integrador.Presentation.UIComponents;
 
 using System.Data;
 
@@ -28,7 +29,7 @@ public partial class LogViewerForm : Form
 
     private void ApplyLocalization()
     {
-        this.Text = Resources.TitleLog;
+        this.Text = Resources.TitleLogViewer;
         lblSelect.Text = Resources.Select;
         lblText.Text = Resources.Text;
         lblLevel.Text = Resources.Level;

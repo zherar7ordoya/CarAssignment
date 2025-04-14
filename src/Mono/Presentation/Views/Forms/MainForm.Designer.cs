@@ -68,11 +68,12 @@ partial class MainForm
         dgvAssignedCars = new DataGridView();
         lblAssignedCars = new Label();
         lblPersonCars = new Label();
-        btnViewLog = new Button();
+        btnLogViewer = new Button();
         cmbLanguages = new ComboBox();
         lblLanguage = new Label();
         lblPersistence = new Label();
         cmbPersistence = new ComboBox();
+        btnUserManagement = new Button();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -456,15 +457,15 @@ partial class MainForm
         lblPersonCars.TabIndex = 19;
         lblPersonCars.Text = "Autos de persona";
         // 
-        // btnViewLog
+        // btnLogViewer
         // 
-        btnViewLog.Location = new Point(245, 681);
-        btnViewLog.Name = "btnViewLog";
-        btnViewLog.Size = new Size(75, 56);
-        btnViewLog.TabIndex = 24;
-        btnViewLog.Text = "Ver bitácora";
-        btnViewLog.UseVisualStyleBackColor = true;
-        btnViewLog.Click += ButtonViewLog_Click;
+        btnLogViewer.Location = new Point(254, 682);
+        btnLogViewer.Name = "btnLogViewer";
+        btnLogViewer.Size = new Size(75, 56);
+        btnLogViewer.TabIndex = 24;
+        btnLogViewer.Text = "Ver bitácora";
+        btnLogViewer.UseVisualStyleBackColor = true;
+        btnLogViewer.Click += ButtonViewLog_Click;
         // 
         // cmbLanguages
         // 
@@ -503,17 +504,28 @@ partial class MainForm
         cmbPersistence.TabIndex = 28;
         cmbPersistence.SelectedIndexChanged += ComboBoxPersistence_SelectedIndexChanged;
         // 
+        // btnUserManagement
+        // 
+        btnUserManagement.Location = new Point(945, 426);
+        btnUserManagement.Name = "btnUserManagement";
+        btnUserManagement.Size = new Size(104, 56);
+        btnUserManagement.TabIndex = 29;
+        btnUserManagement.Text = "User Management";
+        btnUserManagement.UseVisualStyleBackColor = true;
+        btnUserManagement.Click += ButtonUserManagement_Click;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(8F, 18F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
         ClientSize = new Size(1156, 791);
+        Controls.Add(btnUserManagement);
         Controls.Add(cmbPersistence);
         Controls.Add(lblPersistence);
         Controls.Add(lblLanguage);
         Controls.Add(cmbLanguages);
-        Controls.Add(btnViewLog);
+        Controls.Add(btnLogViewer);
         Controls.Add(btnDeleteCar);
         Controls.Add(btnSaveCar);
         Controls.Add(txtPrecio);
@@ -609,9 +621,10 @@ partial class MainForm
     internal Label lblQuantity;
     private TextBox txtModelo;
     internal Label lblPersonCars;
-    private Button btnViewLog;
+    private Button btnLogViewer;
     private ComboBox cmbLanguages;
     private Label lblLanguage;
     private Label lblPersistence;
     private ComboBox cmbPersistence;
+    private Button btnUserManagement;
 }

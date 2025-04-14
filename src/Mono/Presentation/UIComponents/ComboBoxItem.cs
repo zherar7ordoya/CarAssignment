@@ -1,6 +1,6 @@
 ﻿using Integrador.Infrastructure.Logging.Shared;
 
-namespace Integrador.Presentation.Views;
+namespace Integrador.Presentation.UIComponents;
 
 // Changed the access modifier of the ComboBoxItem class from private to internal
 internal class ComboBoxItem

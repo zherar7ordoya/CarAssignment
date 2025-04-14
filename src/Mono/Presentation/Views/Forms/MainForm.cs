@@ -1,11 +1,11 @@
 ﻿using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces;
 using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
+using Integrador.Application.State;
 using Integrador.Infrastructure.Configuration;
-using Integrador.Presentation;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 using Integrador.Presentation.Views;
@@ -87,7 +87,8 @@ public partial class MainForm : Form
         lblAssignedCars.Text = Resources.AssignedCars;
 
         lblLanguage.Text = Resources.Language;
-        btnViewLog.Text = Resources.ViewLog;
+        btnLogViewer.Text = Resources.ViewLog;
+        btnUserManagement.Text = Resources.UserManagement;
     }
 
     private void ConfigurePersistence()
@@ -410,10 +411,8 @@ public partial class MainForm : Form
 
     private void ButtonViewLog_Click(object sender, EventArgs e)
     {
-        var visor = AppServices.Get<LogViewerForm>();
-
-        // Open the log viewer in modal mode
-        visor.ShowDialog(this);
+        var child = AppServices.Get<LogViewerForm>();
+        child.ShowDialog(this);
     }
 
     private void ComboBoxLanguages_SelectedIndexChanged(object sender, EventArgs e)
@@ -478,5 +477,11 @@ public partial class MainForm : Form
         {
             Close(); // O Application.Exit();
         }
+    }
+
+    private void ButtonUserManagement_Click(object sender, EventArgs e)
+    {
+        var child = AppServices.Get<UserManagementForm>();
+        child.ShowDialog(this);
     }
 }

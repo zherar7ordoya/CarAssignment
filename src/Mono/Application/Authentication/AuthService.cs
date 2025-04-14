@@ -1,5 +1,6 @@
 ﻿using Integrador.Application.Interfaces;
 using Integrador.Domain.Entities;
+using Integrador.Domain.Enums.Authorization;
 
 using System.Security.Cryptography;
 using System.Text;
@@ -35,4 +36,40 @@ public class AuthService(IUserRepository userRepository) : IAuthService
         var hash = SHA256.HashData(bytes);
         return Convert.ToBase64String(hash);
     }
+
+    public void SaveUser(User user)
+    {
+        if (string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.PasswordHash))
+            throw new ArgumentException("Username and password are required.");
+
+        // Hash solo si es nuevo o cambió
+        var existing = userRepository.GetUserById(user.Id);
+
+        if (existing == null)
+        {
+            user.Id = GenerateNewId();
+            user.PasswordHash = HashPassword(user.PasswordHash);
+            userRepository.AddUser(user);
+        }
+        else
+        {
+            if (user.PasswordHash != existing.PasswordHash)
+                user.PasswordHash = HashPassword(user.PasswordHash);
+
+            userRepository.UpdateUser(user);
+        }
+    }
+
+    public void DeleteUser(int id)
+    {
+        var current = GetCurrentUser();
+        if (current?.Role != Role.Admin)
+            throw new UnauthorizedAccessException("Only admins can delete users.");
+
+        userRepository.DeleteUser(id);
+    }
+
+    private int GenerateNewId() =>
+        userRepository.GetAll().Select(u => u.Id).DefaultIfEmpty(0).Max() + 1;
+
 }

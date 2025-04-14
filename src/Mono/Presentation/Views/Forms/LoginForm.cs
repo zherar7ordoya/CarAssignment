@@ -1,6 +1,7 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Application.State;
 using Integrador.Infrastructure.Configuration;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 

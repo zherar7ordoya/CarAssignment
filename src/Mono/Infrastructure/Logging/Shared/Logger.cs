@@ -1,5 +1,4 @@
-﻿using Integrador.Application.Interfaces.Infrastructure;
-using Integrador.Infrastructure.Interfaces;
+﻿using Integrador.Infrastructure.Interfaces;
 
 using System.Diagnostics;
 

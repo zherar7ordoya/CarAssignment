@@ -340,6 +340,15 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Role.
+        /// </summary>
+        internal static string Role {
+            get {
+                return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entity Save.
         /// </summary>
         internal static string Save {
@@ -394,15 +403,6 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title of Form Viewer.
-        /// </summary>
-        internal static string TitleLog {
-            get {
-                return ResourceManager.GetString("TitleLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Title of Form Login.
         /// </summary>
         internal static string TitleLogin {
@@ -412,11 +412,29 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title of Form Viewer.
+        /// </summary>
+        internal static string TitleLogViewer {
+            get {
+                return ResourceManager.GetString("TitleLogViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title of Form Main.
         /// </summary>
         internal static string TitleMain {
             get {
                 return ResourceManager.GetString("TitleMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Management.
+        /// </summary>
+        internal static string UserManagement {
+            get {
+                return ResourceManager.GetString("UserManagement", resourceCulture);
             }
         }
         

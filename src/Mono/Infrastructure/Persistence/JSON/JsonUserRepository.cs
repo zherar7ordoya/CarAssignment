@@ -3,11 +3,11 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Integrador.Domain.Entities;
 using System.Configuration;
-using Integrador.Domain.Enums;
 using System.Security.Cryptography;
 using Integrador.Application.Interfaces;
+using Integrador.Domain.Enums.Authorization;
 
-namespace Integrador.Application.Authentication;
+namespace Integrador.Infrastructure.Persistence.JSON;
 
 public class JsonUserRepository : IUserRepository
 {
@@ -101,4 +101,41 @@ public class JsonUserRepository : IUserRepository
         var hash = SHA256.HashData(bytes);
         return Convert.ToBase64String(hash);
     }
+
+    public void AddUser(User user)
+    {
+        ArgumentNullException.ThrowIfNull(user);
+        _users.Add(user);
+        SaveChanges();
+    }
+
+    public void UpdateUser(User user)
+    {
+        ArgumentNullException.ThrowIfNull(user);
+        var existingUser = _users.FirstOrDefault(u => u.Id == user.Id);
+
+        if (existingUser != null)
+        {
+            existingUser.Username = user.Username;
+            existingUser.PasswordHash = user.PasswordHash;
+            existingUser.Role = user.Role;
+            SaveChanges();
+        }
+    }
+
+    public User? GetUserById(int id)
+    {
+        return _users.FirstOrDefault(user => user.Id == id);
+    }
+
+    public void DeleteUser(int id)
+    {
+        var user = _users.FirstOrDefault(u => u.Id == id);
+        if (user is not null)
+        {
+            _users.Remove(user);
+            SaveChanges();
+        }
+    }
+
 }

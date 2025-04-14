@@ -1,5 +1,5 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Enums;
+using Integrador.Domain.Enums.Authorization;
 
 namespace Integrador.Application.Authorization;
 

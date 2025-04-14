@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Configuration;
+﻿namespace Integrador.Infrastructure.Configuration;
 
 public static class SystemSettings
 {

@@ -1,9 +1,9 @@
 ﻿using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Application.Interfaces.Infrastructure;
+using Integrador.Infrastructure.Interfaces;
 
-using ILogger = Integrador.Application.Interfaces.Infrastructure.ILogger;
+using ILogger = Integrador.Infrastructure.Interfaces.ILogger;
 
-namespace Integrador.Application.Exceptions;
+namespace Integrador.Infrastructure.Exceptions;
 
 public class ExceptionHandler
 (

@@ -1,5 +1,4 @@
-﻿using Integrador.Application.Exceptions;
-using Integrador.Application.Services;
+﻿using Integrador.Application.Services;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Messaging;
 using Integrador.Infrastructure.Persistence.SQLite.Mappers;
@@ -10,13 +9,11 @@ using Integrador.Application.Interfaces.Services;
 using Integrador.Application.Interfaces.Utilities;
 using Integrador.Infrastructure.Persistence.LiteDB.Context;
 using Integrador.Infrastructure.Persistence.LiteDB.Repository;
-using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Infrastructure.Persistence.SQLite.Context;
 using Integrador.Infrastructure.Persistence.XML.Context;
 using Integrador.Infrastructure.Persistence.XML.Repository;
 using Integrador.Infrastructure.Persistence.SQLite.Repository;
-using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Integrador.Presentation.Views;
@@ -28,6 +25,8 @@ using Integrador.Application.Interfaces;
 using Integrador.Application.Authentication;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Interfaces.Persistence;
+using Integrador.Infrastructure.Persistence.JSON;
+using Integrador.Infrastructure.Exceptions;
 
 namespace Integrador.Presentation.Composition;
 
@@ -93,7 +92,7 @@ public static class DependencyInjection
         services.AddSingleton<ILogger, Logger>();
 
         services.AddTransient<LogViewerForm>();
-
+        services.AddTransient<UserManagementForm>();
 
         services.AddTransient<IAssignmentService, AssignmentService>();
         services.AddTransient<ICarService, CarService>();

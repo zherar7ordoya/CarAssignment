@@ -180,7 +180,7 @@
   <data name="TitleMain" xml:space="preserve">
     <value>Gestor de asignación de autos</value>
   </data>
-  <data name="TitleLog" xml:space="preserve">
+  <data name="TitleLogViewer" xml:space="preserve">
     <value>Bitácora</value>
   </data>
   <data name="Information" xml:space="preserve">
@@ -248,5 +248,11 @@
   </data>
   <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>Gestión de usuarios</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rol</value>
   </data>
 </root>

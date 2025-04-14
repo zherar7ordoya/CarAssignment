@@ -1,6 +1,6 @@
 ﻿using Integrador.Domain.Entities;
 
-namespace Integrador.Presentation;
+namespace Integrador.Application.State;
 
 public static class Session
 {
