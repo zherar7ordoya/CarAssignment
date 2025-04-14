@@ -1,6 +1,6 @@
 ﻿using Integrador.Domain.Interfaces;
 
-namespace Integrador.Application.Interfaces.Persistence;
+namespace Integrador.Infrastructure.Interfaces.Persistence;
 
 public interface IXmlContext<T> where T : IEntity
 {

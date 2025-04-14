@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using LiteDB;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Interfaces.Persistence;
 
 namespace Integrador.Infrastructure.Persistence.LiteDB.Context;
 

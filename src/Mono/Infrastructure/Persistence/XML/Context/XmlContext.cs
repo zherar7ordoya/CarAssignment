@@ -2,8 +2,8 @@
 using System.Xml.Serialization;
 
 using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Interfaces.Persistence;
 
 namespace Integrador.Infrastructure.Persistence.XML.Context;
 

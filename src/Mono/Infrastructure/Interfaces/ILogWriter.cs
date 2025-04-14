@@ -1,6 +1,6 @@
 ﻿using Integrador.Infrastructure.Logging.Shared;
 
-namespace Integrador.Infrastructure.Logging;
+namespace Integrador.Infrastructure.Interfaces;
 
 public interface ILogWriter
 {

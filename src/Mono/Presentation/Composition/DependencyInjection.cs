@@ -1,13 +1,11 @@
 ﻿using Integrador.Application.Exceptions;
 using Integrador.Application.Services;
 using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Logging;
 using Integrador.Infrastructure.Messaging;
 using Integrador.Infrastructure.Persistence.SQLite.Mappers;
 using Integrador.Presentation.Factories;
 using Integrador.Presentation.Presenters;
 using Integrador.Infrastructure.Persistence.SQLite.Records;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Application.Interfaces.Services;
 using Integrador.Application.Interfaces.Utilities;
 using Integrador.Infrastructure.Persistence.LiteDB.Context;
@@ -25,6 +23,12 @@ using Integrador.Presentation.Views;
 using Integrador.Infrastructure.Logging.LiteDB;
 using Integrador.Infrastructure.Logging.Shared;
 using Integrador.Application.Interfaces.Exceptions;
+using Integrador.Infrastructure.Logging.JSON;
+using Integrador.Application.Authorization;
+using Integrador.Application.Interfaces;
+using Integrador.Application.Authentication;
+using Integrador.Infrastructure.Interfaces;
+using Integrador.Infrastructure.Interfaces.Persistence;
 
 namespace Integrador.Presentation.Composition;
 
@@ -78,11 +82,15 @@ public static class DependencyInjection
 
     private static void RegisterCoreServices(IServiceCollection services)
     {
+        services.AddSingleton<IUserRepository, JsonUserRepository>();
+        services.AddSingleton<IAuthService, AuthService>();
+        services.AddSingleton<IPermissionService, PermissionService>();
+
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
         services.AddSingleton<IMessenger, Messenger>();
 
-        services.AddSingleton<ILogWriter, LiteDbLogWriter>();
-        services.AddSingleton<ILogReader, LiteDbLogReader>();
+        services.AddSingleton<ILogWriter, JsonLogWriter>();
+        services.AddSingleton<ILogReader, JsonLogReader>();
         services.AddSingleton<ILogger, Logger>();
 
         services.AddTransient<LogViewerForm>();

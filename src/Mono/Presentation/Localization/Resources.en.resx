@@ -216,4 +216,25 @@
   <data name="Select" xml:space="preserve">
     <value>Select filter criteria:</value>
   </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack Trace</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="ViewLog" xml:space="preserve">
+    <value>Log Viewer</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Persistence" xml:space="preserve">
+    <value>Persistence</value>
+  </data>
 </root>

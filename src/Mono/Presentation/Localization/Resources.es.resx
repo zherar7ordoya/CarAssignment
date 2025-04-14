@@ -216,4 +216,25 @@
   <data name="Select" xml:space="preserve">
     <value>Seleccione criterios de filtrado:</value>
   </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Marca de tiempo</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Seguimiento</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Fuente</value>
+  </data>
+  <data name="ViewLog" xml:space="preserve">
+    <value>Consultar bitácora</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Persistence" xml:space="preserve">
+    <value>Persistencia</value>
+  </data>
 </root>

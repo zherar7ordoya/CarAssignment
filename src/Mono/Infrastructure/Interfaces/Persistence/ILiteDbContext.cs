@@ -2,7 +2,7 @@
 
 using LiteDB;
 
-namespace Integrador.Application.Interfaces.Persistence;
+namespace Integrador.Infrastructure.Interfaces.Persistence;
 
 public interface ILiteDbContext<T> where T : IEntity
 {

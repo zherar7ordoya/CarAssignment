@@ -1,7 +1,7 @@
 ﻿using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Infrastructure;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Interfaces;
+using Integrador.Infrastructure.Interfaces.Persistence;
 
 using System.Reflection;
 

@@ -1,12 +1,13 @@
 ﻿using System.Configuration;
 
-namespace Integrador;
+namespace Integrador.Infrastructure.Configuration;
 
 public static class AppConfigWriter
 {
     public static void SetSetting(string key, string value)
     {
         var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
         if (config.AppSettings.Settings[key] == null)
         {
             config.AppSettings.Settings.Add(key, value);

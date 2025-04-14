@@ -1,4 +1,4 @@
-﻿using Integrador.Application.Interfaces.Persistence;
+﻿using Integrador.Infrastructure.Interfaces.Persistence;
 
 using Microsoft.Data.Sqlite;
 

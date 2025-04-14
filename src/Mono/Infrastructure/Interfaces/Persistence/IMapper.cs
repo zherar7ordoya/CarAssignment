@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces.Persistence;
+﻿namespace Integrador.Infrastructure.Interfaces.Persistence;
 
 public interface IMapper<TDomain, TStorage>
 {

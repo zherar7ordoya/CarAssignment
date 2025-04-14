@@ -196,6 +196,15 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Person Last Name.
         /// </summary>
         internal static string LastName {
@@ -223,6 +232,15 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car Model.
         /// </summary>
         internal static string Model {
@@ -237,6 +255,15 @@ namespace Integrador.Presentation.Localization {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Persistence {
+            get {
+                return ResourceManager.GetString("Persistence", resourceCulture);
             }
         }
         
@@ -313,11 +340,38 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Source {
+            get {
+                return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string StackTrace {
+            get {
+                return ResourceManager.GetString("StackTrace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter Text.
         /// </summary>
         internal static string Text {
             get {
                 return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
             }
         }
         
@@ -336,6 +390,15 @@ namespace Integrador.Presentation.Localization {
         internal static string TitleMain {
             get {
                 return ResourceManager.GetString("TitleMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ViewLog {
+            get {
+                return ResourceManager.GetString("ViewLog", resourceCulture);
             }
         }
         

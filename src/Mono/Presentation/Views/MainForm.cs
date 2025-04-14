@@ -1,9 +1,11 @@
 ﻿using Integrador.Application.DTOs;
+using Integrador.Application.Interfaces;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
 using Integrador.Infrastructure.Configuration;
+using Integrador.Presentation;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 using Integrador.Presentation.Views;
@@ -20,7 +22,8 @@ public partial class MainForm : Form
         ICarFactory carFactory,
         IPersonFactory personFactory,
         IViewPresenter viewPresenter,
-        IExceptionHandler exceptionHandler
+        IExceptionHandler exceptionHandler,
+        IPermissionService permissionService
     )
     {
         _messenger = messenger;
@@ -28,11 +31,13 @@ public partial class MainForm : Form
         _personFactory = personFactory;
         _viewPresenter = viewPresenter;
         _exceptionHandler = exceptionHandler;
+        _permissionService = permissionService;
 
         try
         {
             InitializeComponent();
             ConfigureCulture();
+            ConfigurePersistence();
             ConfigureBindings();
             LoadData();
 
@@ -83,6 +88,20 @@ public partial class MainForm : Form
         btnDeleteCar.Text = Resources.Delete;
 
         lblAssignedCars.Text = Resources.AssignedCars;
+
+        lblLanguage.Text = Resources.Language;
+        btnViewLog.Text = Resources.ViewLog;
+    }
+
+    private void ConfigurePersistence()
+    {
+        var options = new List<string> { "XML", "SQLite", "LiteDB" };
+        cmbPersistence.DataSource = options;
+
+        string persistence = AppConfigReader.GetSetting("PersistenceTechnology") ?? "XML";
+        cmbPersistence.SelectedItem = persistence;
+
+        _isInitializing = false;
     }
 
     private readonly IMessenger _messenger;
@@ -90,6 +109,9 @@ public partial class MainForm : Form
     private readonly IPersonFactory _personFactory;
     private readonly IViewPresenter _viewPresenter;
     private readonly IExceptionHandler _exceptionHandler;
+    private readonly IPermissionService _permissionService;
+
+    private bool _isInitializing = true;
 
     private readonly BindingSource _persons = [];
     private readonly BindingSource _personCars = [];
@@ -392,7 +414,9 @@ public partial class MainForm : Form
     private void ButtonViewLog_Click(object sender, EventArgs e)
     {
         var visor = AppServices.Get<LogViewerForm>();
-        visor.Show();
+
+        // Open the log viewer in modal mode
+        visor.ShowDialog(this);
     }
 
     private void ComboBoxLanguages_SelectedIndexChanged(object sender, EventArgs e)
@@ -415,5 +439,47 @@ public partial class MainForm : Form
         // Actualizar los controles
         ApplyLocalization();
         ConfigureDataGridView();
+    }
+
+    private void ComboBoxPersistence_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (_isInitializing) return; // Evitar el evento al cargar el formulario
+
+        string selected = cmbPersistence.SelectedItem?.ToString() ?? "XML";
+        AppConfigWriter.SetSetting("PersistenceTechnology", selected);
+
+        var result = _messenger.ShowQuestion
+       (
+           "The change in persistence requires restarting the application.\n" +
+           "Do you want to restart now?", "Restart Required"
+       );
+
+        if (result)
+        {
+            System.Windows.Forms.Application.Restart(); // Use the correct namespace for Application.Restart  
+        }
+    }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+        //base.OnLoad(e);
+        this.Enabled = false;
+
+        using var loginForm = new LoginForm();
+
+        if (loginForm.ShowDialog() == DialogResult.OK && Session.IsAuthenticated)
+        {
+            this.Enabled = true;
+            // Si querés mostrar en status bar: Session.CurrentUser.Username
+            if (!_permissionService.CanDeleteEntities())
+            {
+                btnDeleteCar.Enabled = false;
+                btnDeletePerson.Enabled = false;
+            }
+        }
+        else
+        {
+            Close(); // O Application.Exit();
+        }
     }
 }

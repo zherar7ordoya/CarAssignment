@@ -1,4 +1,5 @@
-﻿using Integrador.Infrastructure.Logging.Shared;
+﻿using Integrador.Infrastructure.Interfaces;
+using Integrador.Infrastructure.Logging.Shared;
 
 using LiteDB;
 
@@ -13,6 +14,7 @@ public class LiteDbLogWriter : ILogWriter
     public LiteDbLogWriter()
     {
         var connectionStringSetting = ConfigurationManager.ConnectionStrings["LiteDbLogConnection"];
+
         if (connectionStringSetting == null || string.IsNullOrWhiteSpace(connectionStringSetting.ConnectionString))
         {
             throw new InvalidOperationException("String connection (LiteDbLogConnection) missing in App.config.");
@@ -28,4 +30,3 @@ public class LiteDbLogWriter : ILogWriter
         col.Insert(entry);
     }
 }
-

@@ -1,4 +1,5 @@
-﻿using Integrador.Infrastructure.Logging.Shared;
+﻿using Integrador.Infrastructure.Interfaces;
+using Integrador.Infrastructure.Logging.Shared;
 
 using LiteDB;
 

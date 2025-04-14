@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace Integrador.Application.Interfaces.Persistence;
+namespace Integrador.Infrastructure.Interfaces.Persistence;
 
 public interface ISQLiteContext<T>
 {

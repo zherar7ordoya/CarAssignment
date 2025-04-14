@@ -1,7 +1,7 @@
 ﻿using Integrador.Application.Interfaces.Infrastructure;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Application.Interfaces.Services;
 using Integrador.Domain.Entities;
+using Integrador.Infrastructure.Interfaces.Persistence;
 
 namespace Integrador.Application.Services
 {

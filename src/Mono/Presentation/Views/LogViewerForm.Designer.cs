@@ -52,7 +52,7 @@
             // 
             // txtText
             // 
-            txtText.Location = new Point(410, 318);
+            txtText.Location = new Point(346, 235);
             txtText.Margin = new Padding(4);
             txtText.Name = "txtText";
             txtText.Size = new Size(113, 25);
@@ -62,26 +62,26 @@
             // cmbLevel
             // 
             cmbLevel.FormattingEnabled = true;
-            cmbLevel.Location = new Point(410, 370);
+            cmbLevel.Location = new Point(573, 234);
             cmbLevel.Margin = new Padding(4);
             cmbLevel.Name = "cmbLevel";
-            cmbLevel.Size = new Size(137, 26);
+            cmbLevel.Size = new Size(113, 26);
             cmbLevel.TabIndex = 2;
             cmbLevel.SelectedIndexChanged += ComboBoxLevel_SelectedIndexChanged;
             // 
             // dtpDate
             // 
             dtpDate.Format = DateTimePickerFormat.Short;
-            dtpDate.Location = new Point(410, 415);
+            dtpDate.Location = new Point(789, 232);
             dtpDate.Margin = new Padding(4);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(228, 25);
+            dtpDate.Size = new Size(113, 25);
             dtpDate.TabIndex = 3;
             dtpDate.ValueChanged += DateTimePickerDate_ValueChanged;
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(386, 486);
+            btnFilter.Location = new Point(404, 296);
             btnFilter.Margin = new Padding(4);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(85, 27);
@@ -93,7 +93,7 @@
             // 
             lblSelect.AutoSize = true;
             lblSelect.Font = new Font("Calibri", 13F, FontStyle.Bold);
-            lblSelect.Location = new Point(28, 343);
+            lblSelect.Location = new Point(13, 233);
             lblSelect.Margin = new Padding(4, 0, 4, 0);
             lblSelect.Name = "lblSelect";
             lblSelect.Size = new Size(241, 22);
@@ -103,7 +103,7 @@
             // lblText
             // 
             lblText.AutoSize = true;
-            lblText.Location = new Point(280, 321);
+            lblText.Location = new Point(297, 238);
             lblText.Name = "lblText";
             lblText.Size = new Size(42, 18);
             lblText.TabIndex = 6;
@@ -112,7 +112,7 @@
             // lblLevel
             // 
             lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(304, 372);
+            lblLevel.Location = new Point(525, 237);
             lblLevel.Name = "lblLevel";
             lblLevel.Size = new Size(41, 18);
             lblLevel.TabIndex = 7;
@@ -121,7 +121,7 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(319, 421);
+            lblDate.Location = new Point(738, 237);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(44, 18);
             lblDate.TabIndex = 8;
@@ -131,7 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(915, 540);
+            ClientSize = new Size(915, 348);
             Controls.Add(lblDate);
             Controls.Add(lblLevel);
             Controls.Add(lblText);

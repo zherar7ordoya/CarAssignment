@@ -1,5 +1,5 @@
 ﻿using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Infrastructure.Logging;
+using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Logging.Shared;
 using Integrador.Presentation.Localization;
 
@@ -40,12 +40,12 @@ public partial class LogViewerForm : Form
     {
         cmbLevel.Items.Clear();
 
-        cmbLevel.Items.Add(Resources.All);
-        cmbLevel.Items.Add(Resources.Information);
-        cmbLevel.Items.Add(Resources.Warning);
-        cmbLevel.Items.Add(Resources.Error);
-        cmbLevel.Items.Add(Resources.Critical);
-        cmbLevel.Items.Add(Resources.Debug);
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.All, Value = null });
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.Information, Value = LogLevel.Information });
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.Warning, Value = LogLevel.Warning });
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.Error, Value = LogLevel.Error });
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.Critical, Value = LogLevel.Critical });
+        cmbLevel.Items.Add(new ComboBoxItem { Text = Resources.Debug, Value = LogLevel.Debug });
 
         cmbLevel.SelectedIndex = 0;
     }
@@ -65,14 +65,16 @@ public partial class LogViewerForm : Form
 
     private void ApplyFilters()
     {
+        var selectedItem = cmbLevel.SelectedItem as ComboBoxItem;
+
         var text = txtText.Text?.ToLower() ?? "";
-        var level = cmbLevel.SelectedItem?.ToString();
+        var level = selectedItem?.Value;
         var date = dtpDate.Value.Date;
 
         var filtered = _logEntries
         .Where(log =>
             // Nivel
-            (level == Resources.All || log.Level.ToString() == level) &&
+            (level == null || log.Level == level) &&
 
             // Texto en el mensaje
             (string.IsNullOrEmpty(text) || log.Message.Contains(text, StringComparison.CurrentCultureIgnoreCase)) &&
@@ -83,6 +85,12 @@ public partial class LogViewerForm : Form
         .ToList();
 
         dgvLogEntries.DataSource = filtered;
+
+        dgvLogEntries.Columns[0].HeaderText = Resources.Timestamp;
+        dgvLogEntries.Columns[1].HeaderText = Resources.Level;
+        dgvLogEntries.Columns[2].HeaderText = Resources.Message;
+        dgvLogEntries.Columns[3].HeaderText = Resources.StackTrace;
+        dgvLogEntries.Columns[4].HeaderText = Resources.Source;
     }
 
 

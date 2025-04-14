@@ -70,7 +70,9 @@ partial class MainForm
         lblPersonCars = new Label();
         btnViewLog = new Button();
         cmbLanguages = new ComboBox();
-        lblLanguages = new Label();
+        lblLanguage = new Label();
+        lblPersistence = new Label();
+        cmbPersistence = new ComboBox();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -456,9 +458,9 @@ partial class MainForm
         // 
         // btnViewLog
         // 
-        btnViewLog.Location = new Point(104, 708);
+        btnViewLog.Location = new Point(245, 681);
         btnViewLog.Name = "btnViewLog";
-        btnViewLog.Size = new Size(75, 23);
+        btnViewLog.Size = new Size(75, 56);
         btnViewLog.TabIndex = 24;
         btnViewLog.Text = "Ver bitácora";
         btnViewLog.UseVisualStyleBackColor = true;
@@ -474,14 +476,32 @@ partial class MainForm
         cmbLanguages.TabIndex = 25;
         cmbLanguages.SelectedIndexChanged += ComboBoxLanguages_SelectedIndexChanged;
         // 
-        // lblLanguages
+        // lblLanguage
         // 
-        lblLanguages.AutoSize = true;
-        lblLanguages.Location = new Point(17, 672);
-        lblLanguages.Name = "lblLanguages";
-        lblLanguages.Size = new Size(51, 18);
-        lblLanguages.TabIndex = 26;
-        lblLanguages.Text = "Idioma";
+        lblLanguage.AutoSize = true;
+        lblLanguage.Location = new Point(17, 672);
+        lblLanguage.Name = "lblLanguage";
+        lblLanguage.Size = new Size(51, 18);
+        lblLanguage.TabIndex = 26;
+        lblLanguage.Text = "Idioma";
+        // 
+        // lblPersistence
+        // 
+        lblPersistence.AutoSize = true;
+        lblPersistence.Location = new Point(17, 729);
+        lblPersistence.Name = "lblPersistence";
+        lblPersistence.Size = new Size(83, 18);
+        lblPersistence.TabIndex = 27;
+        lblPersistence.Text = "Persistencia";
+        // 
+        // cmbPersistence
+        // 
+        cmbPersistence.FormattingEnabled = true;
+        cmbPersistence.Location = new Point(107, 726);
+        cmbPersistence.Name = "cmbPersistence";
+        cmbPersistence.Size = new Size(121, 26);
+        cmbPersistence.TabIndex = 28;
+        cmbPersistence.SelectedIndexChanged += ComboBoxPersistence_SelectedIndexChanged;
         // 
         // MainForm
         // 
@@ -489,7 +509,9 @@ partial class MainForm
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
         ClientSize = new Size(1156, 791);
-        Controls.Add(lblLanguages);
+        Controls.Add(cmbPersistence);
+        Controls.Add(lblPersistence);
+        Controls.Add(lblLanguage);
         Controls.Add(cmbLanguages);
         Controls.Add(btnViewLog);
         Controls.Add(btnDeleteCar);
@@ -537,7 +559,8 @@ partial class MainForm
         MaximizeBox = false;
         Name = "MainForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Integrador";
+        Text = "MainForm";
+        Load += MainForm_Load;
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).EndInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).EndInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).EndInit();
@@ -588,5 +611,7 @@ partial class MainForm
     internal Label lblPersonCars;
     private Button btnViewLog;
     private ComboBox cmbLanguages;
-    private Label lblLanguages;
+    private Label lblLanguage;
+    private Label lblPersistence;
+    private ComboBox cmbPersistence;
 }

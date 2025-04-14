@@ -1,5 +1,5 @@
-﻿using Integrador.Application.Interfaces.Persistence;
-using Integrador.Domain.Entities;
+﻿using Integrador.Domain.Entities;
+using Integrador.Infrastructure.Interfaces.Persistence;
 using Integrador.Infrastructure.Persistence.SQLite.Records;
 
 namespace Integrador.Infrastructure.Persistence.SQLite.Mappers;
