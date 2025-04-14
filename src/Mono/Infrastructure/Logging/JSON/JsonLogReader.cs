@@ -9,32 +9,44 @@ namespace Integrador.Infrastructure.Logging.JSON;
 
 public class JsonLogReader : ILogReader
 {
-    private readonly string _logFilePath;
+    private readonly string _filePath;
+    private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new() { WriteIndented = true };
 
     public JsonLogReader()
     {
         var pathFromConfig = ConfigurationManager.AppSettings["JsonLogPath"];
-        _logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "LogEntry.json");
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "LogEntry.json");
+        EnsureFolderExists();
+    }
+
+    private void EnsureFolderExists()
+    {
+        var folderPath = Path.GetDirectoryName(_filePath);
+
+        if (folderPath != null && !Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 
     public IEnumerable<LogEntry> Read()
     {
         try
         {
-            if (!File.Exists(_logFilePath))
+            if (!File.Exists(_filePath))
             {
                 InitializeWithWelcomeLog();
             }
 
-            string json = File.ReadAllText(_logFilePath);
-            var logs = JsonSerializer.Deserialize<List<LogEntry>>(json) ?? new List<LogEntry>();
+            string json = File.ReadAllText(_filePath);
+            var logs = JsonSerializer.Deserialize<List<LogEntry>>(json) ?? [];
 
-            return logs.OrderByDescending(e => e.Timestamp).ToList();
+            return [.. logs.OrderByDescending(e => e.Timestamp)];
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error reading JSON logs: {ex.Message}");
-            return new List<LogEntry>();
+            return [];
         }
     }
 
@@ -42,7 +54,7 @@ public class JsonLogReader : ILogReader
     {
         var welcomeLog = new List<LogEntry>
         {
-            new LogEntry
+            new()
             {
                 Timestamp = DateTime.Now,
                 Level = LogLevel.Information,
@@ -50,8 +62,8 @@ public class JsonLogReader : ILogReader
             }
         };
 
-        string json = JsonSerializer.Serialize(welcomeLog, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(_logFilePath, json);
+        string json = JsonSerializer.Serialize(welcomeLog, CachedJsonSerializerOptions);
+        File.WriteAllText(_filePath, json);
     }
 }
 

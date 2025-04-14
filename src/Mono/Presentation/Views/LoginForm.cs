@@ -1,15 +1,16 @@
 ﻿using Integrador.Application.Interfaces;
+using Integrador.Application.Interfaces.Infrastructure;
 using Integrador.Infrastructure.Configuration;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 
 using System.Globalization;
-using System.Resources;
 
 namespace Integrador.Presentation.Views
 {
     public partial class LoginForm : Form
     {
+        private readonly ILogger _logger = AppServices.Get<ILogger>();
         public LoginForm()
         {
             InitializeComponent();
@@ -38,7 +39,9 @@ namespace Integrador.Presentation.Views
 
             if (authService.Login(txtUsername.Text, txtPassword.Text))
             {
-                Session.CurrentUser = authService.GetCurrentUser();
+                var user = authService.GetCurrentUser();
+                Session.CurrentUser = user;
+                _logger.LogInformation($"User {user?.Username} logged in successfully.");
                 DialogResult = DialogResult.OK;
                 Close();
             }

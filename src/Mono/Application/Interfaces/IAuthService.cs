@@ -6,4 +6,5 @@ public interface IAuthService
 {
     bool Login(string username, string password);
     User? GetCurrentUser();
+    List<User> GetAllUsers();
 }

@@ -9,12 +9,24 @@ namespace Integrador.Infrastructure.Logging.JSON;
 
 public class JsonLogWriter : ILogWriter
 {
-    private readonly string _logFilePath;
+    private readonly string _filePath;
+    private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new() { WriteIndented = true };
 
     public JsonLogWriter()
     {
         var pathFromConfig = ConfigurationManager.AppSettings["JsonLogPath"];
-        _logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "LogEntry.json");
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "LogEntry.json");
+        EnsureFolderExists();
+    }
+
+    private void EnsureFolderExists()
+    {
+        var folderPath = Path.GetDirectoryName(_filePath);
+
+        if (folderPath != null && !Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 
     public void Write(LogEntry entry)
@@ -23,20 +35,20 @@ public class JsonLogWriter : ILogWriter
         {
             List<LogEntry> logs;
 
-            if (File.Exists(_logFilePath))
+            if (File.Exists(_filePath))
             {
-                string json = File.ReadAllText(_logFilePath);
-                logs = JsonSerializer.Deserialize<List<LogEntry>>(json) ?? new List<LogEntry>();
+                string json = File.ReadAllText(_filePath);
+                logs = JsonSerializer.Deserialize<List<LogEntry>>(json) ?? [];
             }
             else
             {
-                logs = new List<LogEntry>();
+                logs = [];
             }
 
             logs.Add(entry);
 
-            string updatedJson = JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(_logFilePath, updatedJson);
+            string updatedJson = JsonSerializer.Serialize(logs, CachedJsonSerializerOptions);
+            File.WriteAllText(_filePath, updatedJson);
         }
         catch (Exception ex)
         {

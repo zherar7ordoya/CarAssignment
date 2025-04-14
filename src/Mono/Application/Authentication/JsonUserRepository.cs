@@ -18,8 +18,19 @@ public class JsonUserRepository : IUserRepository
     {
         var pathFromConfig = ConfigurationManager.AppSettings["JsonUserPath"];
         _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "User.json");
+        EnsureFolderExists();
         LoadUsers();
         SeedDefaultUsers();
+    }
+
+    private void EnsureFolderExists()
+    {
+        var folderPath = Path.GetDirectoryName(_filePath);
+
+        if (folderPath != null && !Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()

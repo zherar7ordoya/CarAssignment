@@ -13,7 +13,7 @@ public class LiteDbContext<T>() : ILiteDbContext<T> where T : IEntity
 
     public LiteDatabase GetDatabase()
     {
-        EnsureDatabaseExists();
+        EnsureFileExists();
         return new LiteDatabase(_connectionString);
     }
 
@@ -33,7 +33,7 @@ public class LiteDbContext<T>() : ILiteDbContext<T> where T : IEntity
         return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _connectionString);
     }
 
-    private static void EnsureDatabaseExists()
+    private static void EnsureFileExists()
     {
         var fullPath = GetDatabasePath();
         if (!File.Exists(fullPath))

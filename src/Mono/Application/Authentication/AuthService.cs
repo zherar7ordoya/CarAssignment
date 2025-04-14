@@ -24,6 +24,11 @@ public class AuthService(IUserRepository userRepository) : IAuthService
 
     public User? GetCurrentUser() => _currentUser;
 
+    public List<User> GetAllUsers()
+    {
+        return [.. userRepository.GetAll()];
+    }
+
     private static string HashPassword(string password)
     {
         var bytes = Encoding.UTF8.GetBytes(password);

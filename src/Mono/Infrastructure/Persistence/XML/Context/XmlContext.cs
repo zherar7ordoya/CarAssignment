@@ -13,11 +13,11 @@ public class XmlContext<T>(IExceptionHandler exceptionHandler)
     private static readonly string _directory = "LocalData";
     private readonly string _filePath = Path.Combine
                                         (
-                                            EnsureDirectory(_directory),
+                                            EnsureDirectoryExists(_directory),
                                             $"{typeof(T).Name}.xml"
                                         );
 
-    private static string EnsureDirectory(string directory)
+    private static string EnsureDirectoryExists(string directory)
     {
         string fullPath = Path.Combine(Environment.CurrentDirectory, directory);
         if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
