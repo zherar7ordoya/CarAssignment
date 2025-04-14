@@ -196,7 +196,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Select Language.
         /// </summary>
         internal static string Language {
             get {
@@ -232,7 +232,16 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Message.
         /// </summary>
         internal static string Message {
             get {
@@ -259,7 +268,16 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to User Password.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Persistence.
         /// </summary>
         internal static string Persistence {
             get {
@@ -340,7 +358,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Log Source.
         /// </summary>
         internal static string Source {
             get {
@@ -349,7 +367,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Log Stack Trace.
         /// </summary>
         internal static string StackTrace {
             get {
@@ -367,7 +385,7 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Log Timestamp.
         /// </summary>
         internal static string Timestamp {
             get {
@@ -385,6 +403,15 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title of Form Login.
+        /// </summary>
+        internal static string TitleLogin {
+            get {
+                return ResourceManager.GetString("TitleLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title of Form Main.
         /// </summary>
         internal static string TitleMain {
@@ -394,7 +421,16 @@ namespace Integrador.Presentation.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to User Username.
+        /// </summary>
+        internal static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Log.
         /// </summary>
         internal static string ViewLog {
             get {

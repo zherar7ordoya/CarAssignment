@@ -20,7 +20,6 @@ using Integrador.Application.Configuration;
 using Integrador.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Integrador.Presentation.Views;
-using Integrador.Infrastructure.Logging.LiteDB;
 using Integrador.Infrastructure.Logging.Shared;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Infrastructure.Logging.JSON;

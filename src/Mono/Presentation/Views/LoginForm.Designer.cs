@@ -79,6 +79,7 @@
             // 
             // LoginForm
             // 
+            AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(228, 146);
@@ -92,6 +93,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             ResumeLayout(false);
             PerformLayout();

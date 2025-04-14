@@ -52,9 +52,6 @@ public partial class MainForm : Form
     private void ConfigureCulture()
     {
         var culture = AppConfigReader.GetSetting("DefaultCulture") ?? "es";
-        Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-
         if (culture == "es") cmbLanguages.SelectedIndex = 0; // Español
         else if (culture == "en") cmbLanguages.SelectedIndex = 1; // Inglés
         else cmbLanguages.SelectedIndex = 0; // Predeterminado a Español

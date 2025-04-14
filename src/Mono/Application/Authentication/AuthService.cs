@@ -1,29 +1,18 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Application.Interfaces.Persistence;
 using Integrador.Domain.Entities;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Integrador.Application.Authentication;
 
-public class AuthService : IAuthService
+public class AuthService(IUserRepository userRepository) : IAuthService
 {
-    private readonly IUserRepository _userRepository;
     private User? _currentUser;
-
-    public AuthService(IUserRepository userRepository)
-    {
-        _userRepository = userRepository;
-    }
 
     public bool Login(string username, string password)
     {
-        var user = _userRepository.GetAll().FirstOrDefault(u => u.Username == username);
+        var user = userRepository.GetAll().FirstOrDefault(u => u.Username == username);
         if (user is null) return false;
 
         var inputPasswordHash = HashPassword(password);

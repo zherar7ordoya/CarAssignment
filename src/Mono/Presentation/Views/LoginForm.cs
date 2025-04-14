@@ -1,15 +1,10 @@
 ﻿using Integrador.Application.Interfaces;
+using Integrador.Infrastructure.Configuration;
 using Integrador.Presentation.Composition;
+using Integrador.Presentation.Localization;
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Globalization;
+using System.Resources;
 
 namespace Integrador.Presentation.Views
 {
@@ -18,6 +13,23 @@ namespace Integrador.Presentation.Views
         public LoginForm()
         {
             InitializeComponent();
+            ConfigureCulture();
+            ApplyLocalization();
+        }
+
+        private static void ConfigureCulture()
+        {
+            var culture = AppConfigReader.GetSetting("DefaultCulture") ?? "es";
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+        }
+
+        private void ApplyLocalization()
+        {
+            this.Text = Resources.TitleLogin;
+            lblUsername.Text = Resources.Username;
+            lblPassword.Text = Resources.Password;
+            btnLogin.Text = Resources.Login;
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)

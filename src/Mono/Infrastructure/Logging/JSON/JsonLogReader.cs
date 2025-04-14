@@ -1,14 +1,9 @@
 ﻿using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Logging.Shared;
 
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Integrador.Infrastructure.Logging.JSON;
 
