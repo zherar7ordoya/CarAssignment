@@ -1,4 +1,4 @@
-﻿using Integrador.Domain.Entities;
+﻿using Integrador.Application.Authorization;
 
 namespace Integrador.Application.Interfaces;
 

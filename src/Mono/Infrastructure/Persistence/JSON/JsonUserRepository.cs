@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
-using Integrador.Domain.Entities;
 using System.Configuration;
 using System.Security.Cryptography;
 using Integrador.Application.Interfaces;
 using Integrador.Domain.Enums.Authorization;
+using Integrador.Application.Authorization;
 
 namespace Integrador.Infrastructure.Persistence.JSON;
 

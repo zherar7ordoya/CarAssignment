@@ -1,7 +1,7 @@
-﻿using Integrador.Application.Authorization;
+﻿using Integrador.Domain.Entities;
 using Integrador.Domain.Enums.Authorization;
 
-namespace Integrador.Domain.Entities;
+namespace Integrador.Application.Authorization;
 
 public class User : EntityBase
 {
@@ -9,8 +9,8 @@ public class User : EntityBase
     public string PasswordHash { get; set; } = default!;
 
     // Referencias a los nombres de roles, que luego se resuelven
-    public List<string> RoleNames { get; set; } = new();
+    public List<string> RoleNames { get; set; } = [];
 
     // Permisos especiales fuera de rol
-    public List<Permission> SpecialPermissions { get; set; } = new();
+    public List<Permission> SpecialPermissions { get; set; } = [];
 }

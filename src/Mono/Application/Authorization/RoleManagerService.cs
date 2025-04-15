@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Integrador.Application.Authorization;
 
-public class PermissionManagerService
+public class RoleManagerService
 (
     IUserRepository userRepository,
     IRoleRepository roleRepository
-) : IPermissionManagerService
+) : IRoleManagerService
 {
     public void CreateRole(string roleName)
     {
@@ -138,4 +138,3 @@ public class PermissionManagerService
         return [.. permissions];
     }
 }
-

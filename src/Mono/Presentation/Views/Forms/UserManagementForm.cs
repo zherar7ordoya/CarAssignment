@@ -1,5 +1,5 @@
-﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
+﻿using Integrador.Application.Authorization;
+using Integrador.Application.Interfaces;
 using Integrador.Domain.Enums.Authorization;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;

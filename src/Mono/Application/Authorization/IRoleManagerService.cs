@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Integrador.Application.Authorization;
 
-public interface IPermissionManagerService
+public interface IRoleManagerService
 {
     void CreateRole(string roleName);
     void DeleteRole(string roleName);

@@ -35,7 +35,7 @@ public class JsonLogReader : ILogReader
         {
             if (!File.Exists(_filePath))
             {
-                InitializeWithWelcomeLog();
+                Seed();
             }
 
             string json = File.ReadAllText(_filePath);
@@ -50,7 +50,7 @@ public class JsonLogReader : ILogReader
         }
     }
 
-    private void InitializeWithWelcomeLog()
+    private void Seed()
     {
         var welcomeLog = new List<LogEntry>
         {

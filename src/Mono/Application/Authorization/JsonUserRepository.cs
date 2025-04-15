@@ -1,5 +1,4 @@
 ﻿using Integrador.Application.Interfaces;
-using Integrador.Domain.Entities;
 
 using System;
 using System.Collections.Generic;
@@ -28,6 +27,12 @@ public class JsonUserRepository : IUserRepository
         {
             var json = File.ReadAllText(_filePath);
             _users = JsonSerializer.Deserialize<List<User>>(json) ?? [];
+        }
+
+        if (_users == null)
+        {
+            _users = Seeder.SeedUsers();
+            Save();
         }
     }
 

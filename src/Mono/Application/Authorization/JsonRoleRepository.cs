@@ -27,6 +27,12 @@ public class JsonRoleRepository : IRoleRepository
             var json = File.ReadAllText(_filePath);
             _roles = JsonSerializer.Deserialize<List<Role>>(json) ?? [];
         }
+
+        if (_roles == null)
+        {
+            _roles = Seeder.SeedRoles();
+            Save();
+        }
     }
 
     private void Save()
