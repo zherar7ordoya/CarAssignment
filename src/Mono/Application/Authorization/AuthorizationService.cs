@@ -1,12 +1,4 @@
-﻿using Integrador.Application.Interfaces;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Integrador.Application.Authorization;
+﻿namespace Integrador.Application.Authorization;
 
 public class AuthorizationService
 (
@@ -17,6 +9,7 @@ public class AuthorizationService
     public bool HasPermission(string username, Permission permission)
     {
         var user = userRepository.GetByUsername(username);
+
         if (user == null) return false;
 
         if (user.SpecialPermissions.Contains(permission)) return true;
@@ -24,14 +17,14 @@ public class AuthorizationService
         foreach (var roleName in user.RoleNames)
         {
             var role = roleRepository.GetByName(roleName);
-            if (role != null && role.Permissions.Contains(permission))
-                return true;
+
+            if (role != null && role.Permissions.Contains(permission)) return true;
         }
 
         return false;
     }
 
-    public List<Permission> GetEffectivePermissions(string username)
+    public List<Permission> GetPermissions(string username)
     {
         var user = userRepository.GetByUsername(username);
         if (user == null) return [];

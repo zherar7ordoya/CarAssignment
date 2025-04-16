@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Integrador.Application.Authorization;
+﻿namespace Integrador.Application.Authorization;
 
 public class UserManagerService(IUserRepository userRepository) : IUserManagerService
 {
@@ -14,7 +7,7 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
         if (userRepository.GetByUsername(username) is not null)
             throw new InvalidOperationException("Username already exists.");
 
-        var hashedPassword = HashPassword(password);
+        var hashedPassword = PasswordHasher.Hash(password);
 
         var newUser = new User 
         {
@@ -23,7 +16,7 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
             RoleNames = [],
             SpecialPermissions = []
         };
-        userRepository.Save(newUser);
+        userRepository.Update(newUser);
     }
 
     public void DeleteUser(string username)
@@ -36,7 +29,7 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
         var user = userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
-        user.PasswordHash = HashPassword(newPassword);
+        user.PasswordHash = PasswordHasher.Hash(newPassword);
         userRepository.Update(user);
     }
 
@@ -47,14 +40,7 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
 
     public List<User> GetAllUsers()
     {
-        return userRepository.GetAll();
-    }
-
-    private static string HashPassword(string password)
-    {
-        var bytes = Encoding.UTF8.GetBytes(password);
-        var hash = SHA256.HashData(bytes);
-        return Convert.ToBase64String(hash);
+        return userRepository.ReadAll();
     }
 
     public void SetUserRoles(string username, List<string> roleNames)

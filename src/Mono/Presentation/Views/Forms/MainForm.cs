@@ -1,9 +1,8 @@
-﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces;
+﻿using Integrador.Application.Authorization;
+using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
-using Integrador.Application.State;
 using Integrador.Infrastructure.Configuration;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Composition;
@@ -23,7 +22,8 @@ public partial class MainForm : Form
         IPersonFactory personFactory,
         IViewPresenter viewPresenter,
         IExceptionHandler exceptionHandler,
-        IPermissionService permissionService
+        IAuthorizationService authorizationService,
+        IUserRepository userRepository
     )
     {
         _messenger = messenger;
@@ -31,7 +31,11 @@ public partial class MainForm : Form
         _personFactory = personFactory;
         _viewPresenter = viewPresenter;
         _exceptionHandler = exceptionHandler;
-        _permissionService = permissionService;
+
+
+
+        _authorizationService = authorizationService;
+        _userRepository = userRepository;
 
         try
         {
@@ -107,7 +111,10 @@ public partial class MainForm : Form
     private readonly IPersonFactory _personFactory;
     private readonly IViewPresenter _viewPresenter;
     private readonly IExceptionHandler _exceptionHandler;
-    private readonly IPermissionService _permissionService;
+
+
+    private readonly IAuthorizationService _authorizationService;
+    private readonly IUserRepository _userRepository;
 
     private bool _isInitializing = true;
 
@@ -458,24 +465,26 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        //base.OnLoad(e);
-        this.Enabled = false;
+        var loginForm = new LoginForm((IAuthorizationService)_authorizationService, _userRepository);
 
-        using var loginForm = new LoginForm();
-
-        if (loginForm.ShowDialog() == DialogResult.OK && Session.IsAuthenticated)
+        if (loginForm.ShowDialog() == DialogResult.OK)
         {
-            this.Enabled = true;
-            // Si querés mostrar en status bar: Session.CurrentUser.Username
-            if (!_permissionService.CanDeleteEntities())
+            var user = loginForm.LoggedUser;
+
+            if (user != null) // Ensure user is not null
             {
-                btnDeleteCar.Enabled = false;
-                btnDeletePerson.Enabled = false;
+                var permissions = _authorizationService.GetPermissions(user.Username);
+                // Guardar usuario en Session, habilitar controles, etc.
+            }
+            else
+            {
+                _exceptionHandler.Handle(new NullReferenceException("LoggedUser is null"), "Error during login.");
+                System.Windows.Forms.Application.Exit(); // Corrected namespace for Application.Exit
             }
         }
         else
         {
-            Close(); // O Application.Exit();
+            System.Windows.Forms.Application.Exit(); // Corrected namespace for Application.Exit
         }
     }
 

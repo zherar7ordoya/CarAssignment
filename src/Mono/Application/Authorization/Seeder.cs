@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Integrador.Application.Authorization;
 
@@ -40,8 +36,8 @@ public static class Seeder
                 SpecialPermissions = []
             },
             new() {
-                Username = "johndoe",
-                PasswordHash = Hash("1234"),
+                Username = "user",
+                PasswordHash = Hash("user"),
                 RoleNames = ["User"],
                 SpecialPermissions = []
             }

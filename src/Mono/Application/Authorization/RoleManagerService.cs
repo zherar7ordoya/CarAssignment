@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Integrador.Application.Authorization;
+﻿namespace Integrador.Application.Authorization;
 
 public class RoleManagerService
 (
@@ -26,7 +20,7 @@ public class RoleManagerService
         roleRepository.Delete(roleName);
 
         // Además, remover el rol de los usuarios que lo tuvieran
-        var users = userRepository.GetAll();
+        var users = userRepository.ReadAll();
         foreach (var user in users)
         {
             if (user.RoleNames.Remove(roleName)) // No need to check Contains before Remove

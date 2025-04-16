@@ -50,4 +50,9 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 	
+	<ItemGroup>
+	  <Folder Include="Domain\Enums\Authorization\" />
+	  <Folder Include="Infrastructure\Persistence\JSON\" />
+	</ItemGroup>
+	
 </Project>

@@ -1,11 +1,5 @@
-﻿using Integrador.Application.Interfaces;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Configuration;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Integrador.Application.Authorization;
 
@@ -15,10 +9,22 @@ public class JsonUserRepository : IUserRepository
     private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
     private List<User> _users = [];
 
-    public JsonUserRepository(string filePath)
+    public JsonUserRepository()
     {
-        _filePath = filePath;
+        var pathFromConfig = ConfigurationManager.AppSettings["JsonUserPath"];
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "User.json");
+        EnsureFolderExists();
         Load();
+    }
+
+    private void EnsureFolderExists()
+    {
+        var folderPath = Path.GetDirectoryName(_filePath);
+
+        if (folderPath != null && !Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 
     private void Load()
@@ -29,7 +35,7 @@ public class JsonUserRepository : IUserRepository
             _users = JsonSerializer.Deserialize<List<User>>(json) ?? [];
         }
 
-        if (_users == null)
+        if (_users.Count == 0)
         {
             _users = Seeder.SeedUsers();
             Save();
@@ -47,12 +53,12 @@ public class JsonUserRepository : IUserRepository
         return _users.FirstOrDefault(u => u.Username == username);
     }
 
-    public List<User> GetAll()
+    public List<User> ReadAll()
     {
         return [.. _users];
     }
 
-    public void Save(User user)
+    public void Update(User user)
     {
         var existing = _users.FirstOrDefault(u => u.Username == user.Username);
         if (existing != null)
@@ -72,9 +78,19 @@ public class JsonUserRepository : IUserRepository
         }
     }
 
-    public void Update(User user)
+    public void Create(User user)
     {
-        Save(user);
+        if (_users.Any(u => u.Username == user.Username))
+            throw new InvalidOperationException("User already exists.");
+        _users.Add(user);
+        Save();
     }
+
+    public User? GetById(int id)
+    {
+        return _users.FirstOrDefault(u => u.Id == id);
+    }
+
+    
 }
 

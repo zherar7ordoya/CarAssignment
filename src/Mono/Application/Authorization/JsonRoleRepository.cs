@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Configuration;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Integrador.Application.Authorization;
 
@@ -13,9 +9,10 @@ public class JsonRoleRepository : IRoleRepository
     private readonly JsonSerializerOptions _jsonSerializerOptions; // Cached instance
     private List<Role> _roles = [];
 
-    public JsonRoleRepository(string filePath)
+    public JsonRoleRepository()
     {
-        _filePath = filePath;
+        var pathFromConfig = ConfigurationManager.AppSettings["JsonRolePath"];
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "Role.json");
         _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true }; // Initialize once
         Load();
     }

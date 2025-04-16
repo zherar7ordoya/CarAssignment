@@ -21,11 +21,10 @@ using Integrador.Infrastructure.Logging.Shared;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Infrastructure.Logging.JSON;
 using Integrador.Application.Authorization;
-using Integrador.Application.Interfaces;
 using Integrador.Application.Authentication;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Interfaces.Persistence;
-using Integrador.Infrastructure.Persistence.JSON;
+
 using Integrador.Infrastructure.Exceptions;
 
 namespace Integrador.Presentation.Composition;
@@ -80,9 +79,12 @@ public static class DependencyInjection
 
     private static void RegisterCoreServices(IServiceCollection services)
     {
+
+        services.AddSingleton<IAuthenticationService, AuthenticationService>();
+        services.AddSingleton<IAuthorizationService, AuthorizationService>();
+
         services.AddSingleton<IUserRepository, JsonUserRepository>();
-        services.AddSingleton<IAuthService, AuthService>();
-        services.AddSingleton<IPermissionService, PermissionService>();
+        services.AddSingleton<IRoleRepository, JsonRoleRepository>();
 
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
         services.AddSingleton<IMessenger, Messenger>();
