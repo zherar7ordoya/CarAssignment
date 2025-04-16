@@ -13,5 +13,7 @@ public interface IUserManagerService
     void UpdatePassword(string username, string newPassword);
     User? GetUserByUsername(string username);
     List<User> GetAllUsers();
+    void SetUserRoles(string username, List<string> roleNames);
+    void SetUserSpecialPermissions(string username, List<Permission> permissions);
 }
 

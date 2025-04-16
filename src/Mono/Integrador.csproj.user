@@ -11,6 +11,9 @@
     <Compile Update="Presentation\Views\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Presentation\Views\Forms\RoleManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Presentation\Views\Forms\UserManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -92,7 +92,6 @@
             // lblSelect
             // 
             lblSelect.AutoSize = true;
-            lblSelect.Font = new Font("Calibri", 13F, FontStyle.Bold);
             lblSelect.Location = new Point(13, 233);
             lblSelect.Margin = new Padding(4, 0, 4, 0);
             lblSelect.Name = "lblSelect";
@@ -141,7 +140,6 @@
             Controls.Add(cmbLevel);
             Controls.Add(txtText);
             Controls.Add(dgvLogEntries);
-            Font = new Font("Calibri", 11F);
             Margin = new Padding(4);
             Name = "LogViewerForm";
             Text = "LogViewerForm";

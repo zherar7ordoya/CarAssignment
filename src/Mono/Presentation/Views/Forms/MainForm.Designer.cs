@@ -164,7 +164,6 @@ partial class MainForm
         // 
         // lblCarsPrice
         // 
-        lblCarsPrice.Font = new Font("Calibri", 22F);
         lblCarsPrice.Location = new Point(107, 278);
         lblCarsPrice.Name = "lblCarsPrice";
         lblCarsPrice.Size = new Size(222, 37);
@@ -235,7 +234,6 @@ partial class MainForm
         // lblPersons
         // 
         lblPersons.AutoSize = true;
-        lblPersons.Font = new Font("Calibri", 22F);
         lblPersons.Location = new Point(12, 12);
         lblPersons.Name = "lblPersons";
         lblPersons.Size = new Size(126, 37);
@@ -388,7 +386,6 @@ partial class MainForm
         // lblAvailableCars
         // 
         lblAvailableCars.AutoSize = true;
-        lblAvailableCars.Font = new Font("Calibri", 22F);
         lblAvailableCars.Location = new Point(12, 359);
         lblAvailableCars.Name = "lblAvailableCars";
         lblAvailableCars.Size = new Size(235, 37);
@@ -440,7 +437,6 @@ partial class MainForm
         // lblAssignedCars
         // 
         lblAssignedCars.AutoSize = true;
-        lblAssignedCars.Font = new Font("Calibri", 22F);
         lblAssignedCars.Location = new Point(12, 616);
         lblAssignedCars.Name = "lblAssignedCars";
         lblAssignedCars.Size = new Size(216, 37);
@@ -450,7 +446,6 @@ partial class MainForm
         // lblPersonCars
         // 
         lblPersonCars.AutoSize = true;
-        lblPersonCars.Font = new Font("Calibri", 22F);
         lblPersonCars.Location = new Point(12, 210);
         lblPersonCars.Name = "lblPersonCars";
         lblPersonCars.Size = new Size(231, 37);
@@ -565,7 +560,6 @@ partial class MainForm
         Controls.Add(lblPersonId);
         Controls.Add(lblFirstname);
         Controls.Add(lblIdentityNumber);
-        Font = new Font("Calibri", 11F);
         Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
         MaximizeBox = false;

@@ -28,172 +28,167 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvUsers = new DataGridView();
-            lblId = new Label();
-            txtId = new TextBox();
             txtUsername = new TextBox();
             lblUsername = new Label();
             txtPassword = new TextBox();
             lblPassword = new Label();
-            lblRole = new Label();
-            cmbRole = new ComboBox();
-            btnNew = new Button();
-            btnSave = new Button();
-            btnDelete = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
+            btnCreateUser = new Button();
+            btnSaveUserChanges = new Button();
+            btnDeleteUser = new Button();
+            lstUsers = new ListBox();
+            grpUserRoles = new GroupBox();
+            clbRoles = new CheckedListBox();
+            grpSpecialPermissions = new GroupBox();
+            clbSpecialPermissions = new CheckedListBox();
+            grpUserRoles.SuspendLayout();
+            grpSpecialPermissions.SuspendLayout();
             SuspendLayout();
-            // 
-            // dgvUsers
-            // 
-            dgvUsers.AllowUserToAddRows = false;
-            dgvUsers.AllowUserToDeleteRows = false;
-            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Location = new Point(12, 12);
-            dgvUsers.Name = "dgvUsers";
-            dgvUsers.ReadOnly = true;
-            dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUsers.Size = new Size(438, 194);
-            dgvUsers.TabIndex = 0;
-            dgvUsers.SelectionChanged += DgvUsers_SelectionChanged;
-            // 
-            // lblId
-            // 
-            lblId.AutoSize = true;
-            lblId.Location = new Point(570, 15);
-            lblId.Name = "lblId";
-            lblId.Size = new Size(20, 18);
-            lblId.TabIndex = 1;
-            lblId.Text = "Id";
-            // 
-            // txtId
-            // 
-            txtId.Location = new Point(647, 12);
-            txtId.Name = "txtId";
-            txtId.ReadOnly = true;
-            txtId.Size = new Size(121, 25);
-            txtId.TabIndex = 2;
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(647, 43);
+            txtUsername.Location = new Point(266, 32);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(121, 25);
+            txtUsername.Size = new Size(121, 27);
             txtUsername.TabIndex = 4;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(570, 46);
+            lblUsername.Location = new Point(266, 9);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(71, 18);
+            lblUsername.Size = new Size(75, 20);
             lblUsername.TabIndex = 3;
             lblUsername.Text = "Username";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(647, 74);
+            txtPassword.Location = new Point(393, 32);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(121, 25);
+            txtPassword.Size = new Size(121, 27);
             txtPassword.TabIndex = 6;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(570, 77);
+            lblPassword.Location = new Point(393, 9);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(67, 18);
+            lblPassword.Size = new Size(70, 20);
             lblPassword.TabIndex = 5;
             lblPassword.Text = "Password";
             // 
-            // lblRole
+            // btnCreateUser
             // 
-            lblRole.AutoSize = true;
-            lblRole.Location = new Point(570, 108);
-            lblRole.Name = "lblRole";
-            lblRole.Size = new Size(36, 18);
-            lblRole.TabIndex = 7;
-            lblRole.Text = "Role";
+            btnCreateUser.Location = new Point(393, 65);
+            btnCreateUser.Name = "btnCreateUser";
+            btnCreateUser.Size = new Size(121, 33);
+            btnCreateUser.TabIndex = 9;
+            btnCreateUser.Text = "Create User";
+            btnCreateUser.UseVisualStyleBackColor = true;
+            btnCreateUser.Click += ButtonCreateUser_Click;
             // 
-            // cmbRole
+            // btnSaveUserChanges
             // 
-            cmbRole.FormattingEnabled = true;
-            cmbRole.Location = new Point(647, 105);
-            cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(121, 26);
-            cmbRole.TabIndex = 8;
+            btnSaveUserChanges.Location = new Point(266, 223);
+            btnSaveUserChanges.Name = "btnSaveUserChanges";
+            btnSaveUserChanges.Size = new Size(121, 33);
+            btnSaveUserChanges.TabIndex = 10;
+            btnSaveUserChanges.Text = "Save Changes";
+            btnSaveUserChanges.UseVisualStyleBackColor = true;
+            btnSaveUserChanges.Click += ButtonSaveChanges_Click;
             // 
-            // btnNew
+            // btnDeleteUser
             // 
-            btnNew.Location = new Point(456, 176);
-            btnNew.Name = "btnNew";
-            btnNew.Size = new Size(100, 30);
-            btnNew.TabIndex = 9;
-            btnNew.Text = "New";
-            btnNew.UseVisualStyleBackColor = true;
-            btnNew.Click += ButtonNew_Click;
+            btnDeleteUser.Location = new Point(393, 223);
+            btnDeleteUser.Name = "btnDeleteUser";
+            btnDeleteUser.Size = new Size(121, 33);
+            btnDeleteUser.TabIndex = 11;
+            btnDeleteUser.Text = "Delete User";
+            btnDeleteUser.UseVisualStyleBackColor = true;
+            btnDeleteUser.Click += ButtonDeleteUser_Click;
             // 
-            // btnSave
+            // lstUsers
             // 
-            btnSave.Location = new Point(562, 176);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(100, 30);
-            btnSave.TabIndex = 10;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += ButtonSave_Click;
+            lstUsers.FormattingEnabled = true;
+            lstUsers.Location = new Point(12, 12);
+            lstUsers.Name = "lstUsers";
+            lstUsers.Size = new Size(248, 244);
+            lstUsers.TabIndex = 12;
+            lstUsers.SelectedIndexChanged += ListBoxUsers_SelectedIndexChanged;
             // 
-            // btnDelete
+            // grpUserRoles
             // 
-            btnDelete.Location = new Point(668, 176);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 30);
-            btnDelete.TabIndex = 11;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += ButtonDelete_Click;
+            grpUserRoles.Controls.Add(clbRoles);
+            grpUserRoles.Location = new Point(12, 262);
+            grpUserRoles.Name = "grpUserRoles";
+            grpUserRoles.Size = new Size(248, 248);
+            grpUserRoles.TabIndex = 13;
+            grpUserRoles.TabStop = false;
+            grpUserRoles.Text = "User Roles";
+            // 
+            // clbRoles
+            // 
+            clbRoles.FormattingEnabled = true;
+            clbRoles.Location = new Point(6, 26);
+            clbRoles.Name = "clbRoles";
+            clbRoles.Size = new Size(236, 202);
+            clbRoles.TabIndex = 0;
+            // 
+            // grpSpecialPermissions
+            // 
+            grpSpecialPermissions.Controls.Add(clbSpecialPermissions);
+            grpSpecialPermissions.Location = new Point(266, 262);
+            grpSpecialPermissions.Name = "grpSpecialPermissions";
+            grpSpecialPermissions.Size = new Size(248, 248);
+            grpSpecialPermissions.TabIndex = 14;
+            grpSpecialPermissions.TabStop = false;
+            grpSpecialPermissions.Text = "Special Permissions";
+            // 
+            // clbSpecialPermissions
+            // 
+            clbSpecialPermissions.FormattingEnabled = true;
+            clbSpecialPermissions.Location = new Point(6, 26);
+            clbSpecialPermissions.Name = "clbSpecialPermissions";
+            clbSpecialPermissions.Size = new Size(236, 202);
+            clbSpecialPermissions.TabIndex = 0;
             // 
             // UserManagementForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 18F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 230);
-            Controls.Add(btnDelete);
-            Controls.Add(btnSave);
-            Controls.Add(btnNew);
-            Controls.Add(cmbRole);
-            Controls.Add(lblRole);
+            ClientSize = new Size(526, 519);
+            Controls.Add(grpSpecialPermissions);
+            Controls.Add(grpUserRoles);
+            Controls.Add(lstUsers);
+            Controls.Add(btnDeleteUser);
+            Controls.Add(btnSaveUserChanges);
+            Controls.Add(btnCreateUser);
             Controls.Add(txtPassword);
             Controls.Add(lblPassword);
             Controls.Add(txtUsername);
             Controls.Add(lblUsername);
-            Controls.Add(txtId);
-            Controls.Add(lblId);
-            Controls.Add(dgvUsers);
-            Font = new Font("Calibri", 11F);
-            Margin = new Padding(4);
+            Font = new Font("Segoe UI", 11F);
+            Margin = new Padding(5, 4, 5, 4);
             MaximizeBox = false;
             Name = "UserManagementForm";
             Text = "UserManagementForm";
-            Load += UserManagementForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
+            grpUserRoles.ResumeLayout(false);
+            grpSpecialPermissions.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private DataGridView dgvUsers;
-        private Label lblId;
-        private TextBox txtId;
         private TextBox txtUsername;
         private Label lblUsername;
         private TextBox txtPassword;
         private Label lblPassword;
-        private Label lblRole;
-        private ComboBox cmbRole;
-        private Button btnNew;
-        private Button btnSave;
-        private Button btnDelete;
+        private Button btnCreateUser;
+        private Button btnSaveUserChanges;
+        private Button btnDeleteUser;
+        private ListBox lstUsers;
+        private GroupBox grpUserRoles;
+        private CheckedListBox clbRoles;
+        private GroupBox grpSpecialPermissions;
+        private CheckedListBox clbSpecialPermissions;
     }
 }

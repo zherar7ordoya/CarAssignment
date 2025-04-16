@@ -88,7 +88,6 @@
             Controls.Add(txtUsername);
             Controls.Add(lblPassword);
             Controls.Add(lblUsername);
-            Font = new Font("Calibri", 11F);
             Margin = new Padding(4);
             MaximizeBox = false;
             MinimizeBox = false;

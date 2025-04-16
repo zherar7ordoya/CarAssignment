@@ -56,5 +56,24 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
         var hash = SHA256.HashData(bytes);
         return Convert.ToBase64String(hash);
     }
+
+    public void SetUserRoles(string username, List<string> roleNames)
+    {
+        var user = userRepository.GetByUsername(username)
+               ?? throw new InvalidOperationException("User not found.");
+
+        user.RoleNames = [.. roleNames.Distinct()];
+        userRepository.Update(user);
+    }
+
+    public void SetUserSpecialPermissions(string username, List<Permission> permissions)
+    {
+        var user = userRepository.GetByUsername(username)
+               ?? throw new InvalidOperationException("User not found.");
+
+        user.SpecialPermissions = [.. permissions.Distinct()];
+        userRepository.Update(user);
+    }
+
 }
 
