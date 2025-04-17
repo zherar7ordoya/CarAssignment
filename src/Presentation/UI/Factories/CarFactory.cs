@@ -1,0 +1,12 @@
+﻿using Integrador.Application.DTOs;
+using Integrador.Application.Interfaces.Utilities;
+
+namespace Integrador.Presentation.UI.Factories;
+
+public class CarFactory : ICarFactory
+{
+    public CarDTO CreateDefault()
+    {
+        return new CarDTO(0, "12345678", "Brand", "Model", 0, 0, 0);
+    }
+}
