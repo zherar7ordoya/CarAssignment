@@ -86,6 +86,9 @@ public static class DependencyInjection
         services.AddSingleton<IUserRepository, JsonUserRepository>();
         services.AddSingleton<IRoleRepository, JsonRoleRepository>();
 
+        services.AddSingleton<IUserManagerService, UserManagerService>();
+        services.AddSingleton<IRoleManagerService, RoleManagerService>();
+
         services.AddSingleton<IExceptionHandler, ExceptionHandler>();
         services.AddSingleton<IMessenger, Messenger>();
 
