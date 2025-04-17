@@ -11,16 +11,27 @@ public static class Seeder
         [
             new("Admin",
             [
-                new Permission("CreateEntity"),
-                new Permission("EditEntity"),
-                new Permission("DeleteEntity"),
-                new Permission("ManageUsers"),
-                new Permission("ManageRoles")
+                new("NewPerson"),
+                new("SavePerson"),
+                new("DeletePerson"),
+                new("NewCar"),
+                new("SaveCar"),
+                new("DeleteCar"),
+                new("AssignCar"),
+                new("RemoveCar"),
+                new("LogViewer"),
+                new("UserManagement"),
+                new("RoleManagement")
             ]),
             new("User",
             [
-                new Permission("CreateEntity"),
-                new Permission("EditEntity")
+                new("NewPerson"),
+                new("SavePerson"),
+                new("NewCar"),
+                new("SaveCar"),
+                new("AssignCar"),
+                new("RemoveCar"),
+                new("LogViewer")
             ])
         ];
     }
@@ -29,26 +40,20 @@ public static class Seeder
     {
         return
         [
-            new() {
+            new()
+            {
                 Username = "admin",
-                PasswordHash = Hash("admin"), // Simple hash for seed/demo purposes
+                PasswordHash = PasswordHasher.Hash("admin"),
                 RoleNames = ["Admin"],
-                SpecialPermissions = []
+                SpecialPermissions = [] // sin permisos duplicados
             },
-            new() {
+            new()
+            {
                 Username = "user",
-                PasswordHash = Hash("user"),
+                PasswordHash = PasswordHasher.Hash("user"),
                 RoleNames = ["User"],
                 SpecialPermissions = []
             }
         ];
     }
-
-    private static string Hash(string password)
-    {
-        var bytes = Encoding.UTF8.GetBytes(password);
-        var hash = SHA256.HashData(bytes);
-        return Convert.ToBase64String(hash);
-    }
 }
-

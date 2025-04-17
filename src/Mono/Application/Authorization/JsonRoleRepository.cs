@@ -6,15 +6,25 @@ namespace Integrador.Application.Authorization;
 public class JsonRoleRepository : IRoleRepository
 {
     private readonly string _filePath;
-    private readonly JsonSerializerOptions _jsonSerializerOptions; // Cached instance
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
     private List<Role> _roles = [];
 
     public JsonRoleRepository()
     {
         var pathFromConfig = ConfigurationManager.AppSettings["JsonRolePath"];
         _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathFromConfig ?? "Role.json");
-        _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true }; // Initialize once
+        EnsureFolderExists();
         Load();
+    }
+
+    private void EnsureFolderExists()
+    {
+        var folderPath = Path.GetDirectoryName(_filePath);
+
+        if (folderPath != null && !Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 
     private void Load()
@@ -25,7 +35,7 @@ public class JsonRoleRepository : IRoleRepository
             _roles = JsonSerializer.Deserialize<List<Role>>(json) ?? [];
         }
 
-        if (_roles == null)
+        if (_roles.Count == 0)
         {
             _roles = Seeder.SeedRoles();
             Save();

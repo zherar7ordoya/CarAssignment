@@ -474,7 +474,21 @@ public partial class MainForm : Form
             if (user != null) // Ensure user is not null
             {
                 var permissions = _authorizationService.GetPermissions(user.Username);
-                // Guardar usuario en Session, habilitar controles, etc.
+                
+                btnNewPerson.Enabled = permissions.Contains(KnownPermissions.NewPerson);
+                btnSavePerson.Enabled = permissions.Contains(KnownPermissions.SavePerson);
+                btnDeletePerson.Enabled = permissions.Contains(KnownPermissions.DeletePerson);
+
+                btnNewCar.Enabled = permissions.Contains(KnownPermissions.NewCar);
+                btnSaveCar.Enabled = permissions.Contains(KnownPermissions.SaveCar);
+                btnDeleteCar.Enabled = permissions.Contains(KnownPermissions.DeleteCar);
+
+                btnAssignCar.Enabled = permissions.Contains(KnownPermissions.AssignCar);
+                btnRemoveCar.Enabled = permissions.Contains(KnownPermissions.RemoveCar);
+
+                btnLogViewer.Enabled = permissions.Contains(KnownPermissions.LogViewer);
+                btnUserManagement.Enabled = permissions.Contains(KnownPermissions.UserManagement);
+                btnRoleManagement.Enabled = permissions.Contains(KnownPermissions.RoleManagement);
             }
             else
             {

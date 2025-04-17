@@ -1,4 +1,5 @@
-﻿using Integrador.Application.Authorization;
+﻿using Integrador.Application.Authentication;
+using Integrador.Application.Authorization;
 
 using System.ComponentModel;
 
@@ -34,6 +35,7 @@ public partial class LoginForm : Form
         }
 
         LoggedUser = user;
+        Session.Start(user);
         DialogResult = DialogResult.OK;
         Close();
     }

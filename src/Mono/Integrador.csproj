@@ -51,6 +51,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <Folder Include="Application\State\" />
 	  <Folder Include="Domain\Enums\Authorization\" />
 	  <Folder Include="Infrastructure\Persistence\JSON\" />
 	</ItemGroup>
