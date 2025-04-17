@@ -5,7 +5,9 @@ public class UserManagerService(IUserRepository userRepository) : IUserManagerSe
     public void CreateUser(string username, string password)
     {
         if (userRepository.GetByUsername(username) is not null)
+        {
             throw new InvalidOperationException("Username already exists.");
+        }
 
         var hashedPassword = PasswordHasher.Hash(password);
 

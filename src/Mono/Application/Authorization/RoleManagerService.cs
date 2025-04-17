@@ -4,8 +4,8 @@ namespace Integrador.Application.Authorization;
 
 public class RoleManagerService() : IRoleManagerService
 {
-    private readonly IUserRepository _userRepository = AppServices.GetService<IUserRepository>();
-    private readonly IRoleRepository _roleRepository = AppServices.GetService<IRoleRepository>();
+    private readonly IUserRepository _userRepository = AppServiceProvider.GetService<IUserRepository>();
+    private readonly IRoleRepository _roleRepository = AppServiceProvider.GetService<IRoleRepository>();
 
     public void CreateRole(string roleName)
     {

@@ -9,13 +9,13 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-        AppServices.Provider = DependencyInjection.Configure();
+        AppServiceProvider.Provider = DependencyInjection.Configure();
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
         Batteries.Init();
 
-        Application.Run(AppServices.GetService<MainForm>());
+        Application.Run(AppServiceProvider.GetService<MainForm>());
     }
 }

@@ -9,7 +9,7 @@ namespace Integrador.Presentation.Views;
 
 public partial class LoginForm : Form
 {
-    private readonly IAuthenticationService _authenticationService = AppServices.GetService<IAuthenticationService>();
+    private readonly IAuthenticationService _authenticationService = AppServiceProvider.GetService<IAuthenticationService>();
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public User CurrentUser { get; private set; } = default!;

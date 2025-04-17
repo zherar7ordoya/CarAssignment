@@ -1,21 +1,20 @@
 ﻿using Integrador.Application.Authorization;
+using Integrador.Application.Interfaces.Exceptions;
+using Integrador.Infrastructure.Interfaces;
+using Integrador.Presentation.Composition;
 
 namespace Integrador.Presentation.Views;
 
 public partial class UserManagementForm : Form
 {
-    private readonly IUserManagerService _userManagerService;
-    private readonly IRoleManagerService _roleManagerService;
+    private readonly IUserManagerService _userManagerService = AppServiceProvider.GetService<IUserManagerService>();
+    private readonly IRoleManagerService _roleManagerService = AppServiceProvider.GetService<IRoleManagerService>();
+    private readonly IMessenger _messenger = AppServiceProvider.GetService<IMessenger>();
+    private readonly IExceptionHandler _exceptionHandler = AppServiceProvider.GetService<IExceptionHandler>();
 
-    public UserManagementForm
-    (
-        IUserManagerService userManagerService,
-        IRoleManagerService roleManagerService
-    )
+    public UserManagementForm()
     {
         InitializeComponent();
-        _userManagerService = userManagerService;
-        _roleManagerService = roleManagerService;
         LoadUsers();
         LoadRoles();
         LoadPermissions();
@@ -50,14 +49,13 @@ public partial class UserManagementForm : Form
 
     private void ListBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (lstUsers.SelectedItem is not string username)
-            return;
+        if (lstUsers.SelectedItem is not string username) return;
 
         var user = _userManagerService.GetUserByUsername(username);
 
         if (user == null)
         {
-            MessageBox.Show("El usuario seleccionado no existe.");
+            _messenger.ShowError("User not found", "Error");
             return;
         }
 
@@ -89,21 +87,23 @@ public partial class UserManagementForm : Form
     private void ButtonCreateUser_Click(object sender, EventArgs e)
     {
         var username = txtUsername.Text.Trim();
-        if (string.IsNullOrEmpty(username))
+        var password = txtPassword.Text.Trim();
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            MessageBox.Show("Debe ingresar un nombre de usuario.");
+            _messenger.ShowError("Username and password cannot be empty.", "Error");
             return;
         }
 
         try
         {
-            _userManagerService.CreateUser(username, password: "1234"); // Por defecto
+            _userManagerService.CreateUser(username, password);
             LoadUsers();
             txtUsername.Clear();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al crear el usuario: {ex.Message}");
+            _exceptionHandler.Handle(ex, "Error creating user");
         }
     }
 
@@ -111,16 +111,13 @@ public partial class UserManagementForm : Form
     {
         if (lstUsers.SelectedItem is not string username)
         {
-            MessageBox.Show("Debe seleccionar un usuario para eliminar.");
+            _messenger.ShowError("User not selected", "Error");
             return;
         }
 
-        var confirm = MessageBox.Show(
-            $"¿Está seguro que desea eliminar al usuario '{username}'?",
-            "Confirmar eliminación",
-            MessageBoxButtons.YesNo);
+        var confirm = _messenger.ShowQuestion("Are you sure you want to delete this user?", "Confirm deletion");
 
-        if (confirm == DialogResult.Yes)
+        if (confirm)
         {
             try
             {
@@ -129,7 +126,7 @@ public partial class UserManagementForm : Form
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al eliminar el usuario: {ex.Message}");
+                _exceptionHandler.Handle(ex, "Error deleting user");
             }
         }
     }
@@ -138,7 +135,7 @@ public partial class UserManagementForm : Form
     {
         if (lstUsers.SelectedItem is not string username)
         {
-            MessageBox.Show("Debe seleccionar un usuario para guardar cambios.");
+            _messenger.ShowError("User not selected", "Error");
             return;
         }
 
@@ -153,7 +150,7 @@ public partial class UserManagementForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al guardar cambios: {ex.Message}");
+            _exceptionHandler.Handle(ex, "Error saving changes");
         }
     }
 }

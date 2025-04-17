@@ -7,7 +7,7 @@ namespace Integrador.Presentation.Views.Forms;
 
 public partial class RoleManagementForm : Form
 {
-    private readonly IRoleManagerService _roleManagerService = AppServices.GetService<IRoleManagerService>();
+    private readonly IRoleManagerService _roleManagerService = AppServiceProvider.GetService<IRoleManagerService>();
 
     public RoleManagementForm()
     {

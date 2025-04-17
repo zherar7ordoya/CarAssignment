@@ -420,7 +420,7 @@ public partial class MainForm : Form
 
     private void ButtonViewLog_Click(object sender, EventArgs e)
     {
-        var child = AppServices.GetService<LogViewerForm>();
+        var child = AppServiceProvider.GetService<LogViewerForm>();
         child.ShowDialog(this);
     }
 
@@ -480,13 +480,13 @@ public partial class MainForm : Form
 
     private void ButtonUserManagement_Click(object sender, EventArgs e)
     {
-        var child = AppServices.GetService<UserManagementForm>();
+        var child = AppServiceProvider.GetService<UserManagementForm>();
         child.ShowDialog(this);
     }
 
     private void ButtonRoleManagement_Click(object sender, EventArgs e)
     {
-        var child = AppServices.GetService<RoleManagementForm>();
+        var child = AppServiceProvider.GetService<RoleManagementForm>();
         child.ShowDialog(this);
     }
 
