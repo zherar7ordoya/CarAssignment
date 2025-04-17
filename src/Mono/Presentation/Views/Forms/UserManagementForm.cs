@@ -32,7 +32,7 @@ public partial class UserManagementForm : Form
     private void LoadRoles()
     {
         clbRoles.Items.Clear();
-        var roles = _roleManagerService.GetAllRoles();
+        var roles = _roleManagerService.GetRoles();
         foreach (var role in roles)
             clbRoles.Items.Add(role.Name);
     }
@@ -40,8 +40,12 @@ public partial class UserManagementForm : Form
     private void LoadPermissions()
     {
         clbSpecialPermissions.Items.Clear();
-        foreach (var permission in Enum.GetValues(typeof(Permission)))
+        var permissions = _roleManagerService.GetPermissions();
+
+        foreach (var permission in permissions)
+        {
             clbSpecialPermissions.Items.Add(permission);
+        }
     }
 
     private void ListBoxUsers_SelectedIndexChanged(object sender, EventArgs e)

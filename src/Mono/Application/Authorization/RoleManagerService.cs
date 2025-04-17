@@ -1,124 +1,125 @@
-﻿namespace Integrador.Application.Authorization;
+﻿using Integrador.Presentation.Composition;
 
-public class RoleManagerService
-(
-    IUserRepository userRepository,
-    IRoleRepository roleRepository
-) : IRoleManagerService
+namespace Integrador.Application.Authorization;
+
+public class RoleManagerService() : IRoleManagerService
 {
+    private readonly IUserRepository _userRepository = AppServices.GetService<IUserRepository>();
+    private readonly IRoleRepository _roleRepository = AppServices.GetService<IRoleRepository>();
+
     public void CreateRole(string roleName)
     {
-        if (roleRepository.GetByName(roleName) != null)
+        if (_roleRepository.GetByName(roleName) != null)
             throw new InvalidOperationException("Role already exists.");
 
         var newRole = new Role(roleName, []);
-        roleRepository.Save(newRole);
+        _roleRepository.Save(newRole);
     }
 
     public void DeleteRole(string roleName)
     {
-        roleRepository.Delete(roleName);
+        _roleRepository.Delete(roleName);
 
         // Además, remover el rol de los usuarios que lo tuvieran
-        var users = userRepository.ReadAll();
+        var users = _userRepository.ReadAll();
         foreach (var user in users)
         {
             if (user.RoleNames.Remove(roleName)) // No need to check Contains before Remove
             {
-                userRepository.Update(user);
+                _userRepository.Update(user);
             }
         }
     }
 
     public void AddPermissionToRole(string roleName, Permission permission)
     {
-        var role = roleRepository.GetByName(roleName)
+        var role = _roleRepository.GetByName(roleName)
                    ?? throw new InvalidOperationException("Role not found.");
 
         if (!role.Permissions.Contains(permission))
         {
             role.Permissions.Add(permission);
-            roleRepository.Save(role);
+            _roleRepository.Save(role);
         }
     }
 
     public void RemovePermissionFromRole(string roleName, Permission permission)
     {
-        var role = roleRepository.GetByName(roleName)
+        var role = _roleRepository.GetByName(roleName)
                    ?? throw new InvalidOperationException("Role not found.");
 
         if (role.Permissions.Remove(permission))
         {
-            roleRepository.Save(role);
+            _roleRepository.Save(role);
         }
     }
 
     public void AssignRoleToUser(string username, string roleName)
     {
-        var user = userRepository.GetByUsername(username)
+        var user = _userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
         if (!user.RoleNames.Contains(roleName))
         {
             user.RoleNames.Add(roleName);
-            userRepository.Update(user);
+            _userRepository.Update(user);
         }
     }
 
     public void RemoveRoleFromUser(string username, string roleName)
     {
-        var user = userRepository.GetByUsername(username)
+        var user = _userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
         if (user.RoleNames.Remove(roleName)) // No need to check Contains before Remove
         {
-            userRepository.Update(user);
+            _userRepository.Update(user);
         }
     }
 
     public void AssignSpecialPermissionToUser(string username, Permission permission)
     {
-        var user = userRepository.GetByUsername(username)
+        var user = _userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
         if (!user.SpecialPermissions.Contains(permission))
         {
             user.SpecialPermissions.Add(permission);
-            userRepository.Update(user);
+            _userRepository.Update(user);
         }
     }
 
     public void RemoveSpecialPermissionFromUser(string username, Permission permission)
     {
-        var user = userRepository.GetByUsername(username)
+        var user = _userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
         if (user.SpecialPermissions.Remove(permission)) // No need to check Contains before Remove
         {
-            userRepository.Update(user);
+            _userRepository.Update(user);
         }
     }
 
-    public List<Role> GetAllRoles()
+    public List<Role> GetRoles()
     {
-        return roleRepository.GetAll();
+        return _roleRepository.GetAll();
     }
 
     public List<Permission> GetPermissionsForRole(string roleName)
     {
-        return roleRepository.GetByName(roleName)?.Permissions ?? [];
+        return _roleRepository.GetByName(roleName)?.Permissions ?? [];
     }
 
-    public List<Permission> GetAllPermissionsForUser(string username)
+    public List<Permission> GetPermissionsForUser(string username)
     {
-        var user = userRepository.GetByUsername(username)
+        var user = _userRepository.GetByUsername(username)
                    ?? throw new InvalidOperationException("User not found.");
 
         var permissions = new HashSet<Permission>();
 
         foreach (var roleName in user.RoleNames)
         {
-            var role = roleRepository.GetByName(roleName);
+            var role = _roleRepository.GetByName(roleName);
             if (role != null)
             {
                 foreach (var p in role.Permissions)
@@ -130,5 +131,10 @@ public class RoleManagerService
             permissions.Add(special);
 
         return [.. permissions];
+    }
+
+    public List<Permission> GetPermissions()
+    {
+        return [.. KnownPermissions.All];
     }
 }

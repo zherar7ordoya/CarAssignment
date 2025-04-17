@@ -1,42 +1,40 @@
 ﻿using Integrador.Application.Authentication;
 using Integrador.Application.Authorization;
+using Integrador.Presentation.Composition;
 
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Integrador.Presentation.Views;
 
 public partial class LoginForm : Form
 {
-    private readonly IAuthorizationService _authorizationService;
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticationService _authenticationService = AppServices.GetService<IAuthenticationService>();
 
-    [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public User? LoggedUser { get; private set; }
+    public User CurrentUser { get; private set; } = default!;
 
-    public LoginForm(IAuthorizationService authorizationService, IUserRepository userRepository)
+    public LoginForm()
     {
         InitializeComponent();
-        _authorizationService = authorizationService;
-        _userRepository = userRepository;
     }
 
     private void ButtonLogin_Click(object sender, EventArgs e)
     {
         var username = txtUsername.Text.Trim();
-        var password = txtPassword.Text;
+        var password = txtPassword.Text.Trim();
+        var user = _authenticationService.Authenticate(username, password);
 
-        var user = _userRepository.GetByUsername(username);
-
-        if (user == null || user.PasswordHash != PasswordHasher.Hash(password))
+        if (user is not null)
+        {
+            CurrentUser = user;
+            Session.Start(user);
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+        else
         {
             MessageBox.Show("Usuario o contraseña incorrectos.");
-            return;
         }
-
-        LoggedUser = user;
-        Session.Start(user);
-        DialogResult = DialogResult.OK;
-        Close();
     }
 }

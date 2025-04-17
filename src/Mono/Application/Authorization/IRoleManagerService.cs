@@ -13,8 +13,9 @@ public interface IRoleManagerService
     void AssignSpecialPermissionToUser(string username, Permission permission);
     void RemoveSpecialPermissionFromUser(string username, Permission permission);
 
-    List<Role> GetAllRoles();
+    List<Role> GetRoles();
+    List<Permission> GetPermissions();
     List<Permission> GetPermissionsForRole(string roleName);
-    List<Permission> GetAllPermissionsForUser(string username); // suma todo: roles + especiales
+    List<Permission> GetPermissionsForUser(string username); // suma todo: roles + especiales
 }
 

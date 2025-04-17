@@ -26,6 +26,7 @@ using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Interfaces.Persistence;
 
 using Integrador.Infrastructure.Exceptions;
+using Integrador.Presentation.Views.Forms;
 
 namespace Integrador.Presentation.Composition;
 
@@ -98,6 +99,7 @@ public static class DependencyInjection
 
         services.AddTransient<LogViewerForm>();
         services.AddTransient<UserManagementForm>();
+        services.AddTransient<RoleManagementForm>();
 
         services.AddTransient<IAssignmentService, AssignmentService>();
         services.AddTransient<ICarService, CarService>();

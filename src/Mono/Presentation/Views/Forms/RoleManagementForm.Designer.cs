@@ -35,7 +35,7 @@
             btnDeleteRole = new Button();
             grpPermissions = new GroupBox();
             btnSavePermissions = new Button();
-            chkPermissions = new CheckedListBox();
+            clbPermissions = new CheckedListBox();
             grpPermissions.SuspendLayout();
             SuspendLayout();
             // 
@@ -88,7 +88,7 @@
             // grpPermissions
             // 
             grpPermissions.Controls.Add(btnSavePermissions);
-            grpPermissions.Controls.Add(chkPermissions);
+            grpPermissions.Controls.Add(clbPermissions);
             grpPermissions.Location = new Point(12, 242);
             grpPermissions.Name = "grpPermissions";
             grpPermissions.Size = new Size(356, 235);
@@ -108,11 +108,11 @@
             // 
             // chkPermissions
             // 
-            chkPermissions.FormattingEnabled = true;
-            chkPermissions.Location = new Point(6, 26);
-            chkPermissions.Name = "chkPermissions";
-            chkPermissions.Size = new Size(229, 202);
-            chkPermissions.TabIndex = 6;
+            clbPermissions.FormattingEnabled = true;
+            clbPermissions.Location = new Point(6, 26);
+            clbPermissions.Name = "chkPermissions";
+            clbPermissions.Size = new Size(229, 202);
+            clbPermissions.TabIndex = 6;
             // 
             // RoleManagementForm
             // 
@@ -143,7 +143,7 @@
         private ListBox lstRoles;
         private Button btnDeleteRole;
         private GroupBox grpPermissions;
-        private CheckedListBox chkPermissions;
+        private CheckedListBox clbPermissions;
         private Button btnSavePermissions;
     }
 }

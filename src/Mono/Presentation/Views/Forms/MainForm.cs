@@ -1,4 +1,5 @@
-﻿using Integrador.Application.Authorization;
+﻿using Integrador.Application.Authentication;
+using Integrador.Application.Authorization;
 using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Presentation;
@@ -8,6 +9,7 @@ using Integrador.Infrastructure.Interfaces;
 using Integrador.Presentation.Composition;
 using Integrador.Presentation.Localization;
 using Integrador.Presentation.Views;
+using Integrador.Presentation.Views.Forms;
 
 using System.Globalization;
 
@@ -418,7 +420,7 @@ public partial class MainForm : Form
 
     private void ButtonViewLog_Click(object sender, EventArgs e)
     {
-        var child = AppServices.Get<LogViewerForm>();
+        var child = AppServices.GetService<LogViewerForm>();
         child.ShowDialog(this);
     }
 
@@ -465,46 +467,70 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        var loginForm = new LoginForm((IAuthorizationService)_authorizationService, _userRepository);
+        var loginForm = new LoginForm();
 
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
-            var user = loginForm.LoggedUser;
-
-            if (user != null) // Ensure user is not null
-            {
-                var permissions = _authorizationService.GetPermissions(user.Username);
-                
-                btnNewPerson.Enabled = permissions.Contains(KnownPermissions.NewPerson);
-                btnSavePerson.Enabled = permissions.Contains(KnownPermissions.SavePerson);
-                btnDeletePerson.Enabled = permissions.Contains(KnownPermissions.DeletePerson);
-
-                btnNewCar.Enabled = permissions.Contains(KnownPermissions.NewCar);
-                btnSaveCar.Enabled = permissions.Contains(KnownPermissions.SaveCar);
-                btnDeleteCar.Enabled = permissions.Contains(KnownPermissions.DeleteCar);
-
-                btnAssignCar.Enabled = permissions.Contains(KnownPermissions.AssignCar);
-                btnRemoveCar.Enabled = permissions.Contains(KnownPermissions.RemoveCar);
-
-                btnLogViewer.Enabled = permissions.Contains(KnownPermissions.LogViewer);
-                btnUserManagement.Enabled = permissions.Contains(KnownPermissions.UserManagement);
-                btnRoleManagement.Enabled = permissions.Contains(KnownPermissions.RoleManagement);
-            }
-            else
-            {
-                _exceptionHandler.Handle(new NullReferenceException("LoggedUser is null"), "Error during login.");
-                System.Windows.Forms.Application.Exit(); // Corrected namespace for Application.Exit
-            }
+            var user = loginForm.CurrentUser;
+            if (user != null) UpdateUI(user);
+            else System.Windows.Forms.Application.Exit();
         }
-        else
-        {
-            System.Windows.Forms.Application.Exit(); // Corrected namespace for Application.Exit
-        }
+        else System.Windows.Forms.Application.Exit();
     }
 
     private void ButtonUserManagement_Click(object sender, EventArgs e)
     {
-        var child = AppServices.Get<UserManagementForm>();
+        var child = AppServices.GetService<UserManagementForm>();
         child.ShowDialog(this);
+    }
+
+    private void ButtonRoleManagement_Click(object sender, EventArgs e)
+    {
+        var child = AppServices.GetService<RoleManagementForm>();
+        child.ShowDialog(this);
+    }
+
+    private void ButtonLogout_Click(object sender, EventArgs e)
+    {
+        Session.End();
+        Hide();
+
+        using var loginForm = new LoginForm();
+        var result = loginForm.ShowDialog();
+
+        if (result == DialogResult.OK)
+        {
+            UpdateUI(Session.CurrentUser);
+            Show();
+        }
+        else
+        {
+            Close();
+        }
+    }
+
+    private void UpdateUI(User? user)
+    {
+        if (user == null)
+        {
+            throw new ArgumentNullException(nameof(user), "User cannot be null when updating the UI.");
+        }
+
+        var permissions = _authorizationService.GetPermissions(user.Username);
+
+        btnNewPerson.Visible = permissions.Contains(KnownPermissions.NewPerson);
+        btnSavePerson.Visible = permissions.Contains(KnownPermissions.SavePerson);
+        btnDeletePerson.Visible = permissions.Contains(KnownPermissions.DeletePerson);
+
+        btnNewCar.Visible = permissions.Contains(KnownPermissions.NewCar);
+        btnSaveCar.Visible = permissions.Contains(KnownPermissions.SaveCar);
+        btnDeleteCar.Visible = permissions.Contains(KnownPermissions.DeleteCar);
+
+        btnAssignCar.Visible = permissions.Contains(KnownPermissions.AssignCar);
+        btnRemoveCar.Visible = permissions.Contains(KnownPermissions.RemoveCar);
+
+        btnLogViewer.Visible = permissions.Contains(KnownPermissions.LogViewer);
+        btnUserManagement.Visible = permissions.Contains(KnownPermissions.UserManagement);
+        btnRoleManagement.Visible = permissions.Contains(KnownPermissions.RoleManagement);
     }
 }

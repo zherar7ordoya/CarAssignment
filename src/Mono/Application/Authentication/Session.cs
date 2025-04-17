@@ -4,17 +4,17 @@ namespace Integrador.Application.Authentication;
 
 public static class Session
 {
-    public static User? LoggedUser { get; private set; }
+    public static User? CurrentUser { get; private set; }
 
     public static void Start(User user)
     {
-        LoggedUser = user;
+        CurrentUser = user;
     }
 
     public static void End()
     {
-        LoggedUser = null;
+        CurrentUser = null;
     }
 
-    public static bool IsLoggedIn => LoggedUser != null;
+    public static bool IsAuthenticated => CurrentUser != null;
 }

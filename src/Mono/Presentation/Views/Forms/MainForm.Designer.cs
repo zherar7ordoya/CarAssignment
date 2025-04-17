@@ -75,6 +75,7 @@ partial class MainForm
         cmbPersistence = new ComboBox();
         btnUserManagement = new Button();
         btnRoleManagement = new Button();
+        btnLogout = new Button();
         ((System.ComponentModel.ISupportInitialize)dgvPersonCars).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvPersons).BeginInit();
         ((System.ComponentModel.ISupportInitialize)dgvAvailableCars).BeginInit();
@@ -518,6 +519,17 @@ partial class MainForm
         btnRoleManagement.TabIndex = 30;
         btnRoleManagement.Text = "Role Management";
         btnRoleManagement.UseVisualStyleBackColor = true;
+        btnRoleManagement.Click += ButtonRoleManagement_Click;
+        // 
+        // btnLogout
+        // 
+        btnLogout.Location = new Point(974, 347);
+        btnLogout.Name = "btnLogout";
+        btnLogout.Size = new Size(75, 46);
+        btnLogout.TabIndex = 31;
+        btnLogout.Text = "Logout";
+        btnLogout.UseVisualStyleBackColor = true;
+        btnLogout.Click += ButtonLogout_Click;
         // 
         // MainForm
         // 
@@ -525,6 +537,7 @@ partial class MainForm
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.Ivory;
         ClientSize = new Size(1157, 879);
+        Controls.Add(btnLogout);
         Controls.Add(btnRoleManagement);
         Controls.Add(btnUserManagement);
         Controls.Add(cmbPersistence);
@@ -634,4 +647,5 @@ partial class MainForm
     private ComboBox cmbPersistence;
     private Button btnUserManagement;
     private Button btnRoleManagement;
+    private Button btnLogout;
 }

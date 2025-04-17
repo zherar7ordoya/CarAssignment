@@ -1,4 +1,5 @@
 ﻿using Integrador.Application.Authorization;
+using Integrador.Presentation.Composition;
 
 using System.Data;
 
@@ -6,12 +7,11 @@ namespace Integrador.Presentation.Views.Forms;
 
 public partial class RoleManagementForm : Form
 {
-    private readonly IRoleManagerService _roleManagerService;
+    private readonly IRoleManagerService _roleManagerService = AppServices.GetService<IRoleManagerService>();
 
-    public RoleManagementForm(IRoleManagerService roleManagerService)
+    public RoleManagementForm()
     {
         InitializeComponent();
-        _roleManagerService = roleManagerService;
         LoadRoles();
         LoadPermissions();
     }
@@ -19,16 +19,20 @@ public partial class RoleManagementForm : Form
     private void LoadRoles()
     {
         lstRoles.Items.Clear();
-        var roles = _roleManagerService.GetAllRoles();
+        var roles = _roleManagerService.GetRoles();
         foreach (var role in roles)
             lstRoles.Items.Add(role.Name);
     }
 
     private void LoadPermissions()
     {
-        chkPermissions.Items.Clear();
-        foreach (var permission in Enum.GetValues(typeof(Permission)))
-            chkPermissions.Items.Add(permission);
+        clbPermissions.Items.Clear();
+        var permissions = _roleManagerService.GetPermissions();
+
+        foreach (var permission in permissions)
+        {
+            clbPermissions.Items.Add(permission);
+        }
     }
 
     private void ButtonCreateRole_Click(object sender, EventArgs e)
@@ -71,7 +75,7 @@ public partial class RoleManagementForm : Form
             {
                 _roleManagerService.DeleteRole(roleName);
                 LoadRoles();
-                chkPermissions.ClearSelected();
+                clbPermissions.ClearSelected();
             }
             catch (Exception ex)
             {
@@ -88,10 +92,10 @@ public partial class RoleManagementForm : Form
         var rolePermissions = _roleManagerService.GetPermissionsForRole(roleName);
 
         // Limpiar selección actual
-        for (int i = 0; i < chkPermissions.Items.Count; i++)
+        for (int i = 0; i < clbPermissions.Items.Count; i++)
         {
-            var permission = (Permission)chkPermissions.Items[i];
-            chkPermissions.SetItemChecked(i, rolePermissions.Contains(permission));
+            var permission = (Permission)clbPermissions.Items[i];
+            clbPermissions.SetItemChecked(i, rolePermissions.Contains(permission));
         }
     }
 
@@ -104,17 +108,20 @@ public partial class RoleManagementForm : Form
         }
 
         // Obtener permisos seleccionados
-        var selectedPermissions = chkPermissions.CheckedItems.Cast<Permission>().ToList();
+        var selectedPermissions = clbPermissions.CheckedItems.Cast<Permission>().ToList();
 
-        // Primero, eliminar todos los permisos del rol
-        var currentPermissions = _roleManagerService.GetPermissionsForRole(roleName);
+        // Obtener copia de los permisos actuales
+        var currentPermissions = _roleManagerService.GetPermissionsForRole(roleName).ToList();
+
+        // Eliminar todos los permisos actuales
         foreach (var permission in currentPermissions)
             _roleManagerService.RemovePermissionFromRole(roleName, permission);
 
-        // Luego, agregar los seleccionados
+        // Agregar los seleccionados
         foreach (var permission in selectedPermissions)
             _roleManagerService.AddPermissionToRole(roleName, permission);
 
         MessageBox.Show("Permisos actualizados.");
     }
+
 }
