@@ -1,10 +1,10 @@
-﻿using Integrador.Application.Authentication;
+﻿using Integrador.Application.Authentication.State;
 using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces.Exceptions;
 using Integrador.Application.Interfaces.Presentation;
 using Integrador.Application.Interfaces.Utilities;
-using Integrador.Application.Security;
 using Integrador.Application.Security.Contracts;
+using Integrador.Application.Security.Core;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Configuration;
 using Integrador.Infrastructure.Interfaces;
@@ -68,7 +68,7 @@ public partial class MainForm : Form
     private void ApplyLocalization()
     {
         this.Text = Resources.TitleMain;
-        lblPersons.Text = Resources.Persons;
+        grpPersons.Text = Resources.Persons;
         lblIdentityNumber.Text = Resources.IdentityNumber;
         lblFirstname.Text = Resources.FirstName;
         lblLastname.Text = Resources.LastName;
@@ -76,13 +76,13 @@ public partial class MainForm : Form
         btnSavePerson.Text = Resources.Save;
         btnDeletePerson.Text = Resources.Delete;
 
-        lblPersonCars.Text = Resources.PersonCars;
+        grpPersonCars.Text = Resources.PersonCars;
         lblQuantity.Text = Resources.Quantity;
 
         btnAssignCar.Text = Resources.AssignCar;
         btnRemoveCar.Text = Resources.RemoveCar;
 
-        lblAvailableCars.Text = Resources.AvailableCars;
+        grpAvailableCars.Text = Resources.AvailableCars;
         lblLicensePlate.Text = Resources.LicensePlate;
         lblBrand.Text = Resources.Brand;
         lblModel.Text = Resources.Model;
@@ -92,7 +92,7 @@ public partial class MainForm : Form
         btnSaveCar.Text = Resources.Save;
         btnDeleteCar.Text = Resources.Delete;
 
-        lblAssignedCars.Text = Resources.AssignedCars;
+        grpAssignedCars.Text = Resources.AssignedCars;
 
         lblLanguage.Text = Resources.Language;
         btnLogViewer.Text = Resources.ViewLog;
@@ -137,7 +137,7 @@ public partial class MainForm : Form
             {
                 _personCars.DataSource = person.CarIds;
                 _personCars.ResetBindings(false);
-                lblCarsPrice.Text = person.GetCarsPrice.ToString("C2", new CultureInfo("en-US"));
+                txtCarsPrice.Text = person.GetCarsPrice.ToString("C2", new CultureInfo("en-US"));
                 txtCarsCount.Text = person.GetCarsCount.ToString();
             }
         }

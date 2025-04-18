@@ -1,9 +1,9 @@
 ﻿using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces.Utilities;
 
-namespace Integrador.Presentation.UI.Factories;
+namespace Integrador.Presentation.Factories;
 
-public class CarFactory : ICarFactory
+public class CarDTOFactory : ICarFactory
 {
     public CarDTO CreateDefault()
     {

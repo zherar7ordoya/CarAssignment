@@ -1,12 +1,10 @@
-﻿using Integrador.Application.Security.Core;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integrador.Application.Security;
+namespace Integrador.Application.Security.Core;
 
 public static class KnownPermissions
 {

@@ -1,4 +1,5 @@
 ﻿using Integrador.Application.Authentication;
+using Integrador.Application.Authentication.State;
 using Integrador.Domain.Entities;
 using Integrador.Presentation.Composition;
 

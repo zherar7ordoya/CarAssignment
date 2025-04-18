@@ -10,12 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Application\State\**" />
-	  <EmbeddedResource Remove="Application\State\**" />
-	  <None Remove="Application\State\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Include="gt.ico" />
 	</ItemGroup>
 	

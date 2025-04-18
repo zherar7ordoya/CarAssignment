@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Security;
-using Integrador.Application.Security.Contracts;
+﻿using Integrador.Application.Security.Contracts;
 using Integrador.Domain.Entities;
+using Integrador.Infrastructure.Persistence.Seeding;
 
 using System.Configuration;
 using System.Text.Json;
@@ -41,7 +41,7 @@ public class JsonUserRepository : IUserRepository
 
         if (_users.Count == 0)
         {
-            _users = Seeder.SeedUsers();
+            _users = SecuritySeeder.SeedUsers();
             Save();
         }
     }

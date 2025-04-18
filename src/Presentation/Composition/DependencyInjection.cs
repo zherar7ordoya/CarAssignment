@@ -26,9 +26,9 @@ using Integrador.Infrastructure.Interfaces.Persistence;
 using Integrador.Infrastructure.Exceptions;
 using Integrador.Presentation.Views.Forms;
 using Integrador.Infrastructure.Persistence.JSON;
-using Integrador.Presentation.UI.Factories;
 using Integrador.Application.Security.Services;
 using Integrador.Application.Security.Contracts;
+using Integrador.Presentation.Factories;
 
 namespace Integrador.Presentation.Composition;
 
@@ -107,8 +107,8 @@ public static class DependencyInjection
         services.AddTransient<ICarService, CarService>();
         services.AddTransient<IPersonService, PersonService>();
 
-        services.AddTransient<ICarFactory, CarFactory>();
-        services.AddTransient<IPersonFactory, PersonFactory>();
+        services.AddTransient<ICarFactory, CarDTOFactory>();
+        services.AddTransient<IPersonFactory, PersonDTOFactory>();
         services.AddTransient<IViewPresenter, ViewPresenter>();
 
         services.AddTransient<MainForm, MainForm>();

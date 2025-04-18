@@ -3,6 +3,7 @@ using Integrador.Application.Interfaces.Services;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Interfaces.Persistence;
+using Integrador.Presentation.Composition;
 
 namespace Integrador.Application.Services;
 
@@ -35,7 +36,7 @@ public class CarService
     public void UpdateCar(CarDTO carDto)
     {
         var car = repository.ReadById(carDto.Id);
-        
+
         if (car is null)
         {
             messenger.ShowInformation("Car not found.");

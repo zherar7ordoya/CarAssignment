@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Security;
-using Integrador.Application.Security.Contracts;
+﻿using Integrador.Application.Security.Contracts;
 using Integrador.Application.Security.Core;
+using Integrador.Infrastructure.Persistence.Seeding;
 
 using System.Configuration;
 using System.Text.Json;
@@ -41,7 +41,7 @@ public class JsonRoleRepository : IRoleRepository
 
         if (_roles.Count == 0)
         {
-            _roles = Seeder.SeedRoles();
+            _roles = SecuritySeeder.SeedRoles();
             Save();
         }
     }

@@ -1,9 +1,9 @@
 ﻿using Integrador.Application.DTOs;
 using Integrador.Application.Interfaces.Utilities;
 
-namespace Integrador.Presentation.UI.Factories;
+namespace Integrador.Presentation.Factories;
 
-public class PersonFactory : IPersonFactory
+public class PersonDTOFactory : IPersonFactory
 {
     public PersonDTO CreateDefault()
     {

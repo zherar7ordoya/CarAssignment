@@ -5,9 +5,9 @@ using Integrador.Domain.Entities;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Integrador.Application.Security;
+namespace Integrador.Infrastructure.Persistence.Seeding;
 
-public static class Seeder
+public static class SecuritySeeder
 {
     public static List<Role> SeedRoles()
     {
