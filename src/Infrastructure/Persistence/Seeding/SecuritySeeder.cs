@@ -2,9 +2,6 @@
 using Integrador.Application.Security.Services;
 using Integrador.Domain.Entities;
 
-using System.Security.Cryptography;
-using System.Text;
-
 namespace Integrador.Infrastructure.Persistence.Seeding;
 
 public static class SecuritySeeder

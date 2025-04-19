@@ -4,7 +4,6 @@ using Integrador.Domain.Entities;
 using Integrador.Presentation.Composition;
 
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Integrador.Presentation.Views;
 

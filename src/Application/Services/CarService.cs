@@ -3,7 +3,6 @@ using Integrador.Application.Interfaces.Services;
 using Integrador.Domain.Entities;
 using Integrador.Infrastructure.Interfaces;
 using Integrador.Infrastructure.Interfaces.Persistence;
-using Integrador.Presentation.Composition;
 
 namespace Integrador.Application.Services;
 
