@@ -1,8 +1,8 @@
-﻿using Integrador.Domain.Contracts;
+﻿using CarAssignment.Domain.Contracts;
 
 using System.Xml.Serialization;
 
-namespace Integrador.Domain.Entities;
+namespace CarAssignment.Domain.Entities;
 
 public abstract class EntityBase : IEntity
 {

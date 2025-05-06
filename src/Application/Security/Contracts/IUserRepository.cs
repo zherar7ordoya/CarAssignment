@@ -1,6 +1,6 @@
-﻿using Integrador.Domain.Entities;
+﻿using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Security.Contracts;
+namespace CarAssignment.Application.Security.Contracts;
 
 public interface IUserRepository
 {

@@ -1,6 +1,6 @@
-﻿using Integrador.Domain.Entities;
+﻿using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Authentication.State;
+namespace CarAssignment.Application.Authentication.State;
 
 public static class Session
 {

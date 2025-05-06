@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces;
+﻿namespace CarAssignment.Application.Interfaces;
 
 public interface IPermissionService
 {

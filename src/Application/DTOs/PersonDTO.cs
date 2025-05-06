@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Integrador.Application.DTOs;
+namespace CarAssignment.Application.DTOs;
 
 public record PersonDTO(int Id,
                         [Required, RegularExpression("^\\d{7,8}$", ErrorMessage = "Identity number must have between 7 and 8 digits.")] string IdentityNumber,

@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Integrador.Application.Security.Services;
+namespace CarAssignment.Application.Security.Services;
 
 public static class PasswordHasher
 {

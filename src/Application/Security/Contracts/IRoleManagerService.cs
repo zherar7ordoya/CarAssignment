@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Security.Core;
+﻿using CarAssignment.Application.Security.Core;
 
-namespace Integrador.Application.Security.Contracts;
+namespace CarAssignment.Application.Security.Contracts;
 
 public interface IRoleManagerService
 {

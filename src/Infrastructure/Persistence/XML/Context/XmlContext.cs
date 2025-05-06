@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Xml.Serialization;
 
-using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Domain.Contracts;
-using Integrador.Infrastructure.Interfaces.Persistence;
+using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Domain.Contracts;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
 
-namespace Integrador.Infrastructure.Persistence.XML.Context;
+namespace CarAssignment.Infrastructure.Persistence.XML.Context;
 
 public class XmlContext<T>(IExceptionHandler exceptionHandler)
            : IXmlContext<T> where T : IEntity

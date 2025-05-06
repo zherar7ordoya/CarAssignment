@@ -1,6 +1,6 @@
-﻿using Integrador.Application.DTOs;
+﻿using CarAssignment.Application.DTOs;
 
-namespace Integrador.Application.Interfaces.Utilities;
+namespace CarAssignment.Application.Interfaces.Utilities;
 
 public interface IPersonFactory
 {

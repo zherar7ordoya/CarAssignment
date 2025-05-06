@@ -1,8 +1,8 @@
-﻿using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Interfaces.Persistence;
-using Integrador.Infrastructure.Persistence.SQLite.Records;
+﻿using CarAssignment.Domain.Entities;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
+using CarAssignment.Infrastructure.Persistence.SQLite.Records;
 
-namespace Integrador.Infrastructure.Persistence.SQLite.Mappers;
+namespace CarAssignment.Infrastructure.Persistence.SQLite.Mappers;
 
 public class PersonMapper : IMapper<Person, PersonRecord>
 {

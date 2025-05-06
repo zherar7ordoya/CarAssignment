@@ -1,11 +1,11 @@
-﻿using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Logging.Shared;
+﻿using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Logging.Shared;
 
 using System.Configuration;
 using System.Diagnostics;
 using System.Text.Json;
 
-namespace Integrador.Infrastructure.Logging.JSON;
+namespace CarAssignment.Infrastructure.Logging.JSON;
 
 public class JsonLogWriter : ILogWriter
 {

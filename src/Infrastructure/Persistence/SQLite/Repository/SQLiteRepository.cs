@@ -1,14 +1,14 @@
 ﻿using System.Data;
 using System.Reflection;
 
-using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Domain.Contracts;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Interfaces.Persistence;
+using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Domain.Contracts;
+using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
 
 using Microsoft.Data.Sqlite;
 
-namespace Integrador.Infrastructure.Persistence.SQLite.Repository;
+namespace CarAssignment.Infrastructure.Persistence.SQLite.Repository;
 
 public class SQLiteRepository<T, TRecord>
 (

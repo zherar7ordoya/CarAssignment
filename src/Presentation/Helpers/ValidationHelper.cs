@@ -1,9 +1,9 @@
-﻿using Integrador.Application.Interfaces.Exceptions;
+﻿using CarAssignment.Application.Interfaces.Exceptions;
 
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Integrador.Presentation.Helpers;
+namespace CarAssignment.Presentation.Helpers;
 
 public static class ValidationHelper
 {

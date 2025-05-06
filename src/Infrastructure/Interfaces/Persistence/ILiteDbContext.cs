@@ -1,8 +1,8 @@
-﻿using Integrador.Domain.Contracts;
+﻿using CarAssignment.Domain.Contracts;
 
 using LiteDB;
 
-namespace Integrador.Infrastructure.Interfaces.Persistence;
+namespace CarAssignment.Infrastructure.Interfaces.Persistence;
 
 public interface ILiteDbContext<T> where T : IEntity
 {

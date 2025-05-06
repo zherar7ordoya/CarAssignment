@@ -1,10 +1,10 @@
-﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces.Services;
-using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Interfaces.Persistence;
+﻿using CarAssignment.Application.DTOs;
+using CarAssignment.Application.Interfaces.Services;
+using CarAssignment.Domain.Entities;
+using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
 
-namespace Integrador.Application.Services;
+namespace CarAssignment.Application.Services;
 
 public class CarService
 (

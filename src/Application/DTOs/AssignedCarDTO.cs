@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.DTOs;
+﻿namespace CarAssignment.Application.DTOs;
 
 public record AssignedCarDTO(string Brand,
                              int Year,

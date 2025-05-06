@@ -1,8 +1,8 @@
-﻿using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Logging.Shared;
-using Integrador.Presentation.Localization;
-using Integrador.Presentation.UI.Components;
+﻿using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Logging.Shared;
+using CarAssignment.Presentation.Localization;
+using CarAssignment.Presentation.UI.Components;
 
 using System.Data;
 

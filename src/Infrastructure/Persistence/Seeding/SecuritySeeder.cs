@@ -1,8 +1,8 @@
-﻿using Integrador.Application.Security.Core;
-using Integrador.Application.Security.Services;
-using Integrador.Domain.Entities;
+﻿using CarAssignment.Application.Security.Core;
+using CarAssignment.Application.Security.Services;
+using CarAssignment.Domain.Entities;
 
-namespace Integrador.Infrastructure.Persistence.Seeding;
+namespace CarAssignment.Infrastructure.Persistence.Seeding;
 
 public static class SecuritySeeder
 {

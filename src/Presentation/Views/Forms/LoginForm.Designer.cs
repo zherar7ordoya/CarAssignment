@@ -56,21 +56,21 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(118, 13);
+            txtUsername.Location = new Point(129, 13);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(100, 27);
             txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(118, 48);
+            txtPassword.Location = new Point(129, 46);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(100, 27);
             txtPassword.TabIndex = 3;
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(118, 108);
+            btnLogin.Location = new Point(128, 108);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(101, 28);
             btnLogin.TabIndex = 4;
@@ -81,18 +81,18 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(107, 177);
+            lblStatus.Location = new Point(11, 172);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(188, 20);
+            lblStatus.Size = new Size(218, 40);
             lblStatus.TabIndex = 5;
-            lblStatus.Text = "Mostrar errores o mensajes";
+            lblStatus.Text = "(user) admin: (password) admin\r\n(user) user: (password) user\r\n";
             // 
             // LoginForm
             // 
             AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(376, 221);
+            ClientSize = new Size(245, 221);
             Controls.Add(lblStatus);
             Controls.Add(btnLogin);
             Controls.Add(txtPassword);

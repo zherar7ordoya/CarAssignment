@@ -1,6 +1,6 @@
-﻿using Integrador.Infrastructure.Interfaces;
+﻿using CarAssignment.Infrastructure.Interfaces;
 
-namespace Integrador.Infrastructure.Messaging;
+namespace CarAssignment.Infrastructure.Messaging;
 
 public class Messenger : IMessenger
 {

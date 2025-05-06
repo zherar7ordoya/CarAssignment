@@ -1,4 +1,4 @@
-﻿namespace Integrador.Domain.Contracts;
+﻿namespace CarAssignment.Domain.Contracts;
 
 public interface IEntity
 {

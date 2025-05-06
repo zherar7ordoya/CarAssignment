@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
 using LiteDB;
-using Integrador.Infrastructure.Interfaces.Persistence;
-using Integrador.Domain.Contracts;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
+using CarAssignment.Domain.Contracts;
 
-namespace Integrador.Infrastructure.Persistence.LiteDB.Context;
+namespace CarAssignment.Infrastructure.Persistence.LiteDB.Context;
 
 public class LiteDbContext<T>() : ILiteDbContext<T> where T : IEntity
 {

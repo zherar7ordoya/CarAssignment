@@ -1,6 +1,6 @@
-﻿using Integrador.Infrastructure.Logging.Shared;
+﻿using CarAssignment.Infrastructure.Logging.Shared;
 
-namespace Integrador.Presentation.UI.Components;
+namespace CarAssignment.Presentation.UI.Components;
 
 // Changed the access modifier of the ComboBoxItem class from private to internal
 internal class ComboBoxItem

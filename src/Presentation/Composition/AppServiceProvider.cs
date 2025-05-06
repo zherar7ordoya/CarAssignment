@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Integrador.Presentation.Composition;
+namespace CarAssignment.Presentation.Composition;
 
 public static class AppServiceProvider
 {

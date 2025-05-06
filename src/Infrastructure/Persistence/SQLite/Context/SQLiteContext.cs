@@ -1,11 +1,11 @@
-﻿using Integrador.Infrastructure.Interfaces.Persistence;
+﻿using CarAssignment.Infrastructure.Interfaces.Persistence;
 
 using Microsoft.Data.Sqlite;
 
 using System.Configuration;
 using System.Reflection;
 
-namespace Integrador.Infrastructure.Persistence.SQLite.Context;
+namespace CarAssignment.Infrastructure.Persistence.SQLite.Context;
 
 public class SQLiteContext<T>() : ISQLiteContext<T>
 {

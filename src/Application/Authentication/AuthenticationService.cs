@@ -1,8 +1,8 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Application.Security.Services;
-using Integrador.Domain.Entities;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Application.Security.Services;
+using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Authentication;
+namespace CarAssignment.Application.Authentication;
 
 public class AuthenticationService(IUserRepository userRepository) : IAuthenticationService
 {

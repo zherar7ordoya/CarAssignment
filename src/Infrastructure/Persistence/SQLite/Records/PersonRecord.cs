@@ -1,4 +1,4 @@
-﻿namespace Integrador.Infrastructure.Persistence.SQLite.Records;
+﻿namespace CarAssignment.Infrastructure.Persistence.SQLite.Records;
 
 public class PersonRecord
 {

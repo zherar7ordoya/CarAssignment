@@ -1,4 +1,4 @@
-﻿namespace Integrador.Infrastructure.Interfaces
+﻿namespace CarAssignment.Infrastructure.Interfaces
 {
     public interface IMessenger
     {

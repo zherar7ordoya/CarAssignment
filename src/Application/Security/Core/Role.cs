@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Integrador.Application.Security.Core;
+namespace CarAssignment.Application.Security.Core;
 
 [method: JsonConstructor]
 public class Role(string name, List<Permission> permissions)

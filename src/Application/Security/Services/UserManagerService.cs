@@ -1,8 +1,8 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Application.Security.Core;
-using Integrador.Domain.Entities;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Application.Security.Core;
+using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Security.Services;
+namespace CarAssignment.Application.Security.Services;
 
 public class UserManagerService(IUserRepository userRepository) : IUserManagerService
 {

@@ -1,4 +1,4 @@
-﻿namespace Integrador.Infrastructure.Interfaces.Persistence;
+﻿namespace CarAssignment.Infrastructure.Interfaces.Persistence;
 
 public interface IMapper<TDomain, TStorage>
 {

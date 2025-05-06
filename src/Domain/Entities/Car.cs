@@ -1,4 +1,4 @@
-﻿namespace Integrador.Domain.Entities;
+﻿namespace CarAssignment.Domain.Entities;
 
 public class Car : EntityBase
 {

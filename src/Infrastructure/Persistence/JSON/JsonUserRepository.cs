@@ -1,11 +1,11 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Persistence.Seeding;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Domain.Entities;
+using CarAssignment.Infrastructure.Persistence.Seeding;
 
 using System.Configuration;
 using System.Text.Json;
 
-namespace Integrador.Infrastructure.Persistence.JSON;
+namespace CarAssignment.Infrastructure.Persistence.JSON;
 
 public class JsonUserRepository : IUserRepository
 {

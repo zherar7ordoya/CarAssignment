@@ -1,6 +1,6 @@
-﻿using Integrador.Domain.Contracts;
+﻿using CarAssignment.Domain.Contracts;
 
-namespace Integrador.Infrastructure.Interfaces.Persistence;
+namespace CarAssignment.Infrastructure.Interfaces.Persistence;
 
 public interface IRepository<T> where T : IEntity
 {

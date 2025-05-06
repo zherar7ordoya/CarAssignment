@@ -1,7 +1,7 @@
-﻿using Integrador.Application.DTOs;
-using Integrador.Application.Interfaces.Utilities;
+﻿using CarAssignment.Application.DTOs;
+using CarAssignment.Application.Interfaces.Utilities;
 
-namespace Integrador.Presentation.Factories;
+namespace CarAssignment.Presentation.Factories;
 
 public class CarDTOFactory : ICarFactory
 {

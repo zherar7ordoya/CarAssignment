@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Integrador.Application.DTOs;
+namespace CarAssignment.Application.DTOs;
 
 public record CarDTO(int Id,
                      [Required, StringLength(10, MinimumLength = 6)] string LicensePlate,

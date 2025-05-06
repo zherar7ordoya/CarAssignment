@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces.Services
+﻿namespace CarAssignment.Application.Interfaces.Services
 {
     public interface IAssignmentService
     {

@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Security.Core;
+﻿using CarAssignment.Application.Security.Core;
 
-namespace Integrador.Domain.Entities;
+namespace CarAssignment.Domain.Entities;
 
 public class User : EntityBase
 {

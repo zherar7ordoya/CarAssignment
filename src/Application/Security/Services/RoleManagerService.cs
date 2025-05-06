@@ -1,8 +1,8 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Application.Security.Core;
-using Integrador.Presentation.Composition;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Application.Security.Core;
+using CarAssignment.Presentation.Composition;
 
-namespace Integrador.Application.Security.Services;
+namespace CarAssignment.Application.Security.Services;
 
 public class RoleManagerService() : IRoleManagerService
 {

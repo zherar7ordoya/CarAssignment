@@ -1,9 +1,9 @@
-﻿using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Infrastructure.Interfaces;
+﻿using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Infrastructure.Interfaces;
 
-using ILogger = Integrador.Infrastructure.Interfaces.ILogger;
+using ILogger = CarAssignment.Infrastructure.Interfaces.ILogger;
 
-namespace Integrador.Infrastructure.Exceptions;
+namespace CarAssignment.Infrastructure.Exceptions;
 
 public class ExceptionHandler
 (

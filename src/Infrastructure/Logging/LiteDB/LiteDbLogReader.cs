@@ -1,12 +1,12 @@
-﻿using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Logging.Shared;
+﻿using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Logging.Shared;
 
 using LiteDB;
 
 using System.Configuration;
 using System.Diagnostics;
 
-namespace Integrador.Infrastructure.Logging.LiteDB;
+namespace CarAssignment.Infrastructure.Logging.LiteDB;
 
 public class LiteDbLogReader : ILogReader
 {

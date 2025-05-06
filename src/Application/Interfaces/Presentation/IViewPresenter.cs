@@ -1,6 +1,6 @@
-﻿using Integrador.Application.DTOs;
+﻿using CarAssignment.Application.DTOs;
 
-namespace Integrador.Application.Interfaces.Presentation
+namespace CarAssignment.Application.Interfaces.Presentation
 {
     public interface IViewPresenter
     {

@@ -1,7 +1,7 @@
-﻿using Integrador.Application.Authentication;
-using Integrador.Application.Authentication.State;
-using Integrador.Domain.Entities;
-using Integrador.Presentation.Composition;
+﻿using CarAssignment.Application.Authentication;
+using CarAssignment.Application.Authentication.State;
+using CarAssignment.Domain.Entities;
+using CarAssignment.Presentation.Composition;
 
 using System.ComponentModel;
 

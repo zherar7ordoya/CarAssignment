@@ -1,36 +1,36 @@
-﻿using Integrador.Application.Services;
-using Integrador.Domain.Entities;
-using Integrador.Infrastructure.Messaging;
-using Integrador.Infrastructure.Persistence.SQLite.Mappers;
-using Integrador.Presentation.Presenters;
-using Integrador.Infrastructure.Persistence.SQLite.Records;
-using Integrador.Application.Interfaces.Services;
-using Integrador.Application.Interfaces.Utilities;
-using Integrador.Infrastructure.Persistence.LiteDB.Context;
-using Integrador.Infrastructure.Persistence.LiteDB.Repository;
-using Integrador.Application.Interfaces.Presentation;
-using Integrador.Infrastructure.Persistence.SQLite.Context;
-using Integrador.Infrastructure.Persistence.XML.Context;
-using Integrador.Infrastructure.Persistence.XML.Repository;
-using Integrador.Infrastructure.Persistence.SQLite.Repository;
-using Integrador.Infrastructure.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Integrador.Presentation.Views;
-using Integrador.Infrastructure.Logging.Shared;
-using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Infrastructure.Logging.JSON;
-using Integrador.Application.Authentication;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Interfaces.Persistence;
-
-using Integrador.Infrastructure.Exceptions;
 using Integrador.Presentation.Views.Forms;
-using Integrador.Infrastructure.Persistence.JSON;
-using Integrador.Application.Security.Services;
-using Integrador.Application.Security.Contracts;
-using Integrador.Presentation.Factories;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
+using CarAssignment.Infrastructure.Logging.JSON;
+using CarAssignment.Application.Security.Services;
+using CarAssignment.Infrastructure.Logging.Shared;
+using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Infrastructure.Configuration;
+using Integrador;
+using CarAssignment.Infrastructure.Persistence.JSON;
+using CarAssignment.Presentation.Factories;
+using CarAssignment.Domain.Entities;
+using CarAssignment.Infrastructure.Persistence.SQLite.Repository;
+using CarAssignment.Infrastructure.Persistence.SQLite.Context;
+using CarAssignment.Infrastructure.Persistence.LiteDB.Context;
+using CarAssignment.Application.Services;
+using CarAssignment.Infrastructure.Persistence.SQLite.Mappers;
+using CarAssignment.Application.Interfaces.Utilities;
+using CarAssignment.Infrastructure.Persistence.SQLite.Records;
+using CarAssignment.Application.Interfaces.Presentation;
+using CarAssignment.Application.Interfaces.Services;
+using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Application.Authentication;
+using CarAssignment.Infrastructure.Exceptions;
+using CarAssignment.Infrastructure.Persistence.XML.Context;
+using CarAssignment.Presentation.Presenters;
+using CarAssignment.Infrastructure.Messaging;
+using CarAssignment.Infrastructure.Persistence.XML.Repository;
+using CarAssignment.Infrastructure.Persistence.LiteDB.Repository;
 
-namespace Integrador.Presentation.Composition;
+namespace CarAssignment.Presentation.Composition;
 
 public static class DependencyInjection
 {

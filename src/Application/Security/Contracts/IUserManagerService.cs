@@ -1,7 +1,7 @@
-﻿using Integrador.Application.Security.Core;
-using Integrador.Domain.Entities;
+﻿using CarAssignment.Application.Security.Core;
+using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Security.Contracts;
+namespace CarAssignment.Application.Security.Contracts;
 
 public interface IUserManagerService
 {

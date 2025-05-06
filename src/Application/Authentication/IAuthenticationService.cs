@@ -1,6 +1,6 @@
-﻿using Integrador.Domain.Entities;
+﻿using CarAssignment.Domain.Entities;
 
-namespace Integrador.Application.Authentication;
+namespace CarAssignment.Application.Authentication;
 
 public interface IAuthenticationService
 {

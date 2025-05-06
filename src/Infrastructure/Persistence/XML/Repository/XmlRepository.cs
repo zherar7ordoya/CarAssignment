@@ -1,11 +1,11 @@
-﻿using Integrador.Application.Interfaces.Exceptions;
-using Integrador.Domain.Contracts;
-using Integrador.Infrastructure.Interfaces;
-using Integrador.Infrastructure.Interfaces.Persistence;
+﻿using CarAssignment.Application.Interfaces.Exceptions;
+using CarAssignment.Domain.Contracts;
+using CarAssignment.Infrastructure.Interfaces;
+using CarAssignment.Infrastructure.Interfaces.Persistence;
 
 using System.Reflection;
 
-namespace Integrador.Infrastructure.Persistence.XML.Repository;
+namespace CarAssignment.Infrastructure.Persistence.XML.Repository;
 
 public class XmlRepository<T>
 (

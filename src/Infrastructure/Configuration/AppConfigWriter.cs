@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Integrador.Infrastructure.Configuration;
+namespace CarAssignment.Infrastructure.Configuration;
 
 public static class AppConfigWriter
 {

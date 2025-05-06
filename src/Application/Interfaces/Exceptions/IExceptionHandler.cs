@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Interfaces.Exceptions;
+﻿namespace CarAssignment.Application.Interfaces.Exceptions;
 
 public interface IExceptionHandler
 {

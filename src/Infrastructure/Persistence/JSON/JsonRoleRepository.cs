@@ -1,11 +1,11 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Application.Security.Core;
-using Integrador.Infrastructure.Persistence.Seeding;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Application.Security.Core;
+using CarAssignment.Infrastructure.Persistence.Seeding;
 
 using System.Configuration;
 using System.Text.Json;
 
-namespace Integrador.Infrastructure.Persistence.JSON;
+namespace CarAssignment.Infrastructure.Persistence.JSON;
 
 public class JsonRoleRepository : IRoleRepository
 {

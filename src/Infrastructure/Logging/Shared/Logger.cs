@@ -1,8 +1,8 @@
-﻿using Integrador.Infrastructure.Interfaces;
+﻿using CarAssignment.Infrastructure.Interfaces;
 
 using System.Diagnostics;
 
-namespace Integrador.Infrastructure.Logging.Shared;
+namespace CarAssignment.Infrastructure.Logging.Shared;
 
 public class Logger(params IEnumerable<ILogWriter> writers) : ILogger
 {

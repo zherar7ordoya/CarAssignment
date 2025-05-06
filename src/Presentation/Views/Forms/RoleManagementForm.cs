@@ -1,6 +1,6 @@
-﻿using Integrador.Application.Security.Contracts;
-using Integrador.Application.Security.Core;
-using Integrador.Presentation.Composition;
+﻿using CarAssignment.Application.Security.Contracts;
+using CarAssignment.Application.Security.Core;
+using CarAssignment.Presentation.Composition;
 
 using System.Data;
 

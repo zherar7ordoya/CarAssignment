@@ -1,4 +1,4 @@
-﻿namespace Integrador.Application.Security.Core;
+﻿namespace CarAssignment.Application.Security.Core;
 
 public class Permission(string name)
 {

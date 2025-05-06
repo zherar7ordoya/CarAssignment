@@ -1,6 +1,6 @@
-﻿using Integrador.Infrastructure.Logging.Shared;
+﻿using CarAssignment.Infrastructure.Logging.Shared;
 
-namespace Integrador.Infrastructure.Interfaces;
+namespace CarAssignment.Infrastructure.Interfaces;
 
 public interface ILogReader
 {

@@ -44,47 +44,47 @@
             // 
             dgvLogEntries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLogEntries.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogEntries.Location = new Point(13, 13);
-            dgvLogEntries.Margin = new Padding(4);
+            dgvLogEntries.Location = new Point(13, 15);
+            dgvLogEntries.Margin = new Padding(5, 4, 5, 4);
             dgvLogEntries.Name = "dgvLogEntries";
-            dgvLogEntries.Size = new Size(889, 180);
+            dgvLogEntries.Size = new Size(889, 200);
             dgvLogEntries.TabIndex = 0;
             // 
             // txtText
             // 
-            txtText.Location = new Point(346, 235);
-            txtText.Margin = new Padding(4);
+            txtText.Location = new Point(346, 261);
+            txtText.Margin = new Padding(5, 4, 5, 4);
             txtText.Name = "txtText";
-            txtText.Size = new Size(113, 25);
+            txtText.Size = new Size(113, 27);
             txtText.TabIndex = 1;
             txtText.TextChanged += TextBoxText_TextChanged;
             // 
             // cmbLevel
             // 
             cmbLevel.FormattingEnabled = true;
-            cmbLevel.Location = new Point(573, 234);
-            cmbLevel.Margin = new Padding(4);
+            cmbLevel.Location = new Point(573, 260);
+            cmbLevel.Margin = new Padding(5, 4, 5, 4);
             cmbLevel.Name = "cmbLevel";
-            cmbLevel.Size = new Size(113, 26);
+            cmbLevel.Size = new Size(113, 28);
             cmbLevel.TabIndex = 2;
             cmbLevel.SelectedIndexChanged += ComboBoxLevel_SelectedIndexChanged;
             // 
             // dtpDate
             // 
             dtpDate.Format = DateTimePickerFormat.Short;
-            dtpDate.Location = new Point(789, 232);
-            dtpDate.Margin = new Padding(4);
+            dtpDate.Location = new Point(789, 257);
+            dtpDate.Margin = new Padding(5, 4, 5, 4);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(113, 25);
+            dtpDate.Size = new Size(113, 27);
             dtpDate.TabIndex = 3;
             dtpDate.ValueChanged += DateTimePickerDate_ValueChanged;
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(404, 296);
-            btnFilter.Margin = new Padding(4);
+            btnFilter.Location = new Point(405, 329);
+            btnFilter.Margin = new Padding(5, 4, 5, 4);
             btnFilter.Name = "btnFilter";
-            btnFilter.Size = new Size(85, 27);
+            btnFilter.Size = new Size(85, 29);
             btnFilter.TabIndex = 4;
             btnFilter.Text = "Filtrar";
             btnFilter.UseVisualStyleBackColor = true;
@@ -92,45 +92,45 @@
             // lblSelect
             // 
             lblSelect.AutoSize = true;
-            lblSelect.Location = new Point(13, 233);
-            lblSelect.Margin = new Padding(4, 0, 4, 0);
+            lblSelect.Location = new Point(13, 259);
+            lblSelect.Margin = new Padding(5, 0, 5, 0);
             lblSelect.Name = "lblSelect";
-            lblSelect.Size = new Size(241, 22);
+            lblSelect.Size = new Size(214, 20);
             lblSelect.TabIndex = 5;
             lblSelect.Text = "Seleccione criterios de filtrado:";
             // 
             // lblText
             // 
             lblText.AutoSize = true;
-            lblText.Location = new Point(297, 238);
+            lblText.Location = new Point(297, 264);
             lblText.Name = "lblText";
-            lblText.Size = new Size(42, 18);
+            lblText.Size = new Size(45, 20);
             lblText.TabIndex = 6;
             lblText.Text = "Texto";
             // 
             // lblLevel
             // 
             lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(525, 237);
+            lblLevel.Location = new Point(525, 264);
             lblLevel.Name = "lblLevel";
-            lblLevel.Size = new Size(41, 18);
+            lblLevel.Size = new Size(43, 20);
             lblLevel.TabIndex = 7;
             lblLevel.Text = "Nivel";
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(738, 237);
+            lblDate.Location = new Point(738, 264);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(44, 18);
+            lblDate.Size = new Size(47, 20);
             lblDate.TabIndex = 8;
             lblDate.Text = "Fecha";
             // 
             // LogViewerForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 18F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(915, 348);
+            ClientSize = new Size(915, 387);
             Controls.Add(lblDate);
             Controls.Add(lblLevel);
             Controls.Add(lblText);
@@ -140,7 +140,8 @@
             Controls.Add(cmbLevel);
             Controls.Add(txtText);
             Controls.Add(dgvLogEntries);
-            Margin = new Padding(4);
+            Font = new Font("Segoe UI", 11F);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "LogViewerForm";
             Text = "LogViewerForm";
             ((System.ComponentModel.ISupportInitialize)dgvLogEntries).EndInit();
